@@ -1,0 +1,31 @@
+{
+  "budgetApplicationApp": {
+    "annexDecision": {
+      "home": {
+        "title": "AnnexDecisions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Annex Decision",
+        "createOrEditLabel": "Créer ou éditer un Annex Decision",
+        "notFound": "Aucun Annex Decision trouvé"
+      },
+      "created": "Un nouveau Annex Decision a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Annex Decision avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Annex Decision avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Annex Decision {{ id }} ?"
+      },
+      "detail": {
+        "title": "Annex Decision"
+      },
+      "id": "ID",
+      "designation": "Designation",
+      "expenseAmount": "Expense Amount",
+      "creditsAlreadyOpen": "Credits Already Open",
+      "creditsOpen": "Credits Open",
+      "financialYear": "Financial Year",
+      "expense": "Expense",
+      "purchaseOrder": "Purchase Order",
+      "decision": "Decision"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "budgetApplicationApp": {
+    "FamilySituationEnum": {
+      "null": "",
+      "CELIBATAIRE": "CELIBATAIRE",
+      "MARIE": "MARIE"
+    }
+  }
+}

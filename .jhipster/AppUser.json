@@ -1,0 +1,72 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145626"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "accountStatus",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastDateUpdate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "firstname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "birthDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "birthPlace",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "GenderEnum",
+      "fieldValues": "MALE,FEMALE"
+    },
+    {
+      "fieldName": "familySituation",
+      "fieldType": "FamilySituationEnum",
+      "fieldValues": "CELIBATAIRE,MARIE"
+    },
+    {
+      "fieldName": "position",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "AppUser",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipWithBuiltInEntity": true
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

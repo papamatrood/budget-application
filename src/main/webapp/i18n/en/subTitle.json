@@ -1,0 +1,26 @@
+{
+  "budgetApplicationApp": {
+    "subTitle": {
+      "home": {
+        "title": "Sub Titles",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sub Title",
+        "createOrEditLabel": "Create or edit a Sub Title",
+        "notFound": "No Sub Titles found"
+      },
+      "created": "A new Sub Title is created with identifier {{ param }}",
+      "updated": "A Sub Title is updated with identifier {{ param }}",
+      "deleted": "A Sub Title is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sub Title {{ id }}?"
+      },
+      "detail": {
+        "title": "Sub Title"
+      },
+      "id": "ID",
+      "code": "Code",
+      "designation": "Designation",
+      "chapter": "Chapter"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "budgetApplicationApp": {
+    "decisionItem": {
+      "home": {
+        "title": "DecisionItems",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Decision Item",
+        "createOrEditLabel": "Créer ou éditer un Decision Item",
+        "notFound": "Aucun Decision Item trouvé"
+      },
+      "created": "Un nouveau Decision Item a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Decision Item avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Decision Item avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Decision Item {{ id }} ?"
+      },
+      "detail": {
+        "title": "Decision Item"
+      },
+      "id": "ID",
+      "beneficiary": "Beneficiary",
+      "amount": "Amount",
+      "observation": "Observation",
+      "decision": "Decision"
+    }
+  }
+}

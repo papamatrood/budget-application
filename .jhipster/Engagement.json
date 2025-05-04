@@ -1,0 +1,78 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145639"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "engagementNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "engagementDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "objectOfExpense",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "notifiedCredits",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creditCommitted",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creditsAvailable",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "amountProposedCommitment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "headDaf",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "financialController",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "generalManager",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Engagement",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "decision",
+      "otherEntityRelationshipName": "engagement",
+      "relationshipName": "decision",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "mandate",
+      "otherEntityRelationshipName": "engagement",
+      "relationshipName": "mandate",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "purchaseOrder",
+      "otherEntityRelationshipName": "engagement",
+      "relationshipName": "purchaseOrder",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

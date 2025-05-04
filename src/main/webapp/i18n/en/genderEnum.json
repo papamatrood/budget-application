@@ -1,0 +1,9 @@
+{
+  "budgetApplicationApp": {
+    "GenderEnum": {
+      "null": "",
+      "MALE": "MALE",
+      "FEMALE": "FEMALE"
+    }
+  }
+}

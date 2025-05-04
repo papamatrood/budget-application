@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity PurchaseOrder.
+    -->
+    <changeSet id="20250504145635-1" author="jhipster">
+        <createTable tableName="purchase_order">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name_of_the_ministry" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="order_number" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="order_date" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="total_amount_without_tax" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="tax_rate" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="total_tax_amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="prepaid_tax_amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="total_amount_with_tax" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="auth_expenditure_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="allocated_credits" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="committed_expenditures" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="available_balance" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="annex_decision_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="supplier_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="engagement_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="purchase_order" columnName="order_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20250504145635-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/purchase_order.csv"
+                  separator=";"
+                  tableName="purchase_order"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="name_of_the_ministry" type="string"/>
+            <column name="order_number" type="string"/>
+            <column name="order_date" type="date"/>
+            <column name="total_amount_without_tax" type="numeric"/>
+            <column name="tax_rate" type="numeric"/>
+            <column name="total_tax_amount" type="numeric"/>
+            <column name="prepaid_tax_amount" type="numeric"/>
+            <column name="total_amount_with_tax" type="numeric"/>
+            <column name="auth_expenditure_number" type="string"/>
+            <column name="allocated_credits" type="numeric"/>
+            <column name="committed_expenditures" type="numeric"/>
+            <column name="available_balance" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

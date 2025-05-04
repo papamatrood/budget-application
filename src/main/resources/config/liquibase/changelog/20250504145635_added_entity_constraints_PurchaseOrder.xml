@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity PurchaseOrder.
+    -->
+    <changeSet id="20250504145635-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="annex_decision_id"
+                                 baseTableName="purchase_order"
+                                 constraintName="fk_purchase_order__annex_decision_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="annex_decision"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="supplier_id"
+                                 baseTableName="purchase_order"
+                                 constraintName="fk_purchase_order__supplier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="supplier"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="engagement_id"
+                                 baseTableName="purchase_order"
+                                 constraintName="fk_purchase_order__engagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="engagement"
+                                 />
+    </changeSet>
+</databaseChangeLog>

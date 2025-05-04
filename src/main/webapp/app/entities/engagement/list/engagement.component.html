@@ -1,0 +1,192 @@
+<div>
+  <h2 id="page-heading" data-cy="EngagementHeading">
+    <span jhiTranslate="budgetApplicationApp.engagement.home.title">Engagements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.engagement.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-engagement"
+        [routerLink]="['/engagement/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.engagement.home.createLabel">Créer un nouveau Engagement</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (engagements().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="budgetApplicationApp.engagement.home.notFound">Aucun Engagement trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="engagementNumber">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.engagementNumber">Engagement Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="engagementDate">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.engagementDate">Engagement Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="objectOfExpense">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.objectOfExpense">Object Of Expense</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notifiedCredits">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.notifiedCredits">Notified Credits</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="creditCommitted">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.creditCommitted">Credit Committed</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="creditsAvailable">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.creditsAvailable">Credits Available</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="amountProposedCommitment">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.amountProposedCommitment">Amount Proposed Commitment</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="headDaf">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.headDaf">Head Daf</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="financialController">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.financialController">Financial Controller</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="generalManager">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.engagement.generalManager">General Manager</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (engagement of engagements(); track trackId(engagement)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/engagement', engagement.id, 'view']">{{ engagement.id }}</a>
+              </td>
+              <td>{{ engagement.engagementNumber }}</td>
+              <td>{{ engagement.engagementDate | formatMediumDatetime }}</td>
+              <td>{{ engagement.objectOfExpense }}</td>
+              <td>{{ engagement.notifiedCredits }}</td>
+              <td>{{ engagement.creditCommitted }}</td>
+              <td>{{ engagement.creditsAvailable }}</td>
+              <td>{{ engagement.amountProposedCommitment }}</td>
+              <td>{{ engagement.headDaf }}</td>
+              <td>{{ engagement.financialController }}</td>
+              <td>{{ engagement.generalManager }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/purchase-order']"
+                    [queryParams]="{ 'filter[engagementId.in]': engagement.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('budgetApplicationApp.engagement.purchaseOrder' | translate) }"
+                      >Show Purchase Order</span
+                    >
+                  </button>
+                  <a [routerLink]="['/engagement', engagement.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/engagement', engagement.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(engagement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (engagements().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

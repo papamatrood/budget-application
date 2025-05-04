@@ -1,0 +1,26 @@
+{
+  "budgetApplicationApp": {
+    "subTitle": {
+      "home": {
+        "title": "SubTitles",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Sub Title",
+        "createOrEditLabel": "Créer ou éditer un Sub Title",
+        "notFound": "Aucun Sub Title trouvé"
+      },
+      "created": "Un nouveau Sub Title a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Sub Title avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Sub Title avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Sub Title {{ id }} ?"
+      },
+      "detail": {
+        "title": "Sub Title"
+      },
+      "id": "ID",
+      "code": "Code",
+      "designation": "Designation",
+      "chapter": "Chapter"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145633"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "designation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "expenseAmount",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creditsAlreadyOpen",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creditsOpen",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "AnnexDecision",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "financialYear",
+      "otherEntityRelationshipName": "annexDecision",
+      "relationshipName": "financialYear",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "expense",
+      "otherEntityRelationshipName": "annexDecision",
+      "relationshipName": "expense",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "purchaseOrder",
+      "otherEntityRelationshipName": "annexDecision",
+      "relationshipName": "purchaseOrder",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "decision",
+      "otherEntityRelationshipName": "annexDecision",
+      "relationshipName": "decision",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Article.
+    -->
+    <changeSet id="20250504145630-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="chapter_id"
+                                 baseTableName="article"
+                                 constraintName="fk_article__chapter_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chapter"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="rel_article__recipe"
+                                 constraintName="fk_rel_article__recipe__article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="recipe_id"
+                                 baseTableName="rel_article__recipe"
+                                 constraintName="fk_rel_article__recipe__recipe_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="recipe"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="rel_article__expense"
+                                 constraintName="fk_rel_article__expense__article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="expense_id"
+                                 baseTableName="rel_article__expense"
+                                 constraintName="fk_rel_article__expense__expense_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="expense"
+                                 />
+    </changeSet>
+</databaseChangeLog>

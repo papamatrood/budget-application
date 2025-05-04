@@ -1,0 +1,154 @@
+<div>
+  <h2 id="page-heading" data-cy="DecisionHeading">
+    <span jhiTranslate="budgetApplicationApp.decision.home.title">Decisions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.decision.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-decision"
+        [routerLink]="['/decision/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.decision.home.createLabel">Créer un nouveau Decision</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (decisions().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="budgetApplicationApp.decision.home.notFound">Aucun Decision trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="decisionNumber">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.decision.decisionNumber">Decision Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="decisionDate">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.decision.decisionDate">Decision Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="engagement.id">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.decision.engagement">Engagement</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="annexDecision.id">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.decision.annexDecision">Annex Decision</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (decision of decisions(); track trackId(decision)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/decision', decision.id, 'view']">{{ decision.id }}</a>
+              </td>
+              <td>{{ decision.decisionNumber }}</td>
+              <td>{{ decision.decisionDate | formatMediumDatetime }}</td>
+              <td>
+                @if (decision.engagement) {
+                  <div>
+                    <a [routerLink]="['/engagement', decision.engagement.id, 'view']">{{ decision.engagement.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (decision.annexDecision) {
+                  <div>
+                    <a [routerLink]="['/annex-decision', decision.annexDecision.id, 'view']">{{ decision.annexDecision.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/decision-item']"
+                    [queryParams]="{ 'filter[decisionId.in]': decision.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('budgetApplicationApp.decision.decisionItem' | translate) }"
+                      >Show Decision Item</span
+                    >
+                  </button>
+                  <a [routerLink]="['/decision', decision.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/decision', decision.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(decision)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (decisions().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="MandateHeading">
+    <span jhiTranslate="budgetApplicationApp.mandate.home.title">Mandates</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.mandate.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-mandate"
+        [routerLink]="['/mandate/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.mandate.home.createLabel">Créer un nouveau Mandate</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (mandates().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="budgetApplicationApp.mandate.home.notFound">Aucun Mandate trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mandateNumber">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.mandate.mandateNumber">Mandate Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mandateDate">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.mandate.mandateDate">Mandate Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="issueSlipNumber">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.mandate.issueSlipNumber">Issue Slip Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="monthAndYearOfIssue">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.mandate.monthAndYearOfIssue">Month And Year Of Issue</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="supportingDocuments">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.mandate.supportingDocuments">Supporting Documents</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="engagement.id">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.mandate.engagement">Engagement</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (mandate of mandates(); track trackId(mandate)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/mandate', mandate.id, 'view']">{{ mandate.id }}</a>
+              </td>
+              <td>{{ mandate.mandateNumber }}</td>
+              <td>{{ mandate.mandateDate | formatMediumDatetime }}</td>
+              <td>{{ mandate.issueSlipNumber }}</td>
+              <td>{{ mandate.monthAndYearOfIssue }}</td>
+              <td>{{ mandate.supportingDocuments }}</td>
+              <td>
+                @if (mandate.engagement) {
+                  <div>
+                    <a [routerLink]="['/engagement', mandate.engagement.id, 'view']">{{ mandate.engagement.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/mandate', mandate.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/mandate', mandate.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(mandate)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (mandates().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

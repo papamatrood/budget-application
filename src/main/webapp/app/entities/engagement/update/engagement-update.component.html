@@ -1,0 +1,199 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-engagement-heading"
+        data-cy="EngagementCreateUpdateHeading"
+        jhiTranslate="budgetApplicationApp.engagement.home.createOrEditLabel"
+      >
+        Créer ou éditer un Engagement
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.engagement.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let engagementNumberRef = editForm.get('engagementNumber')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_engagementNumber" jhiTranslate="budgetApplicationApp.engagement.engagementNumber"
+            >Engagement Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="engagementNumber"
+            id="field_engagementNumber"
+            data-cy="engagementNumber"
+            formControlName="engagementNumber"
+          />
+          @if (engagementNumberRef.invalid && (engagementNumberRef.dirty || engagementNumberRef.touched)) {
+            <div>
+              @if (editForm.get('engagementNumber')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let engagementDateRef = editForm.get('engagementDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_engagementDate" jhiTranslate="budgetApplicationApp.engagement.engagementDate"
+            >Engagement Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_engagementDate"
+              data-cy="engagementDate"
+              type="datetime-local"
+              class="form-control"
+              name="engagementDate"
+              formControlName="engagementDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (engagementDateRef.invalid && (engagementDateRef.dirty || engagementDateRef.touched)) {
+            <div>
+              @if (editForm.get('engagementDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('engagementDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >Ce champ doit être une date et une heure.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_objectOfExpense" jhiTranslate="budgetApplicationApp.engagement.objectOfExpense"
+            >Object Of Expense</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="objectOfExpense"
+            id="field_objectOfExpense"
+            data-cy="objectOfExpense"
+            formControlName="objectOfExpense"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_notifiedCredits" jhiTranslate="budgetApplicationApp.engagement.notifiedCredits"
+            >Notified Credits</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="notifiedCredits"
+            id="field_notifiedCredits"
+            data-cy="notifiedCredits"
+            formControlName="notifiedCredits"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_creditCommitted" jhiTranslate="budgetApplicationApp.engagement.creditCommitted"
+            >Credit Committed</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="creditCommitted"
+            id="field_creditCommitted"
+            data-cy="creditCommitted"
+            formControlName="creditCommitted"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_creditsAvailable" jhiTranslate="budgetApplicationApp.engagement.creditsAvailable"
+            >Credits Available</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="creditsAvailable"
+            id="field_creditsAvailable"
+            data-cy="creditsAvailable"
+            formControlName="creditsAvailable"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_amountProposedCommitment"
+            jhiTranslate="budgetApplicationApp.engagement.amountProposedCommitment"
+            >Amount Proposed Commitment</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="amountProposedCommitment"
+            id="field_amountProposedCommitment"
+            data-cy="amountProposedCommitment"
+            formControlName="amountProposedCommitment"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_headDaf" jhiTranslate="budgetApplicationApp.engagement.headDaf">Head Daf</label>
+          <input type="text" class="form-control" name="headDaf" id="field_headDaf" data-cy="headDaf" formControlName="headDaf" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_financialController" jhiTranslate="budgetApplicationApp.engagement.financialController"
+            >Financial Controller</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="financialController"
+            id="field_financialController"
+            data-cy="financialController"
+            formControlName="financialController"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_generalManager" jhiTranslate="budgetApplicationApp.engagement.generalManager"
+            >General Manager</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="generalManager"
+            id="field_generalManager"
+            data-cy="generalManager"
+            formControlName="generalManager"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

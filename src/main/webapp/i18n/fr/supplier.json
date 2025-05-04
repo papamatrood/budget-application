@@ -1,0 +1,36 @@
+{
+  "budgetApplicationApp": {
+    "supplier": {
+      "home": {
+        "title": "Suppliers",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Supplier",
+        "createOrEditLabel": "Créer ou éditer un Supplier",
+        "notFound": "Aucun Supplier trouvé"
+      },
+      "created": "Un nouveau Supplier a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Supplier avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Supplier avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Supplier {{ id }} ?"
+      },
+      "detail": {
+        "title": "Supplier"
+      },
+      "id": "ID",
+      "companyName": "Company Name",
+      "address": "Address",
+      "phone": "Phone",
+      "nifNumber": "Nif Number",
+      "commercialRegister": "Commercial Register",
+      "bankAccount": "Bank Account",
+      "mandatingEstablishment": "Mandating Establishment",
+      "email": "Email",
+      "website": "Website",
+      "description": "Description",
+      "contactFirstname": "Contact Firstname",
+      "contactlastname": "Contactlastname",
+      "purchaseOrder": "Purchase Order"
+    }
+  }
+}

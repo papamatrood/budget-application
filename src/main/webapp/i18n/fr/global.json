@@ -8,7 +8,21 @@
       "entities": {
         "main": "Entités",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "appUser": "App User",
+        "financialYear": "Financial Year",
+        "subTitle": "Sub Title",
+        "chapter": "Chapter",
+        "article": "Article",
+        "recipe": "Recipe",
+        "expense": "Expense",
+        "annexDecision": "Annex Decision",
+        "supplier": "Supplier",
+        "purchaseOrder": "Purchase Order",
+        "purchaseOrderItem": "Purchase Order Item",
+        "decision": "Decision",
+        "decisionItem": "Decision Item",
+        "engagement": "Engagement",
+        "mandate": "Mandate"
       },
       "account": {
         "main": "Compte",

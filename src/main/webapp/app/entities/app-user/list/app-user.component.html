@@ -1,0 +1,206 @@
+<div>
+  <h2 id="page-heading" data-cy="AppUserHeading">
+    <span jhiTranslate="budgetApplicationApp.appUser.home.title">AppUsers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.appUser.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-app-user"
+        [routerLink]="['/app-user/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.appUser.home.createLabel">Créer un nouveau App User</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (appUsers().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="budgetApplicationApp.appUser.home.notFound">Aucun App User trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="accountStatus">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.accountStatus">Account Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastDateUpdate">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.lastDateUpdate">Last Date Update</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateCreated">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.dateCreated">Date Created</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="firstname">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.firstname">Firstname</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastname">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.lastname">Lastname</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneNumber">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.phoneNumber">Phone Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthDate">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.birthDate">Birth Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthPlace">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.birthPlace">Birth Place</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="gender">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="familySituation">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.familySituation">Family Situation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="position">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.position">Position</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.address">Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="user.id">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.appUser.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (appUser of appUsers(); track trackId(appUser)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/app-user', appUser.id, 'view']">{{ appUser.id }}</a>
+              </td>
+              <td>{{ appUser.accountStatus }}</td>
+              <td>{{ appUser.lastDateUpdate | formatMediumDatetime }}</td>
+              <td>{{ appUser.dateCreated | formatMediumDatetime }}</td>
+              <td>{{ appUser.firstname }}</td>
+              <td>{{ appUser.lastname }}</td>
+              <td>{{ appUser.phoneNumber }}</td>
+              <td>{{ appUser.birthDate | formatMediumDatetime }}</td>
+              <td>{{ appUser.birthPlace }}</td>
+              <td [jhiTranslate]="'budgetApplicationApp.GenderEnum.' + (appUser.gender ?? 'null')">
+                {{ { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[appUser.gender ?? 'null'] }}
+              </td>
+              <td [jhiTranslate]="'budgetApplicationApp.FamilySituationEnum.' + (appUser.familySituation ?? 'null')">
+                {{ { null: '', CELIBATAIRE: 'CELIBATAIRE', MARIE: 'MARIE' }[appUser.familySituation ?? 'null'] }}
+              </td>
+              <td>{{ appUser.position }}</td>
+              <td>{{ appUser.address }}</td>
+              <td>
+                {{ appUser.user?.id }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/app-user', appUser.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/app-user', appUser.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(appUser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (appUsers().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145631"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "achievementsInThePastYear",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "newYearForecast",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "category",
+      "fieldType": "FinancialCategoryEnum",
+      "fieldValues": "OPERATING_RECIPE,INVESTMENT_RECIPE,OPERATING_EXPENSE,INVESTMENT_EXPENSE"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Recipe",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "financialYear",
+      "otherEntityRelationshipName": "recipe",
+      "relationshipName": "financialYear",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "article",
+      "otherEntityRelationshipName": "recipe",
+      "relationshipName": "article",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

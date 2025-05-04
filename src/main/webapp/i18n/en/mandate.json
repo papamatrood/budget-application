@@ -1,0 +1,29 @@
+{
+  "budgetApplicationApp": {
+    "mandate": {
+      "home": {
+        "title": "Mandates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Mandate",
+        "createOrEditLabel": "Create or edit a Mandate",
+        "notFound": "No Mandates found"
+      },
+      "created": "A new Mandate is created with identifier {{ param }}",
+      "updated": "A Mandate is updated with identifier {{ param }}",
+      "deleted": "A Mandate is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Mandate {{ id }}?"
+      },
+      "detail": {
+        "title": "Mandate"
+      },
+      "id": "ID",
+      "mandateNumber": "Mandate Number",
+      "mandateDate": "Mandate Date",
+      "issueSlipNumber": "Issue Slip Number",
+      "monthAndYearOfIssue": "Month And Year Of Issue",
+      "supportingDocuments": "Supporting Documents",
+      "engagement": "Engagement"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "budgetApplicationApp": {
+    "engagement": {
+      "home": {
+        "title": "Engagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Engagement",
+        "createOrEditLabel": "Create or edit a Engagement",
+        "notFound": "No Engagements found"
+      },
+      "created": "A new Engagement is created with identifier {{ param }}",
+      "updated": "A Engagement is updated with identifier {{ param }}",
+      "deleted": "A Engagement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Engagement {{ id }}?"
+      },
+      "detail": {
+        "title": "Engagement"
+      },
+      "id": "ID",
+      "engagementNumber": "Engagement Number",
+      "engagementDate": "Engagement Date",
+      "objectOfExpense": "Object Of Expense",
+      "notifiedCredits": "Notified Credits",
+      "creditCommitted": "Credit Committed",
+      "creditsAvailable": "Credits Available",
+      "amountProposedCommitment": "Amount Proposed Commitment",
+      "headDaf": "Head Daf",
+      "financialController": "Financial Controller",
+      "generalManager": "General Manager",
+      "decision": "Decision",
+      "mandate": "Mandate",
+      "purchaseOrder": "Purchase Order"
+    }
+  }
+}

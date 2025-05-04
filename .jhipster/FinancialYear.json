@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145627"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "theYear",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "FinancialYear",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "recipe",
+      "otherEntityRelationshipName": "financialYear",
+      "relationshipName": "recipe",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "expense",
+      "otherEntityRelationshipName": "financialYear",
+      "relationshipName": "expense",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "annexDecision",
+      "otherEntityRelationshipName": "financialYear",
+      "relationshipName": "annexDecision",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

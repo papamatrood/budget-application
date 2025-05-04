@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145637"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "decisionNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "decisionDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Decision",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "engagement",
+      "otherEntityRelationshipName": "decision",
+      "relationshipName": "engagement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "annexDecision",
+      "otherEntityRelationshipName": "decision",
+      "relationshipName": "annexDecision",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "decisionItem",
+      "otherEntityRelationshipName": "decision",
+      "relationshipName": "decisionItem",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

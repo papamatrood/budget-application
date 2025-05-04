@@ -1,0 +1,172 @@
+<div>
+  <h2 id="page-heading" data-cy="AnnexDecisionHeading">
+    <span jhiTranslate="budgetApplicationApp.annexDecision.home.title">AnnexDecisions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.annexDecision.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-annex-decision"
+        [routerLink]="['/annex-decision/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.annexDecision.home.createLabel">Créer un nouveau Annex Decision</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (annexDecisions().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="budgetApplicationApp.annexDecision.home.notFound">Aucun Annex Decision trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="designation">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.annexDecision.designation">Designation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="expenseAmount">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.annexDecision.expenseAmount">Expense Amount</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="creditsAlreadyOpen">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.annexDecision.creditsAlreadyOpen">Credits Already Open</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="creditsOpen">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.annexDecision.creditsOpen">Credits Open</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="financialYear.id">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.annexDecision.financialYear">Financial Year</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (annexDecision of annexDecisions(); track trackId(annexDecision)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/annex-decision', annexDecision.id, 'view']">{{ annexDecision.id }}</a>
+              </td>
+              <td>{{ annexDecision.designation }}</td>
+              <td>{{ annexDecision.expenseAmount }}</td>
+              <td>{{ annexDecision.creditsAlreadyOpen }}</td>
+              <td>{{ annexDecision.creditsOpen }}</td>
+              <td>
+                @if (annexDecision.financialYear) {
+                  <div>
+                    <a [routerLink]="['/financial-year', annexDecision.financialYear.id, 'view']">{{ annexDecision.financialYear.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/purchase-order']"
+                    [queryParams]="{ 'filter[annexDecisionId.in]': annexDecision.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('budgetApplicationApp.annexDecision.purchaseOrder' | translate) }"
+                      >Show Purchase Order</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/decision']"
+                    [queryParams]="{ 'filter[annexDecisionId.in]': annexDecision.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('budgetApplicationApp.annexDecision.decision' | translate) }"
+                      >Show Decision</span
+                    >
+                  </button>
+                  <a [routerLink]="['/annex-decision', annexDecision.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/annex-decision', annexDecision.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(annexDecision)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (annexDecisions().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>
