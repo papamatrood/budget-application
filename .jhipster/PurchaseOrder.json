@@ -1,0 +1,94 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145635"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nameOfTheMinistry",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "orderNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "orderDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "totalAmountWithoutTax",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "taxRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalTaxAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "prepaidTaxAmount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalAmountWithTax",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "authExpenditureNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "allocatedCredits",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "committedExpenditures",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "availableBalance",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "PurchaseOrder",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "annexDecision",
+      "otherEntityRelationshipName": "purchaseOrder",
+      "relationshipName": "annexDecision",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "supplier",
+      "otherEntityRelationshipName": "purchaseOrder",
+      "relationshipName": "supplier",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "engagement",
+      "otherEntityRelationshipName": "purchaseOrder",
+      "relationshipName": "engagement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "purchaseOrderItem",
+      "otherEntityRelationshipName": "purchaseOrder",
+      "relationshipName": "purchaseOrderItem",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

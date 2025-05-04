@@ -1,0 +1,28 @@
+{
+  "budgetApplicationApp": {
+    "purchaseOrderItem": {
+      "home": {
+        "title": "PurchaseOrderItems",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Purchase Order Item",
+        "createOrEditLabel": "Créer ou éditer un Purchase Order Item",
+        "notFound": "Aucun Purchase Order Item trouvé"
+      },
+      "created": "Un nouveau Purchase Order Item a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Purchase Order Item avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Purchase Order Item avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Purchase Order Item {{ id }} ?"
+      },
+      "detail": {
+        "title": "Purchase Order Item"
+      },
+      "id": "ID",
+      "productName": "Product Name",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "totalAmount": "Total Amount",
+      "purchaseOrder": "Purchase Order"
+    }
+  }
+}

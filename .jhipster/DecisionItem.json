@@ -1,0 +1,35 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145638"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "beneficiary",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "observation",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "DecisionItem",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "decision",
+      "otherEntityRelationshipName": "decisionItem",
+      "relationshipName": "decision",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

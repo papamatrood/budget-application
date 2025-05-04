@@ -1,0 +1,176 @@
+entity AppUser {
+    accountStatus	            Boolean
+    lastDateUpdate		        Instant
+    dateCreated                 Instant
+    firstname                   String
+    lastname                    String
+    phoneNumber                 String
+    birthDate                   Instant
+    birthPlace                  String
+    gender                      GenderEnum
+    familySituation             FamilySituationEnum
+    position               		String 
+    address               		String 
+}
+
+entity FinancialYear {
+    theYear                        Integer required
+}
+
+entity SubTitle {
+	code                        String required
+	designation                 String required
+}
+
+entity Chapter {
+	code                        String required
+	designation                 String required
+}
+
+entity Article{
+    category                    FinancialCategoryEnum
+	code                        String required
+	designation                 String required
+    accountDiv               	String 
+    codeEnd                     String
+    paragraph                   String
+}
+
+entity Recipe {
+    achievementsInThePastYear   Integer 
+    newYearForecast             Integer 
+    category                    FinancialCategoryEnum
+}
+
+entity Expense {
+    achievementsInThePastYear   Integer 
+    newYearForecast             Integer 
+    category                    FinancialCategoryEnum
+}
+
+entity AnnexDecision {
+	designation                 String
+	expenseAmount               String
+	creditsAlreadyOpen          String
+	creditsOpen                 String
+}
+
+entity Supplier {
+    companyName                String 
+    address                    String 
+    phone                      String 
+    nifNumber                  String  // NIF
+    commercialRegister         String  // RC
+    bankAccount                String 
+    mandatingEstablishment     String 
+    email                      String
+    website                    String
+    description                String
+    contactFirstname           String
+    contactlastname            String
+}
+
+// Entité pour le bon d'achat (PurchaseOrder)
+entity PurchaseOrder {
+	nameOfTheMinistry          String required
+    orderNumber                String required // Numéro du bon d'achat (ex: 24-001)
+    orderDate                  Instant required // Date du bon d'achat
+    totalAmountWithoutTax      BigDecimal  // Montant total HT
+    taxRate                    BigDecimal  // Taux de TVA (ex: 18%)
+    totalTaxAmount             BigDecimal  // Montant total de la TVA
+    prepaidTaxAmount           BigDecimal  // Montant précompté de la TVA (40%)
+    totalAmountWithTax         BigDecimal  // Montant total TTC
+    authExpenditureNumber      String  // Numéro d'autorisation de dépense (ex: 01)
+    allocatedCredits           BigDecimal  // Montant des crédits alloués
+    committedExpenditures      BigDecimal  // Montant des dépenses engagées
+    availableBalance           BigDecimal  // Solde disponible
+}
+
+// Entité pour les articles commandés (OrderItem)
+entity PurchaseOrderItem {
+    productName                String required // Désignation de l'article (ex: Lait en poudre)
+    quantity                   Integer required // Quantité
+    unitPrice                  BigDecimal required // Prix unitaire
+    totalAmount                BigDecimal required // Montant total (quantité * prix unitaire)
+}
+
+entity Decision {
+    decisionNumber             String required 
+    decisionDate               Instant required
+}
+
+entity DecisionItem {
+    beneficiary                String required 
+    amount                     Integer  
+    observation                BigDecimal
+}
+
+entity Engagement {
+    engagementNumber           String required 
+    engagementDate             Instant required
+    objectOfExpense            String  
+    notifiedCredits            String  
+    creditCommitted            String  
+    creditsAvailable           String  
+    amountProposedCommitment   String  
+    headDaf                    String  
+    financialController        String
+    generalManager             String
+}
+
+entity Mandate {
+    mandateNumber              String required 
+    mandateDate                Instant required
+    issueSlipNumber            String  
+    monthAndYearOfIssue        String
+    supportingDocuments        String
+}
+
+enum GenderEnum {
+    MALE,
+    FEMALE
+}
+
+enum FamilySituationEnum {
+    CELIBATAIRE,
+    MARIE
+}
+
+enum FinancialCategoryEnum {
+    OPERATING_RECIPE,
+	INVESTMENT_RECIPE,
+	OPERATING_EXPENSE,
+	INVESTMENT_EXPENSE
+}
+
+
+relationship OneToOne {
+    AppUser {user} to User with builtInEntity
+    Decision to Engagement
+    Recipe to FinancialYear
+    Expense to FinancialYear
+    AnnexDecision to FinancialYear
+    Expense to AnnexDecision
+    Mandate to Engagement
+}
+
+relationship ManyToOne {
+    Chapter to SubTitle
+    Article to Chapter
+    PurchaseOrder to AnnexDecision
+    PurchaseOrder to Supplier
+    PurchaseOrderItem to PurchaseOrder
+    PurchaseOrder to Engagement
+    DecisionItem to Decision
+    Decision to AnnexDecision
+}
+
+relationship ManyToMany {
+    Article to Recipe
+    Article to Expense
+}
+
+paginate all with pagination
+// Set service options to all except few
+service all with serviceImpl
+filter *

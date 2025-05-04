@@ -1,0 +1,29 @@
+{
+  "budgetApplicationApp": {
+    "mandate": {
+      "home": {
+        "title": "Mandates",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Mandate",
+        "createOrEditLabel": "Créer ou éditer un Mandate",
+        "notFound": "Aucun Mandate trouvé"
+      },
+      "created": "Un nouveau Mandate a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Mandate avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Mandate avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Mandate {{ id }} ?"
+      },
+      "detail": {
+        "title": "Mandate"
+      },
+      "id": "ID",
+      "mandateNumber": "Mandate Number",
+      "mandateDate": "Mandate Date",
+      "issueSlipNumber": "Issue Slip Number",
+      "monthAndYearOfIssue": "Month And Year Of Issue",
+      "supportingDocuments": "Supporting Documents",
+      "engagement": "Engagement"
+    }
+  }
+}

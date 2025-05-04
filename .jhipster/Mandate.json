@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145640"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "mandateNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "mandateDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "issueSlipNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "monthAndYearOfIssue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "supportingDocuments",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Mandate",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "engagement",
+      "otherEntityRelationshipName": "mandate",
+      "relationshipName": "engagement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

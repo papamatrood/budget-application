@@ -1,0 +1,27 @@
+{
+  "budgetApplicationApp": {
+    "financialYear": {
+      "home": {
+        "title": "FinancialYears",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Financial Year",
+        "createOrEditLabel": "Créer ou éditer un Financial Year",
+        "notFound": "Aucun Financial Year trouvé"
+      },
+      "created": "Un nouveau Financial Year a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Financial Year avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Financial Year avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Financial Year {{ id }} ?"
+      },
+      "detail": {
+        "title": "Financial Year"
+      },
+      "id": "ID",
+      "theYear": "The Year",
+      "recipe": "Recipe",
+      "expense": "Expense",
+      "annexDecision": "Annex Decision"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (decision(); as decisionRef) {
+      <div>
+        <h2 data-cy="decisionDetailsHeading"><span jhiTranslate="budgetApplicationApp.decision.detail.title">Decision</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ decisionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="budgetApplicationApp.decision.decisionNumber">Decision Number</span></dt>
+          <dd>
+            <span>{{ decisionRef.decisionNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="budgetApplicationApp.decision.decisionDate">Decision Date</span></dt>
+          <dd>
+            <span>{{ decisionRef.decisionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="budgetApplicationApp.decision.engagement">Engagement</span></dt>
+          <dd>
+            @if (decision()!.engagement) {
+              <div>
+                <a [routerLink]="['/engagement', decision()!.engagement?.id, 'view']">{{ decisionRef.engagement?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="budgetApplicationApp.decision.annexDecision">Annex Decision</span></dt>
+          <dd>
+            @if (decision()!.annexDecision) {
+              <div>
+                <a [routerLink]="['/annex-decision', decision()!.annexDecision?.id, 'view']">{{ decisionRef.annexDecision?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/decision', decisionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

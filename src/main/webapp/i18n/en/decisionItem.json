@@ -1,0 +1,27 @@
+{
+  "budgetApplicationApp": {
+    "decisionItem": {
+      "home": {
+        "title": "Decision Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Decision Item",
+        "createOrEditLabel": "Create or edit a Decision Item",
+        "notFound": "No Decision Items found"
+      },
+      "created": "A new Decision Item is created with identifier {{ param }}",
+      "updated": "A Decision Item is updated with identifier {{ param }}",
+      "deleted": "A Decision Item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Decision Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Decision Item"
+      },
+      "id": "ID",
+      "beneficiary": "Beneficiary",
+      "amount": "Amount",
+      "observation": "Observation",
+      "decision": "Decision"
+    }
+  }
+}

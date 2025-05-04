@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145628"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "designation",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "SubTitle",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "chapter",
+      "otherEntityRelationshipName": "subTitle",
+      "relationshipName": "chapter",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145632"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "achievementsInThePastYear",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "newYearForecast",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "category",
+      "fieldType": "FinancialCategoryEnum",
+      "fieldValues": "OPERATING_RECIPE,INVESTMENT_RECIPE,OPERATING_EXPENSE,INVESTMENT_EXPENSE"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Expense",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "financialYear",
+      "otherEntityRelationshipName": "expense",
+      "relationshipName": "financialYear",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "annexDecision",
+      "otherEntityRelationshipName": "expense",
+      "relationshipName": "annexDecision",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "article",
+      "otherEntityRelationshipName": "expense",
+      "relationshipName": "article",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,292 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-purchase-order-heading"
+        data-cy="PurchaseOrderCreateUpdateHeading"
+        jhiTranslate="budgetApplicationApp.purchaseOrder.home.createOrEditLabel"
+      >
+        Créer ou éditer un Purchase Order
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.purchaseOrder.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameOfTheMinistryRef = editForm.get('nameOfTheMinistry')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_nameOfTheMinistry" jhiTranslate="budgetApplicationApp.purchaseOrder.nameOfTheMinistry"
+            >Name Of The Ministry</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="nameOfTheMinistry"
+            id="field_nameOfTheMinistry"
+            data-cy="nameOfTheMinistry"
+            formControlName="nameOfTheMinistry"
+          />
+          @if (nameOfTheMinistryRef.invalid && (nameOfTheMinistryRef.dirty || nameOfTheMinistryRef.touched)) {
+            <div>
+              @if (editForm.get('nameOfTheMinistry')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let orderNumberRef = editForm.get('orderNumber')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_orderNumber" jhiTranslate="budgetApplicationApp.purchaseOrder.orderNumber"
+            >Order Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="orderNumber"
+            id="field_orderNumber"
+            data-cy="orderNumber"
+            formControlName="orderNumber"
+          />
+          @if (orderNumberRef.invalid && (orderNumberRef.dirty || orderNumberRef.touched)) {
+            <div>
+              @if (editForm.get('orderNumber')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let orderDateRef = editForm.get('orderDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_orderDate" jhiTranslate="budgetApplicationApp.purchaseOrder.orderDate">Order Date</label>
+          <div class="d-flex">
+            <input
+              id="field_orderDate"
+              data-cy="orderDate"
+              type="datetime-local"
+              class="form-control"
+              name="orderDate"
+              formControlName="orderDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (orderDateRef.invalid && (orderDateRef.dirty || orderDateRef.touched)) {
+            <div>
+              @if (editForm.get('orderDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('orderDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >Ce champ doit être une date et une heure.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_totalAmountWithoutTax"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithoutTax"
+            >Total Amount Without Tax</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalAmountWithoutTax"
+            id="field_totalAmountWithoutTax"
+            data-cy="totalAmountWithoutTax"
+            formControlName="totalAmountWithoutTax"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_taxRate" jhiTranslate="budgetApplicationApp.purchaseOrder.taxRate">Tax Rate</label>
+          <input type="number" class="form-control" name="taxRate" id="field_taxRate" data-cy="taxRate" formControlName="taxRate" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_totalTaxAmount" jhiTranslate="budgetApplicationApp.purchaseOrder.totalTaxAmount"
+            >Total Tax Amount</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalTaxAmount"
+            id="field_totalTaxAmount"
+            data-cy="totalTaxAmount"
+            formControlName="totalTaxAmount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prepaidTaxAmount" jhiTranslate="budgetApplicationApp.purchaseOrder.prepaidTaxAmount"
+            >Prepaid Tax Amount</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="prepaidTaxAmount"
+            id="field_prepaidTaxAmount"
+            data-cy="prepaidTaxAmount"
+            formControlName="prepaidTaxAmount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_totalAmountWithTax" jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithTax"
+            >Total Amount With Tax</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalAmountWithTax"
+            id="field_totalAmountWithTax"
+            data-cy="totalAmountWithTax"
+            formControlName="totalAmountWithTax"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_authExpenditureNumber"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.authExpenditureNumber"
+            >Auth Expenditure Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="authExpenditureNumber"
+            id="field_authExpenditureNumber"
+            data-cy="authExpenditureNumber"
+            formControlName="authExpenditureNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_allocatedCredits" jhiTranslate="budgetApplicationApp.purchaseOrder.allocatedCredits"
+            >Allocated Credits</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="allocatedCredits"
+            id="field_allocatedCredits"
+            data-cy="allocatedCredits"
+            formControlName="allocatedCredits"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_committedExpenditures"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.committedExpenditures"
+            >Committed Expenditures</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="committedExpenditures"
+            id="field_committedExpenditures"
+            data-cy="committedExpenditures"
+            formControlName="committedExpenditures"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_availableBalance" jhiTranslate="budgetApplicationApp.purchaseOrder.availableBalance"
+            >Available Balance</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="availableBalance"
+            id="field_availableBalance"
+            data-cy="availableBalance"
+            formControlName="availableBalance"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_annexDecision" jhiTranslate="budgetApplicationApp.purchaseOrder.annexDecision"
+            >Annex Decision</label
+          >
+          <select
+            class="form-control"
+            id="field_annexDecision"
+            data-cy="annexDecision"
+            name="annexDecision"
+            formControlName="annexDecision"
+            [compareWith]="compareAnnexDecision"
+          >
+            <option [ngValue]="null"></option>
+            @for (annexDecisionOption of annexDecisionsSharedCollection; track $index) {
+              <option [ngValue]="annexDecisionOption">{{ annexDecisionOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_supplier" jhiTranslate="budgetApplicationApp.purchaseOrder.supplier">Supplier</label>
+          <select
+            class="form-control"
+            id="field_supplier"
+            data-cy="supplier"
+            name="supplier"
+            formControlName="supplier"
+            [compareWith]="compareSupplier"
+          >
+            <option [ngValue]="null"></option>
+            @for (supplierOption of suppliersSharedCollection; track $index) {
+              <option [ngValue]="supplierOption">{{ supplierOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_engagement" jhiTranslate="budgetApplicationApp.purchaseOrder.engagement">Engagement</label>
+          <select
+            class="form-control"
+            id="field_engagement"
+            data-cy="engagement"
+            name="engagement"
+            formControlName="engagement"
+            [compareWith]="compareEngagement"
+          >
+            <option [ngValue]="null"></option>
+            @for (engagementOption of engagementsSharedCollection; track $index) {
+              <option [ngValue]="engagementOption">{{ engagementOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

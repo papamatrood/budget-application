@@ -1,0 +1,63 @@
+{
+  "annotations": {
+    "changelogDate": "20250504145630"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "category",
+      "fieldType": "FinancialCategoryEnum",
+      "fieldValues": "OPERATING_RECIPE,INVESTMENT_RECIPE,OPERATING_EXPENSE,INVESTMENT_EXPENSE"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "designation",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "accountDiv",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codeEnd",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paragraph",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Article",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "chapter",
+      "otherEntityRelationshipName": "article",
+      "relationshipName": "chapter",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "recipe",
+      "otherEntityRelationshipName": "article",
+      "relationshipName": "recipe",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "expense",
+      "otherEntityRelationshipName": "article",
+      "relationshipName": "expense",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

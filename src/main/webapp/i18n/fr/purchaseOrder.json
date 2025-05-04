@@ -1,0 +1,39 @@
+{
+  "budgetApplicationApp": {
+    "purchaseOrder": {
+      "home": {
+        "title": "PurchaseOrders",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Purchase Order",
+        "createOrEditLabel": "Créer ou éditer un Purchase Order",
+        "notFound": "Aucun Purchase Order trouvé"
+      },
+      "created": "Un nouveau Purchase Order a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Purchase Order avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Purchase Order avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Purchase Order {{ id }} ?"
+      },
+      "detail": {
+        "title": "Purchase Order"
+      },
+      "id": "ID",
+      "nameOfTheMinistry": "Name Of The Ministry",
+      "orderNumber": "Order Number",
+      "orderDate": "Order Date",
+      "totalAmountWithoutTax": "Total Amount Without Tax",
+      "taxRate": "Tax Rate",
+      "totalTaxAmount": "Total Tax Amount",
+      "prepaidTaxAmount": "Prepaid Tax Amount",
+      "totalAmountWithTax": "Total Amount With Tax",
+      "authExpenditureNumber": "Auth Expenditure Number",
+      "allocatedCredits": "Allocated Credits",
+      "committedExpenditures": "Committed Expenditures",
+      "availableBalance": "Available Balance",
+      "annexDecision": "Annex Decision",
+      "supplier": "Supplier",
+      "engagement": "Engagement",
+      "purchaseOrderItem": "Purchase Order Item"
+    }
+  }
+}

@@ -1,0 +1,157 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-supplier-heading"
+        data-cy="SupplierCreateUpdateHeading"
+        jhiTranslate="budgetApplicationApp.supplier.home.createOrEditLabel"
+      >
+        Créer ou éditer un Supplier
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.supplier.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_companyName" jhiTranslate="budgetApplicationApp.supplier.companyName">Company Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="companyName"
+            id="field_companyName"
+            data-cy="companyName"
+            formControlName="companyName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_address" jhiTranslate="budgetApplicationApp.supplier.address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_phone" jhiTranslate="budgetApplicationApp.supplier.phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nifNumber" jhiTranslate="budgetApplicationApp.supplier.nifNumber">Nif Number</label>
+          <input type="text" class="form-control" name="nifNumber" id="field_nifNumber" data-cy="nifNumber" formControlName="nifNumber" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_commercialRegister" jhiTranslate="budgetApplicationApp.supplier.commercialRegister"
+            >Commercial Register</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="commercialRegister"
+            id="field_commercialRegister"
+            data-cy="commercialRegister"
+            formControlName="commercialRegister"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_bankAccount" jhiTranslate="budgetApplicationApp.supplier.bankAccount">Bank Account</label>
+          <input
+            type="text"
+            class="form-control"
+            name="bankAccount"
+            id="field_bankAccount"
+            data-cy="bankAccount"
+            formControlName="bankAccount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_mandatingEstablishment" jhiTranslate="budgetApplicationApp.supplier.mandatingEstablishment"
+            >Mandating Establishment</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="mandatingEstablishment"
+            id="field_mandatingEstablishment"
+            data-cy="mandatingEstablishment"
+            formControlName="mandatingEstablishment"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="budgetApplicationApp.supplier.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_website" jhiTranslate="budgetApplicationApp.supplier.website">Website</label>
+          <input type="text" class="form-control" name="website" id="field_website" data-cy="website" formControlName="website" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="budgetApplicationApp.supplier.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_contactFirstname" jhiTranslate="budgetApplicationApp.supplier.contactFirstname"
+            >Contact Firstname</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contactFirstname"
+            id="field_contactFirstname"
+            data-cy="contactFirstname"
+            formControlName="contactFirstname"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_contactlastname" jhiTranslate="budgetApplicationApp.supplier.contactlastname"
+            >Contactlastname</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contactlastname"
+            id="field_contactlastname"
+            data-cy="contactlastname"
+            formControlName="contactlastname"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
