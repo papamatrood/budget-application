@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { RouterTestingHarness } from "@angular/router/testing";
+import { of } from "rxjs";
 
-import { MandateDetailComponent } from './mandate-detail.component';
+import { MandateDetailComponent } from "./mandate-detail.component";
 
-describe('Mandate Management Detail Component', () => {
+describe("Mandate Management Detail Component", () => {
   let comp: MandateDetailComponent;
   let fixture: ComponentFixture<MandateDetailComponent>;
 
@@ -16,8 +16,11 @@ describe('Mandate Management Detail Component', () => {
         provideRouter(
           [
             {
-              path: '**',
-              loadComponent: () => import('./mandate-detail.component').then(m => m.MandateDetailComponent),
+              path: "**",
+              loadComponent: () =>
+                import("./mandate-detail.component").then(
+                  (m) => m.MandateDetailComponent,
+                ),
               resolve: { mandate: () => of({ id: 5755 }) },
             },
           ],
@@ -25,7 +28,7 @@ describe('Mandate Management Detail Component', () => {
         ),
       ],
     })
-      .overrideTemplate(MandateDetailComponent, '')
+      .overrideTemplate(MandateDetailComponent, "")
       .compileComponents();
   });
 
@@ -34,19 +37,19 @@ describe('Mandate Management Detail Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('OnInit', () => {
-    it('should load mandate on init', async () => {
+  describe("OnInit", () => {
+    it("should load mandate on init", async () => {
       const harness = await RouterTestingHarness.create();
-      const instance = await harness.navigateByUrl('/', MandateDetailComponent);
+      const instance = await harness.navigateByUrl("/", MandateDetailComponent);
 
       // THEN
       expect(instance.mandate()).toEqual(expect.objectContaining({ id: 5755 }));
     });
   });
 
-  describe('PreviousState', () => {
-    it('should navigate to previous state', () => {
-      jest.spyOn(window.history, 'back');
+  describe("PreviousState", () => {
+    it("should navigate to previous state", () => {
+      jest.spyOn(window.history, "back");
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
     });

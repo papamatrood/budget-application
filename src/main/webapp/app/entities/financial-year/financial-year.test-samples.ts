@@ -1,4 +1,4 @@
-import { IFinancialYear, NewFinancialYear } from './financial-year.model';
+import { IFinancialYear, NewFinancialYear } from "./financial-year.model";
 
 export const sampleWithRequiredData: IFinancialYear = {
   id: 32636,

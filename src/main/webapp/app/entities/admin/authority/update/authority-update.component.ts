@@ -1,19 +1,22 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Component, OnInit, inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
 
-import SharedModule from 'app/shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import SharedModule from "app/shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { IAuthority } from '../authority.model';
-import { AuthorityService } from '../service/authority.service';
-import { AuthorityFormGroup, AuthorityFormService } from './authority-form.service';
+import { IAuthority } from "../authority.model";
+import { AuthorityService } from "../service/authority.service";
+import {
+  AuthorityFormGroup,
+  AuthorityFormService,
+} from "./authority-form.service";
 
 @Component({
-  selector: 'jhi-authority-update',
-  templateUrl: './authority-update.component.html',
+  selector: "jhi-authority-update",
+  templateUrl: "./authority-update.component.html",
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class AuthorityUpdateComponent implements OnInit {
@@ -25,7 +28,8 @@ export class AuthorityUpdateComponent implements OnInit {
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  editForm: AuthorityFormGroup = this.authorityFormService.createAuthorityFormGroup();
+  editForm: AuthorityFormGroup =
+    this.authorityFormService.createAuthorityFormGroup();
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ authority }) => {
@@ -46,7 +50,9 @@ export class AuthorityUpdateComponent implements OnInit {
     this.subscribeToSaveResponse(this.authorityService.create(authority));
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAuthority>>): void {
+  protected subscribeToSaveResponse(
+    result: Observable<HttpResponse<IAuthority>>,
+  ): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),

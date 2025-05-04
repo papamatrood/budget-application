@@ -1,23 +1,49 @@
 @if (recipe) {
   <form name="deleteForm" (ngSubmit)="confirmDelete(recipe.id!)">
     <div class="modal-header">
-      <h4 class="modal-title" data-cy="recipeDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirmation de suppression</h4>
+      <h4
+        class="modal-title"
+        data-cy="recipeDeleteDialogHeading"
+        jhiTranslate="entity.delete.title"
+      >
+        Confirmation de suppression
+      </h4>
     </div>
 
     <div class="modal-body">
       <jhi-alert-error />
-      <p id="jhi-delete-recipe-heading" jhiTranslate="budgetApplicationApp.recipe.delete.question" [translateValues]="{ id: recipe.id }">
+      <p
+        id="jhi-delete-recipe-heading"
+        jhiTranslate="budgetApplicationApp.recipe.delete.question"
+        [translateValues]="{ id: recipe.id }"
+      >
         Êtes-vous certain de vouloir supprimer le Recipe {{ recipe.id }} ?
       </p>
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
-        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-dismiss="modal"
+        (click)="cancel()"
+      >
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span
+          jhiTranslate="entity.action.cancel"
+          >Annuler</span
+        >
       </button>
 
-      <button id="jhi-confirm-delete-recipe" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
-        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Supprimer</span>
+      <button
+        id="jhi-confirm-delete-recipe"
+        data-cy="entityConfirmDeleteButton"
+        type="submit"
+        class="btn btn-danger"
+      >
+        <fa-icon icon="times"></fa-icon>&nbsp;<span
+          jhiTranslate="entity.action.delete"
+          >Supprimer</span
+        >
       </button>
     </div>
   </form>

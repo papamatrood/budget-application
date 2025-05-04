@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { RouterTestingHarness } from "@angular/router/testing";
+import { of } from "rxjs";
 
-import { ArticleDetailComponent } from './article-detail.component';
+import { ArticleDetailComponent } from "./article-detail.component";
 
-describe('Article Management Detail Component', () => {
+describe("Article Management Detail Component", () => {
   let comp: ArticleDetailComponent;
   let fixture: ComponentFixture<ArticleDetailComponent>;
 
@@ -16,8 +16,11 @@ describe('Article Management Detail Component', () => {
         provideRouter(
           [
             {
-              path: '**',
-              loadComponent: () => import('./article-detail.component').then(m => m.ArticleDetailComponent),
+              path: "**",
+              loadComponent: () =>
+                import("./article-detail.component").then(
+                  (m) => m.ArticleDetailComponent,
+                ),
               resolve: { article: () => of({ id: 24128 }) },
             },
           ],
@@ -25,7 +28,7 @@ describe('Article Management Detail Component', () => {
         ),
       ],
     })
-      .overrideTemplate(ArticleDetailComponent, '')
+      .overrideTemplate(ArticleDetailComponent, "")
       .compileComponents();
   });
 
@@ -34,19 +37,21 @@ describe('Article Management Detail Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('OnInit', () => {
-    it('should load article on init', async () => {
+  describe("OnInit", () => {
+    it("should load article on init", async () => {
       const harness = await RouterTestingHarness.create();
-      const instance = await harness.navigateByUrl('/', ArticleDetailComponent);
+      const instance = await harness.navigateByUrl("/", ArticleDetailComponent);
 
       // THEN
-      expect(instance.article()).toEqual(expect.objectContaining({ id: 24128 }));
+      expect(instance.article()).toEqual(
+        expect.objectContaining({ id: 24128 }),
+      );
     });
   });
 
-  describe('PreviousState', () => {
-    it('should navigate to previous state', () => {
-      jest.spyOn(window.history, 'back');
+  describe("PreviousState", () => {
+    it("should navigate to previous state", () => {
+      jest.spyOn(window.history, "back");
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
     });

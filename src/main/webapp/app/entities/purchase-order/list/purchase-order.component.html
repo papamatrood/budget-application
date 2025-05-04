@@ -1,11 +1,19 @@
 <div>
   <h2 id="page-heading" data-cy="PurchaseOrderHeading">
-    <span jhiTranslate="budgetApplicationApp.purchaseOrder.home.title">PurchaseOrders</span>
+    <span jhiTranslate="budgetApplicationApp.purchaseOrder.home.title"
+      >PurchaseOrders</span
+    >
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
-        <span jhiTranslate="budgetApplicationApp.purchaseOrder.home.refreshListLabel">Actualiser la liste</span>
+        <fa-icon
+          icon="sync"
+          [animation]="isLoading ? 'spin' : undefined"
+        ></fa-icon>
+        <span
+          jhiTranslate="budgetApplicationApp.purchaseOrder.home.refreshListLabel"
+          >Actualiser la liste</span
+        >
       </button>
 
       <button
@@ -15,7 +23,9 @@
         [routerLink]="['/purchase-order/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="budgetApplicationApp.purchaseOrder.home.createLabel">Créer un nouveau Purchase Order</span>
+        <span jhiTranslate="budgetApplicationApp.purchaseOrder.home.createLabel"
+          >Créer un nouveau Purchase Order</span
+        >
       </button>
     </div>
   </h2>
@@ -28,13 +38,19 @@
 
   @if (purchaseOrders().length === 0) {
     <div class="alert alert-warning" id="no-result">
-      <span jhiTranslate="budgetApplicationApp.purchaseOrder.home.notFound">Aucun Purchase Order trouvé</span>
+      <span jhiTranslate="budgetApplicationApp.purchaseOrder.home.notFound"
+        >Aucun Purchase Order trouvé</span
+      >
     </div>
   } @else {
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
-          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+          <tr
+            jhiSort
+            [(sortState)]="sortState"
+            (sortChange)="navigateToWithComponentValues($event)"
+          >
             <th scope="col" jhiSortBy="id">
               <div class="d-flex">
                 <span jhiTranslate="global.field.id">ID</span>
@@ -44,103 +60,146 @@
             </th>
             <th scope="col" jhiSortBy="nameOfTheMinistry">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.nameOfTheMinistry">Name Of The Ministry</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.nameOfTheMinistry"
+                  >Name Of The Ministry</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="orderNumber">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.orderNumber">Order Number</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.orderNumber"
+                  >Order Number</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="orderDate">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.orderDate">Order Date</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.orderDate"
+                  >Order Date</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="totalAmountWithoutTax">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithoutTax">Total Amount Without Tax</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithoutTax"
+                  >Total Amount Without Tax</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="taxRate">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.taxRate">Tax Rate</span>
+                <span jhiTranslate="budgetApplicationApp.purchaseOrder.taxRate"
+                  >Tax Rate</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="totalTaxAmount">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.totalTaxAmount">Total Tax Amount</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.totalTaxAmount"
+                  >Total Tax Amount</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="prepaidTaxAmount">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.prepaidTaxAmount">Prepaid Tax Amount</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.prepaidTaxAmount"
+                  >Prepaid Tax Amount</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="totalAmountWithTax">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithTax">Total Amount With Tax</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithTax"
+                  >Total Amount With Tax</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="authExpenditureNumber">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.authExpenditureNumber">Auth Expenditure Number</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.authExpenditureNumber"
+                  >Auth Expenditure Number</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="allocatedCredits">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.allocatedCredits">Allocated Credits</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.allocatedCredits"
+                  >Allocated Credits</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="committedExpenditures">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.committedExpenditures">Committed Expenditures</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.committedExpenditures"
+                  >Committed Expenditures</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="availableBalance">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.availableBalance">Available Balance</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.availableBalance"
+                  >Available Balance</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="annexDecision.id">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.annexDecision">Annex Decision</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.annexDecision"
+                  >Annex Decision</span
+                >
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="supplier.id">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.supplier">Supplier</span>
+                <span jhiTranslate="budgetApplicationApp.purchaseOrder.supplier"
+                  >Supplier</span
+                >
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="engagement.id">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.purchaseOrder.engagement">Engagement</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.purchaseOrder.engagement"
+                  >Engagement</span
+                >
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -148,10 +207,16 @@
           </tr>
         </thead>
         <tbody>
-          @for (purchaseOrder of purchaseOrders(); track trackId(purchaseOrder)) {
+          @for (
+            purchaseOrder of purchaseOrders();
+            track trackId(purchaseOrder)
+          ) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/purchase-order', purchaseOrder.id, 'view']">{{ purchaseOrder.id }}</a>
+                <a
+                  [routerLink]="['/purchase-order', purchaseOrder.id, 'view']"
+                  >{{ purchaseOrder.id }}</a
+                >
               </td>
               <td>{{ purchaseOrder.nameOfTheMinistry }}</td>
               <td>{{ purchaseOrder.orderNumber }}</td>
@@ -168,21 +233,42 @@
               <td>
                 @if (purchaseOrder.annexDecision) {
                   <div>
-                    <a [routerLink]="['/annex-decision', purchaseOrder.annexDecision.id, 'view']">{{ purchaseOrder.annexDecision.id }}</a>
+                    <a
+                      [routerLink]="[
+                        '/annex-decision',
+                        purchaseOrder.annexDecision.id,
+                        'view',
+                      ]"
+                      >{{ purchaseOrder.annexDecision.id }}</a
+                    >
                   </div>
                 }
               </td>
               <td>
                 @if (purchaseOrder.supplier) {
                   <div>
-                    <a [routerLink]="['/supplier', purchaseOrder.supplier.id, 'view']">{{ purchaseOrder.supplier.id }}</a>
+                    <a
+                      [routerLink]="[
+                        '/supplier',
+                        purchaseOrder.supplier.id,
+                        'view',
+                      ]"
+                      >{{ purchaseOrder.supplier.id }}</a
+                    >
                   </div>
                 }
               </td>
               <td>
                 @if (purchaseOrder.engagement) {
                   <div>
-                    <a [routerLink]="['/engagement', purchaseOrder.engagement.id, 'view']">{{ purchaseOrder.engagement.id }}</a>
+                    <a
+                      [routerLink]="[
+                        '/engagement',
+                        purchaseOrder.engagement.id,
+                        'view',
+                      ]"
+                      >{{ purchaseOrder.engagement.id }}</a
+                    >
                   </div>
                 }
               </td>
@@ -191,7 +277,9 @@
                   <button
                     type="submit"
                     [routerLink]="['/purchase-order-item']"
-                    [queryParams]="{ 'filter[purchaseOrderId.in]': purchaseOrder.id }"
+                    [queryParams]="{
+                      'filter[purchaseOrderId.in]': purchaseOrder.id,
+                    }"
                     class="btn btn-info btn-sm"
                     data-cy="filterOtherEntityButton"
                   >
@@ -199,23 +287,52 @@
                     <span
                       class="d-none d-md-inline"
                       jhiTranslate="entity.action.show"
-                      [translateValues]="{ otherEntity: ('budgetApplicationApp.purchaseOrder.purchaseOrderItem' | translate) }"
+                      [translateValues]="{
+                        otherEntity:
+                          ('budgetApplicationApp.purchaseOrder.purchaseOrderItem'
+                          | translate),
+                      }"
                       >Show Purchase Order Item</span
                     >
                   </button>
-                  <a [routerLink]="['/purchase-order', purchaseOrder.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    [routerLink]="['/purchase-order', purchaseOrder.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.view"
+                      >Voir</span
+                    >
                   </a>
 
-                  <a [routerLink]="['/purchase-order', purchaseOrder.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    [routerLink]="['/purchase-order', purchaseOrder.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.edit"
+                      >Editer</span
+                    >
                   </a>
 
-                  <button type="submit" (click)="delete(purchaseOrder)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <button
+                    type="submit"
+                    (click)="delete(purchaseOrder)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
                     <fa-icon icon="times"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.delete"
+                      >Supprimer</span
+                    >
                   </button>
                 </div>
               </td>
@@ -228,7 +345,13 @@
   @if (purchaseOrders().length > 0) {
     <div>
       <div class="d-flex justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+        <jhi-item-count
+          [params]="{
+            page: page,
+            totalItems: totalItems,
+            itemsPerPage: itemsPerPage,
+          }"
+        />
       </div>
 
       <div class="d-flex justify-content-center">

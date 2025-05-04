@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
-import { of, throwError } from 'rxjs';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { HttpErrorResponse, provideHttpClient } from "@angular/common/http";
+import { of, throwError } from "rxjs";
 
-import HealthComponent from './health.component';
-import { HealthService } from './health.service';
-import { Health } from './health.model';
+import HealthComponent from "./health.component";
+import { HealthService } from "./health.service";
+import { Health } from "./health.model";
 
-describe('HealthComponent', () => {
+describe("HealthComponent", () => {
   let comp: HealthComponent;
   let fixture: ComponentFixture<HealthComponent>;
   let service: HealthService;
@@ -16,7 +16,7 @@ describe('HealthComponent', () => {
       imports: [HealthComponent],
       providers: [provideHttpClient()],
     })
-      .overrideTemplate(HealthComponent, '')
+      .overrideTemplate(HealthComponent, "")
       .compileComponents();
   }));
 
@@ -26,20 +26,23 @@ describe('HealthComponent', () => {
     service = TestBed.inject(HealthService);
   });
 
-  describe('getBadgeClass', () => {
-    it('should get badge class', () => {
-      const upBadgeClass = comp.getBadgeClass('UP');
-      const downBadgeClass = comp.getBadgeClass('DOWN');
-      expect(upBadgeClass).toEqual('bg-success');
-      expect(downBadgeClass).toEqual('bg-danger');
+  describe("getBadgeClass", () => {
+    it("should get badge class", () => {
+      const upBadgeClass = comp.getBadgeClass("UP");
+      const downBadgeClass = comp.getBadgeClass("DOWN");
+      expect(upBadgeClass).toEqual("bg-success");
+      expect(downBadgeClass).toEqual("bg-danger");
     });
   });
 
-  describe('refresh', () => {
-    it('should call refresh on init', () => {
+  describe("refresh", () => {
+    it("should call refresh on init", () => {
       // GIVEN
-      const health: Health = { status: 'UP', components: { mail: { status: 'UP', details: { mailDetail: 'mail' } } } };
-      jest.spyOn(service, 'checkHealth').mockReturnValue(of(health));
+      const health: Health = {
+        status: "UP",
+        components: { mail: { status: "UP", details: { mailDetail: "mail" } } },
+      };
+      jest.spyOn(service, "checkHealth").mockReturnValue(of(health));
 
       // WHEN
       comp.ngOnInit();
@@ -49,10 +52,19 @@ describe('HealthComponent', () => {
       expect(comp.health).toEqual(health);
     });
 
-    it('should handle a 503 on refreshing health data', () => {
+    it("should handle a 503 on refreshing health data", () => {
       // GIVEN
-      const health: Health = { status: 'DOWN', components: { mail: { status: 'DOWN' } } };
-      jest.spyOn(service, 'checkHealth').mockReturnValue(throwError(() => new HttpErrorResponse({ status: 503, error: health })));
+      const health: Health = {
+        status: "DOWN",
+        components: { mail: { status: "DOWN" } },
+      };
+      jest
+        .spyOn(service, "checkHealth")
+        .mockReturnValue(
+          throwError(
+            () => new HttpErrorResponse({ status: 503, error: health }),
+          ),
+        );
 
       // WHEN
       comp.refresh();

@@ -1,7 +1,11 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-expense-heading" data-cy="ExpenseCreateUpdateHeading" jhiTranslate="budgetApplicationApp.expense.home.createOrEditLabel">
+      <h2
+        id="jhi-expense-heading"
+        data-cy="ExpenseCreateUpdateHeading"
+        jhiTranslate="budgetApplicationApp.expense.home.createOrEditLabel"
+      >
         Créer ou éditer un Expense
       </h2>
 
@@ -10,8 +14,21 @@
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.expense.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.expense.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
           </div>
         }
 
@@ -33,7 +50,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_newYearForecast" jhiTranslate="budgetApplicationApp.expense.newYearForecast"
+          <label
+            class="form-label"
+            for="field_newYearForecast"
+            jhiTranslate="budgetApplicationApp.expense.newYearForecast"
             >New Year Forecast</label
           >
           <input
@@ -47,19 +67,43 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_category" jhiTranslate="budgetApplicationApp.expense.category">Category</label>
-          <select class="form-control" name="category" formControlName="category" id="field_category" data-cy="category">
-            <option [ngValue]="null">{{ 'budgetApplicationApp.FinancialCategoryEnum.null' | translate }}</option>
-            @for (financialCategoryEnum of financialCategoryEnumValues; track $index) {
+          <label
+            class="form-label"
+            for="field_category"
+            jhiTranslate="budgetApplicationApp.expense.category"
+            >Category</label
+          >
+          <select
+            class="form-control"
+            name="category"
+            formControlName="category"
+            id="field_category"
+            data-cy="category"
+          >
+            <option [ngValue]="null">
+              {{
+                "budgetApplicationApp.FinancialCategoryEnum.null" | translate
+              }}
+            </option>
+            @for (
+              financialCategoryEnum of financialCategoryEnumValues;
+              track $index
+            ) {
               <option [value]="financialCategoryEnum">
-                {{ 'budgetApplicationApp.FinancialCategoryEnum.' + financialCategoryEnum | translate }}
+                {{
+                  "budgetApplicationApp.FinancialCategoryEnum." +
+                    financialCategoryEnum | translate
+                }}
               </option>
             }
           </select>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_financialYear" jhiTranslate="budgetApplicationApp.expense.financialYear"
+          <label
+            class="form-label"
+            for="field_financialYear"
+            jhiTranslate="budgetApplicationApp.expense.financialYear"
             >Financial Year</label
           >
           <select
@@ -71,14 +115,22 @@
             [compareWith]="compareFinancialYear"
           >
             <option [ngValue]="null"></option>
-            @for (financialYearOption of financialYearsCollection; track $index) {
-              <option [ngValue]="financialYearOption">{{ financialYearOption.id }}</option>
+            @for (
+              financialYearOption of financialYearsCollection;
+              track $index
+            ) {
+              <option [ngValue]="financialYearOption">
+                {{ financialYearOption.id }}
+              </option>
             }
           </select>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_annexDecision" jhiTranslate="budgetApplicationApp.expense.annexDecision"
+          <label
+            class="form-label"
+            for="field_annexDecision"
+            jhiTranslate="budgetApplicationApp.expense.annexDecision"
             >Annex Decision</label
           >
           <select
@@ -90,14 +142,23 @@
             [compareWith]="compareAnnexDecision"
           >
             <option [ngValue]="null"></option>
-            @for (annexDecisionOption of annexDecisionsCollection; track $index) {
-              <option [ngValue]="annexDecisionOption">{{ annexDecisionOption.id }}</option>
+            @for (
+              annexDecisionOption of annexDecisionsCollection;
+              track $index
+            ) {
+              <option [ngValue]="annexDecisionOption">
+                {{ annexDecisionOption.id }}
+              </option>
             }
           </select>
         </div>
 
         <div class="mb-3">
-          <label for="field_articles" jhiTranslate="budgetApplicationApp.expense.article">Article</label>
+          <label
+            for="field_articles"
+            jhiTranslate="budgetApplicationApp.expense.article"
+            >Article</label
+          >
           <select
             class="form-control"
             id="field_articles"
@@ -115,8 +176,17 @@
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
         </button>
 
         <button
@@ -126,7 +196,10 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
         </button>
       </div>
     </form>

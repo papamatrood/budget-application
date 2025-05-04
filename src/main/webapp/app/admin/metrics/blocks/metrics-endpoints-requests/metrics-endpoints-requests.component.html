@@ -2,7 +2,10 @@
 
 @if (!updating() && endpointsRequestsMetrics()) {
   <div class="table-responsive">
-    <table class="table table-striped" aria-describedby="endpointsRequestsMetrics">
+    <table
+      class="table table-striped"
+      aria-describedby="endpointsRequestsMetrics"
+    >
       <thead>
         <tr>
           <th scope="col">Method</th>
@@ -18,7 +21,9 @@
               <td>{{ method.key }}</td>
               <td>{{ entry.key }}</td>
               <td class="text-end">{{ method.value!.count }}</td>
-              <td class="text-end">{{ method.value!.mean | number: '1.0-3' }}</td>
+              <td class="text-end">
+                {{ method.value!.mean | number: "1.0-3" }}
+              </td>
             </tr>
           }
         }

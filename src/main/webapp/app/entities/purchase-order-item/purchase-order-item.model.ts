@@ -1,4 +1,4 @@
-import { IPurchaseOrder } from 'app/entities/purchase-order/purchase-order.model';
+import { IPurchaseOrder } from "app/entities/purchase-order/purchase-order.model";
 
 export interface IPurchaseOrderItem {
   id: number;
@@ -9,4 +9,6 @@ export interface IPurchaseOrderItem {
   purchaseOrder?: IPurchaseOrder | null;
 }
 
-export type NewPurchaseOrderItem = Omit<IPurchaseOrderItem, 'id'> & { id: null };
+export type NewPurchaseOrderItem = Omit<IPurchaseOrderItem, "id"> & {
+  id: null;
+};

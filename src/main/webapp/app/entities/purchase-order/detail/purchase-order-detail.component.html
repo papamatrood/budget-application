@@ -3,7 +3,9 @@
     @if (purchaseOrder(); as purchaseOrderRef) {
       <div>
         <h2 data-cy="purchaseOrderDetailsHeading">
-          <span jhiTranslate="budgetApplicationApp.purchaseOrder.detail.title">Purchase Order</span>
+          <span jhiTranslate="budgetApplicationApp.purchaseOrder.detail.title"
+            >Purchase Order</span
+          >
         </h2>
 
         <hr />
@@ -17,88 +19,192 @@
           <dd>
             <span>{{ purchaseOrderRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.nameOfTheMinistry">Name Of The Ministry</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.nameOfTheMinistry"
+              >Name Of The Ministry</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.nameOfTheMinistry }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.orderNumber">Order Number</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.purchaseOrder.orderNumber"
+              >Order Number</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.orderNumber }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.orderDate">Order Date</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.purchaseOrder.orderDate"
+              >Order Date</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.orderDate | formatMediumDatetime }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithoutTax">Total Amount Without Tax</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithoutTax"
+              >Total Amount Without Tax</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.totalAmountWithoutTax }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.taxRate">Tax Rate</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.purchaseOrder.taxRate"
+              >Tax Rate</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.taxRate }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.totalTaxAmount">Total Tax Amount</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.totalTaxAmount"
+              >Total Tax Amount</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.totalTaxAmount }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.prepaidTaxAmount">Prepaid Tax Amount</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.prepaidTaxAmount"
+              >Prepaid Tax Amount</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.prepaidTaxAmount }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithTax">Total Amount With Tax</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithTax"
+              >Total Amount With Tax</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.totalAmountWithTax }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.authExpenditureNumber">Auth Expenditure Number</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.authExpenditureNumber"
+              >Auth Expenditure Number</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.authExpenditureNumber }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.allocatedCredits">Allocated Credits</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.allocatedCredits"
+              >Allocated Credits</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.allocatedCredits }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.committedExpenditures">Committed Expenditures</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.committedExpenditures"
+              >Committed Expenditures</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.committedExpenditures }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.availableBalance">Available Balance</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.availableBalance"
+              >Available Balance</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderRef.availableBalance }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.annexDecision">Annex Decision</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrder.annexDecision"
+              >Annex Decision</span
+            >
+          </dt>
           <dd>
             @if (purchaseOrder()!.annexDecision) {
               <div>
-                <a [routerLink]="['/annex-decision', purchaseOrder()!.annexDecision?.id, 'view']">{{
-                  purchaseOrderRef.annexDecision?.id
-                }}</a>
+                <a
+                  [routerLink]="[
+                    '/annex-decision',
+                    purchaseOrder()!.annexDecision?.id,
+                    'view',
+                  ]"
+                  >{{ purchaseOrderRef.annexDecision?.id }}</a
+                >
               </div>
             }
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.supplier">Supplier</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.purchaseOrder.supplier"
+              >Supplier</span
+            >
+          </dt>
           <dd>
             @if (purchaseOrder()!.supplier) {
               <div>
-                <a [routerLink]="['/supplier', purchaseOrder()!.supplier?.id, 'view']">{{ purchaseOrderRef.supplier?.id }}</a>
+                <a
+                  [routerLink]="[
+                    '/supplier',
+                    purchaseOrder()!.supplier?.id,
+                    'view',
+                  ]"
+                  >{{ purchaseOrderRef.supplier?.id }}</a
+                >
               </div>
             }
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrder.engagement">Engagement</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.purchaseOrder.engagement"
+              >Engagement</span
+            >
+          </dt>
           <dd>
             @if (purchaseOrder()!.engagement) {
               <div>
-                <a [routerLink]="['/engagement', purchaseOrder()!.engagement?.id, 'view']">{{ purchaseOrderRef.engagement?.id }}</a>
+                <a
+                  [routerLink]="[
+                    '/engagement',
+                    purchaseOrder()!.engagement?.id,
+                    'view',
+                  ]"
+                  >{{ purchaseOrderRef.engagement?.id }}</a
+                >
               </div>
             }
           </dd>
         </dl>
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        <button
+          type="submit"
+          (click)="previousState()"
+          class="btn btn-info"
+          data-cy="entityDetailsBackButton"
+        >
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
         </button>
 
-        <button type="button" [routerLink]="['/purchase-order', purchaseOrderRef.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        <button
+          type="button"
+          [routerLink]="['/purchase-order', purchaseOrderRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.edit"
+            >Editer</span
+          >
         </button>
       </div>
     }

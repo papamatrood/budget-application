@@ -3,7 +3,8 @@
     @if (user(); as userRef) {
       <div>
         <h2>
-          <span jhiTranslate="userManagement.detail.title">Utilisateur</span> [<strong>{{ userRef.login }}</strong
+          <span jhiTranslate="userManagement.detail.title">Utilisateur</span>
+          [<strong>{{ userRef.login }}</strong
           >]
         </h2>
 
@@ -12,9 +13,17 @@
           <dd>
             <span>{{ userRef.login }}</span>
             @if (userRef.activated) {
-              <span class="badge bg-success" jhiTranslate="userManagement.activated">Activé</span>
+              <span
+                class="badge bg-success"
+                jhiTranslate="userManagement.activated"
+                >Activé</span
+              >
             } @else {
-              <span class="badge bg-danger" jhiTranslate="userManagement.deactivated">Désactivé</span>
+              <span
+                class="badge bg-danger"
+                jhiTranslate="userManagement.deactivated"
+                >Désactivé</span
+              >
             }
           </dd>
 
@@ -33,14 +42,24 @@
           <dt><span jhiTranslate="userManagement.createdBy">Créé par</span></dt>
           <dd>{{ userRef.createdBy }}</dd>
 
-          <dt><span jhiTranslate="userManagement.createdDate">Créé le</span></dt>
-          <dd>{{ userRef.createdDate | date: 'dd/MM/yy HH:mm' }}</dd>
+          <dt>
+            <span jhiTranslate="userManagement.createdDate">Créé le</span>
+          </dt>
+          <dd>{{ userRef.createdDate | date: "dd/MM/yy HH:mm" }}</dd>
 
-          <dt><span jhiTranslate="userManagement.lastModifiedBy">Modifié par</span></dt>
+          <dt>
+            <span jhiTranslate="userManagement.lastModifiedBy"
+              >Modifié par</span
+            >
+          </dt>
           <dd>{{ userRef.lastModifiedBy }}</dd>
 
-          <dt><span jhiTranslate="userManagement.lastModifiedDate">Modifié le</span></dt>
-          <dd>{{ userRef.lastModifiedDate | date: 'dd/MM/yy HH:mm' }}</dd>
+          <dt>
+            <span jhiTranslate="userManagement.lastModifiedDate"
+              >Modifié le</span
+            >
+          </dt>
+          <dd>{{ userRef.lastModifiedDate | date: "dd/MM/yy HH:mm" }}</dd>
 
           <dt><span jhiTranslate="userManagement.profiles">Droits</span></dt>
           <dd>
@@ -55,7 +74,10 @@
         </dl>
 
         <button type="submit" routerLink="../../" class="btn btn-info">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
         </button>
       </div>
     }

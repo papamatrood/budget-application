@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import dayjs from 'dayjs/esm';
-import { DATE_TIME_FORMAT } from 'app/config/input.constants';
-import { IDecision, NewDecision } from '../decision.model';
+import dayjs from "dayjs/esm";
+import { DATE_TIME_FORMAT } from "app/config/input.constants";
+import { IDecision, NewDecision } from "../decision.model";
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<
+  Omit<T, "id">
+> & { id: T["id"] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -19,7 +21,10 @@ type DecisionFormGroupInput = IDecision | PartialWithRequiredKeyOf<NewDecision>;
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IDecision | NewDecision> = Omit<T, 'decisionDate'> & {
+type FormValueOf<T extends IDecision | NewDecision> = Omit<
+  T,
+  "decisionDate"
+> & {
   decisionDate?: string | null;
 };
 
@@ -27,21 +32,23 @@ type DecisionFormRawValue = FormValueOf<IDecision>;
 
 type NewDecisionFormRawValue = FormValueOf<NewDecision>;
 
-type DecisionFormDefaults = Pick<NewDecision, 'id' | 'decisionDate'>;
+type DecisionFormDefaults = Pick<NewDecision, "id" | "decisionDate">;
 
 type DecisionFormGroupContent = {
-  id: FormControl<DecisionFormRawValue['id'] | NewDecision['id']>;
-  decisionNumber: FormControl<DecisionFormRawValue['decisionNumber']>;
-  decisionDate: FormControl<DecisionFormRawValue['decisionDate']>;
-  engagement: FormControl<DecisionFormRawValue['engagement']>;
-  annexDecision: FormControl<DecisionFormRawValue['annexDecision']>;
+  id: FormControl<DecisionFormRawValue["id"] | NewDecision["id"]>;
+  decisionNumber: FormControl<DecisionFormRawValue["decisionNumber"]>;
+  decisionDate: FormControl<DecisionFormRawValue["decisionDate"]>;
+  engagement: FormControl<DecisionFormRawValue["engagement"]>;
+  annexDecision: FormControl<DecisionFormRawValue["annexDecision"]>;
 };
 
 export type DecisionFormGroup = FormGroup<DecisionFormGroupContent>;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class DecisionFormService {
-  createDecisionFormGroup(decision: DecisionFormGroupInput = { id: null }): DecisionFormGroup {
+  createDecisionFormGroup(
+    decision: DecisionFormGroupInput = { id: null },
+  ): DecisionFormGroup {
     const decisionRawValue = this.convertDecisionToDecisionRawValue({
       ...this.getFormDefaults(),
       ...decision,
@@ -66,11 +73,16 @@ export class DecisionFormService {
   }
 
   getDecision(form: DecisionFormGroup): IDecision | NewDecision {
-    return this.convertDecisionRawValueToDecision(form.getRawValue() as DecisionFormRawValue | NewDecisionFormRawValue);
+    return this.convertDecisionRawValueToDecision(
+      form.getRawValue() as DecisionFormRawValue | NewDecisionFormRawValue,
+    );
   }
 
   resetForm(form: DecisionFormGroup, decision: DecisionFormGroupInput): void {
-    const decisionRawValue = this.convertDecisionToDecisionRawValue({ ...this.getFormDefaults(), ...decision });
+    const decisionRawValue = this.convertDecisionToDecisionRawValue({
+      ...this.getFormDefaults(),
+      ...decision,
+    });
     form.reset(
       {
         ...decisionRawValue,
@@ -88,7 +100,9 @@ export class DecisionFormService {
     };
   }
 
-  private convertDecisionRawValueToDecision(rawDecision: DecisionFormRawValue | NewDecisionFormRawValue): IDecision | NewDecision {
+  private convertDecisionRawValueToDecision(
+    rawDecision: DecisionFormRawValue | NewDecisionFormRawValue,
+  ): IDecision | NewDecision {
     return {
       ...rawDecision,
       decisionDate: dayjs(rawDecision.decisionDate, DATE_TIME_FORMAT),
@@ -100,7 +114,9 @@ export class DecisionFormService {
   ): DecisionFormRawValue | PartialWithRequiredKeyOf<NewDecisionFormRawValue> {
     return {
       ...decision,
-      decisionDate: decision.decisionDate ? decision.decisionDate.format(DATE_TIME_FORMAT) : undefined,
+      decisionDate: decision.decisionDate
+        ? decision.decisionDate.format(DATE_TIME_FORMAT)
+        : undefined,
     };
   }
 }

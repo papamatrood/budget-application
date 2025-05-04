@@ -1,7 +1,7 @@
-import dayjs from 'dayjs/esm';
-import { IUser } from 'app/entities/user/user.model';
-import { GenderEnum } from 'app/entities/enumerations/gender-enum.model';
-import { FamilySituationEnum } from 'app/entities/enumerations/family-situation-enum.model';
+import dayjs from "dayjs/esm";
+import { IUser } from "app/entities/user/user.model";
+import { GenderEnum } from "app/entities/enumerations/gender-enum.model";
+import { FamilySituationEnum } from "app/entities/enumerations/family-situation-enum.model";
 
 export interface IAppUser {
   id: number;
@@ -17,7 +17,7 @@ export interface IAppUser {
   familySituation?: keyof typeof FamilySituationEnum | null;
   position?: string | null;
   address?: string | null;
-  user?: Pick<IUser, 'id'> | null;
+  user?: Pick<IUser, "id"> | null;
 }
 
-export type NewAppUser = Omit<IAppUser, 'id'> & { id: null };
+export type NewAppUser = Omit<IAppUser, "id"> & { id: null };

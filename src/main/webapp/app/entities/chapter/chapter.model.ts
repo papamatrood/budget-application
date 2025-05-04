@@ -1,4 +1,4 @@
-import { ISubTitle } from 'app/entities/sub-title/sub-title.model';
+import { ISubTitle } from "app/entities/sub-title/sub-title.model";
 
 export interface IChapter {
   id: number;
@@ -7,4 +7,4 @@ export interface IChapter {
   subTitle?: ISubTitle | null;
 }
 
-export type NewChapter = Omit<IChapter, 'id'> & { id: null };
+export type NewChapter = Omit<IChapter, "id"> & { id: null };

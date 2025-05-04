@@ -1,23 +1,26 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { Component, OnInit, inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { finalize, map } from "rxjs/operators";
 
-import SharedModule from 'app/shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import SharedModule from "app/shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { IEngagement } from 'app/entities/engagement/engagement.model';
-import { EngagementService } from 'app/entities/engagement/service/engagement.service';
-import { IAnnexDecision } from 'app/entities/annex-decision/annex-decision.model';
-import { AnnexDecisionService } from 'app/entities/annex-decision/service/annex-decision.service';
-import { DecisionService } from '../service/decision.service';
-import { IDecision } from '../decision.model';
-import { DecisionFormGroup, DecisionFormService } from './decision-form.service';
+import { IEngagement } from "app/entities/engagement/engagement.model";
+import { EngagementService } from "app/entities/engagement/service/engagement.service";
+import { IAnnexDecision } from "app/entities/annex-decision/annex-decision.model";
+import { AnnexDecisionService } from "app/entities/annex-decision/service/annex-decision.service";
+import { DecisionService } from "../service/decision.service";
+import { IDecision } from "../decision.model";
+import {
+  DecisionFormGroup,
+  DecisionFormService,
+} from "./decision-form.service";
 
 @Component({
-  selector: 'jhi-decision-update',
-  templateUrl: './decision-update.component.html',
+  selector: "jhi-decision-update",
+  templateUrl: "./decision-update.component.html",
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class DecisionUpdateComponent implements OnInit {
@@ -34,12 +37,18 @@ export class DecisionUpdateComponent implements OnInit {
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  editForm: DecisionFormGroup = this.decisionFormService.createDecisionFormGroup();
+  editForm: DecisionFormGroup =
+    this.decisionFormService.createDecisionFormGroup();
 
-  compareEngagement = (o1: IEngagement | null, o2: IEngagement | null): boolean => this.engagementService.compareEngagement(o1, o2);
+  compareEngagement = (
+    o1: IEngagement | null,
+    o2: IEngagement | null,
+  ): boolean => this.engagementService.compareEngagement(o1, o2);
 
-  compareAnnexDecision = (o1: IAnnexDecision | null, o2: IAnnexDecision | null): boolean =>
-    this.annexDecisionService.compareAnnexDecision(o1, o2);
+  compareAnnexDecision = (
+    o1: IAnnexDecision | null,
+    o2: IAnnexDecision | null,
+  ): boolean => this.annexDecisionService.compareAnnexDecision(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ decision }) => {
@@ -66,7 +75,9 @@ export class DecisionUpdateComponent implements OnInit {
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IDecision>>): void {
+  protected subscribeToSaveResponse(
+    result: Observable<HttpResponse<IDecision>>,
+  ): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -89,35 +100,49 @@ export class DecisionUpdateComponent implements OnInit {
     this.decision = decision;
     this.decisionFormService.resetForm(this.editForm, decision);
 
-    this.engagementsCollection = this.engagementService.addEngagementToCollectionIfMissing<IEngagement>(
-      this.engagementsCollection,
-      decision.engagement,
-    );
-    this.annexDecisionsSharedCollection = this.annexDecisionService.addAnnexDecisionToCollectionIfMissing<IAnnexDecision>(
-      this.annexDecisionsSharedCollection,
-      decision.annexDecision,
-    );
+    this.engagementsCollection =
+      this.engagementService.addEngagementToCollectionIfMissing<IEngagement>(
+        this.engagementsCollection,
+        decision.engagement,
+      );
+    this.annexDecisionsSharedCollection =
+      this.annexDecisionService.addAnnexDecisionToCollectionIfMissing<IAnnexDecision>(
+        this.annexDecisionsSharedCollection,
+        decision.annexDecision,
+      );
   }
 
   protected loadRelationshipsOptions(): void {
     this.engagementService
-      .query({ 'decisionId.specified': 'false' })
+      .query({ "decisionId.specified": "false" })
       .pipe(map((res: HttpResponse<IEngagement[]>) => res.body ?? []))
       .pipe(
         map((engagements: IEngagement[]) =>
-          this.engagementService.addEngagementToCollectionIfMissing<IEngagement>(engagements, this.decision?.engagement),
+          this.engagementService.addEngagementToCollectionIfMissing<IEngagement>(
+            engagements,
+            this.decision?.engagement,
+          ),
         ),
       )
-      .subscribe((engagements: IEngagement[]) => (this.engagementsCollection = engagements));
+      .subscribe(
+        (engagements: IEngagement[]) =>
+          (this.engagementsCollection = engagements),
+      );
 
     this.annexDecisionService
       .query()
       .pipe(map((res: HttpResponse<IAnnexDecision[]>) => res.body ?? []))
       .pipe(
         map((annexDecisions: IAnnexDecision[]) =>
-          this.annexDecisionService.addAnnexDecisionToCollectionIfMissing<IAnnexDecision>(annexDecisions, this.decision?.annexDecision),
+          this.annexDecisionService.addAnnexDecisionToCollectionIfMissing<IAnnexDecision>(
+            annexDecisions,
+            this.decision?.annexDecision,
+          ),
         ),
       )
-      .subscribe((annexDecisions: IAnnexDecision[]) => (this.annexDecisionsSharedCollection = annexDecisions));
+      .subscribe(
+        (annexDecisions: IAnnexDecision[]) =>
+          (this.annexDecisionsSharedCollection = annexDecisions),
+      );
   }
 }

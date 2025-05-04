@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnDestroy, OnInit, inject, signal } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
-import { Alert, AlertService } from 'app/core/util/alert.service';
+import { Alert, AlertService } from "app/core/util/alert.service";
 
 @Component({
-  selector: 'jhi-alert',
-  templateUrl: './alert.component.html',
+  selector: "jhi-alert",
+  templateUrl: "./alert.component.html",
   imports: [CommonModule, NgbModule],
 })
 export class AlertComponent implements OnInit, OnDestroy {
@@ -19,7 +19,7 @@ export class AlertComponent implements OnInit, OnDestroy {
   }
 
   setClasses(alert: Alert): Record<string, boolean> {
-    const classes = { 'jhi-toast': Boolean(alert.toast) };
+    const classes = { "jhi-toast": Boolean(alert.toast) };
     if (alert.position) {
       return { ...classes, [alert.position]: true };
     }

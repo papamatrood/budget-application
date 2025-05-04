@@ -1,19 +1,22 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Component, OnInit, inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
 
-import SharedModule from 'app/shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import SharedModule from "app/shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { ISupplier } from '../supplier.model';
-import { SupplierService } from '../service/supplier.service';
-import { SupplierFormGroup, SupplierFormService } from './supplier-form.service';
+import { ISupplier } from "../supplier.model";
+import { SupplierService } from "../service/supplier.service";
+import {
+  SupplierFormGroup,
+  SupplierFormService,
+} from "./supplier-form.service";
 
 @Component({
-  selector: 'jhi-supplier-update',
-  templateUrl: './supplier-update.component.html',
+  selector: "jhi-supplier-update",
+  templateUrl: "./supplier-update.component.html",
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class SupplierUpdateComponent implements OnInit {
@@ -25,7 +28,8 @@ export class SupplierUpdateComponent implements OnInit {
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  editForm: SupplierFormGroup = this.supplierFormService.createSupplierFormGroup();
+  editForm: SupplierFormGroup =
+    this.supplierFormService.createSupplierFormGroup();
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ supplier }) => {
@@ -50,7 +54,9 @@ export class SupplierUpdateComponent implements OnInit {
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<ISupplier>>): void {
+  protected subscribeToSaveResponse(
+    result: Observable<HttpResponse<ISupplier>>,
+  ): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),

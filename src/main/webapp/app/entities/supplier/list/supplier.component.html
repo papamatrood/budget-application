@@ -1,11 +1,18 @@
 <div>
   <h2 id="page-heading" data-cy="SupplierHeading">
-    <span jhiTranslate="budgetApplicationApp.supplier.home.title">Suppliers</span>
+    <span jhiTranslate="budgetApplicationApp.supplier.home.title"
+      >Suppliers</span
+    >
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
-        <span jhiTranslate="budgetApplicationApp.supplier.home.refreshListLabel">Actualiser la liste</span>
+        <fa-icon
+          icon="sync"
+          [animation]="isLoading ? 'spin' : undefined"
+        ></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.supplier.home.refreshListLabel"
+          >Actualiser la liste</span
+        >
       </button>
 
       <button
@@ -15,7 +22,9 @@
         [routerLink]="['/supplier/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="budgetApplicationApp.supplier.home.createLabel">Créer un nouveau Supplier</span>
+        <span jhiTranslate="budgetApplicationApp.supplier.home.createLabel"
+          >Créer un nouveau Supplier</span
+        >
       </button>
     </div>
   </h2>
@@ -28,13 +37,19 @@
 
   @if (suppliers().length === 0) {
     <div class="alert alert-warning" id="no-result">
-      <span jhiTranslate="budgetApplicationApp.supplier.home.notFound">Aucun Supplier trouvé</span>
+      <span jhiTranslate="budgetApplicationApp.supplier.home.notFound"
+        >Aucun Supplier trouvé</span
+      >
     </div>
   } @else {
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
-          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+          <tr
+            jhiSort
+            [(sortState)]="sortState"
+            (sortChange)="navigateToWithComponentValues($event)"
+          >
             <th scope="col" jhiSortBy="id">
               <div class="d-flex">
                 <span jhiTranslate="global.field.id">ID</span>
@@ -44,84 +59,112 @@
             </th>
             <th scope="col" jhiSortBy="companyName">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.companyName">Company Name</span>
+                <span jhiTranslate="budgetApplicationApp.supplier.companyName"
+                  >Company Name</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="address">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.address">Address</span>
+                <span jhiTranslate="budgetApplicationApp.supplier.address"
+                  >Address</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="phone">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.phone">Phone</span>
+                <span jhiTranslate="budgetApplicationApp.supplier.phone"
+                  >Phone</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="nifNumber">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.nifNumber">Nif Number</span>
+                <span jhiTranslate="budgetApplicationApp.supplier.nifNumber"
+                  >Nif Number</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="commercialRegister">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.commercialRegister">Commercial Register</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.supplier.commercialRegister"
+                  >Commercial Register</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="bankAccount">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.bankAccount">Bank Account</span>
+                <span jhiTranslate="budgetApplicationApp.supplier.bankAccount"
+                  >Bank Account</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="mandatingEstablishment">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.mandatingEstablishment">Mandating Establishment</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.supplier.mandatingEstablishment"
+                  >Mandating Establishment</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="email">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.email">Email</span>
+                <span jhiTranslate="budgetApplicationApp.supplier.email"
+                  >Email</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="website">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.website">Website</span>
+                <span jhiTranslate="budgetApplicationApp.supplier.website"
+                  >Website</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="description">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.description">Description</span>
+                <span jhiTranslate="budgetApplicationApp.supplier.description"
+                  >Description</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="contactFirstname">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.contactFirstname">Contact Firstname</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.supplier.contactFirstname"
+                  >Contact Firstname</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="contactlastname">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.supplier.contactlastname">Contactlastname</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.supplier.contactlastname"
+                  >Contactlastname</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -133,7 +176,9 @@
           @for (supplier of suppliers(); track trackId(supplier)) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/supplier', supplier.id, 'view']">{{ supplier.id }}</a>
+                <a [routerLink]="['/supplier', supplier.id, 'view']">{{
+                  supplier.id
+                }}</a>
               </td>
               <td>{{ supplier.companyName }}</td>
               <td>{{ supplier.address }}</td>
@@ -160,23 +205,52 @@
                     <span
                       class="d-none d-md-inline"
                       jhiTranslate="entity.action.show"
-                      [translateValues]="{ otherEntity: ('budgetApplicationApp.supplier.purchaseOrder' | translate) }"
+                      [translateValues]="{
+                        otherEntity:
+                          ('budgetApplicationApp.supplier.purchaseOrder'
+                          | translate),
+                      }"
                       >Show Purchase Order</span
                     >
                   </button>
-                  <a [routerLink]="['/supplier', supplier.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    [routerLink]="['/supplier', supplier.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.view"
+                      >Voir</span
+                    >
                   </a>
 
-                  <a [routerLink]="['/supplier', supplier.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    [routerLink]="['/supplier', supplier.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.edit"
+                      >Editer</span
+                    >
                   </a>
 
-                  <button type="submit" (click)="delete(supplier)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <button
+                    type="submit"
+                    (click)="delete(supplier)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
                     <fa-icon icon="times"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.delete"
+                      >Supprimer</span
+                    >
                   </button>
                 </div>
               </td>
@@ -189,7 +263,13 @@
   @if (suppliers().length > 0) {
     <div>
       <div class="d-flex justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+        <jhi-item-count
+          [params]="{
+            page: page,
+            totalItems: totalItems,
+            itemsPerPage: itemsPerPage,
+          }"
+        />
       </div>
 
       <div class="d-flex justify-content-center">

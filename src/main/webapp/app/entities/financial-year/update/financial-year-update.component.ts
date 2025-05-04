@@ -1,19 +1,22 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Component, OnInit, inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
 
-import SharedModule from 'app/shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import SharedModule from "app/shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { IFinancialYear } from '../financial-year.model';
-import { FinancialYearService } from '../service/financial-year.service';
-import { FinancialYearFormGroup, FinancialYearFormService } from './financial-year-form.service';
+import { IFinancialYear } from "../financial-year.model";
+import { FinancialYearService } from "../service/financial-year.service";
+import {
+  FinancialYearFormGroup,
+  FinancialYearFormService,
+} from "./financial-year-form.service";
 
 @Component({
-  selector: 'jhi-financial-year-update',
-  templateUrl: './financial-year-update.component.html',
+  selector: "jhi-financial-year-update",
+  templateUrl: "./financial-year-update.component.html",
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class FinancialYearUpdateComponent implements OnInit {
@@ -25,7 +28,8 @@ export class FinancialYearUpdateComponent implements OnInit {
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  editForm: FinancialYearFormGroup = this.financialYearFormService.createFinancialYearFormGroup();
+  editForm: FinancialYearFormGroup =
+    this.financialYearFormService.createFinancialYearFormGroup();
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ financialYear }) => {
@@ -42,15 +46,23 @@ export class FinancialYearUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const financialYear = this.financialYearFormService.getFinancialYear(this.editForm);
+    const financialYear = this.financialYearFormService.getFinancialYear(
+      this.editForm,
+    );
     if (financialYear.id !== null) {
-      this.subscribeToSaveResponse(this.financialYearService.update(financialYear));
+      this.subscribeToSaveResponse(
+        this.financialYearService.update(financialYear),
+      );
     } else {
-      this.subscribeToSaveResponse(this.financialYearService.create(financialYear));
+      this.subscribeToSaveResponse(
+        this.financialYearService.create(financialYear),
+      );
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IFinancialYear>>): void {
+  protected subscribeToSaveResponse(
+    result: Observable<HttpResponse<IFinancialYear>>,
+  ): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),

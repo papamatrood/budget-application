@@ -2,7 +2,11 @@
   <div class="col-8">
     @if (appUser(); as appUserRef) {
       <div>
-        <h2 data-cy="appUserDetailsHeading"><span jhiTranslate="budgetApplicationApp.appUser.detail.title">App User</span></h2>
+        <h2 data-cy="appUserDetailsHeading">
+          <span jhiTranslate="budgetApplicationApp.appUser.detail.title"
+            >App User</span
+          >
+        </h2>
 
         <hr />
 
@@ -15,70 +19,151 @@
           <dd>
             <span>{{ appUserRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.accountStatus">Account Status</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.accountStatus"
+              >Account Status</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.accountStatus }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.lastDateUpdate">Last Date Update</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.lastDateUpdate"
+              >Last Date Update</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.lastDateUpdate | formatMediumDatetime }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.dateCreated">Date Created</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.dateCreated"
+              >Date Created</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.dateCreated | formatMediumDatetime }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.firstname">Firstname</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.firstname"
+              >Firstname</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.firstname }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.lastname">Lastname</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.lastname"
+              >Lastname</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.lastname }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.phoneNumber">Phone Number</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.phoneNumber"
+              >Phone Number</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.phoneNumber }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.birthDate">Birth Date</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.birthDate"
+              >Birth Date</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.birthDate | formatMediumDatetime }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.birthPlace">Birth Place</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.birthPlace"
+              >Birth Place</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.birthPlace }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.gender">Gender</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.gender"
+              >Gender</span
+            >
+          </dt>
           <dd>
-            <span [jhiTranslate]="'budgetApplicationApp.GenderEnum.' + (appUserRef.gender ?? 'null')">{{
-              { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[appUserRef.gender ?? 'null']
-            }}</span>
+            <span
+              [jhiTranslate]="
+                'budgetApplicationApp.GenderEnum.' +
+                (appUserRef.gender ?? 'null')
+              "
+              >{{
+                { null: "", MALE: "MALE", FEMALE: "FEMALE" }[
+                  appUserRef.gender ?? "null"
+                ]
+              }}</span
+            >
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.familySituation">Family Situation</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.familySituation"
+              >Family Situation</span
+            >
+          </dt>
           <dd>
-            <span [jhiTranslate]="'budgetApplicationApp.FamilySituationEnum.' + (appUserRef.familySituation ?? 'null')">{{
-              { null: '', CELIBATAIRE: 'CELIBATAIRE', MARIE: 'MARIE' }[appUserRef.familySituation ?? 'null']
-            }}</span>
+            <span
+              [jhiTranslate]="
+                'budgetApplicationApp.FamilySituationEnum.' +
+                (appUserRef.familySituation ?? 'null')
+              "
+              >{{
+                { null: "", CELIBATAIRE: "CELIBATAIRE", MARIE: "MARIE" }[
+                  appUserRef.familySituation ?? "null"
+                ]
+              }}</span
+            >
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.position">Position</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.position"
+              >Position</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.position }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.address">Address</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.address"
+              >Address</span
+            >
+          </dt>
           <dd>
             <span>{{ appUserRef.address }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.appUser.user">User</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.appUser.user">User</span>
+          </dt>
           <dd>
             <span>{{ appUserRef.user?.id }}</span>
           </dd>
         </dl>
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        <button
+          type="submit"
+          (click)="previousState()"
+          class="btn btn-info"
+          data-cy="entityDetailsBackButton"
+        >
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
         </button>
 
-        <button type="button" [routerLink]="['/app-user', appUserRef.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        <button
+          type="button"
+          [routerLink]="['/app-user', appUserRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.edit"
+            >Editer</span
+          >
         </button>
       </div>
     }

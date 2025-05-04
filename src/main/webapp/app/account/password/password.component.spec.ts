@@ -1,16 +1,16 @@
-jest.mock('app/core/auth/account.service');
+jest.mock("app/core/auth/account.service");
 
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { of, throwError } from 'rxjs';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { of, throwError } from "rxjs";
 
-import { AccountService } from 'app/core/auth/account.service';
+import { AccountService } from "app/core/auth/account.service";
 
-import PasswordComponent from './password.component';
-import { PasswordService } from './password.service';
+import PasswordComponent from "./password.component";
+import { PasswordService } from "./password.service";
 
-describe('PasswordComponent', () => {
+describe("PasswordComponent", () => {
   let comp: PasswordComponent;
   let fixture: ComponentFixture<PasswordComponent>;
   let service: PasswordService;
@@ -20,7 +20,7 @@ describe('PasswordComponent', () => {
       imports: [PasswordComponent],
       providers: [FormBuilder, AccountService, provideHttpClient()],
     })
-      .overrideTemplate(PasswordComponent, '')
+      .overrideTemplate(PasswordComponent, "")
       .compileComponents();
   }));
 
@@ -30,11 +30,11 @@ describe('PasswordComponent', () => {
     service = TestBed.inject(PasswordService);
   });
 
-  it('should show error if passwords do not match', () => {
+  it("should show error if passwords do not match", () => {
     // GIVEN
     comp.passwordForm.patchValue({
-      newPassword: 'password1',
-      confirmPassword: 'password2',
+      newPassword: "password1",
+      confirmPassword: "password2",
     });
     // WHEN
     comp.changePassword();
@@ -44,14 +44,16 @@ describe('PasswordComponent', () => {
     expect(comp.success()).toBe(false);
   });
 
-  it('should call Auth.changePassword when passwords match', () => {
+  it("should call Auth.changePassword when passwords match", () => {
     // GIVEN
     const passwordValues = {
-      currentPassword: 'oldPassword',
-      newPassword: 'myPassword',
+      currentPassword: "oldPassword",
+      newPassword: "myPassword",
     };
 
-    jest.spyOn(service, 'save').mockReturnValue(of(new HttpResponse({ body: true })));
+    jest
+      .spyOn(service, "save")
+      .mockReturnValue(of(new HttpResponse({ body: true })));
 
     comp.passwordForm.patchValue({
       currentPassword: passwordValues.currentPassword,
@@ -63,15 +65,20 @@ describe('PasswordComponent', () => {
     comp.changePassword();
 
     // THEN
-    expect(service.save).toHaveBeenCalledWith(passwordValues.newPassword, passwordValues.currentPassword);
+    expect(service.save).toHaveBeenCalledWith(
+      passwordValues.newPassword,
+      passwordValues.currentPassword,
+    );
   });
 
-  it('should set success to true upon success', () => {
+  it("should set success to true upon success", () => {
     // GIVEN
-    jest.spyOn(service, 'save').mockReturnValue(of(new HttpResponse({ body: true })));
+    jest
+      .spyOn(service, "save")
+      .mockReturnValue(of(new HttpResponse({ body: true })));
     comp.passwordForm.patchValue({
-      newPassword: 'myPassword',
-      confirmPassword: 'myPassword',
+      newPassword: "myPassword",
+      confirmPassword: "myPassword",
     });
 
     // WHEN
@@ -83,12 +90,12 @@ describe('PasswordComponent', () => {
     expect(comp.success()).toBe(true);
   });
 
-  it('should notify of error if change password fails', () => {
+  it("should notify of error if change password fails", () => {
     // GIVEN
-    jest.spyOn(service, 'save').mockReturnValue(throwError(Error));
+    jest.spyOn(service, "save").mockReturnValue(throwError(Error));
     comp.passwordForm.patchValue({
-      newPassword: 'myPassword',
-      confirmPassword: 'myPassword',
+      newPassword: "myPassword",
+      confirmPassword: "myPassword",
     });
 
     // WHEN

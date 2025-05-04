@@ -1,15 +1,25 @@
-import { ComponentFixture, TestBed, fakeAsync, inject, tick, waitForAsync } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { of, throwError } from 'rxjs';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  inject,
+  tick,
+  waitForAsync,
+} from "@angular/core/testing";
+import { provideHttpClient } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { of, throwError } from "rxjs";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 
-import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/config/error.constants';
+import {
+  EMAIL_ALREADY_USED_TYPE,
+  LOGIN_ALREADY_USED_TYPE,
+} from "app/config/error.constants";
 
-import { RegisterService } from './register.service';
-import RegisterComponent from './register.component';
+import { RegisterService } from "./register.service";
+import RegisterComponent from "./register.component";
 
-describe('RegisterComponent', () => {
+describe("RegisterComponent", () => {
   let fixture: ComponentFixture<RegisterComponent>;
   let comp: RegisterComponent;
 
@@ -18,7 +28,7 @@ describe('RegisterComponent', () => {
       imports: [TranslateModule.forRoot(), RegisterComponent],
       providers: [provideHttpClient(), FormBuilder],
     })
-      .overrideTemplate(RegisterComponent, '')
+      .overrideTemplate(RegisterComponent, "")
       .compileComponents();
   }));
 
@@ -27,10 +37,10 @@ describe('RegisterComponent', () => {
     comp = fixture.componentInstance;
   });
 
-  it('should ensure the two passwords entered match', () => {
+  it("should ensure the two passwords entered match", () => {
     comp.registerForm.patchValue({
-      password: 'password',
-      confirmPassword: 'non-matching',
+      password: "password",
+      confirmPassword: "non-matching",
     });
 
     comp.register();
@@ -38,40 +48,42 @@ describe('RegisterComponent', () => {
     expect(comp.doNotMatch()).toBe(true);
   });
 
-  it('should update success to true after creating an account', inject(
+  it("should update success to true after creating an account", inject(
     [RegisterService, TranslateService],
-    fakeAsync((service: RegisterService, mockTranslateService: TranslateService) => {
-      jest.spyOn(service, 'save').mockReturnValue(of({}));
-      mockTranslateService.currentLang = 'fr';
-      comp.registerForm.patchValue({
-        password: 'password',
-        confirmPassword: 'password',
-      });
+    fakeAsync(
+      (service: RegisterService, mockTranslateService: TranslateService) => {
+        jest.spyOn(service, "save").mockReturnValue(of({}));
+        mockTranslateService.currentLang = "fr";
+        comp.registerForm.patchValue({
+          password: "password",
+          confirmPassword: "password",
+        });
 
-      comp.register();
-      tick();
+        comp.register();
+        tick();
 
-      expect(service.save).toHaveBeenCalledWith({
-        email: '',
-        password: 'password',
-        login: '',
-        langKey: 'fr',
-      });
-      expect(comp.success()).toBe(true);
-      expect(comp.errorUserExists()).toBe(false);
-      expect(comp.errorEmailExists()).toBe(false);
-      expect(comp.error()).toBe(false);
-    }),
+        expect(service.save).toHaveBeenCalledWith({
+          email: "",
+          password: "password",
+          login: "",
+          langKey: "fr",
+        });
+        expect(comp.success()).toBe(true);
+        expect(comp.errorUserExists()).toBe(false);
+        expect(comp.errorEmailExists()).toBe(false);
+        expect(comp.error()).toBe(false);
+      },
+    ),
   ));
 
-  it('should notify of user existence upon 400/login already in use', inject(
+  it("should notify of user existence upon 400/login already in use", inject(
     [RegisterService],
     fakeAsync((service: RegisterService) => {
       const err = { status: 400, error: { type: LOGIN_ALREADY_USED_TYPE } };
-      jest.spyOn(service, 'save').mockReturnValue(throwError(() => err));
+      jest.spyOn(service, "save").mockReturnValue(throwError(() => err));
       comp.registerForm.patchValue({
-        password: 'password',
-        confirmPassword: 'password',
+        password: "password",
+        confirmPassword: "password",
       });
 
       comp.register();
@@ -83,14 +95,14 @@ describe('RegisterComponent', () => {
     }),
   ));
 
-  it('should notify of email existence upon 400/email address already in use', inject(
+  it("should notify of email existence upon 400/email address already in use", inject(
     [RegisterService],
     fakeAsync((service: RegisterService) => {
       const err = { status: 400, error: { type: EMAIL_ALREADY_USED_TYPE } };
-      jest.spyOn(service, 'save').mockReturnValue(throwError(() => err));
+      jest.spyOn(service, "save").mockReturnValue(throwError(() => err));
       comp.registerForm.patchValue({
-        password: 'password',
-        confirmPassword: 'password',
+        password: "password",
+        confirmPassword: "password",
       });
 
       comp.register();
@@ -102,14 +114,14 @@ describe('RegisterComponent', () => {
     }),
   ));
 
-  it('should notify of generic error', inject(
+  it("should notify of generic error", inject(
     [RegisterService],
     fakeAsync((service: RegisterService) => {
       const err = { status: 503 };
-      jest.spyOn(service, 'save').mockReturnValue(throwError(() => err));
+      jest.spyOn(service, "save").mockReturnValue(throwError(() => err));
       comp.registerForm.patchValue({
-        password: 'password',
-        confirmPassword: 'password',
+        password: "password",
+        confirmPassword: "password",
       });
 
       comp.register();

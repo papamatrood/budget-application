@@ -2,7 +2,11 @@
   <div class="col-8">
     @if (mandate(); as mandateRef) {
       <div>
-        <h2 data-cy="mandateDetailsHeading"><span jhiTranslate="budgetApplicationApp.mandate.detail.title">Mandate</span></h2>
+        <h2 data-cy="mandateDetailsHeading">
+          <span jhiTranslate="budgetApplicationApp.mandate.detail.title"
+            >Mandate</span
+          >
+        </h2>
 
         <hr />
 
@@ -15,42 +19,90 @@
           <dd>
             <span>{{ mandateRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.mandate.mandateNumber">Mandate Number</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.mandate.mandateNumber"
+              >Mandate Number</span
+            >
+          </dt>
           <dd>
             <span>{{ mandateRef.mandateNumber }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.mandate.mandateDate">Mandate Date</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.mandate.mandateDate"
+              >Mandate Date</span
+            >
+          </dt>
           <dd>
             <span>{{ mandateRef.mandateDate | formatMediumDatetime }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.mandate.issueSlipNumber">Issue Slip Number</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.mandate.issueSlipNumber"
+              >Issue Slip Number</span
+            >
+          </dt>
           <dd>
             <span>{{ mandateRef.issueSlipNumber }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.mandate.monthAndYearOfIssue">Month And Year Of Issue</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.mandate.monthAndYearOfIssue"
+              >Month And Year Of Issue</span
+            >
+          </dt>
           <dd>
             <span>{{ mandateRef.monthAndYearOfIssue }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.mandate.supportingDocuments">Supporting Documents</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.mandate.supportingDocuments"
+              >Supporting Documents</span
+            >
+          </dt>
           <dd>
             <span>{{ mandateRef.supportingDocuments }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.mandate.engagement">Engagement</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.mandate.engagement"
+              >Engagement</span
+            >
+          </dt>
           <dd>
             @if (mandate()!.engagement) {
               <div>
-                <a [routerLink]="['/engagement', mandate()!.engagement?.id, 'view']">{{ mandateRef.engagement?.id }}</a>
+                <a
+                  [routerLink]="[
+                    '/engagement',
+                    mandate()!.engagement?.id,
+                    'view',
+                  ]"
+                  >{{ mandateRef.engagement?.id }}</a
+                >
               </div>
             }
           </dd>
         </dl>
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        <button
+          type="submit"
+          (click)="previousState()"
+          class="btn btn-info"
+          data-cy="entityDetailsBackButton"
+        >
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
         </button>
 
-        <button type="button" [routerLink]="['/mandate', mandateRef.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        <button
+          type="button"
+          [routerLink]="['/mandate', mandateRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.edit"
+            >Editer</span
+          >
         </button>
       </div>
     }

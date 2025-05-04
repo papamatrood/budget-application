@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { provideHttpClient } from "@angular/common/http";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
-import { ThreadState } from '../../metrics.model';
-import { MetricsModalThreadsComponent } from './metrics-modal-threads.component';
+import { ThreadState } from "../../metrics.model";
+import { MetricsModalThreadsComponent } from "./metrics-modal-threads.component";
 
-describe('MetricsModalThreadsComponent', () => {
+describe("MetricsModalThreadsComponent", () => {
   let comp: MetricsModalThreadsComponent;
   let fixture: ComponentFixture<MetricsModalThreadsComponent>;
   let mockActiveModal: NgbActiveModal;
@@ -15,7 +15,7 @@ describe('MetricsModalThreadsComponent', () => {
       imports: [MetricsModalThreadsComponent],
       providers: [provideHttpClient(), NgbActiveModal],
     })
-      .overrideTemplate(MetricsModalThreadsComponent, '')
+      .overrideTemplate(MetricsModalThreadsComponent, "")
       .compileComponents();
   }));
 
@@ -25,20 +25,20 @@ describe('MetricsModalThreadsComponent', () => {
     mockActiveModal = TestBed.inject(NgbActiveModal);
   });
 
-  describe('ngOnInit', () => {
-    it('should count threads on init', () => {
+  describe("ngOnInit", () => {
+    it("should count threads on init", () => {
       // GIVEN
       comp.threads = [
         {
-          threadName: '',
+          threadName: "",
           threadId: 1,
           blockedTime: 1,
           blockedCount: 1,
           waitedTime: 1,
           waitedCount: 1,
-          lockName: 'lock1',
+          lockName: "lock1",
           lockOwnerId: 1,
-          lockOwnerName: 'lock1',
+          lockOwnerName: "lock1",
           daemon: true,
           inNative: true,
           suspended: true,
@@ -50,15 +50,15 @@ describe('MetricsModalThreadsComponent', () => {
           lockInfo: null,
         },
         {
-          threadName: '',
+          threadName: "",
           threadId: 2,
           blockedTime: 2,
           blockedCount: 2,
           waitedTime: 2,
           waitedCount: 2,
-          lockName: 'lock2',
+          lockName: "lock2",
           lockOwnerId: 2,
-          lockOwnerName: 'lock2',
+          lockOwnerName: "lock2",
           daemon: false,
           inNative: false,
           suspended: false,
@@ -70,15 +70,15 @@ describe('MetricsModalThreadsComponent', () => {
           lockInfo: null,
         },
         {
-          threadName: '',
+          threadName: "",
           threadId: 3,
           blockedTime: 3,
           blockedCount: 3,
           waitedTime: 3,
           waitedCount: 3,
-          lockName: 'lock3',
+          lockName: "lock3",
           lockOwnerId: 3,
-          lockOwnerName: 'lock3',
+          lockOwnerName: "lock3",
           daemon: false,
           inNative: false,
           suspended: false,
@@ -90,15 +90,15 @@ describe('MetricsModalThreadsComponent', () => {
           lockInfo: null,
         },
         {
-          threadName: '',
+          threadName: "",
           threadId: 4,
           blockedTime: 4,
           blockedCount: 4,
           waitedTime: 4,
           waitedCount: 4,
-          lockName: 'lock4',
+          lockName: "lock4",
           lockOwnerId: 4,
-          lockOwnerName: 'lock4',
+          lockOwnerName: "lock4",
           daemon: false,
           inNative: false,
           suspended: false,
@@ -123,8 +123,8 @@ describe('MetricsModalThreadsComponent', () => {
     });
   });
 
-  describe('getBadgeClass', () => {
-    it('should return a success badge class for runnable thread state', () => {
+  describe("getBadgeClass", () => {
+    it("should return a success badge class for runnable thread state", () => {
       // GIVEN
       const threadState = ThreadState.Runnable;
 
@@ -132,10 +132,10 @@ describe('MetricsModalThreadsComponent', () => {
       const badgeClass = comp.getBadgeClass(threadState);
 
       // THEN
-      expect(badgeClass).toEqual('bg-success');
+      expect(badgeClass).toEqual("bg-success");
     });
 
-    it('should return an info badge class for waiting thread state', () => {
+    it("should return an info badge class for waiting thread state", () => {
       // GIVEN
       const threadState = ThreadState.Waiting;
 
@@ -143,10 +143,10 @@ describe('MetricsModalThreadsComponent', () => {
       const badgeClass = comp.getBadgeClass(threadState);
 
       // THEN
-      expect(badgeClass).toEqual('bg-info');
+      expect(badgeClass).toEqual("bg-info");
     });
 
-    it('should return a warning badge class for time waiting thread state', () => {
+    it("should return a warning badge class for time waiting thread state", () => {
       // GIVEN
       const threadState = ThreadState.TimedWaiting;
 
@@ -154,10 +154,10 @@ describe('MetricsModalThreadsComponent', () => {
       const badgeClass = comp.getBadgeClass(threadState);
 
       // THEN
-      expect(badgeClass).toEqual('bg-warning');
+      expect(badgeClass).toEqual("bg-warning");
     });
 
-    it('should return a danger badge class for blocked thread state', () => {
+    it("should return a danger badge class for blocked thread state", () => {
       // GIVEN
       const threadState = ThreadState.Blocked;
 
@@ -165,10 +165,10 @@ describe('MetricsModalThreadsComponent', () => {
       const badgeClass = comp.getBadgeClass(threadState);
 
       // THEN
-      expect(badgeClass).toEqual('bg-danger');
+      expect(badgeClass).toEqual("bg-danger");
     });
 
-    it('should return an empty string for others threads', () => {
+    it("should return an empty string for others threads", () => {
       // GIVEN
       const threadState = ThreadState.New;
 
@@ -176,22 +176,22 @@ describe('MetricsModalThreadsComponent', () => {
       const badgeClass = comp.getBadgeClass(threadState);
 
       // THEN
-      expect(badgeClass).toEqual('');
+      expect(badgeClass).toEqual("");
     });
   });
 
-  describe('getThreads', () => {
+  describe("getThreads", () => {
     // GIVEN
     const thread1 = {
-      threadName: '',
+      threadName: "",
       threadId: 1,
       blockedTime: 1,
       blockedCount: 1,
       waitedTime: 1,
       waitedCount: 1,
-      lockName: 'lock1',
+      lockName: "lock1",
       lockOwnerId: 1,
-      lockOwnerName: 'lock1',
+      lockOwnerName: "lock1",
       daemon: true,
       inNative: true,
       suspended: true,
@@ -203,18 +203,18 @@ describe('MetricsModalThreadsComponent', () => {
       lockInfo: null,
     };
 
-    it('should return blocked threads', () => {
+    it("should return blocked threads", () => {
       // GIVEN
       const thread2 = {
-        threadName: '',
+        threadName: "",
         threadId: 2,
         blockedTime: 2,
         blockedCount: 2,
         waitedTime: 2,
         waitedCount: 2,
-        lockName: 'lock2',
+        lockName: "lock2",
         lockOwnerId: 1,
-        lockOwnerName: 'lock2',
+        lockOwnerName: "lock2",
         daemon: false,
         inNative: false,
         suspended: false,
@@ -235,7 +235,7 @@ describe('MetricsModalThreadsComponent', () => {
       expect(threadsFiltered).toEqual([thread1]);
     });
 
-    it('should return an empty array of threads', () => {
+    it("should return an empty array of threads", () => {
       // GIVEN
       comp.threads = [];
       comp.threadStateFilter = ThreadState.Blocked;
@@ -247,18 +247,18 @@ describe('MetricsModalThreadsComponent', () => {
       expect(threadsFiltered).toEqual([]);
     });
 
-    it('should return all threads if there is no filter', () => {
+    it("should return all threads if there is no filter", () => {
       // GIVEN
       const thread2 = {
-        threadName: '',
+        threadName: "",
         threadId: 2,
         blockedTime: 2,
         blockedCount: 2,
         waitedTime: 2,
         waitedCount: 2,
-        lockName: 'lock2',
+        lockName: "lock2",
         lockOwnerId: 1,
-        lockOwnerName: 'lock2',
+        lockOwnerName: "lock2",
         daemon: false,
         inNative: false,
         suspended: false,
@@ -279,7 +279,7 @@ describe('MetricsModalThreadsComponent', () => {
       expect(threadsFiltered).toEqual(comp.threads);
     });
 
-    it('should return an empty array if there are no threads to filter', () => {
+    it("should return an empty array if there are no threads to filter", () => {
       // GIVEN
       comp.threads = undefined;
       comp.threadStateFilter = ThreadState.Blocked;
@@ -292,10 +292,10 @@ describe('MetricsModalThreadsComponent', () => {
     });
   });
 
-  describe('dismiss', () => {
-    it('should call dismiss function for modal on dismiss', () => {
+  describe("dismiss", () => {
+    it("should call dismiss function for modal on dismiss", () => {
       // GIVEN
-      jest.spyOn(mockActiveModal, 'dismiss').mockReturnValue(undefined);
+      jest.spyOn(mockActiveModal, "dismiss").mockReturnValue(undefined);
 
       // WHEN
       comp.dismiss();

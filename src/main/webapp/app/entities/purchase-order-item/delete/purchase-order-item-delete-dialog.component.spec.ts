@@ -1,15 +1,21 @@
-jest.mock('@ng-bootstrap/ng-bootstrap');
+jest.mock("@ng-bootstrap/ng-bootstrap");
 
-import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  inject,
+  tick,
+} from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import { of } from "rxjs";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
-import { PurchaseOrderItemService } from '../service/purchase-order-item.service';
+import { PurchaseOrderItemService } from "../service/purchase-order-item.service";
 
-import { PurchaseOrderItemDeleteDialogComponent } from './purchase-order-item-delete-dialog.component';
+import { PurchaseOrderItemDeleteDialogComponent } from "./purchase-order-item-delete-dialog.component";
 
-describe('PurchaseOrderItem Management Delete Component', () => {
+describe("PurchaseOrderItem Management Delete Component", () => {
   let comp: PurchaseOrderItemDeleteDialogComponent;
   let fixture: ComponentFixture<PurchaseOrderItemDeleteDialogComponent>;
   let service: PurchaseOrderItemService;
@@ -20,7 +26,7 @@ describe('PurchaseOrderItem Management Delete Component', () => {
       imports: [PurchaseOrderItemDeleteDialogComponent],
       providers: [provideHttpClient(), NgbActiveModal],
     })
-      .overrideTemplate(PurchaseOrderItemDeleteDialogComponent, '')
+      .overrideTemplate(PurchaseOrderItemDeleteDialogComponent, "")
       .compileComponents();
     fixture = TestBed.createComponent(PurchaseOrderItemDeleteDialogComponent);
     comp = fixture.componentInstance;
@@ -28,12 +34,14 @@ describe('PurchaseOrderItem Management Delete Component', () => {
     mockActiveModal = TestBed.inject(NgbActiveModal);
   });
 
-  describe('confirmDelete', () => {
-    it('should call delete service on confirmDelete', inject(
+  describe("confirmDelete", () => {
+    it("should call delete service on confirmDelete", inject(
       [],
       fakeAsync(() => {
         // GIVEN
-        jest.spyOn(service, 'delete').mockReturnValue(of(new HttpResponse({ body: {} })));
+        jest
+          .spyOn(service, "delete")
+          .mockReturnValue(of(new HttpResponse({ body: {} })));
 
         // WHEN
         comp.confirmDelete(123);
@@ -41,13 +49,13 @@ describe('PurchaseOrderItem Management Delete Component', () => {
 
         // THEN
         expect(service.delete).toHaveBeenCalledWith(123);
-        expect(mockActiveModal.close).toHaveBeenCalledWith('deleted');
+        expect(mockActiveModal.close).toHaveBeenCalledWith("deleted");
       }),
     ));
 
-    it('should not call delete service on clear', () => {
+    it("should not call delete service on clear", () => {
       // GIVEN
-      jest.spyOn(service, 'delete');
+      jest.spyOn(service, "delete");
 
       // WHEN
       comp.cancel();

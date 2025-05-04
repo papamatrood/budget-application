@@ -1,4 +1,4 @@
-import { IAnnexDecision, NewAnnexDecision } from './annex-decision.model';
+import { IAnnexDecision, NewAnnexDecision } from "./annex-decision.model";
 
 export const sampleWithRequiredData: IAnnexDecision = {
   id: 9377,
@@ -6,16 +6,16 @@ export const sampleWithRequiredData: IAnnexDecision = {
 
 export const sampleWithPartialData: IAnnexDecision = {
   id: 22527,
-  designation: 'moderne désormais',
-  creditsAlreadyOpen: 'ouah',
+  designation: "moderne désormais",
+  creditsAlreadyOpen: "ouah",
 };
 
 export const sampleWithFullData: IAnnexDecision = {
   id: 24619,
-  designation: 'adepte',
-  expenseAmount: 'alors que',
+  designation: "adepte",
+  expenseAmount: "alors que",
   creditsAlreadyOpen: "d'avec invoquer toc-toc",
-  creditsOpen: 'du fait que triangulaire',
+  creditsOpen: "du fait que triangulaire",
 };
 
 export const sampleWithNewData: NewAnnexDecision = {

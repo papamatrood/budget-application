@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { RouterTestingHarness } from "@angular/router/testing";
+import { of } from "rxjs";
 
-import { RecipeDetailComponent } from './recipe-detail.component';
+import { RecipeDetailComponent } from "./recipe-detail.component";
 
-describe('Recipe Management Detail Component', () => {
+describe("Recipe Management Detail Component", () => {
   let comp: RecipeDetailComponent;
   let fixture: ComponentFixture<RecipeDetailComponent>;
 
@@ -16,8 +16,11 @@ describe('Recipe Management Detail Component', () => {
         provideRouter(
           [
             {
-              path: '**',
-              loadComponent: () => import('./recipe-detail.component').then(m => m.RecipeDetailComponent),
+              path: "**",
+              loadComponent: () =>
+                import("./recipe-detail.component").then(
+                  (m) => m.RecipeDetailComponent,
+                ),
               resolve: { recipe: () => of({ id: 27805 }) },
             },
           ],
@@ -25,7 +28,7 @@ describe('Recipe Management Detail Component', () => {
         ),
       ],
     })
-      .overrideTemplate(RecipeDetailComponent, '')
+      .overrideTemplate(RecipeDetailComponent, "")
       .compileComponents();
   });
 
@@ -34,19 +37,19 @@ describe('Recipe Management Detail Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('OnInit', () => {
-    it('should load recipe on init', async () => {
+  describe("OnInit", () => {
+    it("should load recipe on init", async () => {
       const harness = await RouterTestingHarness.create();
-      const instance = await harness.navigateByUrl('/', RecipeDetailComponent);
+      const instance = await harness.navigateByUrl("/", RecipeDetailComponent);
 
       // THEN
       expect(instance.recipe()).toEqual(expect.objectContaining({ id: 27805 }));
     });
   });
 
-  describe('PreviousState', () => {
-    it('should navigate to previous state', () => {
-      jest.spyOn(window.history, 'back');
+  describe("PreviousState", () => {
+    it("should navigate to previous state", () => {
+      jest.spyOn(window.history, "back");
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
     });

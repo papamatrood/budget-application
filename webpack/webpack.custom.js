@@ -1,48 +1,51 @@
-const path = require('path');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const { hashElement } = require('folder-hash');
-const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const WebpackNotifierPlugin = require('webpack-notifier');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const { merge } = require("webpack-merge");
+const { hashElement } = require("folder-hash");
+const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin");
+const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const WebpackNotifierPlugin = require("webpack-notifier");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const environment = require('./environment');
-const proxyConfig = require('./proxy.conf');
+const environment = require("./environment");
+const proxyConfig = require("./proxy.conf");
 
 module.exports = async (config, options, targetOptions) => {
-  const languagesHash = await hashElement(path.resolve(__dirname, '../src/main/webapp/i18n'), {
-    algo: 'md5',
-    encoding: 'hex',
-    files: { include: ['*.json'] },
-  });
+  const languagesHash = await hashElement(
+    path.resolve(__dirname, "../src/main/webapp/i18n"),
+    {
+      algo: "md5",
+      encoding: "hex",
+      files: { include: ["*.json"] },
+    },
+  );
 
   // PLUGINS
-  if (config.mode === 'development') {
+  if (config.mode === "development") {
     config.plugins.push(
       new WebpackNotifierPlugin({
-        title: 'Budget Application',
-        contentImage: path.join(__dirname, 'logo-jhipster.png'),
+        title: "Budget Application",
+        contentImage: path.join(__dirname, "logo-jhipster.png"),
       }),
     );
   }
 
   // configuring proxy for back end service
-  const tls = config.devServer?.server?.type === 'https';
+  const tls = config.devServer?.server?.type === "https";
   if (config.devServer) {
     config.devServer.proxy = proxyConfig({ tls });
   }
 
-  if (targetOptions.target === 'serve' || config.watch) {
+  if (targetOptions.target === "serve" || config.watch) {
     config.plugins.push(
       new BrowserSyncPlugin(
         {
-          host: 'localhost',
+          host: "localhost",
           port: 9000,
           https: tls,
           proxy: {
-            target: `http${tls ? 's' : ''}://localhost:${targetOptions.target === 'serve' ? '4200' : '8080'}`,
+            target: `http${tls ? "s" : ""}://localhost:${targetOptions.target === "serve" ? "4200" : "8080"}`,
             ws: true,
             proxyOptions: {
               changeOrigin: false, //pass the Host header to the backend unchanged https://github.com/Browsersync/browser-sync/issues/430
@@ -50,8 +53,11 @@ module.exports = async (config, options, targetOptions) => {
             proxyReq: [
               function (proxyReq) {
                 // URI that will be retrieved by the ForwardedHeaderFilter on the server side
-                proxyReq.setHeader('X-Forwarded-Host', 'localhost:9000');
-                proxyReq.setHeader('X-Forwarded-Proto', `http${tls ? 's' : ''}`);
+                proxyReq.setHeader("X-Forwarded-Host", "localhost:9000");
+                proxyReq.setHeader(
+                  "X-Forwarded-Proto",
+                  `http${tls ? "s" : ""}`,
+                );
               },
             ],
           },
@@ -70,19 +76,19 @@ module.exports = async (config, options, targetOptions) => {
           */
         },
         {
-          reload: targetOptions.target === 'build', // enabled for build --watch
+          reload: targetOptions.target === "build", // enabled for build --watch
         },
       ),
     );
   }
 
-  if (config.mode === 'production') {
+  if (config.mode === "production") {
     config.plugins.push(
       new BundleAnalyzerPlugin({
-        analyzerMode: 'static',
+        analyzerMode: "static",
         openAnalyzer: false,
         // Webpack statistics in temporary folder
-        reportFilename: '../../stats.html',
+        reportFilename: "../../stats.html",
       }),
     );
   }
@@ -90,16 +96,19 @@ module.exports = async (config, options, targetOptions) => {
   const patterns = [
     {
       // https://github.com/swagger-api/swagger-ui/blob/v4.6.1/swagger-ui-dist-package/README.md
-      context: require('swagger-ui-dist').getAbsoluteFSPath(),
-      from: '*.{js,css,html,png}',
-      to: 'swagger-ui/',
-      globOptions: { ignore: ['**/index.html'] },
+      context: require("swagger-ui-dist").getAbsoluteFSPath(),
+      from: "*.{js,css,html,png}",
+      to: "swagger-ui/",
+      globOptions: { ignore: ["**/index.html"] },
     },
     {
-      from: path.join(path.dirname(require.resolve('axios/package.json')), 'dist/axios.min.js'),
-      to: 'swagger-ui/',
+      from: path.join(
+        path.dirname(require.resolve("axios/package.json")),
+        "dist/axios.min.js",
+      ),
+      to: "swagger-ui/",
     },
-    { from: './src/main/webapp/swagger-ui/', to: 'swagger-ui/' },
+    { from: "./src/main/webapp/swagger-ui/", to: "swagger-ui/" },
     // jhipster-needle-add-assets-to-webpack - JHipster will add/remove third-party resources in this array
   ];
 
@@ -121,8 +130,14 @@ module.exports = async (config, options, targetOptions) => {
     new MergeJsonWebpackPlugin({
       output: {
         groupBy: [
-          { pattern: './src/main/webapp/i18n/fr/*.json', fileName: './i18n/fr.json' },
-          { pattern: './src/main/webapp/i18n/en/*.json', fileName: './i18n/en.json' },
+          {
+            pattern: "./src/main/webapp/i18n/fr/*.json",
+            fileName: "./i18n/fr.json",
+          },
+          {
+            pattern: "./src/main/webapp/i18n/en/*.json",
+            fileName: "./i18n/en.json",
+          },
           // jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
         ],
       },

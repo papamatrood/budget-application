@@ -42,7 +42,7 @@
     "java:war:dev": "npm run java:war -- -Pdev,webapp",
     "java:war:prod": "npm run java:war -- -Pprod",
     "jest": "jest --coverage --logHeapUsage --maxWorkers=2 --config jest.conf.js",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky",
     "prettier:check": "prettier --check \"{,src/**/,webpack/,.blueprint/**/}*.{md,json,yml,js,cjs,mjs,ts,cts,mts,java,html,css,scss}\"",
@@ -135,6 +135,9 @@
     "webpack-bundle-analyzer": "4.10.2",
     "webpack-merge": "6.0.1",
     "webpack-notifier": "1.15.0"
+  },
+  "prettier": {
+    "endOfLine": "lf"
   },
   "engines": {
     "node": ">=22.14.0"

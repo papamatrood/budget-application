@@ -1,17 +1,20 @@
-import { Component, OnDestroy, inject, signal } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, OnDestroy, inject, signal } from "@angular/core";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Subscription } from "rxjs";
+import { CommonModule } from "@angular/common";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { TranslateService } from "@ngx-translate/core";
 
-import { Alert, AlertService } from 'app/core/util/alert.service';
-import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
-import { AlertError } from './alert-error.model';
+import { Alert, AlertService } from "app/core/util/alert.service";
+import {
+  EventManager,
+  EventWithContent,
+} from "app/core/util/event-manager.service";
+import { AlertError } from "./alert-error.model";
 
 @Component({
-  selector: 'jhi-alert-error',
-  templateUrl: './alert-error.component.html',
+  selector: "jhi-alert-error",
+  templateUrl: "./alert-error.component.html",
   imports: [CommonModule, NgbModule],
 })
 export class AlertErrorComponent implements OnDestroy {
@@ -25,13 +28,21 @@ export class AlertErrorComponent implements OnDestroy {
   private readonly translateService = inject(TranslateService);
 
   constructor() {
-    this.errorListener = this.eventManager.subscribe('budgetApplicationApp.error', (response: EventWithContent<unknown> | string) => {
-      const errorResponse = (response as EventWithContent<AlertError>).content;
-      this.addErrorAlert(errorResponse.message, errorResponse.key, errorResponse.params);
-    });
+    this.errorListener = this.eventManager.subscribe(
+      "budgetApplicationApp.error",
+      (response: EventWithContent<unknown> | string) => {
+        const errorResponse = (response as EventWithContent<AlertError>)
+          .content;
+        this.addErrorAlert(
+          errorResponse.message,
+          errorResponse.key,
+          errorResponse.params,
+        );
+      },
+    );
 
     this.httpErrorListener = this.eventManager.subscribe(
-      'budgetApplicationApp.httpError',
+      "budgetApplicationApp.httpError",
       (response: EventWithContent<unknown> | string) => {
         this.handleHttpError(response);
       },
@@ -39,7 +50,7 @@ export class AlertErrorComponent implements OnDestroy {
   }
 
   setClasses(alert: Alert): Record<string, boolean> {
-    const classes = { 'jhi-toast': Boolean(alert.toast) };
+    const classes = { "jhi-toast": Boolean(alert.toast) };
     if (alert.position) {
       return { ...classes, [alert.position]: true };
     }
@@ -55,16 +66,27 @@ export class AlertErrorComponent implements OnDestroy {
     alert.close?.(this.alerts());
   }
 
-  private addErrorAlert(message?: string, translationKey?: string, translationParams?: Record<string, unknown>): void {
-    this.alertService.addAlert({ type: 'danger', message, translationKey, translationParams }, this.alerts());
+  private addErrorAlert(
+    message?: string,
+    translationKey?: string,
+    translationParams?: Record<string, unknown>,
+  ): void {
+    this.alertService.addAlert(
+      { type: "danger", message, translationKey, translationParams },
+      this.alerts(),
+    );
   }
 
   private handleHttpError(response: EventWithContent<unknown> | string): void {
-    const httpErrorResponse = (response as EventWithContent<HttpErrorResponse>).content;
+    const httpErrorResponse = (response as EventWithContent<HttpErrorResponse>)
+      .content;
     switch (httpErrorResponse.status) {
       // connection refused, server not reachable
       case 0:
-        this.addErrorAlert('Server not reachable', 'error.server.not.reachable');
+        this.addErrorAlert(
+          "Server not reachable",
+          "error.server.not.reachable",
+        );
         break;
 
       case 400: {
@@ -73,7 +95,7 @@ export class AlertErrorComponent implements OnDestroy {
       }
 
       case 404:
-        this.addErrorAlert('Not found', 'error.url.not.found');
+        this.addErrorAlert("Not found", "error.url.not.found");
         break;
 
       default:
@@ -86,18 +108,30 @@ export class AlertErrorComponent implements OnDestroy {
     let errorHeader: string | null = null;
     let entityKey: string | null = null;
     for (const entry of arr) {
-      if (entry.toLowerCase().endsWith('app-error')) {
+      if (entry.toLowerCase().endsWith("app-error")) {
         errorHeader = httpErrorResponse.headers.get(entry);
-      } else if (entry.toLowerCase().endsWith('app-params')) {
+      } else if (entry.toLowerCase().endsWith("app-params")) {
         entityKey = httpErrorResponse.headers.get(entry);
       }
     }
     if (errorHeader) {
-      const alertData = entityKey ? { entityName: this.translateService.instant(`global.menu.entities.${entityKey}`) } : undefined;
+      const alertData = entityKey
+        ? {
+            entityName: this.translateService.instant(
+              `global.menu.entities.${entityKey}`,
+            ),
+          }
+        : undefined;
       this.addErrorAlert(errorHeader, errorHeader, alertData);
-    } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.fieldErrors) {
+    } else if (
+      httpErrorResponse.error !== "" &&
+      httpErrorResponse.error.fieldErrors
+    ) {
       this.handleFieldsError(httpErrorResponse);
-    } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.message) {
+    } else if (
+      httpErrorResponse.error !== "" &&
+      httpErrorResponse.error.message
+    ) {
       this.addErrorAlert(
         httpErrorResponse.error.detail ?? httpErrorResponse.error.message,
         httpErrorResponse.error.message,
@@ -109,7 +143,7 @@ export class AlertErrorComponent implements OnDestroy {
   }
 
   private handleDefaultError(httpErrorResponse: HttpErrorResponse): void {
-    if (httpErrorResponse.error !== '' && httpErrorResponse.error.message) {
+    if (httpErrorResponse.error !== "" && httpErrorResponse.error.message) {
       this.addErrorAlert(
         httpErrorResponse.error.detail ?? httpErrorResponse.error.message,
         httpErrorResponse.error.message,
@@ -123,13 +157,21 @@ export class AlertErrorComponent implements OnDestroy {
   private handleFieldsError(httpErrorResponse: HttpErrorResponse): void {
     const { fieldErrors } = httpErrorResponse.error;
     for (const fieldError of fieldErrors) {
-      if (['Min', 'Max', 'DecimalMin', 'DecimalMax'].includes(fieldError.message)) {
-        fieldError.message = 'Size';
+      if (
+        ["Min", "Max", "DecimalMin", "DecimalMax"].includes(fieldError.message)
+      ) {
+        fieldError.message = "Size";
       }
       // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
-      const convertedField: string = fieldError.field.replace(/\[\d*\]/g, '[]');
-      const fieldName: string = this.translateService.instant(`budgetApplicationApp.${fieldError.objectName as string}.${convertedField}`);
-      this.addErrorAlert(`Error on field "${fieldName}"`, `error.${fieldError.message as string}`, { fieldName });
+      const convertedField: string = fieldError.field.replace(/\[\d*\]/g, "[]");
+      const fieldName: string = this.translateService.instant(
+        `budgetApplicationApp.${fieldError.objectName as string}.${convertedField}`,
+      );
+      this.addErrorAlert(
+        `Error on field "${fieldName}"`,
+        `error.${fieldError.message as string}`,
+        { fieldName },
+      );
     }
   }
 }

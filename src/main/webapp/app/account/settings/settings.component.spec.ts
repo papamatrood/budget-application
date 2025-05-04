@@ -1,29 +1,29 @@
-jest.mock('app/core/auth/account.service');
+jest.mock("app/core/auth/account.service");
 
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { of, throwError } from 'rxjs';
-import { TranslateModule } from '@ngx-translate/core';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { provideHttpClient } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { of, throwError } from "rxjs";
+import { TranslateModule } from "@ngx-translate/core";
 
-import { AccountService } from 'app/core/auth/account.service';
-import { Account } from 'app/core/auth/account.model';
+import { AccountService } from "app/core/auth/account.service";
+import { Account } from "app/core/auth/account.model";
 
-import SettingsComponent from './settings.component';
+import SettingsComponent from "./settings.component";
 
-describe('SettingsComponent', () => {
+describe("SettingsComponent", () => {
   let comp: SettingsComponent;
   let fixture: ComponentFixture<SettingsComponent>;
   let mockAccountService: AccountService;
   const account: Account = {
-    firstName: 'John',
-    lastName: 'Doe',
+    firstName: "John",
+    lastName: "Doe",
     activated: true,
-    email: 'john.doe@mail.com',
-    langKey: 'fr',
-    login: 'john',
+    email: "john.doe@mail.com",
+    langKey: "fr",
+    login: "john",
     authorities: [],
-    imageUrl: '',
+    imageUrl: "",
   };
 
   beforeEach(waitForAsync(() => {
@@ -31,7 +31,7 @@ describe('SettingsComponent', () => {
       imports: [TranslateModule.forRoot(), SettingsComponent],
       providers: [provideHttpClient(), FormBuilder, AccountService],
     })
-      .overrideTemplate(SettingsComponent, '')
+      .overrideTemplate(SettingsComponent, "")
       .compileComponents();
   }));
 
@@ -43,14 +43,14 @@ describe('SettingsComponent', () => {
     mockAccountService.getAuthenticationState = jest.fn(() => of(account));
   });
 
-  it('should send the current identity upon save', () => {
+  it("should send the current identity upon save", () => {
     // GIVEN
     mockAccountService.save = jest.fn(() => of({}));
     const settingsFormValues = {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@mail.com',
-      langKey: 'fr',
+      firstName: "John",
+      lastName: "Doe",
+      email: "john.doe@mail.com",
+      langKey: "fr",
     };
 
     // WHEN
@@ -61,10 +61,12 @@ describe('SettingsComponent', () => {
     expect(mockAccountService.identity).toHaveBeenCalled();
     expect(mockAccountService.save).toHaveBeenCalledWith(account);
     expect(mockAccountService.authenticate).toHaveBeenCalledWith(account);
-    expect(comp.settingsForm.value).toMatchObject(expect.objectContaining(settingsFormValues));
+    expect(comp.settingsForm.value).toMatchObject(
+      expect.objectContaining(settingsFormValues),
+    );
   });
 
-  it('should notify of success upon successful save', () => {
+  it("should notify of success upon successful save", () => {
     // GIVEN
     mockAccountService.save = jest.fn(() => of({}));
 
@@ -76,7 +78,7 @@ describe('SettingsComponent', () => {
     expect(comp.success()).toBe(true);
   });
 
-  it('should notify of error upon failed save', () => {
+  it("should notify of error upon failed save", () => {
     // GIVEN
     mockAccountService.save = jest.fn(() => throwError(Error));
 

@@ -1,25 +1,53 @@
-import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
-import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, NgZone, OnInit, inject, signal } from "@angular/core";
+import { HttpHeaders } from "@angular/common/http";
+import {
+  ActivatedRoute,
+  Data,
+  ParamMap,
+  Router,
+  RouterModule,
+} from "@angular/router";
+import { Observable, Subscription, combineLatest, filter, tap } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
-import SharedModule from 'app/shared/shared.module';
-import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { FormatMediumDatetimePipe } from 'app/shared/date';
-import { ItemCountComponent } from 'app/shared/pagination';
-import { FormsModule } from '@angular/forms';
-import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
-import { FilterComponent, FilterOptions, IFilterOption, IFilterOptions } from 'app/shared/filter';
-import { IAppUser } from '../app-user.model';
+import SharedModule from "app/shared/shared.module";
+import {
+  SortByDirective,
+  SortDirective,
+  SortService,
+  type SortState,
+  sortStateSignal,
+} from "app/shared/sort";
+import { FormatMediumDatetimePipe } from "app/shared/date";
+import { ItemCountComponent } from "app/shared/pagination";
+import { FormsModule } from "@angular/forms";
+import {
+  ITEMS_PER_PAGE,
+  PAGE_HEADER,
+  TOTAL_COUNT_RESPONSE_HEADER,
+} from "app/config/pagination.constants";
+import {
+  DEFAULT_SORT_DATA,
+  ITEM_DELETED_EVENT,
+  SORT,
+} from "app/config/navigation.constants";
+import {
+  FilterComponent,
+  FilterOptions,
+  IFilterOption,
+  IFilterOptions,
+} from "app/shared/filter";
+import { IAppUser } from "../app-user.model";
 
-import { AppUserService, EntityArrayResponseType } from '../service/app-user.service';
-import { AppUserDeleteDialogComponent } from '../delete/app-user-delete-dialog.component';
+import {
+  AppUserService,
+  EntityArrayResponseType,
+} from "../service/app-user.service";
+import { AppUserDeleteDialogComponent } from "../delete/app-user-delete-dialog.component";
 
 @Component({
-  selector: 'jhi-app-user',
-  templateUrl: './app-user.component.html',
+  selector: "jhi-app-user",
+  templateUrl: "./app-user.component.html",
   imports: [
     RouterModule,
     FormsModule,
@@ -50,26 +78,37 @@ export class AppUserComponent implements OnInit {
   protected modalService = inject(NgbModal);
   protected ngZone = inject(NgZone);
 
-  trackId = (item: IAppUser): number => this.appUserService.getAppUserIdentifier(item);
+  trackId = (item: IAppUser): number =>
+    this.appUserService.getAppUserIdentifier(item);
 
   ngOnInit(): void {
-    this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
+    this.subscription = combineLatest([
+      this.activatedRoute.queryParamMap,
+      this.activatedRoute.data,
+    ])
       .pipe(
-        tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
+        tap(([params, data]) =>
+          this.fillComponentAttributeFromRoute(params, data),
+        ),
         tap(() => this.load()),
       )
       .subscribe();
 
-    this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.sortState(), filterOptions));
+    this.filters.filterChanges.subscribe((filterOptions) =>
+      this.handleNavigation(1, this.sortState(), filterOptions),
+    );
   }
 
   delete(appUser: IAppUser): void {
-    const modalRef = this.modalService.open(AppUserDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(AppUserDeleteDialogComponent, {
+      size: "lg",
+      backdrop: "static",
+    });
     modalRef.componentInstance.appUser = appUser;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed
       .pipe(
-        filter(reason => reason === ITEM_DELETED_EVENT),
+        filter((reason) => reason === ITEM_DELETED_EVENT),
         tap(() => this.load()),
       )
       .subscribe();
@@ -91,24 +130,37 @@ export class AppUserComponent implements OnInit {
     this.handleNavigation(page, this.sortState(), this.filters.filterOptions);
   }
 
-  protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
+  protected fillComponentAttributeFromRoute(
+    params: ParamMap,
+    data: Data,
+  ): void {
     const page = params.get(PAGE_HEADER);
     this.page = +(page ?? 1);
-    this.sortState.set(this.sortService.parseSortParam(params.get(SORT) ?? data[DEFAULT_SORT_DATA]));
+    this.sortState.set(
+      this.sortService.parseSortParam(
+        params.get(SORT) ?? data[DEFAULT_SORT_DATA],
+      ),
+    );
     this.filters.initializeFromParams(params);
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
-    const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
+    const dataFromBody = this.fillComponentAttributesFromResponseBody(
+      response.body,
+    );
     this.appUsers.set(dataFromBody);
   }
 
-  protected fillComponentAttributesFromResponseBody(data: IAppUser[] | null): IAppUser[] {
+  protected fillComponentAttributesFromResponseBody(
+    data: IAppUser[] | null,
+  ): IAppUser[] {
     return data ?? [];
   }
 
-  protected fillComponentAttributesFromResponseHeader(headers: HttpHeaders): void {
+  protected fillComponentAttributesFromResponseHeader(
+    headers: HttpHeaders,
+  ): void {
     this.totalItems = Number(headers.get(TOTAL_COUNT_RESPONSE_HEADER));
   }
 
@@ -122,25 +174,31 @@ export class AppUserComponent implements OnInit {
       size: this.itemsPerPage,
       sort: this.sortService.buildSortParam(this.sortState()),
     };
-    filters.filterOptions.forEach(filterOption => {
+    filters.filterOptions.forEach((filterOption) => {
       queryObject[filterOption.name] = filterOption.values;
     });
-    return this.appUserService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    return this.appUserService
+      .query(queryObject)
+      .pipe(tap(() => (this.isLoading = false)));
   }
 
-  protected handleNavigation(page: number, sortState: SortState, filterOptions?: IFilterOption[]): void {
+  protected handleNavigation(
+    page: number,
+    sortState: SortState,
+    filterOptions?: IFilterOption[],
+  ): void {
     const queryParamsObj: any = {
       page,
       size: this.itemsPerPage,
       sort: this.sortService.buildSortParam(sortState),
     };
 
-    filterOptions?.forEach(filterOption => {
+    filterOptions?.forEach((filterOption) => {
       queryParamsObj[filterOption.nameAsQueryParam()] = filterOption.values;
     });
 
     this.ngZone.run(() => {
-      this.router.navigate(['./'], {
+      this.router.navigate(["./"], {
         relativeTo: this.activatedRoute,
         queryParams: queryParamsObj,
       });

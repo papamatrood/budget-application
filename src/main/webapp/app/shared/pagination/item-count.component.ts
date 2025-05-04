@@ -1,12 +1,17 @@
-import { Component, computed, input } from '@angular/core';
-import TranslateDirective from '../language/translate.directive';
+import { Component, computed, input } from "@angular/core";
+import TranslateDirective from "../language/translate.directive";
 
 /**
  * A component that will take care of item count statistics of a pagination.
  */
 @Component({
-  selector: 'jhi-item-count',
-  template: ` <div jhiTranslate="global.item-count" [translateValues]="{ first: first(), second: second(), total: total() }"></div> `,
+  selector: "jhi-item-count",
+  template: `
+    <div
+      jhiTranslate="global.item-count"
+      [translateValues]="{ first: first(), second: second(), total: total() }"
+    ></div>
+  `,
   imports: [TranslateDirective],
 })
 export default class ItemCountComponent {
@@ -24,7 +29,11 @@ export default class ItemCountComponent {
 
   first = computed(() => {
     const params = this.params();
-    if (params?.page && params.totalItems !== undefined && params.itemsPerPage) {
+    if (
+      params?.page &&
+      params.totalItems !== undefined &&
+      params.itemsPerPage
+    ) {
       return (params.page - 1) * params.itemsPerPage + 1;
     }
     return undefined;
@@ -32,8 +41,14 @@ export default class ItemCountComponent {
 
   second = computed(() => {
     const params = this.params();
-    if (params?.page && params.totalItems !== undefined && params.itemsPerPage) {
-      return params.page * params.itemsPerPage < params.totalItems ? params.page * params.itemsPerPage : params.totalItems;
+    if (
+      params?.page &&
+      params.totalItems !== undefined &&
+      params.itemsPerPage
+    ) {
+      return params.page * params.itemsPerPage < params.totalItems
+        ? params.page * params.itemsPerPage
+        : params.totalItems;
     }
     return undefined;
   });

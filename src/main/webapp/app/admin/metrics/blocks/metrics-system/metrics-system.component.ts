@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 
-import SharedModule from 'app/shared/shared.module';
-import { ProcessMetrics } from 'app/admin/metrics/metrics.model';
+import SharedModule from "app/shared/shared.module";
+import { ProcessMetrics } from "app/admin/metrics/metrics.model";
 
 @Component({
-  selector: 'jhi-metrics-system',
-  templateUrl: './metrics-system.component.html',
+  selector: "jhi-metrics-system",
+  templateUrl: "./metrics-system.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SharedModule],
 })
@@ -29,12 +29,12 @@ export class MetricsSystemComponent {
       minute: 60000,
       second: 1000,
     };
-    let timeString = '';
+    let timeString = "";
     for (const [key, value] of Object.entries(times)) {
       if (Math.floor(ms / value) > 0) {
-        let plural = '';
+        let plural = "";
         if (Math.floor(ms / value) > 1) {
-          plural = 's';
+          plural = "s";
         }
         timeString += `${Math.floor(ms / value).toString()} ${key.toString()}${plural} `;
         ms = ms - value * Math.floor(ms / value);

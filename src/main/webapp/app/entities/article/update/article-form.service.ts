@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { IArticle, NewArticle } from '../article.model';
+import { IArticle, NewArticle } from "../article.model";
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<
+  Omit<T, "id">
+> & { id: T["id"] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,26 +16,28 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type ArticleFormGroupInput = IArticle | PartialWithRequiredKeyOf<NewArticle>;
 
-type ArticleFormDefaults = Pick<NewArticle, 'id' | 'recipes' | 'expenses'>;
+type ArticleFormDefaults = Pick<NewArticle, "id" | "recipes" | "expenses">;
 
 type ArticleFormGroupContent = {
-  id: FormControl<IArticle['id'] | NewArticle['id']>;
-  category: FormControl<IArticle['category']>;
-  code: FormControl<IArticle['code']>;
-  designation: FormControl<IArticle['designation']>;
-  accountDiv: FormControl<IArticle['accountDiv']>;
-  codeEnd: FormControl<IArticle['codeEnd']>;
-  paragraph: FormControl<IArticle['paragraph']>;
-  chapter: FormControl<IArticle['chapter']>;
-  recipes: FormControl<IArticle['recipes']>;
-  expenses: FormControl<IArticle['expenses']>;
+  id: FormControl<IArticle["id"] | NewArticle["id"]>;
+  category: FormControl<IArticle["category"]>;
+  code: FormControl<IArticle["code"]>;
+  designation: FormControl<IArticle["designation"]>;
+  accountDiv: FormControl<IArticle["accountDiv"]>;
+  codeEnd: FormControl<IArticle["codeEnd"]>;
+  paragraph: FormControl<IArticle["paragraph"]>;
+  chapter: FormControl<IArticle["chapter"]>;
+  recipes: FormControl<IArticle["recipes"]>;
+  expenses: FormControl<IArticle["expenses"]>;
 };
 
 export type ArticleFormGroup = FormGroup<ArticleFormGroupContent>;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class ArticleFormService {
-  createArticleFormGroup(article: ArticleFormGroupInput = { id: null }): ArticleFormGroup {
+  createArticleFormGroup(
+    article: ArticleFormGroupInput = { id: null },
+  ): ArticleFormGroup {
     const articleRawValue = {
       ...this.getFormDefaults(),
       ...article,

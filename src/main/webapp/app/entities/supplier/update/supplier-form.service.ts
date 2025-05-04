@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { ISupplier, NewSupplier } from '../supplier.model';
+import { ISupplier, NewSupplier } from "../supplier.model";
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<
+  Omit<T, "id">
+> & { id: T["id"] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,29 +16,31 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type SupplierFormGroupInput = ISupplier | PartialWithRequiredKeyOf<NewSupplier>;
 
-type SupplierFormDefaults = Pick<NewSupplier, 'id'>;
+type SupplierFormDefaults = Pick<NewSupplier, "id">;
 
 type SupplierFormGroupContent = {
-  id: FormControl<ISupplier['id'] | NewSupplier['id']>;
-  companyName: FormControl<ISupplier['companyName']>;
-  address: FormControl<ISupplier['address']>;
-  phone: FormControl<ISupplier['phone']>;
-  nifNumber: FormControl<ISupplier['nifNumber']>;
-  commercialRegister: FormControl<ISupplier['commercialRegister']>;
-  bankAccount: FormControl<ISupplier['bankAccount']>;
-  mandatingEstablishment: FormControl<ISupplier['mandatingEstablishment']>;
-  email: FormControl<ISupplier['email']>;
-  website: FormControl<ISupplier['website']>;
-  description: FormControl<ISupplier['description']>;
-  contactFirstname: FormControl<ISupplier['contactFirstname']>;
-  contactlastname: FormControl<ISupplier['contactlastname']>;
+  id: FormControl<ISupplier["id"] | NewSupplier["id"]>;
+  companyName: FormControl<ISupplier["companyName"]>;
+  address: FormControl<ISupplier["address"]>;
+  phone: FormControl<ISupplier["phone"]>;
+  nifNumber: FormControl<ISupplier["nifNumber"]>;
+  commercialRegister: FormControl<ISupplier["commercialRegister"]>;
+  bankAccount: FormControl<ISupplier["bankAccount"]>;
+  mandatingEstablishment: FormControl<ISupplier["mandatingEstablishment"]>;
+  email: FormControl<ISupplier["email"]>;
+  website: FormControl<ISupplier["website"]>;
+  description: FormControl<ISupplier["description"]>;
+  contactFirstname: FormControl<ISupplier["contactFirstname"]>;
+  contactlastname: FormControl<ISupplier["contactlastname"]>;
 };
 
 export type SupplierFormGroup = FormGroup<SupplierFormGroupContent>;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class SupplierFormService {
-  createSupplierFormGroup(supplier: SupplierFormGroupInput = { id: null }): SupplierFormGroup {
+  createSupplierFormGroup(
+    supplier: SupplierFormGroupInput = { id: null },
+  ): SupplierFormGroup {
     const supplierRawValue = {
       ...this.getFormDefaults(),
       ...supplier,
@@ -55,7 +59,9 @@ export class SupplierFormService {
       nifNumber: new FormControl(supplierRawValue.nifNumber),
       commercialRegister: new FormControl(supplierRawValue.commercialRegister),
       bankAccount: new FormControl(supplierRawValue.bankAccount),
-      mandatingEstablishment: new FormControl(supplierRawValue.mandatingEstablishment),
+      mandatingEstablishment: new FormControl(
+        supplierRawValue.mandatingEstablishment,
+      ),
       email: new FormControl(supplierRawValue.email),
       website: new FormControl(supplierRawValue.website),
       description: new FormControl(supplierRawValue.description),

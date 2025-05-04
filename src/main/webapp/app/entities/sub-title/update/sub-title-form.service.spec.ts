@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { sampleWithNewData, sampleWithRequiredData } from '../sub-title.test-samples';
+import {
+  sampleWithNewData,
+  sampleWithRequiredData,
+} from "../sub-title.test-samples";
 
-import { SubTitleFormService } from './sub-title-form.service';
+import { SubTitleFormService } from "./sub-title-form.service";
 
-describe('SubTitle Form Service', () => {
+describe("SubTitle Form Service", () => {
   let service: SubTitleFormService;
 
   beforeEach(() => {
@@ -12,9 +15,9 @@ describe('SubTitle Form Service', () => {
     service = TestBed.inject(SubTitleFormService);
   });
 
-  describe('Service methods', () => {
-    describe('createSubTitleFormGroup', () => {
-      it('should create a new form with FormControl', () => {
+  describe("Service methods", () => {
+    describe("createSubTitleFormGroup", () => {
+      it("should create a new form with FormControl", () => {
         const formGroup = service.createSubTitleFormGroup();
 
         expect(formGroup.controls).toEqual(
@@ -26,8 +29,10 @@ describe('SubTitle Form Service', () => {
         );
       });
 
-      it('passing ISubTitle should create a new form with FormGroup', () => {
-        const formGroup = service.createSubTitleFormGroup(sampleWithRequiredData);
+      it("passing ISubTitle should create a new form with FormGroup", () => {
+        const formGroup = service.createSubTitleFormGroup(
+          sampleWithRequiredData,
+        );
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
@@ -39,8 +44,8 @@ describe('SubTitle Form Service', () => {
       });
     });
 
-    describe('getSubTitle', () => {
-      it('should return NewSubTitle for default SubTitle initial value', () => {
+    describe("getSubTitle", () => {
+      it("should return NewSubTitle for default SubTitle initial value", () => {
         const formGroup = service.createSubTitleFormGroup(sampleWithNewData);
 
         const subTitle = service.getSubTitle(formGroup) as any;
@@ -48,7 +53,7 @@ describe('SubTitle Form Service', () => {
         expect(subTitle).toMatchObject(sampleWithNewData);
       });
 
-      it('should return NewSubTitle for empty SubTitle initial value', () => {
+      it("should return NewSubTitle for empty SubTitle initial value", () => {
         const formGroup = service.createSubTitleFormGroup();
 
         const subTitle = service.getSubTitle(formGroup) as any;
@@ -56,8 +61,10 @@ describe('SubTitle Form Service', () => {
         expect(subTitle).toMatchObject({});
       });
 
-      it('should return ISubTitle', () => {
-        const formGroup = service.createSubTitleFormGroup(sampleWithRequiredData);
+      it("should return ISubTitle", () => {
+        const formGroup = service.createSubTitleFormGroup(
+          sampleWithRequiredData,
+        );
 
         const subTitle = service.getSubTitle(formGroup) as any;
 
@@ -65,8 +72,8 @@ describe('SubTitle Form Service', () => {
       });
     });
 
-    describe('resetForm', () => {
-      it('passing ISubTitle should not enable id FormControl', () => {
+    describe("resetForm", () => {
+      it("passing ISubTitle should not enable id FormControl", () => {
         const formGroup = service.createSubTitleFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 
@@ -75,8 +82,10 @@ describe('SubTitle Form Service', () => {
         expect(formGroup.controls.id.disabled).toBe(true);
       });
 
-      it('passing NewSubTitle should disable id FormControl', () => {
-        const formGroup = service.createSubTitleFormGroup(sampleWithRequiredData);
+      it("passing NewSubTitle should disable id FormControl", () => {
+        const formGroup = service.createSubTitleFormGroup(
+          sampleWithRequiredData,
+        );
         expect(formGroup.controls.id.disabled).toBe(true);
 
         service.resetForm(formGroup, { id: null });

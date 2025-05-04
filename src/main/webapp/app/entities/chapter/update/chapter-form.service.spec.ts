@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { sampleWithNewData, sampleWithRequiredData } from '../chapter.test-samples';
+import {
+  sampleWithNewData,
+  sampleWithRequiredData,
+} from "../chapter.test-samples";
 
-import { ChapterFormService } from './chapter-form.service';
+import { ChapterFormService } from "./chapter-form.service";
 
-describe('Chapter Form Service', () => {
+describe("Chapter Form Service", () => {
   let service: ChapterFormService;
 
   beforeEach(() => {
@@ -12,9 +15,9 @@ describe('Chapter Form Service', () => {
     service = TestBed.inject(ChapterFormService);
   });
 
-  describe('Service methods', () => {
-    describe('createChapterFormGroup', () => {
-      it('should create a new form with FormControl', () => {
+  describe("Service methods", () => {
+    describe("createChapterFormGroup", () => {
+      it("should create a new form with FormControl", () => {
         const formGroup = service.createChapterFormGroup();
 
         expect(formGroup.controls).toEqual(
@@ -27,8 +30,10 @@ describe('Chapter Form Service', () => {
         );
       });
 
-      it('passing IChapter should create a new form with FormGroup', () => {
-        const formGroup = service.createChapterFormGroup(sampleWithRequiredData);
+      it("passing IChapter should create a new form with FormGroup", () => {
+        const formGroup = service.createChapterFormGroup(
+          sampleWithRequiredData,
+        );
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
@@ -41,8 +46,8 @@ describe('Chapter Form Service', () => {
       });
     });
 
-    describe('getChapter', () => {
-      it('should return NewChapter for default Chapter initial value', () => {
+    describe("getChapter", () => {
+      it("should return NewChapter for default Chapter initial value", () => {
         const formGroup = service.createChapterFormGroup(sampleWithNewData);
 
         const chapter = service.getChapter(formGroup) as any;
@@ -50,7 +55,7 @@ describe('Chapter Form Service', () => {
         expect(chapter).toMatchObject(sampleWithNewData);
       });
 
-      it('should return NewChapter for empty Chapter initial value', () => {
+      it("should return NewChapter for empty Chapter initial value", () => {
         const formGroup = service.createChapterFormGroup();
 
         const chapter = service.getChapter(formGroup) as any;
@@ -58,8 +63,10 @@ describe('Chapter Form Service', () => {
         expect(chapter).toMatchObject({});
       });
 
-      it('should return IChapter', () => {
-        const formGroup = service.createChapterFormGroup(sampleWithRequiredData);
+      it("should return IChapter", () => {
+        const formGroup = service.createChapterFormGroup(
+          sampleWithRequiredData,
+        );
 
         const chapter = service.getChapter(formGroup) as any;
 
@@ -67,8 +74,8 @@ describe('Chapter Form Service', () => {
       });
     });
 
-    describe('resetForm', () => {
-      it('passing IChapter should not enable id FormControl', () => {
+    describe("resetForm", () => {
+      it("passing IChapter should not enable id FormControl", () => {
         const formGroup = service.createChapterFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 
@@ -77,8 +84,10 @@ describe('Chapter Form Service', () => {
         expect(formGroup.controls.id.disabled).toBe(true);
       });
 
-      it('passing NewChapter should disable id FormControl', () => {
-        const formGroup = service.createChapterFormGroup(sampleWithRequiredData);
+      it("passing NewChapter should disable id FormControl", () => {
+        const formGroup = service.createChapterFormGroup(
+          sampleWithRequiredData,
+        );
         expect(formGroup.controls.id.disabled).toBe(true);
 
         service.resetForm(formGroup, { id: null });

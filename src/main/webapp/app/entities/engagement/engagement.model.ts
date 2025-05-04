@@ -1,4 +1,4 @@
-import dayjs from 'dayjs/esm';
+import dayjs from "dayjs/esm";
 
 export interface IEngagement {
   id: number;
@@ -14,4 +14,4 @@ export interface IEngagement {
   generalManager?: string | null;
 }
 
-export type NewEngagement = Omit<IEngagement, 'id'> & { id: null };
+export type NewEngagement = Omit<IEngagement, "id"> & { id: null };

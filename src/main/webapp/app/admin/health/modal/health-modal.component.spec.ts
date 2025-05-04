@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { provideHttpClient } from "@angular/common/http";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
-import HealthModalComponent from './health-modal.component';
+import HealthModalComponent from "./health-modal.component";
 
-describe('HealthModalComponent', () => {
+describe("HealthModalComponent", () => {
   let comp: HealthModalComponent;
   let fixture: ComponentFixture<HealthModalComponent>;
   let mockActiveModal: NgbActiveModal;
@@ -14,7 +14,7 @@ describe('HealthModalComponent', () => {
       imports: [HealthModalComponent],
       providers: [provideHttpClient(), NgbActiveModal],
     })
-      .overrideTemplate(HealthModalComponent, '')
+      .overrideTemplate(HealthModalComponent, "")
       .compileComponents();
   }));
 
@@ -24,35 +24,35 @@ describe('HealthModalComponent', () => {
     mockActiveModal = TestBed.inject(NgbActiveModal);
   });
 
-  describe('readableValue', () => {
-    it('should return stringify value', () => {
+  describe("readableValue", () => {
+    it("should return stringify value", () => {
       // GIVEN
       comp.health = undefined;
 
       // WHEN
-      const result = comp.readableValue({ name: 'jhipster' });
+      const result = comp.readableValue({ name: "jhipster" });
 
       // THEN
       expect(result).toEqual('{"name":"jhipster"}');
     });
 
-    it('should return string value', () => {
+    it("should return string value", () => {
       // GIVEN
       comp.health = undefined;
 
       // WHEN
-      const result = comp.readableValue('jhipster');
+      const result = comp.readableValue("jhipster");
 
       // THEN
-      expect(result).toEqual('jhipster');
+      expect(result).toEqual("jhipster");
     });
 
-    it('should return storage space in a human readable unit (GB)', () => {
+    it("should return storage space in a human readable unit (GB)", () => {
       // GIVEN
       comp.health = {
-        key: 'diskSpace',
+        key: "diskSpace",
         value: {
-          status: 'UP',
+          status: "UP",
         },
       };
 
@@ -60,15 +60,15 @@ describe('HealthModalComponent', () => {
       const result = comp.readableValue(1073741825);
 
       // THEN
-      expect(result).toEqual('1.00 GB');
+      expect(result).toEqual("1.00 GB");
     });
 
-    it('should return storage space in a human readable unit (MB)', () => {
+    it("should return storage space in a human readable unit (MB)", () => {
       // GIVEN
       comp.health = {
-        key: 'diskSpace',
+        key: "diskSpace",
         value: {
-          status: 'UP',
+          status: "UP",
         },
       };
 
@@ -76,15 +76,15 @@ describe('HealthModalComponent', () => {
       const result = comp.readableValue(1073741824);
 
       // THEN
-      expect(result).toEqual('1024.00 MB');
+      expect(result).toEqual("1024.00 MB");
     });
 
-    it('should return string value', () => {
+    it("should return string value", () => {
       // GIVEN
       comp.health = {
-        key: 'mail',
+        key: "mail",
         value: {
-          status: 'UP',
+          status: "UP",
         },
       };
 
@@ -92,14 +92,14 @@ describe('HealthModalComponent', () => {
       const result = comp.readableValue(1234);
 
       // THEN
-      expect(result).toEqual('1234');
+      expect(result).toEqual("1234");
     });
   });
 
-  describe('dismiss', () => {
-    it('should call dismiss when dismiss modal is called', () => {
+  describe("dismiss", () => {
+    it("should call dismiss when dismiss modal is called", () => {
       // GIVEN
-      const spy = jest.spyOn(mockActiveModal, 'dismiss');
+      const spy = jest.spyOn(mockActiveModal, "dismiss");
 
       // WHEN
       comp.dismiss();

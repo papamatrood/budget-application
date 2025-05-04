@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideHttpClient } from "@angular/common/http";
+import { of } from "rxjs";
 
-import LogsComponent from './logs.component';
-import { LogsService } from './logs.service';
-import { Log, LoggersResponse } from './log.model';
+import LogsComponent from "./logs.component";
+import { LogsService } from "./logs.service";
+import { Log, LoggersResponse } from "./log.model";
 
-describe('LogsComponent', () => {
+describe("LogsComponent", () => {
   let comp: LogsComponent;
   let fixture: ComponentFixture<LogsComponent>;
   let service: LogsService;
@@ -17,7 +17,7 @@ describe('LogsComponent', () => {
       imports: [LogsComponent],
       providers: [provideHttpClient(), provideHttpClientTesting(), LogsService],
     })
-      .overrideTemplate(LogsComponent, '')
+      .overrideTemplate(LogsComponent, "")
       .compileComponents();
   }));
 
@@ -27,21 +27,21 @@ describe('LogsComponent', () => {
     service = TestBed.inject(LogsService);
   });
 
-  describe('OnInit', () => {
-    it('should set all default values correctly', () => {
-      expect(comp.filter()).toBe('');
-      expect(comp.sortState().predicate).toBe('name');
-      expect(comp.sortState().order).toBe('asc');
+  describe("OnInit", () => {
+    it("should set all default values correctly", () => {
+      expect(comp.filter()).toBe("");
+      expect(comp.sortState().predicate).toBe("name");
+      expect(comp.sortState().order).toBe("asc");
     });
 
-    it('should call load all on init', () => {
+    it("should call load all on init", () => {
       // GIVEN
-      const log = new Log('main', 'WARN');
-      jest.spyOn(service, 'findAll').mockReturnValue(
+      const log = new Log("main", "WARN");
+      jest.spyOn(service, "findAll").mockReturnValue(
         of({
           loggers: {
             main: {
-              effectiveLevel: 'WARN',
+              effectiveLevel: "WARN",
             },
           },
         } as unknown as LoggersResponse),
@@ -56,23 +56,23 @@ describe('LogsComponent', () => {
     });
   });
 
-  describe('change log level', () => {
-    it('should change log level correctly', () => {
+  describe("change log level", () => {
+    it("should change log level correctly", () => {
       // GIVEN
-      const log = new Log('main', 'ERROR');
-      jest.spyOn(service, 'changeLevel').mockReturnValue(of({}));
-      jest.spyOn(service, 'findAll').mockReturnValue(
+      const log = new Log("main", "ERROR");
+      jest.spyOn(service, "changeLevel").mockReturnValue(of({}));
+      jest.spyOn(service, "findAll").mockReturnValue(
         of({
           loggers: {
             main: {
-              effectiveLevel: 'ERROR',
+              effectiveLevel: "ERROR",
             },
           },
         } as unknown as LoggersResponse),
       );
 
       // WHEN
-      comp.changeLevel('main', 'ERROR');
+      comp.changeLevel("main", "ERROR");
 
       // THEN
       expect(service.changeLevel).toHaveBeenCalled();

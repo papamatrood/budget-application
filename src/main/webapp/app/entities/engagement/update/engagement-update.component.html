@@ -14,14 +14,30 @@
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.engagement.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.engagement.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
           </div>
         }
 
-        @let engagementNumberRef = editForm.get('engagementNumber')!;
+        @let engagementNumberRef = editForm.get("engagementNumber")!;
         <div class="mb-3">
-          <label class="form-label" for="field_engagementNumber" jhiTranslate="budgetApplicationApp.engagement.engagementNumber"
+          <label
+            class="form-label"
+            for="field_engagementNumber"
+            jhiTranslate="budgetApplicationApp.engagement.engagementNumber"
             >Engagement Number</label
           >
           <input
@@ -32,18 +48,28 @@
             data-cy="engagementNumber"
             formControlName="engagementNumber"
           />
-          @if (engagementNumberRef.invalid && (engagementNumberRef.dirty || engagementNumberRef.touched)) {
+          @if (
+            engagementNumberRef.invalid &&
+            (engagementNumberRef.dirty || engagementNumberRef.touched)
+          ) {
             <div>
-              @if (editForm.get('engagementNumber')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("engagementNumber")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
             </div>
           }
         </div>
 
-        @let engagementDateRef = editForm.get('engagementDate')!;
+        @let engagementDateRef = editForm.get("engagementDate")!;
         <div class="mb-3">
-          <label class="form-label" for="field_engagementDate" jhiTranslate="budgetApplicationApp.engagement.engagementDate"
+          <label
+            class="form-label"
+            for="field_engagementDate"
+            jhiTranslate="budgetApplicationApp.engagement.engagementDate"
             >Engagement Date</label
           >
           <div class="d-flex">
@@ -57,14 +83,23 @@
               placeholder="YYYY-MM-DD HH:mm"
             />
           </div>
-          @if (engagementDateRef.invalid && (engagementDateRef.dirty || engagementDateRef.touched)) {
+          @if (
+            engagementDateRef.invalid &&
+            (engagementDateRef.dirty || engagementDateRef.touched)
+          ) {
             <div>
-              @if (editForm.get('engagementDate')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("engagementDate")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
               <small
                 class="form-text text-danger"
-                [hidden]="!editForm.get('engagementDate')?.errors?.datetimelocal"
+                [hidden]="
+                  !editForm.get('engagementDate')?.errors?.datetimelocal
+                "
                 jhiTranslate="entity.validation.datetimelocal"
                 >Ce champ doit être une date et une heure.</small
               >
@@ -73,7 +108,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_objectOfExpense" jhiTranslate="budgetApplicationApp.engagement.objectOfExpense"
+          <label
+            class="form-label"
+            for="field_objectOfExpense"
+            jhiTranslate="budgetApplicationApp.engagement.objectOfExpense"
             >Object Of Expense</label
           >
           <input
@@ -87,7 +125,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_notifiedCredits" jhiTranslate="budgetApplicationApp.engagement.notifiedCredits"
+          <label
+            class="form-label"
+            for="field_notifiedCredits"
+            jhiTranslate="budgetApplicationApp.engagement.notifiedCredits"
             >Notified Credits</label
           >
           <input
@@ -101,7 +142,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_creditCommitted" jhiTranslate="budgetApplicationApp.engagement.creditCommitted"
+          <label
+            class="form-label"
+            for="field_creditCommitted"
+            jhiTranslate="budgetApplicationApp.engagement.creditCommitted"
             >Credit Committed</label
           >
           <input
@@ -115,7 +159,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_creditsAvailable" jhiTranslate="budgetApplicationApp.engagement.creditsAvailable"
+          <label
+            class="form-label"
+            for="field_creditsAvailable"
+            jhiTranslate="budgetApplicationApp.engagement.creditsAvailable"
             >Credits Available</label
           >
           <input
@@ -146,12 +193,27 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_headDaf" jhiTranslate="budgetApplicationApp.engagement.headDaf">Head Daf</label>
-          <input type="text" class="form-control" name="headDaf" id="field_headDaf" data-cy="headDaf" formControlName="headDaf" />
+          <label
+            class="form-label"
+            for="field_headDaf"
+            jhiTranslate="budgetApplicationApp.engagement.headDaf"
+            >Head Daf</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="headDaf"
+            id="field_headDaf"
+            data-cy="headDaf"
+            formControlName="headDaf"
+          />
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_financialController" jhiTranslate="budgetApplicationApp.engagement.financialController"
+          <label
+            class="form-label"
+            for="field_financialController"
+            jhiTranslate="budgetApplicationApp.engagement.financialController"
             >Financial Controller</label
           >
           <input
@@ -165,7 +227,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_generalManager" jhiTranslate="budgetApplicationApp.engagement.generalManager"
+          <label
+            class="form-label"
+            for="field_generalManager"
+            jhiTranslate="budgetApplicationApp.engagement.generalManager"
             >General Manager</label
           >
           <input
@@ -180,8 +245,17 @@
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
         </button>
 
         <button
@@ -191,7 +265,10 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
         </button>
       </div>
     </form>

@@ -4,4 +4,4 @@ export interface ISubTitle {
   designation?: string | null;
 }
 
-export type NewSubTitle = Omit<ISubTitle, 'id'> & { id: null };
+export type NewSubTitle = Omit<ISubTitle, "id"> & { id: null };

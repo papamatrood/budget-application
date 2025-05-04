@@ -1,14 +1,20 @@
-import { ElementRef, signal } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { ElementRef, signal } from "@angular/core";
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  inject,
+  tick,
+} from "@angular/core/testing";
+import { provideHttpClient } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { of, throwError } from "rxjs";
 
-import PasswordResetFinishComponent from './password-reset-finish.component';
-import { PasswordResetFinishService } from './password-reset-finish.service';
+import PasswordResetFinishComponent from "./password-reset-finish.component";
+import { PasswordResetFinishService } from "./password-reset-finish.service";
 
-describe('PasswordResetFinishComponent', () => {
+describe("PasswordResetFinishComponent", () => {
   let fixture: ComponentFixture<PasswordResetFinishComponent>;
   let comp: PasswordResetFinishComponent;
 
@@ -20,11 +26,11 @@ describe('PasswordResetFinishComponent', () => {
         FormBuilder,
         {
           provide: ActivatedRoute,
-          useValue: { queryParams: of({ key: 'XYZPDQ' }) },
+          useValue: { queryParams: of({ key: "XYZPDQ" }) },
         },
       ],
     })
-      .overrideTemplate(PasswordResetFinishComponent, '')
+      .overrideTemplate(PasswordResetFinishComponent, "")
       .createComponent(PasswordResetFinishComponent);
   });
 
@@ -34,12 +40,12 @@ describe('PasswordResetFinishComponent', () => {
     comp.ngOnInit();
   });
 
-  it('should define its initial state', () => {
+  it("should define its initial state", () => {
     expect(comp.initialized()).toBe(true);
-    expect(comp.key()).toEqual('XYZPDQ');
+    expect(comp.key()).toEqual("XYZPDQ");
   });
 
-  it('sets focus after the view has been initialized', () => {
+  it("sets focus after the view has been initialized", () => {
     const node = {
       focus: jest.fn(),
     };
@@ -50,10 +56,10 @@ describe('PasswordResetFinishComponent', () => {
     expect(node.focus).toHaveBeenCalled();
   });
 
-  it('should ensure the two passwords entered match', () => {
+  it("should ensure the two passwords entered match", () => {
     comp.passwordForm.patchValue({
-      newPassword: 'password',
-      confirmPassword: 'non-matching',
+      newPassword: "password",
+      confirmPassword: "non-matching",
     });
 
     comp.finishReset();
@@ -61,36 +67,36 @@ describe('PasswordResetFinishComponent', () => {
     expect(comp.doNotMatch()).toBe(true);
   });
 
-  it('should update success to true after resetting password', inject(
+  it("should update success to true after resetting password", inject(
     [PasswordResetFinishService],
     fakeAsync((service: PasswordResetFinishService) => {
-      jest.spyOn(service, 'save').mockReturnValue(of({}));
+      jest.spyOn(service, "save").mockReturnValue(of({}));
       comp.passwordForm.patchValue({
-        newPassword: 'password',
-        confirmPassword: 'password',
+        newPassword: "password",
+        confirmPassword: "password",
       });
 
       comp.finishReset();
       tick();
 
-      expect(service.save).toHaveBeenCalledWith('XYZPDQ', 'password');
+      expect(service.save).toHaveBeenCalledWith("XYZPDQ", "password");
       expect(comp.success()).toBe(true);
     }),
   ));
 
-  it('should notify of generic error', inject(
+  it("should notify of generic error", inject(
     [PasswordResetFinishService],
     fakeAsync((service: PasswordResetFinishService) => {
-      jest.spyOn(service, 'save').mockReturnValue(throwError(Error));
+      jest.spyOn(service, "save").mockReturnValue(throwError(Error));
       comp.passwordForm.patchValue({
-        newPassword: 'password',
-        confirmPassword: 'password',
+        newPassword: "password",
+        confirmPassword: "password",
       });
 
       comp.finishReset();
       tick();
 
-      expect(service.save).toHaveBeenCalledWith('XYZPDQ', 'password');
+      expect(service.save).toHaveBeenCalledWith("XYZPDQ", "password");
       expect(comp.success()).toBe(false);
       expect(comp.error()).toBe(true);
     }),

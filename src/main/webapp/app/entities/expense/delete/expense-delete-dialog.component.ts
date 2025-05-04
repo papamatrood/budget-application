@@ -1,14 +1,14 @@
-import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, inject } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
-import SharedModule from 'app/shared/shared.module';
-import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { IExpense } from '../expense.model';
-import { ExpenseService } from '../service/expense.service';
+import SharedModule from "app/shared/shared.module";
+import { ITEM_DELETED_EVENT } from "app/config/navigation.constants";
+import { IExpense } from "../expense.model";
+import { ExpenseService } from "../service/expense.service";
 
 @Component({
-  templateUrl: './expense-delete-dialog.component.html',
+  templateUrl: "./expense-delete-dialog.component.html",
   imports: [SharedModule, FormsModule],
 })
 export class ExpenseDeleteDialogComponent {

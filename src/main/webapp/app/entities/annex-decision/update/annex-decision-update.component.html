@@ -14,13 +14,29 @@
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.annexDecision.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.annexDecision.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
           </div>
         }
 
         <div class="mb-3">
-          <label class="form-label" for="field_designation" jhiTranslate="budgetApplicationApp.annexDecision.designation"
+          <label
+            class="form-label"
+            for="field_designation"
+            jhiTranslate="budgetApplicationApp.annexDecision.designation"
             >Designation</label
           >
           <input
@@ -34,7 +50,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_expenseAmount" jhiTranslate="budgetApplicationApp.annexDecision.expenseAmount"
+          <label
+            class="form-label"
+            for="field_expenseAmount"
+            jhiTranslate="budgetApplicationApp.annexDecision.expenseAmount"
             >Expense Amount</label
           >
           <input
@@ -48,7 +67,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_creditsAlreadyOpen" jhiTranslate="budgetApplicationApp.annexDecision.creditsAlreadyOpen"
+          <label
+            class="form-label"
+            for="field_creditsAlreadyOpen"
+            jhiTranslate="budgetApplicationApp.annexDecision.creditsAlreadyOpen"
             >Credits Already Open</label
           >
           <input
@@ -62,7 +84,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_creditsOpen" jhiTranslate="budgetApplicationApp.annexDecision.creditsOpen"
+          <label
+            class="form-label"
+            for="field_creditsOpen"
+            jhiTranslate="budgetApplicationApp.annexDecision.creditsOpen"
             >Credits Open</label
           >
           <input
@@ -76,7 +101,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_financialYear" jhiTranslate="budgetApplicationApp.annexDecision.financialYear"
+          <label
+            class="form-label"
+            for="field_financialYear"
+            jhiTranslate="budgetApplicationApp.annexDecision.financialYear"
             >Financial Year</label
           >
           <select
@@ -88,16 +116,30 @@
             [compareWith]="compareFinancialYear"
           >
             <option [ngValue]="null"></option>
-            @for (financialYearOption of financialYearsCollection; track $index) {
-              <option [ngValue]="financialYearOption">{{ financialYearOption.id }}</option>
+            @for (
+              financialYearOption of financialYearsCollection;
+              track $index
+            ) {
+              <option [ngValue]="financialYearOption">
+                {{ financialYearOption.id }}
+              </option>
             }
           </select>
         </div>
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
         </button>
 
         <button
@@ -107,7 +149,10 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
         </button>
       </div>
     </form>

@@ -1,11 +1,14 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideHttpClient } from '@angular/common/http';
+import { TestBed } from "@angular/core/testing";
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from "@angular/common/http/testing";
+import { provideHttpClient } from "@angular/common/http";
 
-import { MetricsService } from './metrics.service';
-import { ThreadDump, ThreadState } from './metrics.model';
+import { MetricsService } from "./metrics.service";
+import { ThreadDump, ThreadState } from "./metrics.model";
 
-describe('Logs Service', () => {
+describe("Logs Service", () => {
   let service: MetricsService;
   let httpMock: HttpTestingController;
 
@@ -21,12 +24,12 @@ describe('Logs Service', () => {
     httpMock.verify();
   });
 
-  describe('Service methods', () => {
-    it('should return Metrics', () => {
+  describe("Service methods", () => {
+    it("should return Metrics", () => {
       let expectedResult;
       const metrics = {
         jvm: {},
-        'http.server.requests': {},
+        "http.server.requests": {},
         cache: {},
         services: {},
         databases: {},
@@ -34,21 +37,21 @@ describe('Logs Service', () => {
         processMetrics: {},
       };
 
-      service.getMetrics().subscribe(received => {
+      service.getMetrics().subscribe((received) => {
         expectedResult = received;
       });
 
-      const req = httpMock.expectOne({ method: 'GET' });
+      const req = httpMock.expectOne({ method: "GET" });
       req.flush(metrics);
       expect(expectedResult).toEqual(metrics);
     });
 
-    it('should return Thread Dump', () => {
+    it("should return Thread Dump", () => {
       let expectedResult: ThreadDump | null = null;
       const dump: ThreadDump = {
         threads: [
           {
-            threadName: 'Reference Handler',
+            threadName: "Reference Handler",
             threadId: 2,
             blockedTime: -1,
             blockedCount: 7,
@@ -70,11 +73,11 @@ describe('Logs Service', () => {
         ],
       };
 
-      service.threadDump().subscribe(received => {
+      service.threadDump().subscribe((received) => {
         expectedResult = received;
       });
 
-      const req = httpMock.expectOne({ method: 'GET' });
+      const req = httpMock.expectOne({ method: "GET" });
       req.flush(dump);
       expect(expectedResult).toEqual(dump);
     });

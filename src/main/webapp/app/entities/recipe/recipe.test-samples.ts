@@ -1,4 +1,4 @@
-import { IRecipe, NewRecipe } from './recipe.model';
+import { IRecipe, NewRecipe } from "./recipe.model";
 
 export const sampleWithRequiredData: IRecipe = {
   id: 23791,
@@ -13,7 +13,7 @@ export const sampleWithFullData: IRecipe = {
   id: 29984,
   achievementsInThePastYear: 3436,
   newYearForecast: 8867,
-  category: 'INVESTMENT_EXPENSE',
+  category: "INVESTMENT_EXPENSE",
 };
 
 export const sampleWithNewData: NewRecipe = {

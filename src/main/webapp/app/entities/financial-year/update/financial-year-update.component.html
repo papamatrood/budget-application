@@ -14,19 +14,48 @@
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.financialYear.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.financialYear.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
           </div>
         }
 
-        @let theYearRef = editForm.get('theYear')!;
+        @let theYearRef = editForm.get("theYear")!;
         <div class="mb-3">
-          <label class="form-label" for="field_theYear" jhiTranslate="budgetApplicationApp.financialYear.theYear">The Year</label>
-          <input type="number" class="form-control" name="theYear" id="field_theYear" data-cy="theYear" formControlName="theYear" />
+          <label
+            class="form-label"
+            for="field_theYear"
+            jhiTranslate="budgetApplicationApp.financialYear.theYear"
+            >The Year</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="theYear"
+            id="field_theYear"
+            data-cy="theYear"
+            formControlName="theYear"
+          />
           @if (theYearRef.invalid && (theYearRef.dirty || theYearRef.touched)) {
             <div>
-              @if (editForm.get('theYear')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("theYear")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
               <small
                 class="form-text text-danger"
@@ -40,8 +69,17 @@
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
         </button>
 
         <button
@@ -51,7 +89,10 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
         </button>
       </div>
     </form>

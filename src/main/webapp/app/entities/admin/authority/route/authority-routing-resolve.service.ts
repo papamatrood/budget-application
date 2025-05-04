@@ -1,13 +1,15 @@
-import { inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRouteSnapshot, Router } from "@angular/router";
+import { EMPTY, Observable, of } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 
-import { IAuthority } from '../authority.model';
-import { AuthorityService } from '../service/authority.service';
+import { IAuthority } from "../authority.model";
+import { AuthorityService } from "../service/authority.service";
 
-const authorityResolve = (route: ActivatedRouteSnapshot): Observable<null | IAuthority> => {
+const authorityResolve = (
+  route: ActivatedRouteSnapshot,
+): Observable<null | IAuthority> => {
   const id = route.params.name;
   if (id) {
     return inject(AuthorityService)
@@ -17,7 +19,7 @@ const authorityResolve = (route: ActivatedRouteSnapshot): Observable<null | IAut
           if (authority.body) {
             return of(authority.body);
           }
-          inject(Router).navigate(['404']);
+          inject(Router).navigate(["404"]);
           return EMPTY;
         }),
       );

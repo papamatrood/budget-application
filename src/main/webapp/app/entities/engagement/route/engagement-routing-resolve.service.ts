@@ -1,13 +1,15 @@
-import { inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRouteSnapshot, Router } from "@angular/router";
+import { EMPTY, Observable, of } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 
-import { IEngagement } from '../engagement.model';
-import { EngagementService } from '../service/engagement.service';
+import { IEngagement } from "../engagement.model";
+import { EngagementService } from "../service/engagement.service";
 
-const engagementResolve = (route: ActivatedRouteSnapshot): Observable<null | IEngagement> => {
+const engagementResolve = (
+  route: ActivatedRouteSnapshot,
+): Observable<null | IEngagement> => {
   const id = route.params.id;
   if (id) {
     return inject(EngagementService)
@@ -17,7 +19,7 @@ const engagementResolve = (route: ActivatedRouteSnapshot): Observable<null | IEn
           if (engagement.body) {
             return of(engagement.body);
           }
-          inject(Router).navigate(['404']);
+          inject(Router).navigate(["404"]);
           return EMPTY;
         }),
       );

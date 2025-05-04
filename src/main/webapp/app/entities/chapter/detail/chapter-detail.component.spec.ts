@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { RouterTestingHarness } from "@angular/router/testing";
+import { of } from "rxjs";
 
-import { ChapterDetailComponent } from './chapter-detail.component';
+import { ChapterDetailComponent } from "./chapter-detail.component";
 
-describe('Chapter Management Detail Component', () => {
+describe("Chapter Management Detail Component", () => {
   let comp: ChapterDetailComponent;
   let fixture: ComponentFixture<ChapterDetailComponent>;
 
@@ -16,8 +16,11 @@ describe('Chapter Management Detail Component', () => {
         provideRouter(
           [
             {
-              path: '**',
-              loadComponent: () => import('./chapter-detail.component').then(m => m.ChapterDetailComponent),
+              path: "**",
+              loadComponent: () =>
+                import("./chapter-detail.component").then(
+                  (m) => m.ChapterDetailComponent,
+                ),
               resolve: { chapter: () => of({ id: 5578 }) },
             },
           ],
@@ -25,7 +28,7 @@ describe('Chapter Management Detail Component', () => {
         ),
       ],
     })
-      .overrideTemplate(ChapterDetailComponent, '')
+      .overrideTemplate(ChapterDetailComponent, "")
       .compileComponents();
   });
 
@@ -34,19 +37,19 @@ describe('Chapter Management Detail Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('OnInit', () => {
-    it('should load chapter on init', async () => {
+  describe("OnInit", () => {
+    it("should load chapter on init", async () => {
       const harness = await RouterTestingHarness.create();
-      const instance = await harness.navigateByUrl('/', ChapterDetailComponent);
+      const instance = await harness.navigateByUrl("/", ChapterDetailComponent);
 
       // THEN
       expect(instance.chapter()).toEqual(expect.objectContaining({ id: 5578 }));
     });
   });
 
-  describe('PreviousState', () => {
-    it('should navigate to previous state', () => {
-      jest.spyOn(window.history, 'back');
+  describe("PreviousState", () => {
+    it("should navigate to previous state", () => {
+      jest.spyOn(window.history, "back");
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
     });

@@ -2,7 +2,11 @@
   <div class="col-8">
     @if (engagement(); as engagementRef) {
       <div>
-        <h2 data-cy="engagementDetailsHeading"><span jhiTranslate="budgetApplicationApp.engagement.detail.title">Engagement</span></h2>
+        <h2 data-cy="engagementDetailsHeading">
+          <span jhiTranslate="budgetApplicationApp.engagement.detail.title"
+            >Engagement</span
+          >
+        </h2>
 
         <hr />
 
@@ -15,54 +19,115 @@
           <dd>
             <span>{{ engagementRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.engagementNumber">Engagement Number</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.engagement.engagementNumber"
+              >Engagement Number</span
+            >
+          </dt>
           <dd>
             <span>{{ engagementRef.engagementNumber }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.engagementDate">Engagement Date</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.engagement.engagementDate"
+              >Engagement Date</span
+            >
+          </dt>
           <dd>
-            <span>{{ engagementRef.engagementDate | formatMediumDatetime }}</span>
+            <span>{{
+              engagementRef.engagementDate | formatMediumDatetime
+            }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.objectOfExpense">Object Of Expense</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.engagement.objectOfExpense"
+              >Object Of Expense</span
+            >
+          </dt>
           <dd>
             <span>{{ engagementRef.objectOfExpense }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.notifiedCredits">Notified Credits</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.engagement.notifiedCredits"
+              >Notified Credits</span
+            >
+          </dt>
           <dd>
             <span>{{ engagementRef.notifiedCredits }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.creditCommitted">Credit Committed</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.engagement.creditCommitted"
+              >Credit Committed</span
+            >
+          </dt>
           <dd>
             <span>{{ engagementRef.creditCommitted }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.creditsAvailable">Credits Available</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.engagement.creditsAvailable"
+              >Credits Available</span
+            >
+          </dt>
           <dd>
             <span>{{ engagementRef.creditsAvailable }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.amountProposedCommitment">Amount Proposed Commitment</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.engagement.amountProposedCommitment"
+              >Amount Proposed Commitment</span
+            >
+          </dt>
           <dd>
             <span>{{ engagementRef.amountProposedCommitment }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.headDaf">Head Daf</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.engagement.headDaf"
+              >Head Daf</span
+            >
+          </dt>
           <dd>
             <span>{{ engagementRef.headDaf }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.financialController">Financial Controller</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.engagement.financialController"
+              >Financial Controller</span
+            >
+          </dt>
           <dd>
             <span>{{ engagementRef.financialController }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.engagement.generalManager">General Manager</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.engagement.generalManager"
+              >General Manager</span
+            >
+          </dt>
           <dd>
             <span>{{ engagementRef.generalManager }}</span>
           </dd>
         </dl>
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        <button
+          type="submit"
+          (click)="previousState()"
+          class="btn btn-info"
+          data-cy="entityDetailsBackButton"
+        >
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
         </button>
 
-        <button type="button" [routerLink]="['/engagement', engagementRef.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        <button
+          type="button"
+          [routerLink]="['/engagement', engagementRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.edit"
+            >Editer</span
+          >
         </button>
       </div>
     }

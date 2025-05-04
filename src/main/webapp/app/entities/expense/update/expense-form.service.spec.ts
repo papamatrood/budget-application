@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { sampleWithNewData, sampleWithRequiredData } from '../expense.test-samples';
+import {
+  sampleWithNewData,
+  sampleWithRequiredData,
+} from "../expense.test-samples";
 
-import { ExpenseFormService } from './expense-form.service';
+import { ExpenseFormService } from "./expense-form.service";
 
-describe('Expense Form Service', () => {
+describe("Expense Form Service", () => {
   let service: ExpenseFormService;
 
   beforeEach(() => {
@@ -12,9 +15,9 @@ describe('Expense Form Service', () => {
     service = TestBed.inject(ExpenseFormService);
   });
 
-  describe('Service methods', () => {
-    describe('createExpenseFormGroup', () => {
-      it('should create a new form with FormControl', () => {
+  describe("Service methods", () => {
+    describe("createExpenseFormGroup", () => {
+      it("should create a new form with FormControl", () => {
         const formGroup = service.createExpenseFormGroup();
 
         expect(formGroup.controls).toEqual(
@@ -30,8 +33,10 @@ describe('Expense Form Service', () => {
         );
       });
 
-      it('passing IExpense should create a new form with FormGroup', () => {
-        const formGroup = service.createExpenseFormGroup(sampleWithRequiredData);
+      it("passing IExpense should create a new form with FormGroup", () => {
+        const formGroup = service.createExpenseFormGroup(
+          sampleWithRequiredData,
+        );
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
@@ -47,8 +52,8 @@ describe('Expense Form Service', () => {
       });
     });
 
-    describe('getExpense', () => {
-      it('should return NewExpense for default Expense initial value', () => {
+    describe("getExpense", () => {
+      it("should return NewExpense for default Expense initial value", () => {
         const formGroup = service.createExpenseFormGroup(sampleWithNewData);
 
         const expense = service.getExpense(formGroup) as any;
@@ -56,7 +61,7 @@ describe('Expense Form Service', () => {
         expect(expense).toMatchObject(sampleWithNewData);
       });
 
-      it('should return NewExpense for empty Expense initial value', () => {
+      it("should return NewExpense for empty Expense initial value", () => {
         const formGroup = service.createExpenseFormGroup();
 
         const expense = service.getExpense(formGroup) as any;
@@ -64,8 +69,10 @@ describe('Expense Form Service', () => {
         expect(expense).toMatchObject({});
       });
 
-      it('should return IExpense', () => {
-        const formGroup = service.createExpenseFormGroup(sampleWithRequiredData);
+      it("should return IExpense", () => {
+        const formGroup = service.createExpenseFormGroup(
+          sampleWithRequiredData,
+        );
 
         const expense = service.getExpense(formGroup) as any;
 
@@ -73,8 +80,8 @@ describe('Expense Form Service', () => {
       });
     });
 
-    describe('resetForm', () => {
-      it('passing IExpense should not enable id FormControl', () => {
+    describe("resetForm", () => {
+      it("passing IExpense should not enable id FormControl", () => {
         const formGroup = service.createExpenseFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 
@@ -83,8 +90,10 @@ describe('Expense Form Service', () => {
         expect(formGroup.controls.id.disabled).toBe(true);
       });
 
-      it('passing NewExpense should disable id FormControl', () => {
-        const formGroup = service.createExpenseFormGroup(sampleWithRequiredData);
+      it("passing NewExpense should disable id FormControl", () => {
+        const formGroup = service.createExpenseFormGroup(
+          sampleWithRequiredData,
+        );
         expect(formGroup.controls.id.disabled).toBe(true);
 
         service.resetForm(formGroup, { id: null });

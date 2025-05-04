@@ -1,11 +1,19 @@
 <div>
   <h2 id="page-heading" data-cy="DecisionItemHeading">
-    <span jhiTranslate="budgetApplicationApp.decisionItem.home.title">DecisionItems</span>
+    <span jhiTranslate="budgetApplicationApp.decisionItem.home.title"
+      >DecisionItems</span
+    >
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
-        <span jhiTranslate="budgetApplicationApp.decisionItem.home.refreshListLabel">Actualiser la liste</span>
+        <fa-icon
+          icon="sync"
+          [animation]="isLoading ? 'spin' : undefined"
+        ></fa-icon>
+        <span
+          jhiTranslate="budgetApplicationApp.decisionItem.home.refreshListLabel"
+          >Actualiser la liste</span
+        >
       </button>
 
       <button
@@ -15,7 +23,9 @@
         [routerLink]="['/decision-item/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="budgetApplicationApp.decisionItem.home.createLabel">Créer un nouveau Decision Item</span>
+        <span jhiTranslate="budgetApplicationApp.decisionItem.home.createLabel"
+          >Créer un nouveau Decision Item</span
+        >
       </button>
     </div>
   </h2>
@@ -28,13 +38,19 @@
 
   @if (decisionItems().length === 0) {
     <div class="alert alert-warning" id="no-result">
-      <span jhiTranslate="budgetApplicationApp.decisionItem.home.notFound">Aucun Decision Item trouvé</span>
+      <span jhiTranslate="budgetApplicationApp.decisionItem.home.notFound"
+        >Aucun Decision Item trouvé</span
+      >
     </div>
   } @else {
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
-          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+          <tr
+            jhiSort
+            [(sortState)]="sortState"
+            (sortChange)="navigateToWithComponentValues($event)"
+          >
             <th scope="col" jhiSortBy="id">
               <div class="d-flex">
                 <span jhiTranslate="global.field.id">ID</span>
@@ -44,28 +60,38 @@
             </th>
             <th scope="col" jhiSortBy="beneficiary">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.decisionItem.beneficiary">Beneficiary</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.decisionItem.beneficiary"
+                  >Beneficiary</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="amount">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.decisionItem.amount">Amount</span>
+                <span jhiTranslate="budgetApplicationApp.decisionItem.amount"
+                  >Amount</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="observation">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.decisionItem.observation">Observation</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.decisionItem.observation"
+                  >Observation</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="decision.id">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.decisionItem.decision">Decision</span>
+                <span jhiTranslate="budgetApplicationApp.decisionItem.decision"
+                  >Decision</span
+                >
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -76,7 +102,9 @@
           @for (decisionItem of decisionItems(); track trackId(decisionItem)) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/decision-item', decisionItem.id, 'view']">{{ decisionItem.id }}</a>
+                <a [routerLink]="['/decision-item', decisionItem.id, 'view']">{{
+                  decisionItem.id
+                }}</a>
               </td>
               <td>{{ decisionItem.beneficiary }}</td>
               <td>{{ decisionItem.amount }}</td>
@@ -84,25 +112,57 @@
               <td>
                 @if (decisionItem.decision) {
                   <div>
-                    <a [routerLink]="['/decision', decisionItem.decision.id, 'view']">{{ decisionItem.decision.id }}</a>
+                    <a
+                      [routerLink]="[
+                        '/decision',
+                        decisionItem.decision.id,
+                        'view',
+                      ]"
+                      >{{ decisionItem.decision.id }}</a
+                    >
                   </div>
                 }
               </td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/decision-item', decisionItem.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    [routerLink]="['/decision-item', decisionItem.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.view"
+                      >Voir</span
+                    >
                   </a>
 
-                  <a [routerLink]="['/decision-item', decisionItem.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    [routerLink]="['/decision-item', decisionItem.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.edit"
+                      >Editer</span
+                    >
                   </a>
 
-                  <button type="submit" (click)="delete(decisionItem)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <button
+                    type="submit"
+                    (click)="delete(decisionItem)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
                     <fa-icon icon="times"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.delete"
+                      >Supprimer</span
+                    >
                   </button>
                 </div>
               </td>
@@ -115,7 +175,13 @@
   @if (decisionItems().length > 0) {
     <div>
       <div class="d-flex justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+        <jhi-item-count
+          [params]="{
+            page: page,
+            totalItems: totalItems,
+            itemsPerPage: itemsPerPage,
+          }"
+        />
       </div>
 
       <div class="d-flex justify-content-center">

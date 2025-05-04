@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ApplicationConfigService {
-  private endpointPrefix = '';
+  private endpointPrefix = "";
   private microfrontend = false;
 
   setEndpointPrefix(endpointPrefix: string): void {

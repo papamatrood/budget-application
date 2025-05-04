@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { sampleWithNewData, sampleWithRequiredData } from '../decision-item.test-samples';
+import {
+  sampleWithNewData,
+  sampleWithRequiredData,
+} from "../decision-item.test-samples";
 
-import { DecisionItemFormService } from './decision-item-form.service';
+import { DecisionItemFormService } from "./decision-item-form.service";
 
-describe('DecisionItem Form Service', () => {
+describe("DecisionItem Form Service", () => {
   let service: DecisionItemFormService;
 
   beforeEach(() => {
@@ -12,9 +15,9 @@ describe('DecisionItem Form Service', () => {
     service = TestBed.inject(DecisionItemFormService);
   });
 
-  describe('Service methods', () => {
-    describe('createDecisionItemFormGroup', () => {
-      it('should create a new form with FormControl', () => {
+  describe("Service methods", () => {
+    describe("createDecisionItemFormGroup", () => {
+      it("should create a new form with FormControl", () => {
         const formGroup = service.createDecisionItemFormGroup();
 
         expect(formGroup.controls).toEqual(
@@ -28,8 +31,10 @@ describe('DecisionItem Form Service', () => {
         );
       });
 
-      it('passing IDecisionItem should create a new form with FormGroup', () => {
-        const formGroup = service.createDecisionItemFormGroup(sampleWithRequiredData);
+      it("passing IDecisionItem should create a new form with FormGroup", () => {
+        const formGroup = service.createDecisionItemFormGroup(
+          sampleWithRequiredData,
+        );
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
@@ -43,16 +48,17 @@ describe('DecisionItem Form Service', () => {
       });
     });
 
-    describe('getDecisionItem', () => {
-      it('should return NewDecisionItem for default DecisionItem initial value', () => {
-        const formGroup = service.createDecisionItemFormGroup(sampleWithNewData);
+    describe("getDecisionItem", () => {
+      it("should return NewDecisionItem for default DecisionItem initial value", () => {
+        const formGroup =
+          service.createDecisionItemFormGroup(sampleWithNewData);
 
         const decisionItem = service.getDecisionItem(formGroup) as any;
 
         expect(decisionItem).toMatchObject(sampleWithNewData);
       });
 
-      it('should return NewDecisionItem for empty DecisionItem initial value', () => {
+      it("should return NewDecisionItem for empty DecisionItem initial value", () => {
         const formGroup = service.createDecisionItemFormGroup();
 
         const decisionItem = service.getDecisionItem(formGroup) as any;
@@ -60,8 +66,10 @@ describe('DecisionItem Form Service', () => {
         expect(decisionItem).toMatchObject({});
       });
 
-      it('should return IDecisionItem', () => {
-        const formGroup = service.createDecisionItemFormGroup(sampleWithRequiredData);
+      it("should return IDecisionItem", () => {
+        const formGroup = service.createDecisionItemFormGroup(
+          sampleWithRequiredData,
+        );
 
         const decisionItem = service.getDecisionItem(formGroup) as any;
 
@@ -69,8 +77,8 @@ describe('DecisionItem Form Service', () => {
       });
     });
 
-    describe('resetForm', () => {
-      it('passing IDecisionItem should not enable id FormControl', () => {
+    describe("resetForm", () => {
+      it("passing IDecisionItem should not enable id FormControl", () => {
         const formGroup = service.createDecisionItemFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 
@@ -79,8 +87,10 @@ describe('DecisionItem Form Service', () => {
         expect(formGroup.controls.id.disabled).toBe(true);
       });
 
-      it('passing NewDecisionItem should disable id FormControl', () => {
-        const formGroup = service.createDecisionItemFormGroup(sampleWithRequiredData);
+      it("passing NewDecisionItem should disable id FormControl", () => {
+        const formGroup = service.createDecisionItemFormGroup(
+          sampleWithRequiredData,
+        );
         expect(formGroup.controls.id.disabled).toBe(true);
 
         service.resetForm(formGroup, { id: null });

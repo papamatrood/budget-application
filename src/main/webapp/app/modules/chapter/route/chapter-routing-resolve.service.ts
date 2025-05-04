@@ -1,0 +1,30 @@
+import { inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRouteSnapshot, Router } from "@angular/router";
+import { EMPTY, Observable, of } from "rxjs";
+import { mergeMap } from "rxjs/operators";
+
+import { IChapter } from "app/entities/chapter/chapter.model";
+import { ChapterService } from "app/entities/chapter/service/chapter.service";
+
+const chapterResolve = (
+  route: ActivatedRouteSnapshot,
+): Observable<null | IChapter> => {
+  const id = route.params.id;
+  if (id) {
+    return inject(ChapterService)
+      .find(id)
+      .pipe(
+        mergeMap((chapter: HttpResponse<IChapter>) => {
+          if (chapter.body) {
+            return of(chapter.body);
+          }
+          inject(Router).navigate(["404"]);
+          return EMPTY;
+        }),
+      );
+  }
+  return of(null);
+};
+
+export default chapterResolve;

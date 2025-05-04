@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 
-import SharedModule from 'app/shared/shared.module';
-import { HttpServerRequests } from 'app/admin/metrics/metrics.model';
-import { filterNaN } from 'app/core/util/operators';
+import SharedModule from "app/shared/shared.module";
+import { HttpServerRequests } from "app/admin/metrics/metrics.model";
+import { filterNaN } from "app/core/util/operators";
 
 @Component({
-  selector: 'jhi-metrics-request',
-  templateUrl: './metrics-request.component.html',
+  selector: "jhi-metrics-request",
+  templateUrl: "./metrics-request.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SharedModule],
 })

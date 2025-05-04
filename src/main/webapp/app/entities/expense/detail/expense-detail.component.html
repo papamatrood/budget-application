@@ -2,7 +2,11 @@
   <div class="col-8">
     @if (expense(); as expenseRef) {
       <div>
-        <h2 data-cy="expenseDetailsHeading"><span jhiTranslate="budgetApplicationApp.expense.detail.title">Expense</span></h2>
+        <h2 data-cy="expenseDetailsHeading">
+          <span jhiTranslate="budgetApplicationApp.expense.detail.title"
+            >Expense</span
+          >
+        </h2>
 
         <hr />
 
@@ -15,59 +19,125 @@
           <dd>
             <span>{{ expenseRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.expense.achievementsInThePastYear">Achievements In The Past Year</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.expense.achievementsInThePastYear"
+              >Achievements In The Past Year</span
+            >
+          </dt>
           <dd>
             <span>{{ expenseRef.achievementsInThePastYear }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.expense.newYearForecast">New Year Forecast</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.expense.newYearForecast"
+              >New Year Forecast</span
+            >
+          </dt>
           <dd>
             <span>{{ expenseRef.newYearForecast }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.expense.category">Category</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.expense.category"
+              >Category</span
+            >
+          </dt>
           <dd>
-            <span [jhiTranslate]="'budgetApplicationApp.FinancialCategoryEnum.' + (expenseRef.category ?? 'null')">{{
-              {
-                null: '',
-                OPERATING_RECIPE: 'OPERATING_RECIPE',
-                INVESTMENT_RECIPE: 'INVESTMENT_RECIPE',
-                OPERATING_EXPENSE: 'OPERATING_EXPENSE',
-                INVESTMENT_EXPENSE: 'INVESTMENT_EXPENSE',
-              }[expenseRef.category ?? 'null']
-            }}</span>
+            <span
+              [jhiTranslate]="
+                'budgetApplicationApp.FinancialCategoryEnum.' +
+                (expenseRef.category ?? 'null')
+              "
+              >{{
+                {
+                  null: "",
+                  OPERATING_RECIPE: "OPERATING_RECIPE",
+                  INVESTMENT_RECIPE: "INVESTMENT_RECIPE",
+                  OPERATING_EXPENSE: "OPERATING_EXPENSE",
+                  INVESTMENT_EXPENSE: "INVESTMENT_EXPENSE",
+                }[expenseRef.category ?? "null"]
+              }}</span
+            >
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.expense.financialYear">Financial Year</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.expense.financialYear"
+              >Financial Year</span
+            >
+          </dt>
           <dd>
             @if (expense()!.financialYear) {
               <div>
-                <a [routerLink]="['/financial-year', expense()!.financialYear?.id, 'view']">{{ expenseRef.financialYear?.id }}</a>
+                <a
+                  [routerLink]="[
+                    '/financial-year',
+                    expense()!.financialYear?.id,
+                    'view',
+                  ]"
+                  >{{ expenseRef.financialYear?.id }}</a
+                >
               </div>
             }
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.expense.annexDecision">Annex Decision</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.expense.annexDecision"
+              >Annex Decision</span
+            >
+          </dt>
           <dd>
             @if (expense()!.annexDecision) {
               <div>
-                <a [routerLink]="['/annex-decision', expense()!.annexDecision?.id, 'view']">{{ expenseRef.annexDecision?.id }}</a>
+                <a
+                  [routerLink]="[
+                    '/annex-decision',
+                    expense()!.annexDecision?.id,
+                    'view',
+                  ]"
+                  >{{ expenseRef.annexDecision?.id }}</a
+                >
               </div>
             }
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.expense.article">Article</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.expense.article"
+              >Article</span
+            >
+          </dt>
           <dd>
-            @for (article of expenseRef.articles; track $index; let last = $last) {
+            @for (
+              article of expenseRef.articles;
+              track $index;
+              let last = $last
+            ) {
               <span>
-                <a [routerLink]="['/article', article.id, 'view']">{{ article?.id }}</a
-                >{{ last ? '' : ', ' }}
+                <a [routerLink]="['/article', article.id, 'view']">{{
+                  article?.id
+                }}</a
+                >{{ last ? "" : ", " }}
               </span>
             }
           </dd>
         </dl>
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        <button
+          type="submit"
+          (click)="previousState()"
+          class="btn btn-info"
+          data-cy="entityDetailsBackButton"
+        >
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
         </button>
 
-        <button type="button" [routerLink]="['/expense', expenseRef.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        <button
+          type="button"
+          [routerLink]="['/expense', expenseRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.edit"
+            >Editer</span
+          >
         </button>
       </div>
     }

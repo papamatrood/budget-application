@@ -1,25 +1,61 @@
-import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
-import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, NgZone, OnInit, inject, signal } from "@angular/core";
+import { HttpHeaders } from "@angular/common/http";
+import {
+  ActivatedRoute,
+  Data,
+  ParamMap,
+  Router,
+  RouterModule,
+} from "@angular/router";
+import { Observable, Subscription, combineLatest, filter, tap } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
-import SharedModule from 'app/shared/shared.module';
-import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { ItemCountComponent } from 'app/shared/pagination';
-import { FormsModule } from '@angular/forms';
-import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
-import { FilterComponent, FilterOptions, IFilterOption, IFilterOptions } from 'app/shared/filter';
-import { IDecisionItem } from '../decision-item.model';
+import SharedModule from "app/shared/shared.module";
+import {
+  SortByDirective,
+  SortDirective,
+  SortService,
+  type SortState,
+  sortStateSignal,
+} from "app/shared/sort";
+import { ItemCountComponent } from "app/shared/pagination";
+import { FormsModule } from "@angular/forms";
+import {
+  ITEMS_PER_PAGE,
+  PAGE_HEADER,
+  TOTAL_COUNT_RESPONSE_HEADER,
+} from "app/config/pagination.constants";
+import {
+  DEFAULT_SORT_DATA,
+  ITEM_DELETED_EVENT,
+  SORT,
+} from "app/config/navigation.constants";
+import {
+  FilterComponent,
+  FilterOptions,
+  IFilterOption,
+  IFilterOptions,
+} from "app/shared/filter";
+import { IDecisionItem } from "../decision-item.model";
 
-import { DecisionItemService, EntityArrayResponseType } from '../service/decision-item.service';
-import { DecisionItemDeleteDialogComponent } from '../delete/decision-item-delete-dialog.component';
+import {
+  DecisionItemService,
+  EntityArrayResponseType,
+} from "../service/decision-item.service";
+import { DecisionItemDeleteDialogComponent } from "../delete/decision-item-delete-dialog.component";
 
 @Component({
-  selector: 'jhi-decision-item',
-  templateUrl: './decision-item.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, FilterComponent, ItemCountComponent],
+  selector: "jhi-decision-item",
+  templateUrl: "./decision-item.component.html",
+  imports: [
+    RouterModule,
+    FormsModule,
+    SharedModule,
+    SortDirective,
+    SortByDirective,
+    FilterComponent,
+    ItemCountComponent,
+  ],
 })
 export class DecisionItemComponent implements OnInit {
   subscription: Subscription | null = null;
@@ -40,26 +76,37 @@ export class DecisionItemComponent implements OnInit {
   protected modalService = inject(NgbModal);
   protected ngZone = inject(NgZone);
 
-  trackId = (item: IDecisionItem): number => this.decisionItemService.getDecisionItemIdentifier(item);
+  trackId = (item: IDecisionItem): number =>
+    this.decisionItemService.getDecisionItemIdentifier(item);
 
   ngOnInit(): void {
-    this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
+    this.subscription = combineLatest([
+      this.activatedRoute.queryParamMap,
+      this.activatedRoute.data,
+    ])
       .pipe(
-        tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
+        tap(([params, data]) =>
+          this.fillComponentAttributeFromRoute(params, data),
+        ),
         tap(() => this.load()),
       )
       .subscribe();
 
-    this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.sortState(), filterOptions));
+    this.filters.filterChanges.subscribe((filterOptions) =>
+      this.handleNavigation(1, this.sortState(), filterOptions),
+    );
   }
 
   delete(decisionItem: IDecisionItem): void {
-    const modalRef = this.modalService.open(DecisionItemDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(DecisionItemDeleteDialogComponent, {
+      size: "lg",
+      backdrop: "static",
+    });
     modalRef.componentInstance.decisionItem = decisionItem;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed
       .pipe(
-        filter(reason => reason === ITEM_DELETED_EVENT),
+        filter((reason) => reason === ITEM_DELETED_EVENT),
         tap(() => this.load()),
       )
       .subscribe();
@@ -81,24 +128,37 @@ export class DecisionItemComponent implements OnInit {
     this.handleNavigation(page, this.sortState(), this.filters.filterOptions);
   }
 
-  protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
+  protected fillComponentAttributeFromRoute(
+    params: ParamMap,
+    data: Data,
+  ): void {
     const page = params.get(PAGE_HEADER);
     this.page = +(page ?? 1);
-    this.sortState.set(this.sortService.parseSortParam(params.get(SORT) ?? data[DEFAULT_SORT_DATA]));
+    this.sortState.set(
+      this.sortService.parseSortParam(
+        params.get(SORT) ?? data[DEFAULT_SORT_DATA],
+      ),
+    );
     this.filters.initializeFromParams(params);
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
-    const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
+    const dataFromBody = this.fillComponentAttributesFromResponseBody(
+      response.body,
+    );
     this.decisionItems.set(dataFromBody);
   }
 
-  protected fillComponentAttributesFromResponseBody(data: IDecisionItem[] | null): IDecisionItem[] {
+  protected fillComponentAttributesFromResponseBody(
+    data: IDecisionItem[] | null,
+  ): IDecisionItem[] {
     return data ?? [];
   }
 
-  protected fillComponentAttributesFromResponseHeader(headers: HttpHeaders): void {
+  protected fillComponentAttributesFromResponseHeader(
+    headers: HttpHeaders,
+  ): void {
     this.totalItems = Number(headers.get(TOTAL_COUNT_RESPONSE_HEADER));
   }
 
@@ -112,25 +172,31 @@ export class DecisionItemComponent implements OnInit {
       size: this.itemsPerPage,
       sort: this.sortService.buildSortParam(this.sortState()),
     };
-    filters.filterOptions.forEach(filterOption => {
+    filters.filterOptions.forEach((filterOption) => {
       queryObject[filterOption.name] = filterOption.values;
     });
-    return this.decisionItemService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    return this.decisionItemService
+      .query(queryObject)
+      .pipe(tap(() => (this.isLoading = false)));
   }
 
-  protected handleNavigation(page: number, sortState: SortState, filterOptions?: IFilterOption[]): void {
+  protected handleNavigation(
+    page: number,
+    sortState: SortState,
+    filterOptions?: IFilterOption[],
+  ): void {
     const queryParamsObj: any = {
       page,
       size: this.itemsPerPage,
       sort: this.sortService.buildSortParam(sortState),
     };
 
-    filterOptions?.forEach(filterOption => {
+    filterOptions?.forEach((filterOption) => {
       queryParamsObj[filterOption.nameAsQueryParam()] = filterOption.values;
     });
 
     this.ngZone.run(() => {
-      this.router.navigate(['./'], {
+      this.router.navigate(["./"], {
         relativeTo: this.activatedRoute,
         queryParams: queryParamsObj,
       });

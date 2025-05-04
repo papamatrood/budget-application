@@ -1,13 +1,13 @@
-import { Component, computed, inject, input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, computed, inject, input } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
-import SharedModule from 'app/shared/shared.module';
-import { Thread, ThreadState } from 'app/admin/metrics/metrics.model';
-import { MetricsModalThreadsComponent } from '../metrics-modal-threads/metrics-modal-threads.component';
+import SharedModule from "app/shared/shared.module";
+import { Thread, ThreadState } from "app/admin/metrics/metrics.model";
+import { MetricsModalThreadsComponent } from "../metrics-modal-threads/metrics-modal-threads.component";
 
 @Component({
-  selector: 'jhi-jvm-threads',
-  templateUrl: './jvm-threads.component.html',
+  selector: "jhi-jvm-threads",
+  templateUrl: "./jvm-threads.component.html",
   imports: [SharedModule],
 })
 export class JvmThreadsComponent {
@@ -22,7 +22,7 @@ export class JvmThreadsComponent {
       threadDumpBlocked: 0,
     };
 
-    this.threads()?.forEach(thread => {
+    this.threads()?.forEach((thread) => {
       if (thread.threadState === ThreadState.Runnable) {
         stats.threadDumpRunnable += 1;
       } else if (thread.threadState === ThreadState.Waiting) {
@@ -34,7 +34,11 @@ export class JvmThreadsComponent {
       }
     });
 
-    stats.threadDumpAll = stats.threadDumpRunnable + stats.threadDumpWaiting + stats.threadDumpTimedWaiting + stats.threadDumpBlocked;
+    stats.threadDumpAll =
+      stats.threadDumpRunnable +
+      stats.threadDumpWaiting +
+      stats.threadDumpTimedWaiting +
+      stats.threadDumpBlocked;
 
     return stats;
   });

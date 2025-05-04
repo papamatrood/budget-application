@@ -14,14 +14,30 @@
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.purchaseOrder.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.purchaseOrder.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
           </div>
         }
 
-        @let nameOfTheMinistryRef = editForm.get('nameOfTheMinistry')!;
+        @let nameOfTheMinistryRef = editForm.get("nameOfTheMinistry")!;
         <div class="mb-3">
-          <label class="form-label" for="field_nameOfTheMinistry" jhiTranslate="budgetApplicationApp.purchaseOrder.nameOfTheMinistry"
+          <label
+            class="form-label"
+            for="field_nameOfTheMinistry"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.nameOfTheMinistry"
             >Name Of The Ministry</label
           >
           <input
@@ -32,18 +48,28 @@
             data-cy="nameOfTheMinistry"
             formControlName="nameOfTheMinistry"
           />
-          @if (nameOfTheMinistryRef.invalid && (nameOfTheMinistryRef.dirty || nameOfTheMinistryRef.touched)) {
+          @if (
+            nameOfTheMinistryRef.invalid &&
+            (nameOfTheMinistryRef.dirty || nameOfTheMinistryRef.touched)
+          ) {
             <div>
-              @if (editForm.get('nameOfTheMinistry')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("nameOfTheMinistry")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
             </div>
           }
         </div>
 
-        @let orderNumberRef = editForm.get('orderNumber')!;
+        @let orderNumberRef = editForm.get("orderNumber")!;
         <div class="mb-3">
-          <label class="form-label" for="field_orderNumber" jhiTranslate="budgetApplicationApp.purchaseOrder.orderNumber"
+          <label
+            class="form-label"
+            for="field_orderNumber"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.orderNumber"
             >Order Number</label
           >
           <input
@@ -54,18 +80,30 @@
             data-cy="orderNumber"
             formControlName="orderNumber"
           />
-          @if (orderNumberRef.invalid && (orderNumberRef.dirty || orderNumberRef.touched)) {
+          @if (
+            orderNumberRef.invalid &&
+            (orderNumberRef.dirty || orderNumberRef.touched)
+          ) {
             <div>
-              @if (editForm.get('orderNumber')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("orderNumber")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
             </div>
           }
         </div>
 
-        @let orderDateRef = editForm.get('orderDate')!;
+        @let orderDateRef = editForm.get("orderDate")!;
         <div class="mb-3">
-          <label class="form-label" for="field_orderDate" jhiTranslate="budgetApplicationApp.purchaseOrder.orderDate">Order Date</label>
+          <label
+            class="form-label"
+            for="field_orderDate"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.orderDate"
+            >Order Date</label
+          >
           <div class="d-flex">
             <input
               id="field_orderDate"
@@ -77,10 +115,16 @@
               placeholder="YYYY-MM-DD HH:mm"
             />
           </div>
-          @if (orderDateRef.invalid && (orderDateRef.dirty || orderDateRef.touched)) {
+          @if (
+            orderDateRef.invalid && (orderDateRef.dirty || orderDateRef.touched)
+          ) {
             <div>
-              @if (editForm.get('orderDate')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("orderDate")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
               <small
                 class="form-text text-danger"
@@ -110,12 +154,27 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_taxRate" jhiTranslate="budgetApplicationApp.purchaseOrder.taxRate">Tax Rate</label>
-          <input type="number" class="form-control" name="taxRate" id="field_taxRate" data-cy="taxRate" formControlName="taxRate" />
+          <label
+            class="form-label"
+            for="field_taxRate"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.taxRate"
+            >Tax Rate</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="taxRate"
+            id="field_taxRate"
+            data-cy="taxRate"
+            formControlName="taxRate"
+          />
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_totalTaxAmount" jhiTranslate="budgetApplicationApp.purchaseOrder.totalTaxAmount"
+          <label
+            class="form-label"
+            for="field_totalTaxAmount"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.totalTaxAmount"
             >Total Tax Amount</label
           >
           <input
@@ -129,7 +188,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_prepaidTaxAmount" jhiTranslate="budgetApplicationApp.purchaseOrder.prepaidTaxAmount"
+          <label
+            class="form-label"
+            for="field_prepaidTaxAmount"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.prepaidTaxAmount"
             >Prepaid Tax Amount</label
           >
           <input
@@ -143,7 +205,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_totalAmountWithTax" jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithTax"
+          <label
+            class="form-label"
+            for="field_totalAmountWithTax"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.totalAmountWithTax"
             >Total Amount With Tax</label
           >
           <input
@@ -174,7 +239,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_allocatedCredits" jhiTranslate="budgetApplicationApp.purchaseOrder.allocatedCredits"
+          <label
+            class="form-label"
+            for="field_allocatedCredits"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.allocatedCredits"
             >Allocated Credits</label
           >
           <input
@@ -205,7 +273,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_availableBalance" jhiTranslate="budgetApplicationApp.purchaseOrder.availableBalance"
+          <label
+            class="form-label"
+            for="field_availableBalance"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.availableBalance"
             >Available Balance</label
           >
           <input
@@ -219,7 +290,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_annexDecision" jhiTranslate="budgetApplicationApp.purchaseOrder.annexDecision"
+          <label
+            class="form-label"
+            for="field_annexDecision"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.annexDecision"
             >Annex Decision</label
           >
           <select
@@ -231,14 +305,24 @@
             [compareWith]="compareAnnexDecision"
           >
             <option [ngValue]="null"></option>
-            @for (annexDecisionOption of annexDecisionsSharedCollection; track $index) {
-              <option [ngValue]="annexDecisionOption">{{ annexDecisionOption.id }}</option>
+            @for (
+              annexDecisionOption of annexDecisionsSharedCollection;
+              track $index
+            ) {
+              <option [ngValue]="annexDecisionOption">
+                {{ annexDecisionOption.id }}
+              </option>
             }
           </select>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_supplier" jhiTranslate="budgetApplicationApp.purchaseOrder.supplier">Supplier</label>
+          <label
+            class="form-label"
+            for="field_supplier"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.supplier"
+            >Supplier</label
+          >
           <select
             class="form-control"
             id="field_supplier"
@@ -249,13 +333,20 @@
           >
             <option [ngValue]="null"></option>
             @for (supplierOption of suppliersSharedCollection; track $index) {
-              <option [ngValue]="supplierOption">{{ supplierOption.id }}</option>
+              <option [ngValue]="supplierOption">
+                {{ supplierOption.id }}
+              </option>
             }
           </select>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_engagement" jhiTranslate="budgetApplicationApp.purchaseOrder.engagement">Engagement</label>
+          <label
+            class="form-label"
+            for="field_engagement"
+            jhiTranslate="budgetApplicationApp.purchaseOrder.engagement"
+            >Engagement</label
+          >
           <select
             class="form-control"
             id="field_engagement"
@@ -265,16 +356,30 @@
             [compareWith]="compareEngagement"
           >
             <option [ngValue]="null"></option>
-            @for (engagementOption of engagementsSharedCollection; track $index) {
-              <option [ngValue]="engagementOption">{{ engagementOption.id }}</option>
+            @for (
+              engagementOption of engagementsSharedCollection;
+              track $index
+            ) {
+              <option [ngValue]="engagementOption">
+                {{ engagementOption.id }}
+              </option>
             }
           </select>
         </div>
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
         </button>
 
         <button
@@ -284,7 +389,10 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
         </button>
       </div>
     </form>

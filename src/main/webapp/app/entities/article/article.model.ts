@@ -1,7 +1,7 @@
-import { IChapter } from 'app/entities/chapter/chapter.model';
-import { IRecipe } from 'app/entities/recipe/recipe.model';
-import { IExpense } from 'app/entities/expense/expense.model';
-import { FinancialCategoryEnum } from 'app/entities/enumerations/financial-category-enum.model';
+import { IChapter } from "app/entities/chapter/chapter.model";
+import { IRecipe } from "app/entities/recipe/recipe.model";
+import { IExpense } from "app/entities/expense/expense.model";
+import { FinancialCategoryEnum } from "app/entities/enumerations/financial-category-enum.model";
 
 export interface IArticle {
   id: number;
@@ -16,4 +16,4 @@ export interface IArticle {
   expenses?: IExpense[] | null;
 }
 
-export type NewArticle = Omit<IArticle, 'id'> & { id: null };
+export type NewArticle = Omit<IArticle, "id"> & { id: null };

@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { sampleWithNewData, sampleWithRequiredData } from '../article.test-samples';
+import {
+  sampleWithNewData,
+  sampleWithRequiredData,
+} from "../article.test-samples";
 
-import { ArticleFormService } from './article-form.service';
+import { ArticleFormService } from "./article-form.service";
 
-describe('Article Form Service', () => {
+describe("Article Form Service", () => {
   let service: ArticleFormService;
 
   beforeEach(() => {
@@ -12,9 +15,9 @@ describe('Article Form Service', () => {
     service = TestBed.inject(ArticleFormService);
   });
 
-  describe('Service methods', () => {
-    describe('createArticleFormGroup', () => {
-      it('should create a new form with FormControl', () => {
+  describe("Service methods", () => {
+    describe("createArticleFormGroup", () => {
+      it("should create a new form with FormControl", () => {
         const formGroup = service.createArticleFormGroup();
 
         expect(formGroup.controls).toEqual(
@@ -33,8 +36,10 @@ describe('Article Form Service', () => {
         );
       });
 
-      it('passing IArticle should create a new form with FormGroup', () => {
-        const formGroup = service.createArticleFormGroup(sampleWithRequiredData);
+      it("passing IArticle should create a new form with FormGroup", () => {
+        const formGroup = service.createArticleFormGroup(
+          sampleWithRequiredData,
+        );
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
@@ -53,8 +58,8 @@ describe('Article Form Service', () => {
       });
     });
 
-    describe('getArticle', () => {
-      it('should return NewArticle for default Article initial value', () => {
+    describe("getArticle", () => {
+      it("should return NewArticle for default Article initial value", () => {
         const formGroup = service.createArticleFormGroup(sampleWithNewData);
 
         const article = service.getArticle(formGroup) as any;
@@ -62,7 +67,7 @@ describe('Article Form Service', () => {
         expect(article).toMatchObject(sampleWithNewData);
       });
 
-      it('should return NewArticle for empty Article initial value', () => {
+      it("should return NewArticle for empty Article initial value", () => {
         const formGroup = service.createArticleFormGroup();
 
         const article = service.getArticle(formGroup) as any;
@@ -70,8 +75,10 @@ describe('Article Form Service', () => {
         expect(article).toMatchObject({});
       });
 
-      it('should return IArticle', () => {
-        const formGroup = service.createArticleFormGroup(sampleWithRequiredData);
+      it("should return IArticle", () => {
+        const formGroup = service.createArticleFormGroup(
+          sampleWithRequiredData,
+        );
 
         const article = service.getArticle(formGroup) as any;
 
@@ -79,8 +86,8 @@ describe('Article Form Service', () => {
       });
     });
 
-    describe('resetForm', () => {
-      it('passing IArticle should not enable id FormControl', () => {
+    describe("resetForm", () => {
+      it("passing IArticle should not enable id FormControl", () => {
         const formGroup = service.createArticleFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 
@@ -89,8 +96,10 @@ describe('Article Form Service', () => {
         expect(formGroup.controls.id.disabled).toBe(true);
       });
 
-      it('passing NewArticle should disable id FormControl', () => {
-        const formGroup = service.createArticleFormGroup(sampleWithRequiredData);
+      it("passing NewArticle should disable id FormControl", () => {
+        const formGroup = service.createArticleFormGroup(
+          sampleWithRequiredData,
+        );
         expect(formGroup.controls.id.disabled).toBe(true);
 
         service.resetForm(formGroup, { id: null });

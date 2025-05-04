@@ -1,14 +1,14 @@
-import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, inject } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
-import SharedModule from 'app/shared/shared.module';
-import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { IPurchaseOrderItem } from '../purchase-order-item.model';
-import { PurchaseOrderItemService } from '../service/purchase-order-item.service';
+import SharedModule from "app/shared/shared.module";
+import { ITEM_DELETED_EVENT } from "app/config/navigation.constants";
+import { IPurchaseOrderItem } from "../purchase-order-item.model";
+import { PurchaseOrderItemService } from "../service/purchase-order-item.service";
 
 @Component({
-  templateUrl: './purchase-order-item-delete-dialog.component.html',
+  templateUrl: "./purchase-order-item-delete-dialog.component.html",
   imports: [SharedModule, FormsModule],
 })
 export class PurchaseOrderItemDeleteDialogComponent {

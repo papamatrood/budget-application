@@ -2,10 +2,14 @@
   "budgetApplicationApp": {
     "FinancialCategoryEnum": {
       "null": "",
-      "OPERATING_RECIPE": "OPERATING_RECIPE",
-      "INVESTMENT_RECIPE": "INVESTMENT_RECIPE",
-      "OPERATING_EXPENSE": "OPERATING_EXPENSE",
-      "INVESTMENT_EXPENSE": "INVESTMENT_EXPENSE"
+      "OPERATING_RECIPE": "Operating recipe",
+      "INVESTMENT_RECIPE": "Investment recipe",
+      "OPERATING_EXPENSE": "Operating expense",
+      "INVESTMENT_EXPENSE": "Investment expense",
+      "group": {
+        "RECIPES": "RECIPES",
+        "EXPENSES": "EXPENSES"
+      }
     }
   }
 }

@@ -1,19 +1,38 @@
 @if (allBeans()) {
   <div>
-    <h2 id="configuration-page-heading" data-cy="configurationPageHeading" jhiTranslate="configuration.title">Configuration</h2>
+    <h2
+      id="configuration-page-heading"
+      data-cy="configurationPageHeading"
+      jhiTranslate="configuration.title"
+    >
+      Configuration
+    </h2>
 
     <span jhiTranslate="configuration.filter">Filtrer (par préfixe)</span>
-    <input type="text" [ngModel]="beansFilter()" (ngModelChange)="beansFilter.set($event)" class="form-control" />
+    <input
+      type="text"
+      [ngModel]="beansFilter()"
+      (ngModelChange)="beansFilter.set($event)"
+      class="form-control"
+    />
 
     <h3 id="spring-configuration">Spring configuration</h3>
 
-    <table class="table table-striped table-bordered table-responsive d-table" aria-describedby="spring-configuration">
+    <table
+      class="table table-striped table-bordered table-responsive d-table"
+      aria-describedby="spring-configuration"
+    >
       <thead>
         <tr jhiSort [(sortState)]="sortState">
           <th jhiSortBy="prefix" scope="col" class="w-40">
-            <span jhiTranslate="configuration.table.prefix">Préfixe</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="configuration.table.prefix">Préfixe</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" class="w-60"><span jhiTranslate="configuration.table.properties">Propriétés</span></th>
+          <th scope="col" class="w-60">
+            <span jhiTranslate="configuration.table.properties"
+              >Propriétés</span
+            >
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -23,11 +42,16 @@
               <span>{{ bean.prefix }}</span>
             </td>
             <td>
-              @for (property of bean.properties | keyvalue; track property.key) {
+              @for (
+                property of bean.properties | keyvalue;
+                track property.key
+              ) {
                 <div class="row">
                   <div class="col-md-4">{{ property.key }}</div>
                   <div class="col-md-8">
-                    <span class="float-end bg-secondary break">{{ property.value | json }}</span>
+                    <span class="float-end bg-secondary break">{{
+                      property.value | json
+                    }}</span>
                   </div>
                 </div>
               }
@@ -54,11 +78,16 @@
             </tr>
           </thead>
           <tbody>
-            @for (property of propertySource.properties | keyvalue; track property.key) {
+            @for (
+              property of propertySource.properties | keyvalue;
+              track property.key
+            ) {
               <tr>
                 <td class="break">{{ property.key }}</td>
                 <td class="break">
-                  <span class="float-end bg-secondary break">{{ property.value.value }}</span>
+                  <span class="float-end bg-secondary break">{{
+                    property.value.value
+                  }}</span>
                 </td>
               </tr>
             }

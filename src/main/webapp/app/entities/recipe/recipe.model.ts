@@ -1,6 +1,6 @@
-import { IFinancialYear } from 'app/entities/financial-year/financial-year.model';
-import { IArticle } from 'app/entities/article/article.model';
-import { FinancialCategoryEnum } from 'app/entities/enumerations/financial-category-enum.model';
+import { IFinancialYear } from "app/entities/financial-year/financial-year.model";
+import { IArticle } from "app/entities/article/article.model";
+import { FinancialCategoryEnum } from "app/entities/enumerations/financial-category-enum.model";
 
 export interface IRecipe {
   id: number;
@@ -11,4 +11,4 @@ export interface IRecipe {
   articles?: IArticle[] | null;
 }
 
-export type NewRecipe = Omit<IRecipe, 'id'> & { id: null };
+export type NewRecipe = Omit<IRecipe, "id"> & { id: null };

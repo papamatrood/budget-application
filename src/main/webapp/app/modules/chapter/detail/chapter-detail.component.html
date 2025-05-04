@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (chapter(); as chapterRef) {
+      <div>
+        <h2 data-cy="chapterDetailsHeading">
+          <span jhiTranslate="budgetApplicationApp.chapter.detail.title"
+            >Chapter</span
+          >
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ chapterRef.id }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.chapter.code">Code</span>
+          </dt>
+          <dd>
+            <span>{{ chapterRef.code }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.chapter.designation"
+              >Designation</span
+            >
+          </dt>
+          <dd>
+            <span>{{ chapterRef.designation }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.chapter.subTitle"
+              >Sub Title</span
+            >
+          </dt>
+          <dd>
+            @if (chapter()!.subTitle) {
+              <div>
+                <a
+                  [routerLink]="['/sub-title', chapter()!.subTitle?.id, 'view']"
+                  >{{ chapterRef.subTitle?.id }}</a
+                >
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button
+          type="submit"
+          (click)="previousState()"
+          class="btn btn-info"
+          data-cy="entityDetailsBackButton"
+        >
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/chapter', chapterRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.edit"
+            >Editer</span
+          >
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,21 +1,21 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { Component, OnInit, inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { finalize, map } from "rxjs/operators";
 
-import SharedModule from 'app/shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import SharedModule from "app/shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { ISubTitle } from 'app/entities/sub-title/sub-title.model';
-import { SubTitleService } from 'app/entities/sub-title/service/sub-title.service';
-import { IChapter } from '../chapter.model';
-import { ChapterService } from '../service/chapter.service';
-import { ChapterFormGroup, ChapterFormService } from './chapter-form.service';
+import { ISubTitle } from "app/entities/sub-title/sub-title.model";
+import { SubTitleService } from "app/entities/sub-title/service/sub-title.service";
+import { IChapter } from "../chapter.model";
+import { ChapterService } from "../service/chapter.service";
+import { ChapterFormGroup, ChapterFormService } from "./chapter-form.service";
 
 @Component({
-  selector: 'jhi-chapter-update',
-  templateUrl: './chapter-update.component.html',
+  selector: "jhi-chapter-update",
+  templateUrl: "./chapter-update.component.html",
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class ChapterUpdateComponent implements OnInit {
@@ -32,7 +32,8 @@ export class ChapterUpdateComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ChapterFormGroup = this.chapterFormService.createChapterFormGroup();
 
-  compareSubTitle = (o1: ISubTitle | null, o2: ISubTitle | null): boolean => this.subTitleService.compareSubTitle(o1, o2);
+  compareSubTitle = (o1: ISubTitle | null, o2: ISubTitle | null): boolean =>
+    this.subTitleService.compareSubTitle(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ chapter }) => {
@@ -59,7 +60,9 @@ export class ChapterUpdateComponent implements OnInit {
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IChapter>>): void {
+  protected subscribeToSaveResponse(
+    result: Observable<HttpResponse<IChapter>>,
+  ): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -82,10 +85,11 @@ export class ChapterUpdateComponent implements OnInit {
     this.chapter = chapter;
     this.chapterFormService.resetForm(this.editForm, chapter);
 
-    this.subTitlesSharedCollection = this.subTitleService.addSubTitleToCollectionIfMissing<ISubTitle>(
-      this.subTitlesSharedCollection,
-      chapter.subTitle,
-    );
+    this.subTitlesSharedCollection =
+      this.subTitleService.addSubTitleToCollectionIfMissing<ISubTitle>(
+        this.subTitlesSharedCollection,
+        chapter.subTitle,
+      );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -94,9 +98,15 @@ export class ChapterUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<ISubTitle[]>) => res.body ?? []))
       .pipe(
         map((subTitles: ISubTitle[]) =>
-          this.subTitleService.addSubTitleToCollectionIfMissing<ISubTitle>(subTitles, this.chapter?.subTitle),
+          this.subTitleService.addSubTitleToCollectionIfMissing<ISubTitle>(
+            subTitles,
+            this.chapter?.subTitle,
+          ),
         ),
       )
-      .subscribe((subTitles: ISubTitle[]) => (this.subTitlesSharedCollection = subTitles));
+      .subscribe(
+        (subTitles: ISubTitle[]) =>
+          (this.subTitlesSharedCollection = subTitles),
+      );
   }
 }

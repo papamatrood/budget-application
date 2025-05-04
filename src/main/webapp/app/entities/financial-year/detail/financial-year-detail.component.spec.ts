@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { RouterTestingHarness } from "@angular/router/testing";
+import { of } from "rxjs";
 
-import { FinancialYearDetailComponent } from './financial-year-detail.component';
+import { FinancialYearDetailComponent } from "./financial-year-detail.component";
 
-describe('FinancialYear Management Detail Component', () => {
+describe("FinancialYear Management Detail Component", () => {
   let comp: FinancialYearDetailComponent;
   let fixture: ComponentFixture<FinancialYearDetailComponent>;
 
@@ -16,8 +16,11 @@ describe('FinancialYear Management Detail Component', () => {
         provideRouter(
           [
             {
-              path: '**',
-              loadComponent: () => import('./financial-year-detail.component').then(m => m.FinancialYearDetailComponent),
+              path: "**",
+              loadComponent: () =>
+                import("./financial-year-detail.component").then(
+                  (m) => m.FinancialYearDetailComponent,
+                ),
               resolve: { financialYear: () => of({ id: 14021 }) },
             },
           ],
@@ -25,7 +28,7 @@ describe('FinancialYear Management Detail Component', () => {
         ),
       ],
     })
-      .overrideTemplate(FinancialYearDetailComponent, '')
+      .overrideTemplate(FinancialYearDetailComponent, "")
       .compileComponents();
   });
 
@@ -34,19 +37,24 @@ describe('FinancialYear Management Detail Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('OnInit', () => {
-    it('should load financialYear on init', async () => {
+  describe("OnInit", () => {
+    it("should load financialYear on init", async () => {
       const harness = await RouterTestingHarness.create();
-      const instance = await harness.navigateByUrl('/', FinancialYearDetailComponent);
+      const instance = await harness.navigateByUrl(
+        "/",
+        FinancialYearDetailComponent,
+      );
 
       // THEN
-      expect(instance.financialYear()).toEqual(expect.objectContaining({ id: 14021 }));
+      expect(instance.financialYear()).toEqual(
+        expect.objectContaining({ id: 14021 }),
+      );
     });
   });
 
-  describe('PreviousState', () => {
-    it('should navigate to previous state', () => {
-      jest.spyOn(window.history, 'back');
+  describe("PreviousState", () => {
+    it("should navigate to previous state", () => {
+      jest.spyOn(window.history, "back");
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
     });

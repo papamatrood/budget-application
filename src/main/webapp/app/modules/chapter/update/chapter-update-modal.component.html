@@ -1,0 +1,139 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">
+    {{ chapter?.id ? "Modifier Chapitre" : "Créer Chapitre" }}
+  </h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="previousState()"
+  ></button>
+</div>
+
+<div class="modal-body">
+  <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <div>
+      <jhi-alert-error></jhi-alert-error>
+
+      <div class="mb-3">
+        <label
+          class="form-label"
+          for="field_subTitle"
+          jhiTranslate="budgetApplicationApp.chapter.subTitle"
+          >Sub Title</label
+        >
+        <select
+          class="form-select"
+          id="field_subTitle"
+          data-cy="subTitle"
+          name="subTitle"
+          formControlName="subTitle"
+          [compareWith]="compareSubTitle"
+        >
+          <option [ngValue]="null"></option>
+          @for (subTitleOption of subTitlesSharedCollection; track $index) {
+            <option [ngValue]="subTitleOption">
+              {{ subTitleOption.designation }}
+            </option>
+          }
+        </select>
+      </div>
+
+      @let codeRef = editForm.get("code")!;
+      <div class="mb-3">
+        <label
+          class="form-label"
+          for="field_code"
+          jhiTranslate="budgetApplicationApp.chapter.code"
+          >Code</label
+        >
+        <div class="input-group">
+          <!-- <span class="input-group-text">{{ selectedSubTitleCode }}</span> -->
+          <input
+            type="text"
+            class="form-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            formControlName="code"
+            [disabled]="!editForm.get('subTitle')?.value"
+          />
+        </div>
+        @if (codeRef.invalid && (codeRef.dirty || codeRef.touched)) {
+          <div>
+            @if (editForm.get("code")?.errors?.required) {
+              <small
+                class="form-text text-danger"
+                jhiTranslate="entity.validation.required"
+                >Ce champ est obligatoire.</small
+              >
+            }
+          </div>
+        }
+        <!-- <small class="form-text text-muted">
+          Le code complet sera: {{ selectedSubTitleCode }}{{ editForm.get('code')?.value }}
+        </small> -->
+      </div>
+
+      @let designationRef = editForm.get("designation")!;
+      <div class="mb-3">
+        <label
+          class="form-label"
+          for="field_designation"
+          jhiTranslate="budgetApplicationApp.chapter.designation"
+          >Designation</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          name="designation"
+          id="field_designation"
+          data-cy="designation"
+          formControlName="designation"
+        />
+        @if (
+          designationRef.invalid &&
+          (designationRef.dirty || designationRef.touched)
+        ) {
+          <div>
+            @if (editForm.get("designation")?.errors?.required) {
+              <small
+                class="form-text text-danger"
+                jhiTranslate="entity.validation.required"
+                >Ce champ est obligatoire.</small
+              >
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div>
+      <button
+        type="button"
+        id="cancel-save"
+        data-cy="entityCreateCancelButton"
+        class="btn btn-danger"
+        (click)="previousState()"
+      >
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span
+          jhiTranslate="entity.action.cancel"
+          >Annuler</span
+        >
+      </button>
+
+      <button
+        type="submit"
+        id="save-entity"
+        data-cy="entityCreateSaveButton"
+        [disabled]="editForm.invalid || isSaving"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="save"></fa-icon>&nbsp;<span
+          jhiTranslate="entity.action.save"
+          >Sauvegarder</span
+        >
+      </button>
+    </div>
+  </form>
+</div>

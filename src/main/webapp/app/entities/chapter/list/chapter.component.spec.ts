@@ -1,16 +1,26 @@
-import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { HttpHeaders, HttpResponse, provideHttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, of } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  inject,
+  tick,
+} from "@angular/core/testing";
+import {
+  HttpHeaders,
+  HttpResponse,
+  provideHttpClient,
+} from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Subject, of } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
-import { sampleWithRequiredData } from '../chapter.test-samples';
-import { ChapterService } from '../service/chapter.service';
+import { sampleWithRequiredData } from "../chapter.test-samples";
+import { ChapterService } from "../service/chapter.service";
 
-import { ChapterComponent } from './chapter.component';
+import { ChapterComponent } from "./chapter.component";
 import SpyInstance = jest.SpyInstance;
 
-describe('Chapter Management Component', () => {
+describe("Chapter Management Component", () => {
   let comp: ChapterComponent;
   let fixture: ComponentFixture<ChapterComponent>;
   let service: ChapterService;
@@ -25,39 +35,41 @@ describe('Chapter Management Component', () => {
           provide: ActivatedRoute,
           useValue: {
             data: of({
-              defaultSort: 'id,asc',
+              defaultSort: "id,asc",
             }),
             queryParamMap: of(
-              jest.requireActual('@angular/router').convertToParamMap({
-                page: '1',
-                size: '1',
-                sort: 'id,desc',
-                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
+              jest.requireActual("@angular/router").convertToParamMap({
+                page: "1",
+                size: "1",
+                sort: "id,desc",
+                "filter[someId.in]": "dc4279ea-cfb9-11ec-9d64-0242ac120002",
               }),
             ),
             snapshot: {
               queryParams: {},
-              queryParamMap: jest.requireActual('@angular/router').convertToParamMap({
-                page: '1',
-                size: '1',
-                sort: 'id,desc',
-                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
-              }),
+              queryParamMap: jest
+                .requireActual("@angular/router")
+                .convertToParamMap({
+                  page: "1",
+                  size: "1",
+                  sort: "id,desc",
+                  "filter[someId.in]": "dc4279ea-cfb9-11ec-9d64-0242ac120002",
+                }),
             },
           },
         },
       ],
     })
-      .overrideTemplate(ChapterComponent, '')
+      .overrideTemplate(ChapterComponent, "")
       .compileComponents();
 
     fixture = TestBed.createComponent(ChapterComponent);
     comp = fixture.componentInstance;
     service = TestBed.inject(ChapterService);
-    routerNavigateSpy = jest.spyOn(comp.router, 'navigate');
+    routerNavigateSpy = jest.spyOn(comp.router, "navigate");
 
     jest
-      .spyOn(service, 'query')
+      .spyOn(service, "query")
       .mockReturnValueOnce(
         of(
           new HttpResponse({
@@ -80,7 +92,7 @@ describe('Chapter Management Component', () => {
       );
   });
 
-  it('should call load all on init', () => {
+  it("should call load all on init", () => {
     // WHEN
     comp.ngOnInit();
 
@@ -89,32 +101,35 @@ describe('Chapter Management Component', () => {
     expect(comp.chapters()[0]).toEqual(expect.objectContaining({ id: 5578 }));
   });
 
-  describe('trackId', () => {
-    it('should forward to chapterService', () => {
+  describe("trackId", () => {
+    it("should forward to chapterService", () => {
       const entity = { id: 5578 };
-      jest.spyOn(service, 'getChapterIdentifier');
+      jest.spyOn(service, "getChapterIdentifier");
       const id = comp.trackId(entity);
       expect(service.getChapterIdentifier).toHaveBeenCalledWith(entity);
       expect(id).toBe(entity.id);
     });
   });
 
-  it('should calculate the sort attribute for a non-id attribute', () => {
+  it("should calculate the sort attribute for a non-id attribute", () => {
     // WHEN
-    comp.navigateToWithComponentValues({ predicate: 'non-existing-column', order: 'asc' });
+    comp.navigateToWithComponentValues({
+      predicate: "non-existing-column",
+      order: "asc",
+    });
 
     // THEN
     expect(routerNavigateSpy).toHaveBeenLastCalledWith(
       expect.anything(),
       expect.objectContaining({
         queryParams: expect.objectContaining({
-          sort: ['non-existing-column,asc'],
+          sort: ["non-existing-column,asc"],
         }),
       }),
     );
   });
 
-  it('should load a page', () => {
+  it("should load a page", () => {
     // WHEN
     comp.navigateToPage(1);
 
@@ -122,23 +137,29 @@ describe('Chapter Management Component', () => {
     expect(routerNavigateSpy).toHaveBeenCalled();
   });
 
-  it('should calculate the sort attribute for an id', () => {
+  it("should calculate the sort attribute for an id", () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
-    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['id,desc'] }));
+    expect(service.query).toHaveBeenLastCalledWith(
+      expect.objectContaining({ sort: ["id,desc"] }),
+    );
   });
 
-  it('should calculate the filter attribute', () => {
+  it("should calculate the filter attribute", () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
-    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ 'someId.in': ['dc4279ea-cfb9-11ec-9d64-0242ac120002'] }));
+    expect(service.query).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        "someId.in": ["dc4279ea-cfb9-11ec-9d64-0242ac120002"],
+      }),
+    );
   });
 
-  describe('delete', () => {
+  describe("delete", () => {
     let ngbModal: NgbModal;
     let deleteModalMock: any;
 
@@ -147,18 +168,18 @@ describe('Chapter Management Component', () => {
       // NgbModal is not a singleton using TestBed.inject.
       // ngbModal = TestBed.inject(NgbModal);
       ngbModal = (comp as any).modalService;
-      jest.spyOn(ngbModal, 'open').mockReturnValue(deleteModalMock);
+      jest.spyOn(ngbModal, "open").mockReturnValue(deleteModalMock);
     });
 
-    it('on confirm should call load', inject(
+    it("on confirm should call load", inject(
       [],
       fakeAsync(() => {
         // GIVEN
-        jest.spyOn(comp, 'load');
+        jest.spyOn(comp, "load");
 
         // WHEN
         comp.delete(sampleWithRequiredData);
-        deleteModalMock.closed.next('deleted');
+        deleteModalMock.closed.next("deleted");
         tick();
 
         // THEN
@@ -167,11 +188,11 @@ describe('Chapter Management Component', () => {
       }),
     ));
 
-    it('on dismiss should call load', inject(
+    it("on dismiss should call load", inject(
       [],
       fakeAsync(() => {
         // GIVEN
-        jest.spyOn(comp, 'load');
+        jest.spyOn(comp, "load");
 
         // WHEN
         comp.delete(sampleWithRequiredData);

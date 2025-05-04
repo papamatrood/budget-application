@@ -1,26 +1,26 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { Component, OnInit, inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { finalize, map } from "rxjs/operators";
 
-import SharedModule from 'app/shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import SharedModule from "app/shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { IChapter } from 'app/entities/chapter/chapter.model';
-import { ChapterService } from 'app/entities/chapter/service/chapter.service';
-import { IRecipe } from 'app/entities/recipe/recipe.model';
-import { RecipeService } from 'app/entities/recipe/service/recipe.service';
-import { IExpense } from 'app/entities/expense/expense.model';
-import { ExpenseService } from 'app/entities/expense/service/expense.service';
-import { FinancialCategoryEnum } from 'app/entities/enumerations/financial-category-enum.model';
-import { ArticleService } from '../service/article.service';
-import { IArticle } from '../article.model';
-import { ArticleFormGroup, ArticleFormService } from './article-form.service';
+import { IChapter } from "app/entities/chapter/chapter.model";
+import { ChapterService } from "app/entities/chapter/service/chapter.service";
+import { IRecipe } from "app/entities/recipe/recipe.model";
+import { RecipeService } from "app/entities/recipe/service/recipe.service";
+import { IExpense } from "app/entities/expense/expense.model";
+import { ExpenseService } from "app/entities/expense/service/expense.service";
+import { FinancialCategoryEnum } from "app/entities/enumerations/financial-category-enum.model";
+import { ArticleService } from "../service/article.service";
+import { IArticle } from "../article.model";
+import { ArticleFormGroup, ArticleFormService } from "./article-form.service";
 
 @Component({
-  selector: 'jhi-article-update',
-  templateUrl: './article-update.component.html',
+  selector: "jhi-article-update",
+  templateUrl: "./article-update.component.html",
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class ArticleUpdateComponent implements OnInit {
@@ -42,11 +42,14 @@ export class ArticleUpdateComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ArticleFormGroup = this.articleFormService.createArticleFormGroup();
 
-  compareChapter = (o1: IChapter | null, o2: IChapter | null): boolean => this.chapterService.compareChapter(o1, o2);
+  compareChapter = (o1: IChapter | null, o2: IChapter | null): boolean =>
+    this.chapterService.compareChapter(o1, o2);
 
-  compareRecipe = (o1: IRecipe | null, o2: IRecipe | null): boolean => this.recipeService.compareRecipe(o1, o2);
+  compareRecipe = (o1: IRecipe | null, o2: IRecipe | null): boolean =>
+    this.recipeService.compareRecipe(o1, o2);
 
-  compareExpense = (o1: IExpense | null, o2: IExpense | null): boolean => this.expenseService.compareExpense(o1, o2);
+  compareExpense = (o1: IExpense | null, o2: IExpense | null): boolean =>
+    this.expenseService.compareExpense(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ article }) => {
@@ -73,7 +76,9 @@ export class ArticleUpdateComponent implements OnInit {
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IArticle>>): void {
+  protected subscribeToSaveResponse(
+    result: Observable<HttpResponse<IArticle>>,
+  ): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -96,43 +101,67 @@ export class ArticleUpdateComponent implements OnInit {
     this.article = article;
     this.articleFormService.resetForm(this.editForm, article);
 
-    this.chaptersSharedCollection = this.chapterService.addChapterToCollectionIfMissing<IChapter>(
-      this.chaptersSharedCollection,
-      article.chapter,
-    );
-    this.recipesSharedCollection = this.recipeService.addRecipeToCollectionIfMissing<IRecipe>(
-      this.recipesSharedCollection,
-      ...(article.recipes ?? []),
-    );
-    this.expensesSharedCollection = this.expenseService.addExpenseToCollectionIfMissing<IExpense>(
-      this.expensesSharedCollection,
-      ...(article.expenses ?? []),
-    );
+    this.chaptersSharedCollection =
+      this.chapterService.addChapterToCollectionIfMissing<IChapter>(
+        this.chaptersSharedCollection,
+        article.chapter,
+      );
+    this.recipesSharedCollection =
+      this.recipeService.addRecipeToCollectionIfMissing<IRecipe>(
+        this.recipesSharedCollection,
+        ...(article.recipes ?? []),
+      );
+    this.expensesSharedCollection =
+      this.expenseService.addExpenseToCollectionIfMissing<IExpense>(
+        this.expensesSharedCollection,
+        ...(article.expenses ?? []),
+      );
   }
 
   protected loadRelationshipsOptions(): void {
     this.chapterService
       .query()
       .pipe(map((res: HttpResponse<IChapter[]>) => res.body ?? []))
-      .pipe(map((chapters: IChapter[]) => this.chapterService.addChapterToCollectionIfMissing<IChapter>(chapters, this.article?.chapter)))
-      .subscribe((chapters: IChapter[]) => (this.chaptersSharedCollection = chapters));
+      .pipe(
+        map((chapters: IChapter[]) =>
+          this.chapterService.addChapterToCollectionIfMissing<IChapter>(
+            chapters,
+            this.article?.chapter,
+          ),
+        ),
+      )
+      .subscribe(
+        (chapters: IChapter[]) => (this.chaptersSharedCollection = chapters),
+      );
 
     this.recipeService
       .query()
       .pipe(map((res: HttpResponse<IRecipe[]>) => res.body ?? []))
       .pipe(
-        map((recipes: IRecipe[]) => this.recipeService.addRecipeToCollectionIfMissing<IRecipe>(recipes, ...(this.article?.recipes ?? []))),
+        map((recipes: IRecipe[]) =>
+          this.recipeService.addRecipeToCollectionIfMissing<IRecipe>(
+            recipes,
+            ...(this.article?.recipes ?? []),
+          ),
+        ),
       )
-      .subscribe((recipes: IRecipe[]) => (this.recipesSharedCollection = recipes));
+      .subscribe(
+        (recipes: IRecipe[]) => (this.recipesSharedCollection = recipes),
+      );
 
     this.expenseService
       .query()
       .pipe(map((res: HttpResponse<IExpense[]>) => res.body ?? []))
       .pipe(
         map((expenses: IExpense[]) =>
-          this.expenseService.addExpenseToCollectionIfMissing<IExpense>(expenses, ...(this.article?.expenses ?? [])),
+          this.expenseService.addExpenseToCollectionIfMissing<IExpense>(
+            expenses,
+            ...(this.article?.expenses ?? []),
+          ),
         ),
       )
-      .subscribe((expenses: IExpense[]) => (this.expensesSharedCollection = expenses));
+      .subscribe(
+        (expenses: IExpense[]) => (this.expensesSharedCollection = expenses),
+      );
   }
 }

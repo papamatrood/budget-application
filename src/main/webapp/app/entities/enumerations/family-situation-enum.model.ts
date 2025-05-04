@@ -1,5 +1,5 @@
 export enum FamilySituationEnum {
-  CELIBATAIRE = 'CELIBATAIRE',
+  CELIBATAIRE = "CELIBATAIRE",
 
-  MARIE = 'MARIE',
+  MARIE = "MARIE",
 }

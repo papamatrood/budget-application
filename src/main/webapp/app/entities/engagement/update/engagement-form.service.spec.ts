@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { sampleWithNewData, sampleWithRequiredData } from '../engagement.test-samples';
+import {
+  sampleWithNewData,
+  sampleWithRequiredData,
+} from "../engagement.test-samples";
 
-import { EngagementFormService } from './engagement-form.service';
+import { EngagementFormService } from "./engagement-form.service";
 
-describe('Engagement Form Service', () => {
+describe("Engagement Form Service", () => {
   let service: EngagementFormService;
 
   beforeEach(() => {
@@ -12,9 +15,9 @@ describe('Engagement Form Service', () => {
     service = TestBed.inject(EngagementFormService);
   });
 
-  describe('Service methods', () => {
-    describe('createEngagementFormGroup', () => {
-      it('should create a new form with FormControl', () => {
+  describe("Service methods", () => {
+    describe("createEngagementFormGroup", () => {
+      it("should create a new form with FormControl", () => {
         const formGroup = service.createEngagementFormGroup();
 
         expect(formGroup.controls).toEqual(
@@ -34,8 +37,10 @@ describe('Engagement Form Service', () => {
         );
       });
 
-      it('passing IEngagement should create a new form with FormGroup', () => {
-        const formGroup = service.createEngagementFormGroup(sampleWithRequiredData);
+      it("passing IEngagement should create a new form with FormGroup", () => {
+        const formGroup = service.createEngagementFormGroup(
+          sampleWithRequiredData,
+        );
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
@@ -55,8 +60,8 @@ describe('Engagement Form Service', () => {
       });
     });
 
-    describe('getEngagement', () => {
-      it('should return NewEngagement for default Engagement initial value', () => {
+    describe("getEngagement", () => {
+      it("should return NewEngagement for default Engagement initial value", () => {
         const formGroup = service.createEngagementFormGroup(sampleWithNewData);
 
         const engagement = service.getEngagement(formGroup) as any;
@@ -64,7 +69,7 @@ describe('Engagement Form Service', () => {
         expect(engagement).toMatchObject(sampleWithNewData);
       });
 
-      it('should return NewEngagement for empty Engagement initial value', () => {
+      it("should return NewEngagement for empty Engagement initial value", () => {
         const formGroup = service.createEngagementFormGroup();
 
         const engagement = service.getEngagement(formGroup) as any;
@@ -72,8 +77,10 @@ describe('Engagement Form Service', () => {
         expect(engagement).toMatchObject({});
       });
 
-      it('should return IEngagement', () => {
-        const formGroup = service.createEngagementFormGroup(sampleWithRequiredData);
+      it("should return IEngagement", () => {
+        const formGroup = service.createEngagementFormGroup(
+          sampleWithRequiredData,
+        );
 
         const engagement = service.getEngagement(formGroup) as any;
 
@@ -81,8 +88,8 @@ describe('Engagement Form Service', () => {
       });
     });
 
-    describe('resetForm', () => {
-      it('passing IEngagement should not enable id FormControl', () => {
+    describe("resetForm", () => {
+      it("passing IEngagement should not enable id FormControl", () => {
         const formGroup = service.createEngagementFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 
@@ -91,8 +98,10 @@ describe('Engagement Form Service', () => {
         expect(formGroup.controls.id.disabled).toBe(true);
       });
 
-      it('passing NewEngagement should disable id FormControl', () => {
-        const formGroup = service.createEngagementFormGroup(sampleWithRequiredData);
+      it("passing NewEngagement should disable id FormControl", () => {
+        const formGroup = service.createEngagementFormGroup(
+          sampleWithRequiredData,
+        );
         expect(formGroup.controls.id.disabled).toBe(true);
 
         service.resetForm(formGroup, { id: null });

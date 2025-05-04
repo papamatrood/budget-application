@@ -14,4 +14,4 @@ export interface ISupplier {
   contactlastname?: string | null;
 }
 
-export type NewSupplier = Omit<ISupplier, 'id'> & { id: null };
+export type NewSupplier = Omit<ISupplier, "id"> & { id: null };

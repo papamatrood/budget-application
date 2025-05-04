@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, from, of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Subject, from, of } from "rxjs";
 
-import { SubTitleService } from '../service/sub-title.service';
-import { ISubTitle } from '../sub-title.model';
-import { SubTitleFormService } from './sub-title-form.service';
+import { SubTitleService } from "../service/sub-title.service";
+import { ISubTitle } from "../sub-title.model";
+import { SubTitleFormService } from "./sub-title-form.service";
 
-import { SubTitleUpdateComponent } from './sub-title-update.component';
+import { SubTitleUpdateComponent } from "./sub-title-update.component";
 
-describe('SubTitle Management Update Component', () => {
+describe("SubTitle Management Update Component", () => {
   let comp: SubTitleUpdateComponent;
   let fixture: ComponentFixture<SubTitleUpdateComponent>;
   let activatedRoute: ActivatedRoute;
@@ -31,7 +31,7 @@ describe('SubTitle Management Update Component', () => {
         },
       ],
     })
-      .overrideTemplate(SubTitleUpdateComponent, '')
+      .overrideTemplate(SubTitleUpdateComponent, "")
       .compileComponents();
 
     fixture = TestBed.createComponent(SubTitleUpdateComponent);
@@ -42,8 +42,8 @@ describe('SubTitle Management Update Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('ngOnInit', () => {
-    it('should update editForm', () => {
+  describe("ngOnInit", () => {
+    it("should update editForm", () => {
       const subTitle: ISubTitle = { id: 27234 };
 
       activatedRoute.data = of({ subTitle });
@@ -53,14 +53,14 @@ describe('SubTitle Management Update Component', () => {
     });
   });
 
-  describe('save', () => {
-    it('should call update service on save for existing entity', () => {
+  describe("save", () => {
+    it("should call update service on save for existing entity", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ISubTitle>>();
       const subTitle = { id: 2895 };
-      jest.spyOn(subTitleFormService, 'getSubTitle').mockReturnValue(subTitle);
-      jest.spyOn(subTitleService, 'update').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest.spyOn(subTitleFormService, "getSubTitle").mockReturnValue(subTitle);
+      jest.spyOn(subTitleService, "update").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ subTitle });
       comp.ngOnInit();
 
@@ -73,17 +73,21 @@ describe('SubTitle Management Update Component', () => {
       // THEN
       expect(subTitleFormService.getSubTitle).toHaveBeenCalled();
       expect(comp.previousState).toHaveBeenCalled();
-      expect(subTitleService.update).toHaveBeenCalledWith(expect.objectContaining(subTitle));
+      expect(subTitleService.update).toHaveBeenCalledWith(
+        expect.objectContaining(subTitle),
+      );
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('should call create service on save for new entity', () => {
+    it("should call create service on save for new entity", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ISubTitle>>();
       const subTitle = { id: 2895 };
-      jest.spyOn(subTitleFormService, 'getSubTitle').mockReturnValue({ id: null });
-      jest.spyOn(subTitleService, 'create').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest
+        .spyOn(subTitleFormService, "getSubTitle")
+        .mockReturnValue({ id: null });
+      jest.spyOn(subTitleService, "create").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ subTitle: null });
       comp.ngOnInit();
 
@@ -100,19 +104,19 @@ describe('SubTitle Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('should set isSaving to false on error', () => {
+    it("should set isSaving to false on error", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ISubTitle>>();
       const subTitle = { id: 2895 };
-      jest.spyOn(subTitleService, 'update').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest.spyOn(subTitleService, "update").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ subTitle });
       comp.ngOnInit();
 
       // WHEN
       comp.save();
       expect(comp.isSaving).toEqual(true);
-      saveSubject.error('This is an error!');
+      saveSubject.error("This is an error!");
 
       // THEN
       expect(subTitleService.update).toHaveBeenCalled();

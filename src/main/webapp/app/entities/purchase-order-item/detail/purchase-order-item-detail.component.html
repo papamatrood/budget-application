@@ -3,7 +3,10 @@
     @if (purchaseOrderItem(); as purchaseOrderItemRef) {
       <div>
         <h2 data-cy="purchaseOrderItemDetailsHeading">
-          <span jhiTranslate="budgetApplicationApp.purchaseOrderItem.detail.title">Purchase Order Item</span>
+          <span
+            jhiTranslate="budgetApplicationApp.purchaseOrderItem.detail.title"
+            >Purchase Order Item</span
+          >
         </h2>
 
         <hr />
@@ -17,40 +20,88 @@
           <dd>
             <span>{{ purchaseOrderItemRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrderItem.productName">Product Name</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrderItem.productName"
+              >Product Name</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderItemRef.productName }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrderItem.quantity">Quantity</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.purchaseOrderItem.quantity"
+              >Quantity</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderItemRef.quantity }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrderItem.unitPrice">Unit Price</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrderItem.unitPrice"
+              >Unit Price</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderItemRef.unitPrice }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrderItem.totalAmount">Total Amount</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrderItem.totalAmount"
+              >Total Amount</span
+            >
+          </dt>
           <dd>
             <span>{{ purchaseOrderItemRef.totalAmount }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.purchaseOrderItem.purchaseOrder">Purchase Order</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.purchaseOrderItem.purchaseOrder"
+              >Purchase Order</span
+            >
+          </dt>
           <dd>
             @if (purchaseOrderItem()!.purchaseOrder) {
               <div>
-                <a [routerLink]="['/purchase-order', purchaseOrderItem()!.purchaseOrder?.id, 'view']">{{
-                  purchaseOrderItemRef.purchaseOrder?.id
-                }}</a>
+                <a
+                  [routerLink]="[
+                    '/purchase-order',
+                    purchaseOrderItem()!.purchaseOrder?.id,
+                    'view',
+                  ]"
+                  >{{ purchaseOrderItemRef.purchaseOrder?.id }}</a
+                >
               </div>
             }
           </dd>
         </dl>
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        <button
+          type="submit"
+          (click)="previousState()"
+          class="btn btn-info"
+          data-cy="entityDetailsBackButton"
+        >
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
         </button>
 
-        <button type="button" [routerLink]="['/purchase-order-item', purchaseOrderItemRef.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        <button
+          type="button"
+          [routerLink]="[
+            '/purchase-order-item',
+            purchaseOrderItemRef.id,
+            'edit',
+          ]"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.edit"
+            >Editer</span
+          >
         </button>
       </div>
     }

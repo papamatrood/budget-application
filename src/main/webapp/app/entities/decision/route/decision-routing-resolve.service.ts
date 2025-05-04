@@ -1,13 +1,15 @@
-import { inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRouteSnapshot, Router } from "@angular/router";
+import { EMPTY, Observable, of } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 
-import { IDecision } from '../decision.model';
-import { DecisionService } from '../service/decision.service';
+import { IDecision } from "../decision.model";
+import { DecisionService } from "../service/decision.service";
 
-const decisionResolve = (route: ActivatedRouteSnapshot): Observable<null | IDecision> => {
+const decisionResolve = (
+  route: ActivatedRouteSnapshot,
+): Observable<null | IDecision> => {
   const id = route.params.id;
   if (id) {
     return inject(DecisionService)
@@ -17,7 +19,7 @@ const decisionResolve = (route: ActivatedRouteSnapshot): Observable<null | IDeci
           if (decision.body) {
             return of(decision.body);
           }
-          inject(Router).navigate(['404']);
+          inject(Router).navigate(["404"]);
           return EMPTY;
         }),
       );

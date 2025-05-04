@@ -1,13 +1,46 @@
-<jhi-page-ribbon />
-
-<div>
-  <router-outlet name="navbar" />
-</div>
-
-<div class="container-fluid">
-  <div class="card jh-card">
-    <router-outlet />
+<router-outlet name="navbar" />
+@if (menu_active) {
+  <div class="container-fluid p-0 content">
+    <jhi-header />
+    <div class="row g-0">
+      <div class="col-md-3" style="background-color: #d7edfa">
+        <jhi-sidebar />
+      </div>
+      <div class="col-md-9">
+        <div class="d-none d-sm-block position-absolute d-flex">
+          <i class="bi bi-list fs-3 pointer" (click)="menu()"></i>
+        </div>
+        <div class="container-fluid mb-3">
+          <router-outlet />
+        </div>
+      </div>
+    </div>
+    <jhi-footer />
   </div>
+} @else {
+  <div class="container-fluid p-0 content">
+    <jhi-header />
+    <div class="row g-0">
+      <div class="col-md-1" style="background-color: #d7edfa">
+        <jhi-sidebar-2 />
+      </div>
+      <div class="col-md-11">
+        <div class="position-absolute d-flex">
+          <i class="bi bi-list fs-3 pointer" (click)="menu()"></i>
+        </div>
+        <div class="container-fluid mb-3">
+          <router-outlet />
+        </div>
+      </div>
+    </div>
+    <jhi-footer />
+  </div>
+}
 
-  <jhi-footer />
-</div>
+<!-- <jhi-page-ribbon />
+
+<router-outlet name="navbar" />
+
+<router-outlet />
+
+<jhi-footer /> -->

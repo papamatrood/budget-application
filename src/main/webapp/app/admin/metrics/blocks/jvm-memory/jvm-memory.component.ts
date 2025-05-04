@@ -1,11 +1,11 @@
-import { Component, input } from '@angular/core';
+import { Component, input } from "@angular/core";
 
-import SharedModule from 'app/shared/shared.module';
-import { JvmMetrics } from 'app/admin/metrics/metrics.model';
+import SharedModule from "app/shared/shared.module";
+import { JvmMetrics } from "app/admin/metrics/metrics.model";
 
 @Component({
-  selector: 'jhi-jvm-memory',
-  templateUrl: './jvm-memory.component.html',
+  selector: "jhi-jvm-memory",
+  templateUrl: "./jvm-memory.component.html",
   imports: [SharedModule],
 })
 export class JvmMemoryComponent {

@@ -1,0 +1,103 @@
+.c-red {
+  color: #eb1d22;
+}
+
+.borderBottom {
+  border-bottom: 5px solid #fbcc00;
+}
+
+.border-bottom-yellow {
+  border-bottom: 2px solid #fbcc00;
+}
+
+.c-yellow {
+  color: #fbcc00;
+}
+
+.bg-yellow,
+.bg-yellow-hover:hover {
+  background-color: #fbcc00;
+}
+
+.border-yellow {
+  border: 0.2px solid #fbcc00;
+}
+
+.box-shadow {
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-30 {
+  font-size: 30px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+table thead tr {
+  background-color: #d7edfa;
+  text-align: center;
+}
+
+th,
+td {
+  padding: 10px;
+  font-size: 12px;
+}
+
+td {
+  text-align: end;
+  white-space: nowrap;
+}
+
+tr,
+td {
+  border: 2px solid #d7edfa;
+}
+
+thead th {
+  border: 2px solid #f3f3f3;
+}
+
+tbody tr.active-row,
+.chapter {
+  font-weight: bold;
+  background-color: #f3f3f3;
+}
+
+tbody tr.active-row th {
+  font-weight: bold;
+}
+
+tbody th {
+  font-weight: normal;
+}
+
+.tables {
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  border: #fbcc00 2px solid;
+}
+
+.tables::-webkit-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.subTitle {
+  font-weight: bold;
+  background-color: #fbcc00;
+}
+
+.bg-gray {
+  background-color: rgb(166, 166, 166);
+}
+
+.bg-blue {
+  background-color: #d7edfa;
+}

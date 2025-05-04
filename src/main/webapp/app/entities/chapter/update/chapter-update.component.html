@@ -1,7 +1,11 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-chapter-heading" data-cy="ChapterCreateUpdateHeading" jhiTranslate="budgetApplicationApp.chapter.home.createOrEditLabel">
+      <h2
+        id="jhi-chapter-heading"
+        data-cy="ChapterCreateUpdateHeading"
+        jhiTranslate="budgetApplicationApp.chapter.home.createOrEditLabel"
+      >
         Créer ou éditer un Chapter
       </h2>
 
@@ -10,27 +14,61 @@
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.chapter.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.chapter.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
           </div>
         }
 
-        @let codeRef = editForm.get('code')!;
+        @let codeRef = editForm.get("code")!;
         <div class="mb-3">
-          <label class="form-label" for="field_code" jhiTranslate="budgetApplicationApp.chapter.code">Code</label>
-          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <label
+            class="form-label"
+            for="field_code"
+            jhiTranslate="budgetApplicationApp.chapter.code"
+            >Code</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            formControlName="code"
+          />
           @if (codeRef.invalid && (codeRef.dirty || codeRef.touched)) {
             <div>
-              @if (editForm.get('code')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("code")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
             </div>
           }
         </div>
 
-        @let designationRef = editForm.get('designation')!;
+        @let designationRef = editForm.get("designation")!;
         <div class="mb-3">
-          <label class="form-label" for="field_designation" jhiTranslate="budgetApplicationApp.chapter.designation">Designation</label>
+          <label
+            class="form-label"
+            for="field_designation"
+            jhiTranslate="budgetApplicationApp.chapter.designation"
+            >Designation</label
+          >
           <input
             type="text"
             class="form-control"
@@ -39,17 +77,29 @@
             data-cy="designation"
             formControlName="designation"
           />
-          @if (designationRef.invalid && (designationRef.dirty || designationRef.touched)) {
+          @if (
+            designationRef.invalid &&
+            (designationRef.dirty || designationRef.touched)
+          ) {
             <div>
-              @if (editForm.get('designation')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("designation")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
             </div>
           }
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_subTitle" jhiTranslate="budgetApplicationApp.chapter.subTitle">Sub Title</label>
+          <label
+            class="form-label"
+            for="field_subTitle"
+            jhiTranslate="budgetApplicationApp.chapter.subTitle"
+            >Sub Title</label
+          >
           <select
             class="form-control"
             id="field_subTitle"
@@ -60,15 +110,26 @@
           >
             <option [ngValue]="null"></option>
             @for (subTitleOption of subTitlesSharedCollection; track $index) {
-              <option [ngValue]="subTitleOption">{{ subTitleOption.id }}</option>
+              <option [ngValue]="subTitleOption">
+                {{ subTitleOption.id }}
+              </option>
             }
           </select>
         </div>
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
         </button>
 
         <button
@@ -78,7 +139,10 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
         </button>
       </div>
     </form>

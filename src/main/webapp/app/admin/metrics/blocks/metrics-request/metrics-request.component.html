@@ -1,4 +1,6 @@
-<h3 id="requestMetrics" jhiTranslate="metrics.jvm.http.title">Requêtes HTTP (temps en millisecondes)</h3>
+<h3 id="requestMetrics" jhiTranslate="metrics.jvm.http.title">
+  Requêtes HTTP (temps en millisecondes)
+</h3>
 
 @let requestMetricsRef = requestMetrics();
 @if (!updating() && requestMetricsRef) {
@@ -7,12 +9,24 @@
       <tr>
         <th scope="col" jhiTranslate="metrics.jvm.http.table.code">Code</th>
         <th scope="col" jhiTranslate="metrics.jvm.http.table.count">Total</th>
-        <th scope="col" class="text-end" jhiTranslate="metrics.jvm.http.table.mean">Médian</th>
-        <th scope="col" class="text-end" jhiTranslate="metrics.jvm.http.table.max">Max</th>
+        <th
+          scope="col"
+          class="text-end"
+          jhiTranslate="metrics.jvm.http.table.mean"
+        >
+          Médian
+        </th>
+        <th
+          scope="col"
+          class="text-end"
+          jhiTranslate="metrics.jvm.http.table.max"
+        >
+          Max
+        </th>
       </tr>
     </thead>
     <tbody>
-      @for (entry of requestMetricsRef['percode'] | keyvalue; track entry.key) {
+      @for (entry of requestMetricsRef["percode"] | keyvalue; track entry.key) {
         <tr>
           <td>{{ entry.key }}</td>
           <td>
@@ -27,9 +41,9 @@
             </ngb-progressbar>
           </td>
           <td class="text-end">
-            {{ filterNaN(entry.value.mean) | number: '1.0-2' }}
+            {{ filterNaN(entry.value.mean) | number: "1.0-2" }}
           </td>
-          <td class="text-end">{{ entry.value.max | number: '1.0-2' }}</td>
+          <td class="text-end">{{ entry.value.max | number: "1.0-2" }}</td>
         </tr>
       }
     </tbody>

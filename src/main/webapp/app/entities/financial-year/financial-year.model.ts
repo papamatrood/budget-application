@@ -3,4 +3,4 @@ export interface IFinancialYear {
   theYear?: number | null;
 }
 
-export type NewFinancialYear = Omit<IFinancialYear, 'id'> & { id: null };
+export type NewFinancialYear = Omit<IFinancialYear, "id"> & { id: null };

@@ -1,4 +1,4 @@
-import { IFinancialYear } from 'app/entities/financial-year/financial-year.model';
+import { IFinancialYear } from "app/entities/financial-year/financial-year.model";
 
 export interface IAnnexDecision {
   id: number;
@@ -9,4 +9,4 @@ export interface IAnnexDecision {
   financialYear?: IFinancialYear | null;
 }
 
-export type NewAnnexDecision = Omit<IAnnexDecision, 'id'> & { id: null };
+export type NewAnnexDecision = Omit<IAnnexDecision, "id"> & { id: null };

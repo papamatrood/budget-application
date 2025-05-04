@@ -1,15 +1,38 @@
-<div>
-  <div class="d-flex justify-content-center">
-    <div class="col-lg-6 col-md-8 col-sm-10">
-      <h1 data-cy="loginTitle" jhiTranslate="login.title">Authentification</h1>
+<div
+  class="container-fluid vh-100 d-flex justify-content-center align-items-center bg-blue"
+>
+  <!-- <div class=""> -->
+  <div class="card" style="min-width: 500px">
+    <div class="text-center">
+      <img
+        src="../../content/images/logo.png"
+        alt="image introuvable"
+        class="img-fluid m-2"
+      />
+    </div>
+    <div class="card-title text-center">
+      <h2>Bienvenue sur SIGAF</h2>
+      <p data-cy="loginTitle" jhiTranslate="login.title">Authentification</p>
       @if (authenticationError()) {
-        <div class="alert alert-danger" data-cy="loginError" jhiTranslate="login.messages.error.authentication">
-          <strong>Erreur d&apos;authentification !</strong> Veuillez vérifier vos identifiants de connexion.
+        <div
+          class="alert alert-danger"
+          data-cy="loginError"
+          jhiTranslate="login.messages.error.authentication"
+        >
+          <strong>Erreur d&apos;authentification !</strong> Veuillez vérifier
+          vos identifiants de connexion.
         </div>
       }
-      <form class="form" (ngSubmit)="login()" [formGroup]="loginForm">
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="login()" [formGroup]="loginForm">
         <div class="mb-3">
-          <label class="username-label" for="username" jhiTranslate="global.form.username.label">Nom d&apos;utilisateur</label>
+          <label
+            class="form-label"
+            for="username"
+            jhiTranslate="global.form.username.label"
+            >Nom d'utilisateur</label
+          >
           <input
             type="text"
             class="form-control"
@@ -20,39 +43,122 @@
             data-cy="username"
           />
         </div>
-
         <div class="mb-3">
-          <label for="password" jhiTranslate="login.form.password">Mot de passe</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            id="password"
-            placeholder="{{ 'login.form.password.placeholder' | translate }}"
-            formControlName="password"
-            data-cy="password"
-          />
+          <label
+            class="form-label"
+            for="password"
+            jhiTranslate="login.form.password"
+            >Mot de passe</label
+          >
+          <div class="input-group mb-3">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control"
+              name="password"
+              id="password"
+              placeholder="{{ 'login.form.password.placeholder' | translate }}"
+              formControlName="password"
+              data-cy="password"
+            />
+            <span
+              class="input-group-text pointer"
+              (click)="togglePasswordVisibility()"
+            >
+              @if (showPassword) {
+                <i class="bi bi-eye-slash"></i>
+              }
+              @if (!showPassword) {
+                <i class="bi bi-eye"></i>
+              }
+            </span>
+          </div>
         </div>
 
         <div class="form-check">
           <label class="form-check-label" for="rememberMe">
-            <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-            <span jhiTranslate="login.form.rememberme">Garder la session ouverte</span>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="rememberMe"
+              id="rememberMe"
+              formControlName="rememberMe"
+            />
+            <span jhiTranslate="login.form.rememberme"
+              >Garder la session ouverte</span
+            >
           </label>
         </div>
-
-        <button type="submit" class="btn btn-primary" data-cy="submit" jhiTranslate="login.form.button">Connexion</button>
+        <div class="mb-4 d-flex justify-content-center">
+          <button
+            class="btn btn-connexion bg-yellow fw-bold"
+            type="submit"
+            data-cy="submit"
+            jhiTranslate="login.form.button"
+            type="submit"
+          >
+            Connexion
+          </button>
+        </div>
       </form>
-      <div class="mt-3 alert alert-warning">
-        <a class="alert-link" routerLink="/account/reset/request" data-cy="forgetYourPasswordSelector" jhiTranslate="login.password.forgot"
+      <p class="text-end pointer mb-5">
+        <a
+          class="alert-link"
+          routerLink="/account/reset/request"
+          data-cy="forgetYourPasswordSelector"
+          jhiTranslate="login.password.forgot"
           >Avez-vous oublié votre mot de passe ?</a
         >
-      </div>
-
-      <div class="alert alert-warning">
-        <span jhiTranslate="global.messages.info.register.noaccount">Vous n&apos;avez pas encore de compte ?</span>
-        <a class="alert-link" routerLink="/account/register" jhiTranslate="global.messages.info.register.link">Créer un compte</a>
-      </div>
+      </p>
     </div>
   </div>
 </div>
+
+<!-- 
+
+
+
+
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center bg-blue">
+  <h1 data-cy="loginTitle" jhiTranslate="login.title">Authentification</h1>
+  @if (authenticationError()) {
+  <div class="alert alert-danger" data-cy="loginError" jhiTranslate="login.messages.error.authentication">
+    <strong>Erreur d&apos;authentification !</strong> Veuillez vérifier vos identifiants de connexion.
+  </div>
+  }
+  <form class="form" (ngSubmit)="login()" [formGroup]="loginForm">
+    <div class="mb-3">
+      <label class="username-label" for="username" jhiTranslate="global.form.username.label">Nom
+        d&apos;utilisateur</label>
+      <input type="text" class="form-control" name="username" id="username"
+        placeholder="{{ 'global.form.username.placeholder' | translate }}" formControlName="username"
+        data-cy="username" />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" jhiTranslate="login.form.password">Mot de passe</label>
+      <input type="password" class="form-control" name="password" id="password"
+        placeholder="{{ 'login.form.password.placeholder' | translate }}" formControlName="password"
+        data-cy="password" />
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label" for="rememberMe">
+        <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe"
+          formControlName="rememberMe" />
+        <span jhiTranslate="login.form.rememberme">Garder la session ouverte</span>
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary" data-cy="submit" jhiTranslate="login.form.button">Connexion</button>
+  </form>
+  <div class="mt-3 alert alert-warning">
+    <a class="alert-link" routerLink="/account/reset/request" data-cy="forgetYourPasswordSelector"
+      jhiTranslate="login.password.forgot">Avez-vous oublié votre mot de passe ?</a>
+  </div>
+
+  <div class="alert alert-warning">
+    <span jhiTranslate="global.messages.info.register.noaccount">Vous n&apos;avez pas encore de compte ?</span>
+    <a class="alert-link" routerLink="/account/register" jhiTranslate="global.messages.info.register.link">Créer un
+      compte</a>
+  </div>
+</div> -->

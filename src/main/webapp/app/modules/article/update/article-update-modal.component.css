@@ -1,0 +1,14 @@
+.input-group-text {
+  background-color: #e9ecef;
+  color: #495057;
+  font-weight: bold;
+}
+
+.input-group {
+  margin-bottom: 5px;
+}
+
+.form-text.text-muted {
+  font-size: 0.8rem;
+  color: #6c757d !important;
+}

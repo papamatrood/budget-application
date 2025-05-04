@@ -1,37 +1,47 @@
-import { Routes } from '@angular/router';
+import { Routes } from "@angular/router";
 
-import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { ASC } from 'app/config/navigation.constants';
-import ArticleResolve from './route/article-routing-resolve.service';
+import { UserRouteAccessService } from "app/core/auth/user-route-access.service";
+import { ASC } from "app/config/navigation.constants";
+import ArticleResolve from "./route/article-routing-resolve.service";
 
 const articleRoute: Routes = [
   {
-    path: '',
-    loadComponent: () => import('./list/article.component').then(m => m.ArticleComponent),
+    path: "",
+    loadComponent: () =>
+      import("./list/article.component").then((m) => m.ArticleComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
-    loadComponent: () => import('./detail/article-detail.component').then(m => m.ArticleDetailComponent),
+    path: ":id/view",
+    loadComponent: () =>
+      import("./detail/article-detail.component").then(
+        (m) => m.ArticleDetailComponent,
+      ),
     resolve: {
       article: ArticleResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new',
-    loadComponent: () => import('./update/article-update.component').then(m => m.ArticleUpdateComponent),
+    path: "new",
+    loadComponent: () =>
+      import("./update/article-update.component").then(
+        (m) => m.ArticleUpdateComponent,
+      ),
     resolve: {
       article: ArticleResolve,
     },
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    loadComponent: () => import('./update/article-update.component').then(m => m.ArticleUpdateComponent),
+    path: ":id/edit",
+    loadComponent: () =>
+      import("./update/article-update.component").then(
+        (m) => m.ArticleUpdateComponent,
+      ),
     resolve: {
       article: ArticleResolve,
     },

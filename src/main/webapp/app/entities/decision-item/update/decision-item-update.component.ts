@@ -1,21 +1,24 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { Component, OnInit, inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { finalize, map } from "rxjs/operators";
 
-import SharedModule from 'app/shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import SharedModule from "app/shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { IDecision } from 'app/entities/decision/decision.model';
-import { DecisionService } from 'app/entities/decision/service/decision.service';
-import { IDecisionItem } from '../decision-item.model';
-import { DecisionItemService } from '../service/decision-item.service';
-import { DecisionItemFormGroup, DecisionItemFormService } from './decision-item-form.service';
+import { IDecision } from "app/entities/decision/decision.model";
+import { DecisionService } from "app/entities/decision/service/decision.service";
+import { IDecisionItem } from "../decision-item.model";
+import { DecisionItemService } from "../service/decision-item.service";
+import {
+  DecisionItemFormGroup,
+  DecisionItemFormService,
+} from "./decision-item-form.service";
 
 @Component({
-  selector: 'jhi-decision-item-update',
-  templateUrl: './decision-item-update.component.html',
+  selector: "jhi-decision-item-update",
+  templateUrl: "./decision-item-update.component.html",
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class DecisionItemUpdateComponent implements OnInit {
@@ -30,9 +33,11 @@ export class DecisionItemUpdateComponent implements OnInit {
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  editForm: DecisionItemFormGroup = this.decisionItemFormService.createDecisionItemFormGroup();
+  editForm: DecisionItemFormGroup =
+    this.decisionItemFormService.createDecisionItemFormGroup();
 
-  compareDecision = (o1: IDecision | null, o2: IDecision | null): boolean => this.decisionService.compareDecision(o1, o2);
+  compareDecision = (o1: IDecision | null, o2: IDecision | null): boolean =>
+    this.decisionService.compareDecision(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ decisionItem }) => {
@@ -51,15 +56,23 @@ export class DecisionItemUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const decisionItem = this.decisionItemFormService.getDecisionItem(this.editForm);
+    const decisionItem = this.decisionItemFormService.getDecisionItem(
+      this.editForm,
+    );
     if (decisionItem.id !== null) {
-      this.subscribeToSaveResponse(this.decisionItemService.update(decisionItem));
+      this.subscribeToSaveResponse(
+        this.decisionItemService.update(decisionItem),
+      );
     } else {
-      this.subscribeToSaveResponse(this.decisionItemService.create(decisionItem));
+      this.subscribeToSaveResponse(
+        this.decisionItemService.create(decisionItem),
+      );
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IDecisionItem>>): void {
+  protected subscribeToSaveResponse(
+    result: Observable<HttpResponse<IDecisionItem>>,
+  ): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -82,10 +95,11 @@ export class DecisionItemUpdateComponent implements OnInit {
     this.decisionItem = decisionItem;
     this.decisionItemFormService.resetForm(this.editForm, decisionItem);
 
-    this.decisionsSharedCollection = this.decisionService.addDecisionToCollectionIfMissing<IDecision>(
-      this.decisionsSharedCollection,
-      decisionItem.decision,
-    );
+    this.decisionsSharedCollection =
+      this.decisionService.addDecisionToCollectionIfMissing<IDecision>(
+        this.decisionsSharedCollection,
+        decisionItem.decision,
+      );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -94,9 +108,15 @@ export class DecisionItemUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IDecision[]>) => res.body ?? []))
       .pipe(
         map((decisions: IDecision[]) =>
-          this.decisionService.addDecisionToCollectionIfMissing<IDecision>(decisions, this.decisionItem?.decision),
+          this.decisionService.addDecisionToCollectionIfMissing<IDecision>(
+            decisions,
+            this.decisionItem?.decision,
+          ),
         ),
       )
-      .subscribe((decisions: IDecision[]) => (this.decisionsSharedCollection = decisions));
+      .subscribe(
+        (decisions: IDecision[]) =>
+          (this.decisionsSharedCollection = decisions),
+      );
   }
 }

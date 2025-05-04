@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { sampleWithNewData, sampleWithRequiredData } from '../annex-decision.test-samples';
+import {
+  sampleWithNewData,
+  sampleWithRequiredData,
+} from "../annex-decision.test-samples";
 
-import { AnnexDecisionFormService } from './annex-decision-form.service';
+import { AnnexDecisionFormService } from "./annex-decision-form.service";
 
-describe('AnnexDecision Form Service', () => {
+describe("AnnexDecision Form Service", () => {
   let service: AnnexDecisionFormService;
 
   beforeEach(() => {
@@ -12,9 +15,9 @@ describe('AnnexDecision Form Service', () => {
     service = TestBed.inject(AnnexDecisionFormService);
   });
 
-  describe('Service methods', () => {
-    describe('createAnnexDecisionFormGroup', () => {
-      it('should create a new form with FormControl', () => {
+  describe("Service methods", () => {
+    describe("createAnnexDecisionFormGroup", () => {
+      it("should create a new form with FormControl", () => {
         const formGroup = service.createAnnexDecisionFormGroup();
 
         expect(formGroup.controls).toEqual(
@@ -29,8 +32,10 @@ describe('AnnexDecision Form Service', () => {
         );
       });
 
-      it('passing IAnnexDecision should create a new form with FormGroup', () => {
-        const formGroup = service.createAnnexDecisionFormGroup(sampleWithRequiredData);
+      it("passing IAnnexDecision should create a new form with FormGroup", () => {
+        const formGroup = service.createAnnexDecisionFormGroup(
+          sampleWithRequiredData,
+        );
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
@@ -45,16 +50,17 @@ describe('AnnexDecision Form Service', () => {
       });
     });
 
-    describe('getAnnexDecision', () => {
-      it('should return NewAnnexDecision for default AnnexDecision initial value', () => {
-        const formGroup = service.createAnnexDecisionFormGroup(sampleWithNewData);
+    describe("getAnnexDecision", () => {
+      it("should return NewAnnexDecision for default AnnexDecision initial value", () => {
+        const formGroup =
+          service.createAnnexDecisionFormGroup(sampleWithNewData);
 
         const annexDecision = service.getAnnexDecision(formGroup) as any;
 
         expect(annexDecision).toMatchObject(sampleWithNewData);
       });
 
-      it('should return NewAnnexDecision for empty AnnexDecision initial value', () => {
+      it("should return NewAnnexDecision for empty AnnexDecision initial value", () => {
         const formGroup = service.createAnnexDecisionFormGroup();
 
         const annexDecision = service.getAnnexDecision(formGroup) as any;
@@ -62,8 +68,10 @@ describe('AnnexDecision Form Service', () => {
         expect(annexDecision).toMatchObject({});
       });
 
-      it('should return IAnnexDecision', () => {
-        const formGroup = service.createAnnexDecisionFormGroup(sampleWithRequiredData);
+      it("should return IAnnexDecision", () => {
+        const formGroup = service.createAnnexDecisionFormGroup(
+          sampleWithRequiredData,
+        );
 
         const annexDecision = service.getAnnexDecision(formGroup) as any;
 
@@ -71,8 +79,8 @@ describe('AnnexDecision Form Service', () => {
       });
     });
 
-    describe('resetForm', () => {
-      it('passing IAnnexDecision should not enable id FormControl', () => {
+    describe("resetForm", () => {
+      it("passing IAnnexDecision should not enable id FormControl", () => {
         const formGroup = service.createAnnexDecisionFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 
@@ -81,8 +89,10 @@ describe('AnnexDecision Form Service', () => {
         expect(formGroup.controls.id.disabled).toBe(true);
       });
 
-      it('passing NewAnnexDecision should disable id FormControl', () => {
-        const formGroup = service.createAnnexDecisionFormGroup(sampleWithRequiredData);
+      it("passing NewAnnexDecision should disable id FormControl", () => {
+        const formGroup = service.createAnnexDecisionFormGroup(
+          sampleWithRequiredData,
+        );
         expect(formGroup.controls.id.disabled).toBe(true);
 
         service.resetForm(formGroup, { id: null });

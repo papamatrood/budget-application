@@ -1,35 +1,45 @@
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { IPurchaseOrderItem, NewPurchaseOrderItem } from '../purchase-order-item.model';
+import {
+  IPurchaseOrderItem,
+  NewPurchaseOrderItem,
+} from "../purchase-order-item.model";
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<
+  Omit<T, "id">
+> & { id: T["id"] };
 
 /**
  * Type for createFormGroup and resetForm argument.
  * It accepts IPurchaseOrderItem for edit and NewPurchaseOrderItemFormGroupInput for create.
  */
-type PurchaseOrderItemFormGroupInput = IPurchaseOrderItem | PartialWithRequiredKeyOf<NewPurchaseOrderItem>;
+type PurchaseOrderItemFormGroupInput =
+  | IPurchaseOrderItem
+  | PartialWithRequiredKeyOf<NewPurchaseOrderItem>;
 
-type PurchaseOrderItemFormDefaults = Pick<NewPurchaseOrderItem, 'id'>;
+type PurchaseOrderItemFormDefaults = Pick<NewPurchaseOrderItem, "id">;
 
 type PurchaseOrderItemFormGroupContent = {
-  id: FormControl<IPurchaseOrderItem['id'] | NewPurchaseOrderItem['id']>;
-  productName: FormControl<IPurchaseOrderItem['productName']>;
-  quantity: FormControl<IPurchaseOrderItem['quantity']>;
-  unitPrice: FormControl<IPurchaseOrderItem['unitPrice']>;
-  totalAmount: FormControl<IPurchaseOrderItem['totalAmount']>;
-  purchaseOrder: FormControl<IPurchaseOrderItem['purchaseOrder']>;
+  id: FormControl<IPurchaseOrderItem["id"] | NewPurchaseOrderItem["id"]>;
+  productName: FormControl<IPurchaseOrderItem["productName"]>;
+  quantity: FormControl<IPurchaseOrderItem["quantity"]>;
+  unitPrice: FormControl<IPurchaseOrderItem["unitPrice"]>;
+  totalAmount: FormControl<IPurchaseOrderItem["totalAmount"]>;
+  purchaseOrder: FormControl<IPurchaseOrderItem["purchaseOrder"]>;
 };
 
-export type PurchaseOrderItemFormGroup = FormGroup<PurchaseOrderItemFormGroupContent>;
+export type PurchaseOrderItemFormGroup =
+  FormGroup<PurchaseOrderItemFormGroupContent>;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class PurchaseOrderItemFormService {
-  createPurchaseOrderItemFormGroup(purchaseOrderItem: PurchaseOrderItemFormGroupInput = { id: null }): PurchaseOrderItemFormGroup {
+  createPurchaseOrderItemFormGroup(
+    purchaseOrderItem: PurchaseOrderItemFormGroupInput = { id: null },
+  ): PurchaseOrderItemFormGroup {
     const purchaseOrderItemRawValue = {
       ...this.getFormDefaults(),
       ...purchaseOrderItem,
@@ -58,12 +68,20 @@ export class PurchaseOrderItemFormService {
     });
   }
 
-  getPurchaseOrderItem(form: PurchaseOrderItemFormGroup): IPurchaseOrderItem | NewPurchaseOrderItem {
+  getPurchaseOrderItem(
+    form: PurchaseOrderItemFormGroup,
+  ): IPurchaseOrderItem | NewPurchaseOrderItem {
     return form.getRawValue() as IPurchaseOrderItem | NewPurchaseOrderItem;
   }
 
-  resetForm(form: PurchaseOrderItemFormGroup, purchaseOrderItem: PurchaseOrderItemFormGroupInput): void {
-    const purchaseOrderItemRawValue = { ...this.getFormDefaults(), ...purchaseOrderItem };
+  resetForm(
+    form: PurchaseOrderItemFormGroup,
+    purchaseOrderItem: PurchaseOrderItemFormGroupInput,
+  ): void {
+    const purchaseOrderItemRawValue = {
+      ...this.getFormDefaults(),
+      ...purchaseOrderItem,
+    };
     form.reset(
       {
         ...purchaseOrderItemRawValue,

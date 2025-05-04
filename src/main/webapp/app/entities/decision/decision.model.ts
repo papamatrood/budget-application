@@ -1,6 +1,6 @@
-import dayjs from 'dayjs/esm';
-import { IEngagement } from 'app/entities/engagement/engagement.model';
-import { IAnnexDecision } from 'app/entities/annex-decision/annex-decision.model';
+import dayjs from "dayjs/esm";
+import { IEngagement } from "app/entities/engagement/engagement.model";
+import { IAnnexDecision } from "app/entities/annex-decision/annex-decision.model";
 
 export interface IDecision {
   id: number;
@@ -10,4 +10,4 @@ export interface IDecision {
   annexDecision?: IAnnexDecision | null;
 }
 
-export type NewDecision = Omit<IDecision, 'id'> & { id: null };
+export type NewDecision = Omit<IDecision, "id"> & { id: null };

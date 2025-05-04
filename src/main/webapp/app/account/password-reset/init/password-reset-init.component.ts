@@ -1,16 +1,28 @@
-import { AfterViewInit, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import SharedModule from 'app/shared/shared.module';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from "@angular/core";
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
+import SharedModule from "app/shared/shared.module";
 
-import { PasswordResetInitService } from './password-reset-init.service';
+import { PasswordResetInitService } from "./password-reset-init.service";
 
 @Component({
-  selector: 'jhi-password-reset-init',
+  selector: "jhi-password-reset-init",
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './password-reset-init.component.html',
+  templateUrl: "./password-reset-init.component.html",
 })
 export default class PasswordResetInitComponent implements AfterViewInit {
-  email = viewChild.required<ElementRef>('email');
+  email = viewChild.required<ElementRef>("email");
 
   success = signal(false);
   resetRequestForm;
@@ -20,7 +32,15 @@ export default class PasswordResetInitComponent implements AfterViewInit {
 
   constructor() {
     this.resetRequestForm = this.fb.group({
-      email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
+      email: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(254),
+          Validators.email,
+        ],
+      ],
     });
   }
 
@@ -29,6 +49,8 @@ export default class PasswordResetInitComponent implements AfterViewInit {
   }
 
   requestReset(): void {
-    this.passwordResetInitService.save(this.resetRequestForm.get(['email'])!.value).subscribe(() => this.success.set(true));
+    this.passwordResetInitService
+      .save(this.resetRequestForm.get(["email"])!.value)
+      .subscribe(() => this.success.set(true));
   }
 }

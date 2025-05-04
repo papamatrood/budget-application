@@ -1,12 +1,12 @@
-import { Component, input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, input } from "@angular/core";
+import { RouterModule } from "@angular/router";
 
-import SharedModule from 'app/shared/shared.module';
-import { IFinancialYear } from '../financial-year.model';
+import SharedModule from "app/shared/shared.module";
+import { IFinancialYear } from "../financial-year.model";
 
 @Component({
-  selector: 'jhi-financial-year-detail',
-  templateUrl: './financial-year-detail.component.html',
+  selector: "jhi-financial-year-detail",
+  templateUrl: "./financial-year-detail.component.html",
   imports: [SharedModule, RouterModule],
 })
 export class FinancialYearDetailComponent {

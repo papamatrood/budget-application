@@ -1,16 +1,26 @@
-import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { HttpHeaders, HttpResponse, provideHttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, of } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  inject,
+  tick,
+} from "@angular/core/testing";
+import {
+  HttpHeaders,
+  HttpResponse,
+  provideHttpClient,
+} from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Subject, of } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
-import { sampleWithRequiredData } from '../purchase-order.test-samples';
-import { PurchaseOrderService } from '../service/purchase-order.service';
+import { sampleWithRequiredData } from "../purchase-order.test-samples";
+import { PurchaseOrderService } from "../service/purchase-order.service";
 
-import { PurchaseOrderComponent } from './purchase-order.component';
+import { PurchaseOrderComponent } from "./purchase-order.component";
 import SpyInstance = jest.SpyInstance;
 
-describe('PurchaseOrder Management Component', () => {
+describe("PurchaseOrder Management Component", () => {
   let comp: PurchaseOrderComponent;
   let fixture: ComponentFixture<PurchaseOrderComponent>;
   let service: PurchaseOrderService;
@@ -25,39 +35,41 @@ describe('PurchaseOrder Management Component', () => {
           provide: ActivatedRoute,
           useValue: {
             data: of({
-              defaultSort: 'id,asc',
+              defaultSort: "id,asc",
             }),
             queryParamMap: of(
-              jest.requireActual('@angular/router').convertToParamMap({
-                page: '1',
-                size: '1',
-                sort: 'id,desc',
-                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
+              jest.requireActual("@angular/router").convertToParamMap({
+                page: "1",
+                size: "1",
+                sort: "id,desc",
+                "filter[someId.in]": "dc4279ea-cfb9-11ec-9d64-0242ac120002",
               }),
             ),
             snapshot: {
               queryParams: {},
-              queryParamMap: jest.requireActual('@angular/router').convertToParamMap({
-                page: '1',
-                size: '1',
-                sort: 'id,desc',
-                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
-              }),
+              queryParamMap: jest
+                .requireActual("@angular/router")
+                .convertToParamMap({
+                  page: "1",
+                  size: "1",
+                  sort: "id,desc",
+                  "filter[someId.in]": "dc4279ea-cfb9-11ec-9d64-0242ac120002",
+                }),
             },
           },
         },
       ],
     })
-      .overrideTemplate(PurchaseOrderComponent, '')
+      .overrideTemplate(PurchaseOrderComponent, "")
       .compileComponents();
 
     fixture = TestBed.createComponent(PurchaseOrderComponent);
     comp = fixture.componentInstance;
     service = TestBed.inject(PurchaseOrderService);
-    routerNavigateSpy = jest.spyOn(comp.router, 'navigate');
+    routerNavigateSpy = jest.spyOn(comp.router, "navigate");
 
     jest
-      .spyOn(service, 'query')
+      .spyOn(service, "query")
       .mockReturnValueOnce(
         of(
           new HttpResponse({
@@ -80,41 +92,46 @@ describe('PurchaseOrder Management Component', () => {
       );
   });
 
-  it('should call load all on init', () => {
+  it("should call load all on init", () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.purchaseOrders()[0]).toEqual(expect.objectContaining({ id: 29828 }));
+    expect(comp.purchaseOrders()[0]).toEqual(
+      expect.objectContaining({ id: 29828 }),
+    );
   });
 
-  describe('trackId', () => {
-    it('should forward to purchaseOrderService', () => {
+  describe("trackId", () => {
+    it("should forward to purchaseOrderService", () => {
       const entity = { id: 29828 };
-      jest.spyOn(service, 'getPurchaseOrderIdentifier');
+      jest.spyOn(service, "getPurchaseOrderIdentifier");
       const id = comp.trackId(entity);
       expect(service.getPurchaseOrderIdentifier).toHaveBeenCalledWith(entity);
       expect(id).toBe(entity.id);
     });
   });
 
-  it('should calculate the sort attribute for a non-id attribute', () => {
+  it("should calculate the sort attribute for a non-id attribute", () => {
     // WHEN
-    comp.navigateToWithComponentValues({ predicate: 'non-existing-column', order: 'asc' });
+    comp.navigateToWithComponentValues({
+      predicate: "non-existing-column",
+      order: "asc",
+    });
 
     // THEN
     expect(routerNavigateSpy).toHaveBeenLastCalledWith(
       expect.anything(),
       expect.objectContaining({
         queryParams: expect.objectContaining({
-          sort: ['non-existing-column,asc'],
+          sort: ["non-existing-column,asc"],
         }),
       }),
     );
   });
 
-  it('should load a page', () => {
+  it("should load a page", () => {
     // WHEN
     comp.navigateToPage(1);
 
@@ -122,23 +139,29 @@ describe('PurchaseOrder Management Component', () => {
     expect(routerNavigateSpy).toHaveBeenCalled();
   });
 
-  it('should calculate the sort attribute for an id', () => {
+  it("should calculate the sort attribute for an id", () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
-    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['id,desc'] }));
+    expect(service.query).toHaveBeenLastCalledWith(
+      expect.objectContaining({ sort: ["id,desc"] }),
+    );
   });
 
-  it('should calculate the filter attribute', () => {
+  it("should calculate the filter attribute", () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
-    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ 'someId.in': ['dc4279ea-cfb9-11ec-9d64-0242ac120002'] }));
+    expect(service.query).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        "someId.in": ["dc4279ea-cfb9-11ec-9d64-0242ac120002"],
+      }),
+    );
   });
 
-  describe('delete', () => {
+  describe("delete", () => {
     let ngbModal: NgbModal;
     let deleteModalMock: any;
 
@@ -147,18 +170,18 @@ describe('PurchaseOrder Management Component', () => {
       // NgbModal is not a singleton using TestBed.inject.
       // ngbModal = TestBed.inject(NgbModal);
       ngbModal = (comp as any).modalService;
-      jest.spyOn(ngbModal, 'open').mockReturnValue(deleteModalMock);
+      jest.spyOn(ngbModal, "open").mockReturnValue(deleteModalMock);
     });
 
-    it('on confirm should call load', inject(
+    it("on confirm should call load", inject(
       [],
       fakeAsync(() => {
         // GIVEN
-        jest.spyOn(comp, 'load');
+        jest.spyOn(comp, "load");
 
         // WHEN
         comp.delete(sampleWithRequiredData);
-        deleteModalMock.closed.next('deleted');
+        deleteModalMock.closed.next("deleted");
         tick();
 
         // THEN
@@ -167,11 +190,11 @@ describe('PurchaseOrder Management Component', () => {
       }),
     ));
 
-    it('on dismiss should call load', inject(
+    it("on dismiss should call load", inject(
       [],
       fakeAsync(() => {
         // GIVEN
-        jest.spyOn(comp, 'load');
+        jest.spyOn(comp, "load");
 
         // WHEN
         comp.delete(sampleWithRequiredData);

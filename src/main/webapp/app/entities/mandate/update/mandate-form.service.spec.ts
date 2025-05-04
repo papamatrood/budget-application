@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { sampleWithNewData, sampleWithRequiredData } from '../mandate.test-samples';
+import {
+  sampleWithNewData,
+  sampleWithRequiredData,
+} from "../mandate.test-samples";
 
-import { MandateFormService } from './mandate-form.service';
+import { MandateFormService } from "./mandate-form.service";
 
-describe('Mandate Form Service', () => {
+describe("Mandate Form Service", () => {
   let service: MandateFormService;
 
   beforeEach(() => {
@@ -12,9 +15,9 @@ describe('Mandate Form Service', () => {
     service = TestBed.inject(MandateFormService);
   });
 
-  describe('Service methods', () => {
-    describe('createMandateFormGroup', () => {
-      it('should create a new form with FormControl', () => {
+  describe("Service methods", () => {
+    describe("createMandateFormGroup", () => {
+      it("should create a new form with FormControl", () => {
         const formGroup = service.createMandateFormGroup();
 
         expect(formGroup.controls).toEqual(
@@ -30,8 +33,10 @@ describe('Mandate Form Service', () => {
         );
       });
 
-      it('passing IMandate should create a new form with FormGroup', () => {
-        const formGroup = service.createMandateFormGroup(sampleWithRequiredData);
+      it("passing IMandate should create a new form with FormGroup", () => {
+        const formGroup = service.createMandateFormGroup(
+          sampleWithRequiredData,
+        );
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
@@ -47,8 +52,8 @@ describe('Mandate Form Service', () => {
       });
     });
 
-    describe('getMandate', () => {
-      it('should return NewMandate for default Mandate initial value', () => {
+    describe("getMandate", () => {
+      it("should return NewMandate for default Mandate initial value", () => {
         const formGroup = service.createMandateFormGroup(sampleWithNewData);
 
         const mandate = service.getMandate(formGroup) as any;
@@ -56,7 +61,7 @@ describe('Mandate Form Service', () => {
         expect(mandate).toMatchObject(sampleWithNewData);
       });
 
-      it('should return NewMandate for empty Mandate initial value', () => {
+      it("should return NewMandate for empty Mandate initial value", () => {
         const formGroup = service.createMandateFormGroup();
 
         const mandate = service.getMandate(formGroup) as any;
@@ -64,8 +69,10 @@ describe('Mandate Form Service', () => {
         expect(mandate).toMatchObject({});
       });
 
-      it('should return IMandate', () => {
-        const formGroup = service.createMandateFormGroup(sampleWithRequiredData);
+      it("should return IMandate", () => {
+        const formGroup = service.createMandateFormGroup(
+          sampleWithRequiredData,
+        );
 
         const mandate = service.getMandate(formGroup) as any;
 
@@ -73,8 +80,8 @@ describe('Mandate Form Service', () => {
       });
     });
 
-    describe('resetForm', () => {
-      it('passing IMandate should not enable id FormControl', () => {
+    describe("resetForm", () => {
+      it("passing IMandate should not enable id FormControl", () => {
         const formGroup = service.createMandateFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 
@@ -83,8 +90,10 @@ describe('Mandate Form Service', () => {
         expect(formGroup.controls.id.disabled).toBe(true);
       });
 
-      it('passing NewMandate should disable id FormControl', () => {
-        const formGroup = service.createMandateFormGroup(sampleWithRequiredData);
+      it("passing NewMandate should disable id FormControl", () => {
+        const formGroup = service.createMandateFormGroup(
+          sampleWithRequiredData,
+        );
         expect(formGroup.controls.id.disabled).toBe(true);
 
         service.resetForm(formGroup, { id: null });

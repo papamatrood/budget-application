@@ -1,18 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, from, of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Subject, from, of } from "rxjs";
 
-import { IDecision } from 'app/entities/decision/decision.model';
-import { DecisionService } from 'app/entities/decision/service/decision.service';
-import { DecisionItemService } from '../service/decision-item.service';
-import { IDecisionItem } from '../decision-item.model';
-import { DecisionItemFormService } from './decision-item-form.service';
+import { IDecision } from "app/entities/decision/decision.model";
+import { DecisionService } from "app/entities/decision/service/decision.service";
+import { DecisionItemService } from "../service/decision-item.service";
+import { IDecisionItem } from "../decision-item.model";
+import { DecisionItemFormService } from "./decision-item-form.service";
 
-import { DecisionItemUpdateComponent } from './decision-item-update.component';
+import { DecisionItemUpdateComponent } from "./decision-item-update.component";
 
-describe('DecisionItem Management Update Component', () => {
+describe("DecisionItem Management Update Component", () => {
   let comp: DecisionItemUpdateComponent;
   let fixture: ComponentFixture<DecisionItemUpdateComponent>;
   let activatedRoute: ActivatedRoute;
@@ -34,7 +34,7 @@ describe('DecisionItem Management Update Component', () => {
         },
       ],
     })
-      .overrideTemplate(DecisionItemUpdateComponent, '')
+      .overrideTemplate(DecisionItemUpdateComponent, "")
       .compileComponents();
 
     fixture = TestBed.createComponent(DecisionItemUpdateComponent);
@@ -46,30 +46,39 @@ describe('DecisionItem Management Update Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('ngOnInit', () => {
-    it('should call Decision query and add missing value', () => {
+  describe("ngOnInit", () => {
+    it("should call Decision query and add missing value", () => {
       const decisionItem: IDecisionItem = { id: 6825 };
       const decision: IDecision = { id: 19132 };
       decisionItem.decision = decision;
 
       const decisionCollection: IDecision[] = [{ id: 19132 }];
-      jest.spyOn(decisionService, 'query').mockReturnValue(of(new HttpResponse({ body: decisionCollection })));
+      jest
+        .spyOn(decisionService, "query")
+        .mockReturnValue(of(new HttpResponse({ body: decisionCollection })));
       const additionalDecisions = [decision];
-      const expectedCollection: IDecision[] = [...additionalDecisions, ...decisionCollection];
-      jest.spyOn(decisionService, 'addDecisionToCollectionIfMissing').mockReturnValue(expectedCollection);
+      const expectedCollection: IDecision[] = [
+        ...additionalDecisions,
+        ...decisionCollection,
+      ];
+      jest
+        .spyOn(decisionService, "addDecisionToCollectionIfMissing")
+        .mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ decisionItem });
       comp.ngOnInit();
 
       expect(decisionService.query).toHaveBeenCalled();
-      expect(decisionService.addDecisionToCollectionIfMissing).toHaveBeenCalledWith(
+      expect(
+        decisionService.addDecisionToCollectionIfMissing,
+      ).toHaveBeenCalledWith(
         decisionCollection,
         ...additionalDecisions.map(expect.objectContaining),
       );
       expect(comp.decisionsSharedCollection).toEqual(expectedCollection);
     });
 
-    it('should update editForm', () => {
+    it("should update editForm", () => {
       const decisionItem: IDecisionItem = { id: 6825 };
       const decision: IDecision = { id: 19132 };
       decisionItem.decision = decision;
@@ -82,14 +91,16 @@ describe('DecisionItem Management Update Component', () => {
     });
   });
 
-  describe('save', () => {
-    it('should call update service on save for existing entity', () => {
+  describe("save", () => {
+    it("should call update service on save for existing entity", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IDecisionItem>>();
       const decisionItem = { id: 9886 };
-      jest.spyOn(decisionItemFormService, 'getDecisionItem').mockReturnValue(decisionItem);
-      jest.spyOn(decisionItemService, 'update').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest
+        .spyOn(decisionItemFormService, "getDecisionItem")
+        .mockReturnValue(decisionItem);
+      jest.spyOn(decisionItemService, "update").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ decisionItem });
       comp.ngOnInit();
 
@@ -102,17 +113,21 @@ describe('DecisionItem Management Update Component', () => {
       // THEN
       expect(decisionItemFormService.getDecisionItem).toHaveBeenCalled();
       expect(comp.previousState).toHaveBeenCalled();
-      expect(decisionItemService.update).toHaveBeenCalledWith(expect.objectContaining(decisionItem));
+      expect(decisionItemService.update).toHaveBeenCalledWith(
+        expect.objectContaining(decisionItem),
+      );
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('should call create service on save for new entity', () => {
+    it("should call create service on save for new entity", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IDecisionItem>>();
       const decisionItem = { id: 9886 };
-      jest.spyOn(decisionItemFormService, 'getDecisionItem').mockReturnValue({ id: null });
-      jest.spyOn(decisionItemService, 'create').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest
+        .spyOn(decisionItemFormService, "getDecisionItem")
+        .mockReturnValue({ id: null });
+      jest.spyOn(decisionItemService, "create").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ decisionItem: null });
       comp.ngOnInit();
 
@@ -129,19 +144,19 @@ describe('DecisionItem Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('should set isSaving to false on error', () => {
+    it("should set isSaving to false on error", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IDecisionItem>>();
       const decisionItem = { id: 9886 };
-      jest.spyOn(decisionItemService, 'update').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest.spyOn(decisionItemService, "update").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ decisionItem });
       comp.ngOnInit();
 
       // WHEN
       comp.save();
       expect(comp.isSaving).toEqual(true);
-      saveSubject.error('This is an error!');
+      saveSubject.error("This is an error!");
 
       // THEN
       expect(decisionItemService.update).toHaveBeenCalled();
@@ -150,14 +165,17 @@ describe('DecisionItem Management Update Component', () => {
     });
   });
 
-  describe('Compare relationships', () => {
-    describe('compareDecision', () => {
-      it('should forward to decisionService', () => {
+  describe("Compare relationships", () => {
+    describe("compareDecision", () => {
+      it("should forward to decisionService", () => {
         const entity = { id: 19132 };
         const entity2 = { id: 4076 };
-        jest.spyOn(decisionService, 'compareDecision');
+        jest.spyOn(decisionService, "compareDecision");
         comp.compareDecision(entity, entity2);
-        expect(decisionService.compareDecision).toHaveBeenCalledWith(entity, entity2);
+        expect(decisionService.compareDecision).toHaveBeenCalledWith(
+          entity,
+          entity2,
+        );
       });
     });
   });

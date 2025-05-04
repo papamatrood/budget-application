@@ -4,8 +4,13 @@
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
-        <span jhiTranslate="budgetApplicationApp.expense.home.refreshListLabel">Actualiser la liste</span>
+        <fa-icon
+          icon="sync"
+          [animation]="isLoading ? 'spin' : undefined"
+        ></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.expense.home.refreshListLabel"
+          >Actualiser la liste</span
+        >
       </button>
 
       <button
@@ -15,7 +20,9 @@
         [routerLink]="['/expense/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="budgetApplicationApp.expense.home.createLabel">Créer un nouveau Expense</span>
+        <span jhiTranslate="budgetApplicationApp.expense.home.createLabel"
+          >Créer un nouveau Expense</span
+        >
       </button>
     </div>
   </h2>
@@ -28,13 +35,19 @@
 
   @if (expenses().length === 0) {
     <div class="alert alert-warning" id="no-result">
-      <span jhiTranslate="budgetApplicationApp.expense.home.notFound">Aucun Expense trouvé</span>
+      <span jhiTranslate="budgetApplicationApp.expense.home.notFound"
+        >Aucun Expense trouvé</span
+      >
     </div>
   } @else {
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
-          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+          <tr
+            jhiSort
+            [(sortState)]="sortState"
+            (sortChange)="navigateToWithComponentValues($event)"
+          >
             <th scope="col" jhiSortBy="id">
               <div class="d-flex">
                 <span jhiTranslate="global.field.id">ID</span>
@@ -44,34 +57,46 @@
             </th>
             <th scope="col" jhiSortBy="achievementsInThePastYear">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.expense.achievementsInThePastYear">Achievements In The Past Year</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.expense.achievementsInThePastYear"
+                  >Achievements In The Past Year</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="newYearForecast">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.expense.newYearForecast">New Year Forecast</span>
+                <span
+                  jhiTranslate="budgetApplicationApp.expense.newYearForecast"
+                  >New Year Forecast</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="category">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.expense.category">Category</span>
+                <span jhiTranslate="budgetApplicationApp.expense.category"
+                  >Category</span
+                >
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="financialYear.id">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.expense.financialYear">Financial Year</span>
+                <span jhiTranslate="budgetApplicationApp.expense.financialYear"
+                  >Financial Year</span
+                >
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col" jhiSortBy="annexDecision.id">
               <div class="d-flex">
-                <span jhiTranslate="budgetApplicationApp.expense.annexDecision">Annex Decision</span>
+                <span jhiTranslate="budgetApplicationApp.expense.annexDecision"
+                  >Annex Decision</span
+                >
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
@@ -82,50 +107,96 @@
           @for (expense of expenses(); track trackId(expense)) {
             <tr data-cy="entityTable">
               <td>
-                <a [routerLink]="['/expense', expense.id, 'view']">{{ expense.id }}</a>
+                <a [routerLink]="['/expense', expense.id, 'view']">{{
+                  expense.id
+                }}</a>
               </td>
               <td>{{ expense.achievementsInThePastYear }}</td>
               <td>{{ expense.newYearForecast }}</td>
-              <td [jhiTranslate]="'budgetApplicationApp.FinancialCategoryEnum.' + (expense.category ?? 'null')">
+              <td
+                [jhiTranslate]="
+                  'budgetApplicationApp.FinancialCategoryEnum.' +
+                  (expense.category ?? 'null')
+                "
+              >
                 {{
                   {
-                    null: '',
-                    OPERATING_RECIPE: 'OPERATING_RECIPE',
-                    INVESTMENT_RECIPE: 'INVESTMENT_RECIPE',
-                    OPERATING_EXPENSE: 'OPERATING_EXPENSE',
-                    INVESTMENT_EXPENSE: 'INVESTMENT_EXPENSE',
-                  }[expense.category ?? 'null']
+                    null: "",
+                    OPERATING_RECIPE: "OPERATING_RECIPE",
+                    INVESTMENT_RECIPE: "INVESTMENT_RECIPE",
+                    OPERATING_EXPENSE: "OPERATING_EXPENSE",
+                    INVESTMENT_EXPENSE: "INVESTMENT_EXPENSE",
+                  }[expense.category ?? "null"]
                 }}
               </td>
               <td>
                 @if (expense.financialYear) {
                   <div>
-                    <a [routerLink]="['/financial-year', expense.financialYear.id, 'view']">{{ expense.financialYear.id }}</a>
+                    <a
+                      [routerLink]="[
+                        '/financial-year',
+                        expense.financialYear.id,
+                        'view',
+                      ]"
+                      >{{ expense.financialYear.id }}</a
+                    >
                   </div>
                 }
               </td>
               <td>
                 @if (expense.annexDecision) {
                   <div>
-                    <a [routerLink]="['/annex-decision', expense.annexDecision.id, 'view']">{{ expense.annexDecision.id }}</a>
+                    <a
+                      [routerLink]="[
+                        '/annex-decision',
+                        expense.annexDecision.id,
+                        'view',
+                      ]"
+                      >{{ expense.annexDecision.id }}</a
+                    >
                   </div>
                 }
               </td>
               <td class="text-end">
                 <div class="btn-group">
-                  <a [routerLink]="['/expense', expense.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <a
+                    [routerLink]="['/expense', expense.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
                     <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.view"
+                      >Voir</span
+                    >
                   </a>
 
-                  <a [routerLink]="['/expense', expense.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <a
+                    [routerLink]="['/expense', expense.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
                     <fa-icon icon="pencil-alt"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.edit"
+                      >Editer</span
+                    >
                   </a>
 
-                  <button type="submit" (click)="delete(expense)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <button
+                    type="submit"
+                    (click)="delete(expense)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
                     <fa-icon icon="times"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.delete"
+                      >Supprimer</span
+                    >
                   </button>
                 </div>
               </td>
@@ -138,7 +209,13 @@
   @if (expenses().length > 0) {
     <div>
       <div class="d-flex justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+        <jhi-item-count
+          [params]="{
+            page: page,
+            totalItems: totalItems,
+            itemsPerPage: itemsPerPage,
+          }"
+        />
       </div>
 
       <div class="d-flex justify-content-center">

@@ -1,12 +1,12 @@
-import { Component, input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, input } from "@angular/core";
+import { RouterModule } from "@angular/router";
 
-import SharedModule from 'app/shared/shared.module';
-import { ISubTitle } from '../sub-title.model';
+import SharedModule from "app/shared/shared.module";
+import { ISubTitle } from "../sub-title.model";
 
 @Component({
-  selector: 'jhi-sub-title-detail',
-  templateUrl: './sub-title-detail.component.html',
+  selector: "jhi-sub-title-detail",
+  templateUrl: "./sub-title-detail.component.html",
   imports: [SharedModule, RouterModule],
 })
 export class SubTitleDetailComponent {

@@ -1,7 +1,7 @@
-import dayjs from 'dayjs/esm';
-import { IAnnexDecision } from 'app/entities/annex-decision/annex-decision.model';
-import { ISupplier } from 'app/entities/supplier/supplier.model';
-import { IEngagement } from 'app/entities/engagement/engagement.model';
+import dayjs from "dayjs/esm";
+import { IAnnexDecision } from "app/entities/annex-decision/annex-decision.model";
+import { ISupplier } from "app/entities/supplier/supplier.model";
+import { IEngagement } from "app/entities/engagement/engagement.model";
 
 export interface IPurchaseOrder {
   id: number;
@@ -22,4 +22,4 @@ export interface IPurchaseOrder {
   engagement?: IEngagement | null;
 }
 
-export type NewPurchaseOrder = Omit<IPurchaseOrder, 'id'> & { id: null };
+export type NewPurchaseOrder = Omit<IPurchaseOrder, "id"> & { id: null };

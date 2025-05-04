@@ -14,14 +14,30 @@
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.decision.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.decision.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
           </div>
         }
 
-        @let decisionNumberRef = editForm.get('decisionNumber')!;
+        @let decisionNumberRef = editForm.get("decisionNumber")!;
         <div class="mb-3">
-          <label class="form-label" for="field_decisionNumber" jhiTranslate="budgetApplicationApp.decision.decisionNumber"
+          <label
+            class="form-label"
+            for="field_decisionNumber"
+            jhiTranslate="budgetApplicationApp.decision.decisionNumber"
             >Decision Number</label
           >
           <input
@@ -32,18 +48,30 @@
             data-cy="decisionNumber"
             formControlName="decisionNumber"
           />
-          @if (decisionNumberRef.invalid && (decisionNumberRef.dirty || decisionNumberRef.touched)) {
+          @if (
+            decisionNumberRef.invalid &&
+            (decisionNumberRef.dirty || decisionNumberRef.touched)
+          ) {
             <div>
-              @if (editForm.get('decisionNumber')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("decisionNumber")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
             </div>
           }
         </div>
 
-        @let decisionDateRef = editForm.get('decisionDate')!;
+        @let decisionDateRef = editForm.get("decisionDate")!;
         <div class="mb-3">
-          <label class="form-label" for="field_decisionDate" jhiTranslate="budgetApplicationApp.decision.decisionDate">Decision Date</label>
+          <label
+            class="form-label"
+            for="field_decisionDate"
+            jhiTranslate="budgetApplicationApp.decision.decisionDate"
+            >Decision Date</label
+          >
           <div class="d-flex">
             <input
               id="field_decisionDate"
@@ -55,10 +83,17 @@
               placeholder="YYYY-MM-DD HH:mm"
             />
           </div>
-          @if (decisionDateRef.invalid && (decisionDateRef.dirty || decisionDateRef.touched)) {
+          @if (
+            decisionDateRef.invalid &&
+            (decisionDateRef.dirty || decisionDateRef.touched)
+          ) {
             <div>
-              @if (editForm.get('decisionDate')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("decisionDate")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
               <small
                 class="form-text text-danger"
@@ -71,7 +106,12 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_engagement" jhiTranslate="budgetApplicationApp.decision.engagement">Engagement</label>
+          <label
+            class="form-label"
+            for="field_engagement"
+            jhiTranslate="budgetApplicationApp.decision.engagement"
+            >Engagement</label
+          >
           <select
             class="form-control"
             id="field_engagement"
@@ -82,13 +122,18 @@
           >
             <option [ngValue]="null"></option>
             @for (engagementOption of engagementsCollection; track $index) {
-              <option [ngValue]="engagementOption">{{ engagementOption.id }}</option>
+              <option [ngValue]="engagementOption">
+                {{ engagementOption.id }}
+              </option>
             }
           </select>
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_annexDecision" jhiTranslate="budgetApplicationApp.decision.annexDecision"
+          <label
+            class="form-label"
+            for="field_annexDecision"
+            jhiTranslate="budgetApplicationApp.decision.annexDecision"
             >Annex Decision</label
           >
           <select
@@ -100,16 +145,30 @@
             [compareWith]="compareAnnexDecision"
           >
             <option [ngValue]="null"></option>
-            @for (annexDecisionOption of annexDecisionsSharedCollection; track $index) {
-              <option [ngValue]="annexDecisionOption">{{ annexDecisionOption.id }}</option>
+            @for (
+              annexDecisionOption of annexDecisionsSharedCollection;
+              track $index
+            ) {
+              <option [ngValue]="annexDecisionOption">
+                {{ annexDecisionOption.id }}
+              </option>
             }
           </select>
         </div>
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
         </button>
 
         <button
@@ -119,7 +178,10 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
         </button>
       </div>
     </form>

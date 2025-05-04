@@ -1,12 +1,12 @@
-jest.mock('app/core/util/alert.service');
+jest.mock("app/core/util/alert.service");
 
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { AlertService } from 'app/core/util/alert.service';
+import { AlertService } from "app/core/util/alert.service";
 
-import { AlertComponent } from './alert.component';
+import { AlertComponent } from "./alert.component";
 
-describe('Alert Component', () => {
+describe("Alert Component", () => {
   let comp: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;
   let mockAlertService: AlertService;
@@ -16,7 +16,7 @@ describe('Alert Component', () => {
       imports: [AlertComponent],
       providers: [AlertService],
     })
-      .overrideTemplate(AlertComponent, '')
+      .overrideTemplate(AlertComponent, "")
       .compileComponents();
   }));
 
@@ -26,7 +26,7 @@ describe('Alert Component', () => {
     mockAlertService = TestBed.inject(AlertService);
   });
 
-  it('should call alertService.get on init', () => {
+  it("should call alertService.get on init", () => {
     // WHEN
     comp.ngOnInit();
 
@@ -34,7 +34,7 @@ describe('Alert Component', () => {
     expect(mockAlertService.get).toHaveBeenCalled();
   });
 
-  it('should call alertService.clear on destroy', () => {
+  it("should call alertService.clear on destroy", () => {
     // WHEN
     comp.ngOnDestroy();
 

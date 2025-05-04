@@ -1,9 +1,9 @@
-import { Buffer } from 'buffer';
-import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
+import { Buffer } from "buffer";
+import { Injectable } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { Observable, Observer } from "rxjs";
 
-export type FileLoadErrorType = 'not.image' | 'could.not.extract';
+export type FileLoadErrorType = "not.image" | "could.not.extract";
 
 export interface FileLoadError {
   message: string;
@@ -15,7 +15,7 @@ export interface FileLoadError {
  * A utility service for data.
  */
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class DataUtils {
   /**
@@ -29,9 +29,9 @@ export class DataUtils {
    * Method to open file
    */
   openFile(data: string, contentType: string | null | undefined): void {
-    contentType = contentType ?? '';
+    contentType = contentType ?? "";
 
-    const byteCharacters = Buffer.from(data, 'base64').toString('binary');
+    const byteCharacters = Buffer.from(data, "base64").toString("binary");
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
       byteNumbers[i] = byteCharacters.charCodeAt(i);
@@ -58,15 +58,21 @@ export class DataUtils {
    * @returns an observable that loads file to form field and completes if successful
    *      or returns error as FileLoadError on failure
    */
-  loadFileToForm(event: Event, editForm: FormGroup, field: string, isImage: boolean): Observable<void> {
+  loadFileToForm(
+    event: Event,
+    editForm: FormGroup,
+    field: string,
+    isImage: boolean,
+  ): Observable<void> {
     return new Observable((observer: Observer<void>) => {
-      const eventTarget: HTMLInputElement | null = event.target as HTMLInputElement | null;
+      const eventTarget: HTMLInputElement | null =
+        event.target as HTMLInputElement | null;
       if (eventTarget?.files?.[0]) {
         const file: File = eventTarget.files[0];
-        if (isImage && !file.type.startsWith('image/')) {
+        if (isImage && !file.type.startsWith("image/")) {
           const error: FileLoadError = {
             message: `File was expected to be an image but was found to be '${file.type}'`,
-            key: 'not.image',
+            key: "not.image",
             params: { fileType: file.type },
           };
           observer.error(error);
@@ -83,8 +89,8 @@ export class DataUtils {
         }
       } else {
         const error: FileLoadError = {
-          message: 'Could not extract file',
-          key: 'could.not.extract',
+          message: "Could not extract file",
+          key: "could.not.extract",
           params: { event },
         };
         observer.error(error);
@@ -98,8 +104,10 @@ export class DataUtils {
   private toBase64(file: File, callback: (base64Data: string) => void): void {
     const fileReader: FileReader = new FileReader();
     fileReader.onload = (e: ProgressEvent<FileReader>) => {
-      if (typeof e.target?.result === 'string') {
-        const base64Data: string = e.target.result.substring(e.target.result.indexOf('base64,') + 'base64,'.length);
+      if (typeof e.target?.result === "string") {
+        const base64Data: string = e.target.result.substring(
+          e.target.result.indexOf("base64,") + "base64,".length,
+        );
         callback(base64Data);
       }
     };
@@ -111,10 +119,10 @@ export class DataUtils {
   }
 
   private paddingSize(value: string): number {
-    if (this.endsWith('==', value)) {
+    if (this.endsWith("==", value)) {
       return 2;
     }
-    if (this.endsWith('=', value)) {
+    if (this.endsWith("=", value)) {
       return 1;
     }
     return 0;
@@ -125,6 +133,6 @@ export class DataUtils {
   }
 
   private formatAsBytes(size: number): string {
-    return `${size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} bytes`; // NOSONAR
+    return `${size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} bytes`; // NOSONAR
   }
 }

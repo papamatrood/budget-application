@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { ApplicationConfigService } from './application-config.service';
+import { ApplicationConfigService } from "./application-config.service";
 
-describe('ApplicationConfigService', () => {
+describe("ApplicationConfigService", () => {
   let service: ApplicationConfigService;
 
   beforeEach(() => {
@@ -10,31 +10,35 @@ describe('ApplicationConfigService', () => {
     service = TestBed.inject(ApplicationConfigService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 
-  describe('without prefix', () => {
-    it('should return correctly', () => {
-      expect(service.getEndpointFor('api')).toEqual('api');
+  describe("without prefix", () => {
+    it("should return correctly", () => {
+      expect(service.getEndpointFor("api")).toEqual("api");
     });
 
-    it('should return correctly when passing microservice', () => {
-      expect(service.getEndpointFor('api', 'microservice')).toEqual('services/microservice/api');
+    it("should return correctly when passing microservice", () => {
+      expect(service.getEndpointFor("api", "microservice")).toEqual(
+        "services/microservice/api",
+      );
     });
   });
 
-  describe('with prefix', () => {
+  describe("with prefix", () => {
     beforeEach(() => {
-      service.setEndpointPrefix('prefix/');
+      service.setEndpointPrefix("prefix/");
     });
 
-    it('should return correctly', () => {
-      expect(service.getEndpointFor('api')).toEqual('prefix/api');
+    it("should return correctly", () => {
+      expect(service.getEndpointFor("api")).toEqual("prefix/api");
     });
 
-    it('should return correctly when passing microservice', () => {
-      expect(service.getEndpointFor('api', 'microservice')).toEqual('prefix/services/microservice/api');
+    it("should return correctly when passing microservice", () => {
+      expect(service.getEndpointFor("api", "microservice")).toEqual(
+        "prefix/services/microservice/api",
+      );
     });
   });
 });

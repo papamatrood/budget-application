@@ -1,6 +1,6 @@
-import { WritableSignal, signal } from '@angular/core';
+import { WritableSignal, signal } from "@angular/core";
 
-export type SortOrder = 'asc' | 'desc';
+export type SortOrder = "asc" | "desc";
 
 export type SortState = { predicate?: string; order?: SortOrder };
 

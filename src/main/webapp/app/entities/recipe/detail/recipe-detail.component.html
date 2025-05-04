@@ -2,7 +2,11 @@
   <div class="col-8">
     @if (recipe(); as recipeRef) {
       <div>
-        <h2 data-cy="recipeDetailsHeading"><span jhiTranslate="budgetApplicationApp.recipe.detail.title">Recipe</span></h2>
+        <h2 data-cy="recipeDetailsHeading">
+          <span jhiTranslate="budgetApplicationApp.recipe.detail.title"
+            >Recipe</span
+          >
+        </h2>
 
         <hr />
 
@@ -15,51 +19,106 @@
           <dd>
             <span>{{ recipeRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.recipe.achievementsInThePastYear">Achievements In The Past Year</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.recipe.achievementsInThePastYear"
+              >Achievements In The Past Year</span
+            >
+          </dt>
           <dd>
             <span>{{ recipeRef.achievementsInThePastYear }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.recipe.newYearForecast">New Year Forecast</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.recipe.newYearForecast"
+              >New Year Forecast</span
+            >
+          </dt>
           <dd>
             <span>{{ recipeRef.newYearForecast }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.recipe.category">Category</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.recipe.category"
+              >Category</span
+            >
+          </dt>
           <dd>
-            <span [jhiTranslate]="'budgetApplicationApp.FinancialCategoryEnum.' + (recipeRef.category ?? 'null')">{{
-              {
-                null: '',
-                OPERATING_RECIPE: 'OPERATING_RECIPE',
-                INVESTMENT_RECIPE: 'INVESTMENT_RECIPE',
-                OPERATING_EXPENSE: 'OPERATING_EXPENSE',
-                INVESTMENT_EXPENSE: 'INVESTMENT_EXPENSE',
-              }[recipeRef.category ?? 'null']
-            }}</span>
+            <span
+              [jhiTranslate]="
+                'budgetApplicationApp.FinancialCategoryEnum.' +
+                (recipeRef.category ?? 'null')
+              "
+              >{{
+                {
+                  null: "",
+                  OPERATING_RECIPE: "OPERATING_RECIPE",
+                  INVESTMENT_RECIPE: "INVESTMENT_RECIPE",
+                  OPERATING_EXPENSE: "OPERATING_EXPENSE",
+                  INVESTMENT_EXPENSE: "INVESTMENT_EXPENSE",
+                }[recipeRef.category ?? "null"]
+              }}</span
+            >
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.recipe.financialYear">Financial Year</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.recipe.financialYear"
+              >Financial Year</span
+            >
+          </dt>
           <dd>
             @if (recipe()!.financialYear) {
               <div>
-                <a [routerLink]="['/financial-year', recipe()!.financialYear?.id, 'view']">{{ recipeRef.financialYear?.id }}</a>
+                <a
+                  [routerLink]="[
+                    '/financial-year',
+                    recipe()!.financialYear?.id,
+                    'view',
+                  ]"
+                  >{{ recipeRef.financialYear?.id }}</a
+                >
               </div>
             }
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.recipe.article">Article</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.recipe.article"
+              >Article</span
+            >
+          </dt>
           <dd>
-            @for (article of recipeRef.articles; track $index; let last = $last) {
+            @for (
+              article of recipeRef.articles;
+              track $index;
+              let last = $last
+            ) {
               <span>
-                <a [routerLink]="['/article', article.id, 'view']">{{ article?.id }}</a
-                >{{ last ? '' : ', ' }}
+                <a [routerLink]="['/article', article.id, 'view']">{{
+                  article?.id
+                }}</a
+                >{{ last ? "" : ", " }}
               </span>
             }
           </dd>
         </dl>
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        <button
+          type="submit"
+          (click)="previousState()"
+          class="btn btn-info"
+          data-cy="entityDetailsBackButton"
+        >
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
         </button>
 
-        <button type="button" [routerLink]="['/recipe', recipeRef.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        <button
+          type="button"
+          [routerLink]="['/recipe', recipeRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.edit"
+            >Editer</span
+          >
         </button>
       </div>
     }

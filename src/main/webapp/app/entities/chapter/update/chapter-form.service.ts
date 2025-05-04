@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { IChapter, NewChapter } from '../chapter.model';
+import { IChapter, NewChapter } from "../chapter.model";
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<
+  Omit<T, "id">
+> & { id: T["id"] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -14,20 +16,22 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type ChapterFormGroupInput = IChapter | PartialWithRequiredKeyOf<NewChapter>;
 
-type ChapterFormDefaults = Pick<NewChapter, 'id'>;
+type ChapterFormDefaults = Pick<NewChapter, "id">;
 
 type ChapterFormGroupContent = {
-  id: FormControl<IChapter['id'] | NewChapter['id']>;
-  code: FormControl<IChapter['code']>;
-  designation: FormControl<IChapter['designation']>;
-  subTitle: FormControl<IChapter['subTitle']>;
+  id: FormControl<IChapter["id"] | NewChapter["id"]>;
+  code: FormControl<IChapter["code"]>;
+  designation: FormControl<IChapter["designation"]>;
+  subTitle: FormControl<IChapter["subTitle"]>;
 };
 
 export type ChapterFormGroup = FormGroup<ChapterFormGroupContent>;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class ChapterFormService {
-  createChapterFormGroup(chapter: ChapterFormGroupInput = { id: null }): ChapterFormGroup {
+  createChapterFormGroup(
+    chapter: ChapterFormGroupInput = { id: null },
+  ): ChapterFormGroup {
     const chapterRawValue = {
       ...this.getFormDefaults(),
       ...chapter,

@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { sampleWithNewData, sampleWithRequiredData } from '../financial-year.test-samples';
+import {
+  sampleWithNewData,
+  sampleWithRequiredData,
+} from "../financial-year.test-samples";
 
-import { FinancialYearFormService } from './financial-year-form.service';
+import { FinancialYearFormService } from "./financial-year-form.service";
 
-describe('FinancialYear Form Service', () => {
+describe("FinancialYear Form Service", () => {
   let service: FinancialYearFormService;
 
   beforeEach(() => {
@@ -12,9 +15,9 @@ describe('FinancialYear Form Service', () => {
     service = TestBed.inject(FinancialYearFormService);
   });
 
-  describe('Service methods', () => {
-    describe('createFinancialYearFormGroup', () => {
-      it('should create a new form with FormControl', () => {
+  describe("Service methods", () => {
+    describe("createFinancialYearFormGroup", () => {
+      it("should create a new form with FormControl", () => {
         const formGroup = service.createFinancialYearFormGroup();
 
         expect(formGroup.controls).toEqual(
@@ -25,8 +28,10 @@ describe('FinancialYear Form Service', () => {
         );
       });
 
-      it('passing IFinancialYear should create a new form with FormGroup', () => {
-        const formGroup = service.createFinancialYearFormGroup(sampleWithRequiredData);
+      it("passing IFinancialYear should create a new form with FormGroup", () => {
+        const formGroup = service.createFinancialYearFormGroup(
+          sampleWithRequiredData,
+        );
 
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
@@ -37,16 +42,17 @@ describe('FinancialYear Form Service', () => {
       });
     });
 
-    describe('getFinancialYear', () => {
-      it('should return NewFinancialYear for default FinancialYear initial value', () => {
-        const formGroup = service.createFinancialYearFormGroup(sampleWithNewData);
+    describe("getFinancialYear", () => {
+      it("should return NewFinancialYear for default FinancialYear initial value", () => {
+        const formGroup =
+          service.createFinancialYearFormGroup(sampleWithNewData);
 
         const financialYear = service.getFinancialYear(formGroup) as any;
 
         expect(financialYear).toMatchObject(sampleWithNewData);
       });
 
-      it('should return NewFinancialYear for empty FinancialYear initial value', () => {
+      it("should return NewFinancialYear for empty FinancialYear initial value", () => {
         const formGroup = service.createFinancialYearFormGroup();
 
         const financialYear = service.getFinancialYear(formGroup) as any;
@@ -54,8 +60,10 @@ describe('FinancialYear Form Service', () => {
         expect(financialYear).toMatchObject({});
       });
 
-      it('should return IFinancialYear', () => {
-        const formGroup = service.createFinancialYearFormGroup(sampleWithRequiredData);
+      it("should return IFinancialYear", () => {
+        const formGroup = service.createFinancialYearFormGroup(
+          sampleWithRequiredData,
+        );
 
         const financialYear = service.getFinancialYear(formGroup) as any;
 
@@ -63,8 +71,8 @@ describe('FinancialYear Form Service', () => {
       });
     });
 
-    describe('resetForm', () => {
-      it('passing IFinancialYear should not enable id FormControl', () => {
+    describe("resetForm", () => {
+      it("passing IFinancialYear should not enable id FormControl", () => {
         const formGroup = service.createFinancialYearFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 
@@ -73,8 +81,10 @@ describe('FinancialYear Form Service', () => {
         expect(formGroup.controls.id.disabled).toBe(true);
       });
 
-      it('passing NewFinancialYear should disable id FormControl', () => {
-        const formGroup = service.createFinancialYearFormGroup(sampleWithRequiredData);
+      it("passing NewFinancialYear should disable id FormControl", () => {
+        const formGroup = service.createFinancialYearFormGroup(
+          sampleWithRequiredData,
+        );
         expect(formGroup.controls.id.disabled).toBe(true);
 
         service.resetForm(formGroup, { id: null });

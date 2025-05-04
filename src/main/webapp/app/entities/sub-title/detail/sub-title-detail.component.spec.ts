@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { RouterTestingHarness } from "@angular/router/testing";
+import { of } from "rxjs";
 
-import { SubTitleDetailComponent } from './sub-title-detail.component';
+import { SubTitleDetailComponent } from "./sub-title-detail.component";
 
-describe('SubTitle Management Detail Component', () => {
+describe("SubTitle Management Detail Component", () => {
   let comp: SubTitleDetailComponent;
   let fixture: ComponentFixture<SubTitleDetailComponent>;
 
@@ -16,8 +16,11 @@ describe('SubTitle Management Detail Component', () => {
         provideRouter(
           [
             {
-              path: '**',
-              loadComponent: () => import('./sub-title-detail.component').then(m => m.SubTitleDetailComponent),
+              path: "**",
+              loadComponent: () =>
+                import("./sub-title-detail.component").then(
+                  (m) => m.SubTitleDetailComponent,
+                ),
               resolve: { subTitle: () => of({ id: 2895 }) },
             },
           ],
@@ -25,7 +28,7 @@ describe('SubTitle Management Detail Component', () => {
         ),
       ],
     })
-      .overrideTemplate(SubTitleDetailComponent, '')
+      .overrideTemplate(SubTitleDetailComponent, "")
       .compileComponents();
   });
 
@@ -34,19 +37,24 @@ describe('SubTitle Management Detail Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('OnInit', () => {
-    it('should load subTitle on init', async () => {
+  describe("OnInit", () => {
+    it("should load subTitle on init", async () => {
       const harness = await RouterTestingHarness.create();
-      const instance = await harness.navigateByUrl('/', SubTitleDetailComponent);
+      const instance = await harness.navigateByUrl(
+        "/",
+        SubTitleDetailComponent,
+      );
 
       // THEN
-      expect(instance.subTitle()).toEqual(expect.objectContaining({ id: 2895 }));
+      expect(instance.subTitle()).toEqual(
+        expect.objectContaining({ id: 2895 }),
+      );
     });
   });
 
-  describe('PreviousState', () => {
-    it('should navigate to previous state', () => {
-      jest.spyOn(window.history, 'back');
+  describe("PreviousState", () => {
+    it("should navigate to previous state", () => {
+      jest.spyOn(window.history, "back");
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
     });

@@ -1,16 +1,24 @@
 <div class="modal-header">
-  <h4 class="modal-title" jhiTranslate="metrics.jvm.threads.dump.title">Threads dump</h4>
+  <h4 class="modal-title" jhiTranslate="metrics.jvm.threads.dump.title">
+    Threads dump
+  </h4>
 
   <button type="button" class="btn-close" (click)="dismiss()">&nbsp;</button>
 </div>
 
 <div class="modal-body">
   <div class="mb-3">
-    <button class="badge bg-primary hand" (click)="threadStateFilter = undefined" (keydown.enter)="threadStateFilter = undefined">
+    <button
+      class="badge bg-primary hand"
+      (click)="threadStateFilter = undefined"
+      (keydown.enter)="threadStateFilter = undefined"
+    >
       @if (threadStateFilter === undefined) {
         <fa-icon icon="check"></fa-icon>
       }
-      All&nbsp;<span class="badge rounded-pill bg-default">{{ threadDumpAll }}</span>
+      All&nbsp;<span class="badge rounded-pill bg-default">{{
+        threadDumpAll
+      }}</span>
     </button>
 
     <button
@@ -21,7 +29,9 @@
       @if (threadStateFilter === ThreadState.Runnable) {
         <fa-icon icon="check"></fa-icon>
       }
-      Runnable&nbsp;<span class="badge rounded-pill bg-default">{{ threadDumpRunnable }}</span>
+      Runnable&nbsp;<span class="badge rounded-pill bg-default">{{
+        threadDumpRunnable
+      }}</span>
     </button>
 
     <button
@@ -32,7 +42,9 @@
       @if (threadStateFilter === ThreadState.Waiting) {
         <fa-icon icon="check"></fa-icon>
       }
-      Waiting&nbsp;<span class="badge rounded-pill bg-default">{{ threadDumpWaiting }}</span>
+      Waiting&nbsp;<span class="badge rounded-pill bg-default">{{
+        threadDumpWaiting
+      }}</span>
     </button>
 
     <button
@@ -43,7 +55,9 @@
       @if (threadStateFilter === ThreadState.TimedWaiting) {
         <fa-icon icon="check"></fa-icon>
       }
-      Timed Waiting&nbsp;<span class="badge rounded-pill bg-default">{{ threadDumpTimedWaiting }}</span>
+      Timed Waiting&nbsp;<span class="badge rounded-pill bg-default">{{
+        threadDumpTimedWaiting
+      }}</span>
     </button>
 
     <button
@@ -54,20 +68,35 @@
       @if (threadStateFilter === ThreadState.Blocked) {
         <fa-icon icon="check"></fa-icon>
       }
-      Blocked&nbsp;<span class="badge rounded-pill bg-default">{{ threadDumpBlocked }}</span>
+      Blocked&nbsp;<span class="badge rounded-pill bg-default">{{
+        threadDumpBlocked
+      }}</span>
     </button>
   </div>
 
   @for (thread of getThreads(); track $index) {
     <div class="pad">
       <h6>
-        <span class="badge" [ngClass]="getBadgeClass(thread.threadState)">{{ thread.threadState }}</span>
+        <span class="badge" [ngClass]="getBadgeClass(thread.threadState)">{{
+          thread.threadState
+        }}</span>
 
         &nbsp;{{ thread.threadName }} (ID {{ thread.threadId }})
 
-        <a (click)="thread.showThreadDump = !thread.showThreadDump" href="javascript:void(0);">
-          <span [hidden]="thread.showThreadDump" jhiTranslate="metrics.jvm.threads.dump.show">Afficher</span>
-          <span [hidden]="!thread.showThreadDump" jhiTranslate="metrics.jvm.threads.dump.hide">Cacher</span>
+        <a
+          (click)="thread.showThreadDump = !thread.showThreadDump"
+          href="javascript:void(0);"
+        >
+          <span
+            [hidden]="thread.showThreadDump"
+            jhiTranslate="metrics.jvm.threads.dump.show"
+            >Afficher</span
+          >
+          <span
+            [hidden]="!thread.showThreadDump"
+            jhiTranslate="metrics.jvm.threads.dump.hide"
+            >Cacher</span
+          >
         </a>
       </h6>
 
@@ -76,7 +105,8 @@
           @for (st of thread.stackTrace; track $index) {
             <div class="break">
               <samp
-                >{{ st.className }}.{{ st.methodName }}(<code>{{ st.fileName }}:{{ st.lineNumber }}</code
+                >{{ st.className }}.{{ st.methodName }}(<code
+                  >{{ st.fileName }}:{{ st.lineNumber }}</code
                 >)</samp
               >
               <span class="mt-1"></span>
@@ -93,11 +123,24 @@
         </caption>
         <thead>
           <tr>
-            <th scope="col" jhiTranslate="metrics.jvm.threads.dump.blockedtime">Temps bloqué</th>
-            <th scope="col" jhiTranslate="metrics.jvm.threads.dump.blockedcount">Nb fois bloqué</th>
-            <th scope="col" jhiTranslate="metrics.jvm.threads.dump.waitedtime">Temps d&apos;attente</th>
-            <th scope="col" jhiTranslate="metrics.jvm.threads.dump.waitedcount">Nb fois en attente</th>
-            <th scope="col" jhiTranslate="metrics.jvm.threads.dump.lockname">Nom du process bloquant</th>
+            <th scope="col" jhiTranslate="metrics.jvm.threads.dump.blockedtime">
+              Temps bloqué
+            </th>
+            <th
+              scope="col"
+              jhiTranslate="metrics.jvm.threads.dump.blockedcount"
+            >
+              Nb fois bloqué
+            </th>
+            <th scope="col" jhiTranslate="metrics.jvm.threads.dump.waitedtime">
+              Temps d&apos;attente
+            </th>
+            <th scope="col" jhiTranslate="metrics.jvm.threads.dump.waitedcount">
+              Nb fois en attente
+            </th>
+            <th scope="col" jhiTranslate="metrics.jvm.threads.dump.lockname">
+              Nom du process bloquant
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -116,5 +159,12 @@
   }
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary float-start" data-dismiss="modal" (click)="dismiss()">Done</button>
+  <button
+    type="button"
+    class="btn btn-secondary float-start"
+    data-dismiss="modal"
+    (click)="dismiss()"
+  >
+    Done
+  </button>
 </div>

@@ -1,0 +1,123 @@
+<div class="text-center">
+  <h2 class="fw-bold">Sous-titre</h2>
+</div>
+<hr style="height: 5px; opacity: 100%" class="c-yellow" />
+
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.subTitle.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        @let codeRef = editForm.get("code")!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_code"
+            jhiTranslate="budgetApplicationApp.subTitle.code"
+            >Code</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            formControlName="code"
+          />
+          @if (codeRef.invalid && (codeRef.dirty || codeRef.touched)) {
+            <div>
+              @if (editForm.get("code")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let designationRef = editForm.get("designation")!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_designation"
+            jhiTranslate="budgetApplicationApp.subTitle.designation"
+            >Designation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="designation"
+            id="field_designation"
+            data-cy="designation"
+            formControlName="designation"
+          />
+          @if (
+            designationRef.invalid &&
+            (designationRef.dirty || designationRef.touched)
+          ) {
+            <div>
+              @if (editForm.get("designation")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

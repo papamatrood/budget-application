@@ -1,19 +1,22 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Component, OnInit, inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
 
-import SharedModule from 'app/shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import SharedModule from "app/shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { ISubTitle } from '../sub-title.model';
-import { SubTitleService } from '../service/sub-title.service';
-import { SubTitleFormGroup, SubTitleFormService } from './sub-title-form.service';
+import { ISubTitle } from "../sub-title.model";
+import { SubTitleService } from "../service/sub-title.service";
+import {
+  SubTitleFormGroup,
+  SubTitleFormService,
+} from "./sub-title-form.service";
 
 @Component({
-  selector: 'jhi-sub-title-update',
-  templateUrl: './sub-title-update.component.html',
+  selector: "jhi-sub-title-update",
+  templateUrl: "./sub-title-update.component.html",
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class SubTitleUpdateComponent implements OnInit {
@@ -25,7 +28,8 @@ export class SubTitleUpdateComponent implements OnInit {
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  editForm: SubTitleFormGroup = this.subTitleFormService.createSubTitleFormGroup();
+  editForm: SubTitleFormGroup =
+    this.subTitleFormService.createSubTitleFormGroup();
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ subTitle }) => {
@@ -50,7 +54,9 @@ export class SubTitleUpdateComponent implements OnInit {
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<ISubTitle>>): void {
+  protected subscribeToSaveResponse(
+    result: Observable<HttpResponse<ISubTitle>>,
+  ): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),

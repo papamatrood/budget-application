@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 
-import SharedModule from 'app/shared/shared.module';
-import { CacheMetrics } from 'app/admin/metrics/metrics.model';
-import { filterNaN } from 'app/core/util/operators';
+import SharedModule from "app/shared/shared.module";
+import { CacheMetrics } from "app/admin/metrics/metrics.model";
+import { filterNaN } from "app/core/util/operators";
 
 @Component({
-  selector: 'jhi-metrics-cache',
-  templateUrl: './metrics-cache.component.html',
+  selector: "jhi-metrics-cache",
+  templateUrl: "./metrics-cache.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SharedModule],
 })

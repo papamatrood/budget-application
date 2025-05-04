@@ -1,34 +1,40 @@
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { IDecisionItem, NewDecisionItem } from '../decision-item.model';
+import { IDecisionItem, NewDecisionItem } from "../decision-item.model";
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<
+  Omit<T, "id">
+> & { id: T["id"] };
 
 /**
  * Type for createFormGroup and resetForm argument.
  * It accepts IDecisionItem for edit and NewDecisionItemFormGroupInput for create.
  */
-type DecisionItemFormGroupInput = IDecisionItem | PartialWithRequiredKeyOf<NewDecisionItem>;
+type DecisionItemFormGroupInput =
+  | IDecisionItem
+  | PartialWithRequiredKeyOf<NewDecisionItem>;
 
-type DecisionItemFormDefaults = Pick<NewDecisionItem, 'id'>;
+type DecisionItemFormDefaults = Pick<NewDecisionItem, "id">;
 
 type DecisionItemFormGroupContent = {
-  id: FormControl<IDecisionItem['id'] | NewDecisionItem['id']>;
-  beneficiary: FormControl<IDecisionItem['beneficiary']>;
-  amount: FormControl<IDecisionItem['amount']>;
-  observation: FormControl<IDecisionItem['observation']>;
-  decision: FormControl<IDecisionItem['decision']>;
+  id: FormControl<IDecisionItem["id"] | NewDecisionItem["id"]>;
+  beneficiary: FormControl<IDecisionItem["beneficiary"]>;
+  amount: FormControl<IDecisionItem["amount"]>;
+  observation: FormControl<IDecisionItem["observation"]>;
+  decision: FormControl<IDecisionItem["decision"]>;
 };
 
 export type DecisionItemFormGroup = FormGroup<DecisionItemFormGroupContent>;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class DecisionItemFormService {
-  createDecisionItemFormGroup(decisionItem: DecisionItemFormGroupInput = { id: null }): DecisionItemFormGroup {
+  createDecisionItemFormGroup(
+    decisionItem: DecisionItemFormGroupInput = { id: null },
+  ): DecisionItemFormGroup {
     const decisionItemRawValue = {
       ...this.getFormDefaults(),
       ...decisionItem,
@@ -50,11 +56,16 @@ export class DecisionItemFormService {
     });
   }
 
-  getDecisionItem(form: DecisionItemFormGroup): IDecisionItem | NewDecisionItem {
+  getDecisionItem(
+    form: DecisionItemFormGroup,
+  ): IDecisionItem | NewDecisionItem {
     return form.getRawValue() as IDecisionItem | NewDecisionItem;
   }
 
-  resetForm(form: DecisionItemFormGroup, decisionItem: DecisionItemFormGroupInput): void {
+  resetForm(
+    form: DecisionItemFormGroup,
+    decisionItem: DecisionItemFormGroupInput,
+  ): void {
     const decisionItemRawValue = { ...this.getFormDefaults(), ...decisionItem };
     form.reset(
       {

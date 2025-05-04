@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { RouterTestingHarness } from "@angular/router/testing";
+import { of } from "rxjs";
 
-import { AppUserDetailComponent } from './app-user-detail.component';
+import { AppUserDetailComponent } from "./app-user-detail.component";
 
-describe('AppUser Management Detail Component', () => {
+describe("AppUser Management Detail Component", () => {
   let comp: AppUserDetailComponent;
   let fixture: ComponentFixture<AppUserDetailComponent>;
 
@@ -16,8 +16,11 @@ describe('AppUser Management Detail Component', () => {
         provideRouter(
           [
             {
-              path: '**',
-              loadComponent: () => import('./app-user-detail.component').then(m => m.AppUserDetailComponent),
+              path: "**",
+              loadComponent: () =>
+                import("./app-user-detail.component").then(
+                  (m) => m.AppUserDetailComponent,
+                ),
               resolve: { appUser: () => of({ id: 14418 }) },
             },
           ],
@@ -25,7 +28,7 @@ describe('AppUser Management Detail Component', () => {
         ),
       ],
     })
-      .overrideTemplate(AppUserDetailComponent, '')
+      .overrideTemplate(AppUserDetailComponent, "")
       .compileComponents();
   });
 
@@ -34,19 +37,21 @@ describe('AppUser Management Detail Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('OnInit', () => {
-    it('should load appUser on init', async () => {
+  describe("OnInit", () => {
+    it("should load appUser on init", async () => {
       const harness = await RouterTestingHarness.create();
-      const instance = await harness.navigateByUrl('/', AppUserDetailComponent);
+      const instance = await harness.navigateByUrl("/", AppUserDetailComponent);
 
       // THEN
-      expect(instance.appUser()).toEqual(expect.objectContaining({ id: 14418 }));
+      expect(instance.appUser()).toEqual(
+        expect.objectContaining({ id: 14418 }),
+      );
     });
   });
 
-  describe('PreviousState', () => {
-    it('should navigate to previous state', () => {
-      jest.spyOn(window.history, 'back');
+  describe("PreviousState", () => {
+    it("should navigate to previous state", () => {
+      jest.spyOn(window.history, "back");
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
     });

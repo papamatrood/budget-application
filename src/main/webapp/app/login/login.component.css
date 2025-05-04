@@ -1,0 +1,17 @@
+.card {
+  box-shadow: 0px 4px 4px 0px #00000040 inset;
+  padding: 30px 40px;
+  border-radius: 57px 0px 57px 0px;
+}
+
+.btn-connexion {
+  box-shadow: 0px 4px 10px 0px #e9444b40;
+}
+
+.form-control,
+.input-group {
+  background: #c4c4c400;
+  border: 1px solid #d7edfa;
+  box-shadow: 0px 4px 10px 0px #00000040;
+  border-radius: 12px;
+}

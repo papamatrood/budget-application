@@ -1,0 +1,197 @@
+<div class="text-center">
+  <h2 class="fw-bold">
+    <span jhiTranslate="budgetApplicationApp.article.home.title">Articles</span>
+  </h2>
+</div>
+<hr style="height: 5px; opacity: 100%" class="c-yellow" />
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <fa-icon
+        icon="sync"
+        [animation]="isLoading ? 'spin' : undefined"
+      ></fa-icon>
+      <span jhiTranslate="budgetApplicationApp.article.home.refreshListLabel"
+        >Actualiser la liste</span
+      >
+    </button>
+
+    <!-- <button id="jh-create-entity" data-cy="entityCreateButton" class="btn bg-yellow jh-create-entity create-article"
+      [routerLink]="['/article/new']">
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="budgetApplicationApp.article.home.createLabel">Créer un nouveau Article</span>
+    </button> -->
+    <button
+      class="btn bg-yellow"
+      (click)="openCreateModal()"
+      data-cy="entityCreateButton"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="budgetApplicationApp.article.home.createLabel"
+        >Créer un nouveau Article</span
+      >
+    </button>
+  </div>
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  @if (articles().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="budgetApplicationApp.article.home.notFound"
+        >Aucun Article trouvé</span
+      >
+    </div>
+  } @else {
+    <div class="table-responsive mb-3 tables table-entities" id="entities">
+      <table class="w-100" aria-describedby="page-heading">
+        <thead>
+          <tr
+            jhiSort
+            [(sortState)]="sortState"
+            (sortChange)="navigateToWithComponentValues($event)"
+          >
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.article.code"
+                  >Code</span
+                >
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="designation">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.article.designation"
+                  >Designation</span
+                >
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="category">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.article.category"
+                  >Category</span
+                >
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="accountDiv">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.article.accountDiv"
+                  >Account Div</span
+                >
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="codeEnd">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.article.codeEnd"
+                  >Code End</span
+                >
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="chapter.id">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.article.chapter"
+                  >Chapter</span
+                >
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          @for (article of articles(); track trackId(article)) {
+            <tr data-cy="entityTable">
+              <td>{{ article.code }}</td>
+              <td>{{ article.designation }}</td>
+              <td
+                [jhiTranslate]="
+                  'budgetApplicationApp.FinancialCategoryEnum.' +
+                  (article.category ?? 'null')
+                "
+              >
+                {{
+                  {
+                    null: "",
+                    OPERATING_RECIPE: "OPERATING_RECIPE",
+                    INVESTMENT_RECIPE: "INVESTMENT_RECIPE",
+                    OPERATING_EXPENSE: "OPERATING_EXPENSE",
+                    INVESTMENT_EXPENSE: "INVESTMENT_EXPENSE",
+                  }[article.category ?? "null"]
+                }}
+              </td>
+              <td>{{ article.accountDiv }}</td>
+              <td>{{ article.codeEnd }}</td>
+              <td>
+                @if (article.chapter) {
+                  {{ article.chapter.code }} - {{ article.chapter.designation }}
+                }
+              </td>
+              <td class="text-center fs-6 fw-bold">
+                <!-- <button [routerLink]="['/article', article.id, 'edit']" class="btn btn-warning me-2"
+              data-cy="entityEditButton">
+              <fa-icon icon="pencil-alt"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+            </button> -->
+
+                <button
+                  (click)="openEditModal(article)"
+                  class="btn btn-warning me-2"
+                  data-cy="entityEditButton"
+                >
+                  <fa-icon icon="pencil-alt"></fa-icon>
+                </button>
+
+                <button
+                  type="submit"
+                  (click)="delete(article)"
+                  class="btn btn-danger me-2"
+                  data-cy="entityDeleteButton"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                  <!-- <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span> -->
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (articles().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count
+          [params]="{
+            page: page,
+            totalItems: totalItems,
+            itemsPerPage: itemsPerPage,
+          }"
+        ></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

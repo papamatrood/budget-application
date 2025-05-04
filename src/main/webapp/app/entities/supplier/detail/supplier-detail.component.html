@@ -2,7 +2,11 @@
   <div class="col-8">
     @if (supplier(); as supplierRef) {
       <div>
-        <h2 data-cy="supplierDetailsHeading"><span jhiTranslate="budgetApplicationApp.supplier.detail.title">Supplier</span></h2>
+        <h2 data-cy="supplierDetailsHeading">
+          <span jhiTranslate="budgetApplicationApp.supplier.detail.title"
+            >Supplier</span
+          >
+        </h2>
 
         <hr />
 
@@ -15,62 +19,127 @@
           <dd>
             <span>{{ supplierRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.companyName">Company Name</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.companyName"
+              >Company Name</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.companyName }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.address">Address</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.address"
+              >Address</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.address }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.phone">Phone</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.phone"
+              >Phone</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.phone }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.nifNumber">Nif Number</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.nifNumber"
+              >Nif Number</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.nifNumber }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.commercialRegister">Commercial Register</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.supplier.commercialRegister"
+              >Commercial Register</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.commercialRegister }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.bankAccount">Bank Account</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.bankAccount"
+              >Bank Account</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.bankAccount }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.mandatingEstablishment">Mandating Establishment</span></dt>
+          <dt>
+            <span
+              jhiTranslate="budgetApplicationApp.supplier.mandatingEstablishment"
+              >Mandating Establishment</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.mandatingEstablishment }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.email">Email</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.email"
+              >Email</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.email }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.website">Website</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.website"
+              >Website</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.website }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.description">Description</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.description"
+              >Description</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.description }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.contactFirstname">Contact Firstname</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.contactFirstname"
+              >Contact Firstname</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.contactFirstname }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.supplier.contactlastname">Contactlastname</span></dt>
+          <dt>
+            <span jhiTranslate="budgetApplicationApp.supplier.contactlastname"
+              >Contactlastname</span
+            >
+          </dt>
           <dd>
             <span>{{ supplierRef.contactlastname }}</span>
           </dd>
         </dl>
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        <button
+          type="submit"
+          (click)="previousState()"
+          class="btn btn-info"
+          data-cy="entityDetailsBackButton"
+        >
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.back"
+            >Retour</span
+          >
         </button>
 
-        <button type="button" [routerLink]="['/supplier', supplierRef.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        <button
+          type="button"
+          [routerLink]="['/supplier', supplierRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.edit"
+            >Editer</span
+          >
         </button>
       </div>
     }

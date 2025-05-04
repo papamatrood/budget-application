@@ -1,13 +1,15 @@
-import { inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRouteSnapshot, Router } from "@angular/router";
+import { EMPTY, Observable, of } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 
-import { IExpense } from '../expense.model';
-import { ExpenseService } from '../service/expense.service';
+import { IExpense } from "../expense.model";
+import { ExpenseService } from "../service/expense.service";
 
-const expenseResolve = (route: ActivatedRouteSnapshot): Observable<null | IExpense> => {
+const expenseResolve = (
+  route: ActivatedRouteSnapshot,
+): Observable<null | IExpense> => {
   const id = route.params.id;
   if (id) {
     return inject(ExpenseService)
@@ -17,7 +19,7 @@ const expenseResolve = (route: ActivatedRouteSnapshot): Observable<null | IExpen
           if (expense.body) {
             return of(expense.body);
           }
-          inject(Router).navigate(['404']);
+          inject(Router).navigate(["404"]);
           return EMPTY;
         }),
       );

@@ -1,18 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, from, of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Subject, from, of } from "rxjs";
 
-import { ISubTitle } from 'app/entities/sub-title/sub-title.model';
-import { SubTitleService } from 'app/entities/sub-title/service/sub-title.service';
-import { ChapterService } from '../service/chapter.service';
-import { IChapter } from '../chapter.model';
-import { ChapterFormService } from './chapter-form.service';
+import { ISubTitle } from "app/entities/sub-title/sub-title.model";
+import { SubTitleService } from "app/entities/sub-title/service/sub-title.service";
+import { ChapterService } from "../service/chapter.service";
+import { IChapter } from "../chapter.model";
+import { ChapterFormService } from "./chapter-form.service";
 
-import { ChapterUpdateComponent } from './chapter-update.component';
+import { ChapterUpdateComponent } from "./chapter-update.component";
 
-describe('Chapter Management Update Component', () => {
+describe("Chapter Management Update Component", () => {
   let comp: ChapterUpdateComponent;
   let fixture: ComponentFixture<ChapterUpdateComponent>;
   let activatedRoute: ActivatedRoute;
@@ -34,7 +34,7 @@ describe('Chapter Management Update Component', () => {
         },
       ],
     })
-      .overrideTemplate(ChapterUpdateComponent, '')
+      .overrideTemplate(ChapterUpdateComponent, "")
       .compileComponents();
 
     fixture = TestBed.createComponent(ChapterUpdateComponent);
@@ -46,30 +46,39 @@ describe('Chapter Management Update Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('ngOnInit', () => {
-    it('should call SubTitle query and add missing value', () => {
+  describe("ngOnInit", () => {
+    it("should call SubTitle query and add missing value", () => {
       const chapter: IChapter = { id: 28081 };
       const subTitle: ISubTitle = { id: 2895 };
       chapter.subTitle = subTitle;
 
       const subTitleCollection: ISubTitle[] = [{ id: 2895 }];
-      jest.spyOn(subTitleService, 'query').mockReturnValue(of(new HttpResponse({ body: subTitleCollection })));
+      jest
+        .spyOn(subTitleService, "query")
+        .mockReturnValue(of(new HttpResponse({ body: subTitleCollection })));
       const additionalSubTitles = [subTitle];
-      const expectedCollection: ISubTitle[] = [...additionalSubTitles, ...subTitleCollection];
-      jest.spyOn(subTitleService, 'addSubTitleToCollectionIfMissing').mockReturnValue(expectedCollection);
+      const expectedCollection: ISubTitle[] = [
+        ...additionalSubTitles,
+        ...subTitleCollection,
+      ];
+      jest
+        .spyOn(subTitleService, "addSubTitleToCollectionIfMissing")
+        .mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ chapter });
       comp.ngOnInit();
 
       expect(subTitleService.query).toHaveBeenCalled();
-      expect(subTitleService.addSubTitleToCollectionIfMissing).toHaveBeenCalledWith(
+      expect(
+        subTitleService.addSubTitleToCollectionIfMissing,
+      ).toHaveBeenCalledWith(
         subTitleCollection,
         ...additionalSubTitles.map(expect.objectContaining),
       );
       expect(comp.subTitlesSharedCollection).toEqual(expectedCollection);
     });
 
-    it('should update editForm', () => {
+    it("should update editForm", () => {
       const chapter: IChapter = { id: 28081 };
       const subTitle: ISubTitle = { id: 2895 };
       chapter.subTitle = subTitle;
@@ -82,14 +91,14 @@ describe('Chapter Management Update Component', () => {
     });
   });
 
-  describe('save', () => {
-    it('should call update service on save for existing entity', () => {
+  describe("save", () => {
+    it("should call update service on save for existing entity", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IChapter>>();
       const chapter = { id: 5578 };
-      jest.spyOn(chapterFormService, 'getChapter').mockReturnValue(chapter);
-      jest.spyOn(chapterService, 'update').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest.spyOn(chapterFormService, "getChapter").mockReturnValue(chapter);
+      jest.spyOn(chapterService, "update").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ chapter });
       comp.ngOnInit();
 
@@ -102,17 +111,21 @@ describe('Chapter Management Update Component', () => {
       // THEN
       expect(chapterFormService.getChapter).toHaveBeenCalled();
       expect(comp.previousState).toHaveBeenCalled();
-      expect(chapterService.update).toHaveBeenCalledWith(expect.objectContaining(chapter));
+      expect(chapterService.update).toHaveBeenCalledWith(
+        expect.objectContaining(chapter),
+      );
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('should call create service on save for new entity', () => {
+    it("should call create service on save for new entity", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IChapter>>();
       const chapter = { id: 5578 };
-      jest.spyOn(chapterFormService, 'getChapter').mockReturnValue({ id: null });
-      jest.spyOn(chapterService, 'create').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest
+        .spyOn(chapterFormService, "getChapter")
+        .mockReturnValue({ id: null });
+      jest.spyOn(chapterService, "create").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ chapter: null });
       comp.ngOnInit();
 
@@ -129,19 +142,19 @@ describe('Chapter Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('should set isSaving to false on error', () => {
+    it("should set isSaving to false on error", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IChapter>>();
       const chapter = { id: 5578 };
-      jest.spyOn(chapterService, 'update').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest.spyOn(chapterService, "update").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ chapter });
       comp.ngOnInit();
 
       // WHEN
       comp.save();
       expect(comp.isSaving).toEqual(true);
-      saveSubject.error('This is an error!');
+      saveSubject.error("This is an error!");
 
       // THEN
       expect(chapterService.update).toHaveBeenCalled();
@@ -150,14 +163,17 @@ describe('Chapter Management Update Component', () => {
     });
   });
 
-  describe('Compare relationships', () => {
-    describe('compareSubTitle', () => {
-      it('should forward to subTitleService', () => {
+  describe("Compare relationships", () => {
+    describe("compareSubTitle", () => {
+      it("should forward to subTitleService", () => {
         const entity = { id: 2895 };
         const entity2 = { id: 27234 };
-        jest.spyOn(subTitleService, 'compareSubTitle');
+        jest.spyOn(subTitleService, "compareSubTitle");
         comp.compareSubTitle(entity, entity2);
-        expect(subTitleService.compareSubTitle).toHaveBeenCalledWith(entity, entity2);
+        expect(subTitleService.compareSubTitle).toHaveBeenCalledWith(
+          entity,
+          entity2,
+        );
       });
     });
   });

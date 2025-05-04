@@ -1,17 +1,24 @@
-import { Component, ElementRef, Renderer2, effect, inject, input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Renderer2,
+  effect,
+  inject,
+  input,
+} from "@angular/core";
 
-import SharedModule from 'app/shared/shared.module';
+import SharedModule from "app/shared/shared.module";
 
 @Component({
-  selector: 'jhi-password-strength-bar',
+  selector: "jhi-password-strength-bar",
   imports: [SharedModule],
-  templateUrl: './password-strength-bar.component.html',
-  styleUrl: './password-strength-bar.component.scss',
+  templateUrl: "./password-strength-bar.component.html",
+  styleUrl: "./password-strength-bar.component.scss",
 })
 export default class PasswordStrengthBarComponent {
-  passwordToCheck = input<string>('');
+  passwordToCheck = input<string>("");
 
-  colors = ['#F00', '#F90', '#FF0', '#9F0', '#0F0'];
+  colors = ["#F00", "#F90", "#FF0", "#9F0", "#0F0"];
 
   private readonly renderer = inject(Renderer2);
   private readonly elementRef = inject(ElementRef);
@@ -25,12 +32,12 @@ export default class PasswordStrengthBarComponent {
         if (element.className) {
           this.renderer.removeClass(element, element.className);
         }
-        const lis = element.getElementsByTagName('li');
+        const lis = element.getElementsByTagName("li");
         for (let i = 0; i < lis.length; i++) {
           if (i < c.idx) {
-            this.renderer.setStyle(lis[i], 'backgroundColor', c.color);
+            this.renderer.setStyle(lis[i], "backgroundColor", c.color);
           } else {
-            this.renderer.setStyle(lis[i], 'backgroundColor', '#DDD');
+            this.renderer.setStyle(lis[i], "backgroundColor", "#DDD");
           }
         }
       }
@@ -46,7 +53,9 @@ export default class PasswordStrengthBarComponent {
     const symbols = regex.test(p);
 
     const flags = [lowerLetters, upperLetters, numbers, symbols];
-    const passedMatches = flags.filter((isMatchedFlag: boolean) => isMatchedFlag).length;
+    const passedMatches = flags.filter(
+      (isMatchedFlag: boolean) => isMatchedFlag,
+    ).length;
 
     force += 2 * p.length + (p.length >= 10 ? 1 : 0);
     force += passedMatches * 10;

@@ -14,14 +14,32 @@
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.decisionItem.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.decisionItem.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
           </div>
         }
 
-        @let beneficiaryRef = editForm.get('beneficiary')!;
+        @let beneficiaryRef = editForm.get("beneficiary")!;
         <div class="mb-3">
-          <label class="form-label" for="field_beneficiary" jhiTranslate="budgetApplicationApp.decisionItem.beneficiary">Beneficiary</label>
+          <label
+            class="form-label"
+            for="field_beneficiary"
+            jhiTranslate="budgetApplicationApp.decisionItem.beneficiary"
+            >Beneficiary</label
+          >
           <input
             type="text"
             class="form-control"
@@ -30,22 +48,46 @@
             data-cy="beneficiary"
             formControlName="beneficiary"
           />
-          @if (beneficiaryRef.invalid && (beneficiaryRef.dirty || beneficiaryRef.touched)) {
+          @if (
+            beneficiaryRef.invalid &&
+            (beneficiaryRef.dirty || beneficiaryRef.touched)
+          ) {
             <div>
-              @if (editForm.get('beneficiary')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("beneficiary")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
             </div>
           }
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_amount" jhiTranslate="budgetApplicationApp.decisionItem.amount">Amount</label>
-          <input type="number" class="form-control" name="amount" id="field_amount" data-cy="amount" formControlName="amount" />
+          <label
+            class="form-label"
+            for="field_amount"
+            jhiTranslate="budgetApplicationApp.decisionItem.amount"
+            >Amount</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="amount"
+            id="field_amount"
+            data-cy="amount"
+            formControlName="amount"
+          />
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_observation" jhiTranslate="budgetApplicationApp.decisionItem.observation">Observation</label>
+          <label
+            class="form-label"
+            for="field_observation"
+            jhiTranslate="budgetApplicationApp.decisionItem.observation"
+            >Observation</label
+          >
           <input
             type="number"
             class="form-control"
@@ -57,7 +99,12 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_decision" jhiTranslate="budgetApplicationApp.decisionItem.decision">Decision</label>
+          <label
+            class="form-label"
+            for="field_decision"
+            jhiTranslate="budgetApplicationApp.decisionItem.decision"
+            >Decision</label
+          >
           <select
             class="form-control"
             id="field_decision"
@@ -68,15 +115,26 @@
           >
             <option [ngValue]="null"></option>
             @for (decisionOption of decisionsSharedCollection; track $index) {
-              <option [ngValue]="decisionOption">{{ decisionOption.id }}</option>
+              <option [ngValue]="decisionOption">
+                {{ decisionOption.id }}
+              </option>
             }
           </select>
         </div>
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
         </button>
 
         <button
@@ -86,7 +144,10 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
         </button>
       </div>
     </form>

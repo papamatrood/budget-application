@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter, withComponentInputBinding } from "@angular/router";
+import { RouterTestingHarness } from "@angular/router/testing";
+import { of } from "rxjs";
 
-import { PurchaseOrderItemDetailComponent } from './purchase-order-item-detail.component';
+import { PurchaseOrderItemDetailComponent } from "./purchase-order-item-detail.component";
 
-describe('PurchaseOrderItem Management Detail Component', () => {
+describe("PurchaseOrderItem Management Detail Component", () => {
   let comp: PurchaseOrderItemDetailComponent;
   let fixture: ComponentFixture<PurchaseOrderItemDetailComponent>;
 
@@ -16,8 +16,11 @@ describe('PurchaseOrderItem Management Detail Component', () => {
         provideRouter(
           [
             {
-              path: '**',
-              loadComponent: () => import('./purchase-order-item-detail.component').then(m => m.PurchaseOrderItemDetailComponent),
+              path: "**",
+              loadComponent: () =>
+                import("./purchase-order-item-detail.component").then(
+                  (m) => m.PurchaseOrderItemDetailComponent,
+                ),
               resolve: { purchaseOrderItem: () => of({ id: 13347 }) },
             },
           ],
@@ -25,7 +28,7 @@ describe('PurchaseOrderItem Management Detail Component', () => {
         ),
       ],
     })
-      .overrideTemplate(PurchaseOrderItemDetailComponent, '')
+      .overrideTemplate(PurchaseOrderItemDetailComponent, "")
       .compileComponents();
   });
 
@@ -34,19 +37,24 @@ describe('PurchaseOrderItem Management Detail Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('OnInit', () => {
-    it('should load purchaseOrderItem on init', async () => {
+  describe("OnInit", () => {
+    it("should load purchaseOrderItem on init", async () => {
       const harness = await RouterTestingHarness.create();
-      const instance = await harness.navigateByUrl('/', PurchaseOrderItemDetailComponent);
+      const instance = await harness.navigateByUrl(
+        "/",
+        PurchaseOrderItemDetailComponent,
+      );
 
       // THEN
-      expect(instance.purchaseOrderItem()).toEqual(expect.objectContaining({ id: 13347 }));
+      expect(instance.purchaseOrderItem()).toEqual(
+        expect.objectContaining({ id: 13347 }),
+      );
     });
   });
 
-  describe('PreviousState', () => {
-    it('should navigate to previous state', () => {
-      jest.spyOn(window.history, 'back');
+  describe("PreviousState", () => {
+    it("should navigate to previous state", () => {
+      jest.spyOn(window.history, "back");
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
     });

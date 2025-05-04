@@ -1,13 +1,15 @@
-import { inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRouteSnapshot, Router } from "@angular/router";
+import { EMPTY, Observable, of } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 
-import { IRecipe } from '../recipe.model';
-import { RecipeService } from '../service/recipe.service';
+import { IRecipe } from "../recipe.model";
+import { RecipeService } from "../service/recipe.service";
 
-const recipeResolve = (route: ActivatedRouteSnapshot): Observable<null | IRecipe> => {
+const recipeResolve = (
+  route: ActivatedRouteSnapshot,
+): Observable<null | IRecipe> => {
   const id = route.params.id;
   if (id) {
     return inject(RecipeService)
@@ -17,7 +19,7 @@ const recipeResolve = (route: ActivatedRouteSnapshot): Observable<null | IRecipe
           if (recipe.body) {
             return of(recipe.body);
           }
-          inject(Router).navigate(['404']);
+          inject(Router).navigate(["404"]);
           return EMPTY;
         }),
       );

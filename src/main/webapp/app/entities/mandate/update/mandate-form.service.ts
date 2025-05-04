@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import dayjs from 'dayjs/esm';
-import { DATE_TIME_FORMAT } from 'app/config/input.constants';
-import { IMandate, NewMandate } from '../mandate.model';
+import dayjs from "dayjs/esm";
+import { DATE_TIME_FORMAT } from "app/config/input.constants";
+import { IMandate, NewMandate } from "../mandate.model";
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<
+  Omit<T, "id">
+> & { id: T["id"] };
 
 /**
  * Type for createFormGroup and resetForm argument.
@@ -19,7 +21,7 @@ type MandateFormGroupInput = IMandate | PartialWithRequiredKeyOf<NewMandate>;
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IMandate | NewMandate> = Omit<T, 'mandateDate'> & {
+type FormValueOf<T extends IMandate | NewMandate> = Omit<T, "mandateDate"> & {
   mandateDate?: string | null;
 };
 
@@ -27,23 +29,25 @@ type MandateFormRawValue = FormValueOf<IMandate>;
 
 type NewMandateFormRawValue = FormValueOf<NewMandate>;
 
-type MandateFormDefaults = Pick<NewMandate, 'id' | 'mandateDate'>;
+type MandateFormDefaults = Pick<NewMandate, "id" | "mandateDate">;
 
 type MandateFormGroupContent = {
-  id: FormControl<MandateFormRawValue['id'] | NewMandate['id']>;
-  mandateNumber: FormControl<MandateFormRawValue['mandateNumber']>;
-  mandateDate: FormControl<MandateFormRawValue['mandateDate']>;
-  issueSlipNumber: FormControl<MandateFormRawValue['issueSlipNumber']>;
-  monthAndYearOfIssue: FormControl<MandateFormRawValue['monthAndYearOfIssue']>;
-  supportingDocuments: FormControl<MandateFormRawValue['supportingDocuments']>;
-  engagement: FormControl<MandateFormRawValue['engagement']>;
+  id: FormControl<MandateFormRawValue["id"] | NewMandate["id"]>;
+  mandateNumber: FormControl<MandateFormRawValue["mandateNumber"]>;
+  mandateDate: FormControl<MandateFormRawValue["mandateDate"]>;
+  issueSlipNumber: FormControl<MandateFormRawValue["issueSlipNumber"]>;
+  monthAndYearOfIssue: FormControl<MandateFormRawValue["monthAndYearOfIssue"]>;
+  supportingDocuments: FormControl<MandateFormRawValue["supportingDocuments"]>;
+  engagement: FormControl<MandateFormRawValue["engagement"]>;
 };
 
 export type MandateFormGroup = FormGroup<MandateFormGroupContent>;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class MandateFormService {
-  createMandateFormGroup(mandate: MandateFormGroupInput = { id: null }): MandateFormGroup {
+  createMandateFormGroup(
+    mandate: MandateFormGroupInput = { id: null },
+  ): MandateFormGroup {
     const mandateRawValue = this.convertMandateToMandateRawValue({
       ...this.getFormDefaults(),
       ...mandate,
@@ -70,11 +74,16 @@ export class MandateFormService {
   }
 
   getMandate(form: MandateFormGroup): IMandate | NewMandate {
-    return this.convertMandateRawValueToMandate(form.getRawValue() as MandateFormRawValue | NewMandateFormRawValue);
+    return this.convertMandateRawValueToMandate(
+      form.getRawValue() as MandateFormRawValue | NewMandateFormRawValue,
+    );
   }
 
   resetForm(form: MandateFormGroup, mandate: MandateFormGroupInput): void {
-    const mandateRawValue = this.convertMandateToMandateRawValue({ ...this.getFormDefaults(), ...mandate });
+    const mandateRawValue = this.convertMandateToMandateRawValue({
+      ...this.getFormDefaults(),
+      ...mandate,
+    });
     form.reset(
       {
         ...mandateRawValue,
@@ -92,7 +101,9 @@ export class MandateFormService {
     };
   }
 
-  private convertMandateRawValueToMandate(rawMandate: MandateFormRawValue | NewMandateFormRawValue): IMandate | NewMandate {
+  private convertMandateRawValueToMandate(
+    rawMandate: MandateFormRawValue | NewMandateFormRawValue,
+  ): IMandate | NewMandate {
     return {
       ...rawMandate,
       mandateDate: dayjs(rawMandate.mandateDate, DATE_TIME_FORMAT),
@@ -104,7 +115,9 @@ export class MandateFormService {
   ): MandateFormRawValue | PartialWithRequiredKeyOf<NewMandateFormRawValue> {
     return {
       ...mandate,
-      mandateDate: mandate.mandateDate ? mandate.mandateDate.format(DATE_TIME_FORMAT) : undefined,
+      mandateDate: mandate.mandateDate
+        ? mandate.mandateDate.format(DATE_TIME_FORMAT)
+        : undefined,
     };
   }
 }

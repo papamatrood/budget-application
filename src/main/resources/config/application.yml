@@ -19,7 +19,7 @@
 spring:
   config:
     activate:
-      on-profile: '!api-docs'
+      on-profile: "!api-docs"
 springdoc:
   api-docs:
     enabled: false
@@ -45,7 +45,7 @@ management:
   endpoint:
     health:
       show-details: when_authorized
-      roles: 'ROLE_ADMIN'
+      roles: "ROLE_ADMIN"
       probes:
         enabled: true
       group:
@@ -102,7 +102,7 @@ spring:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
     # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
-    active: '@spring.profiles.active@'
+    active: "@spring.profiles.active@"
     group:
       dev:
         - dev
@@ -148,7 +148,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          authority-prefix: ''
+          authority-prefix: ""
           authorities-claim-name: auth
   task:
     execution:
@@ -179,7 +179,7 @@ springdoc:
 # Properties to be exposed on the /info management endpoint
 info:
   # Comma separated list of profiles that will trigger the ribbon to show
-  display-ribbon-on-profiles: 'dev'
+  display-ribbon-on-profiles: "dev"
 
 # ===================================================================
 # JHipster specific properties
@@ -189,7 +189,7 @@ info:
 
 jhipster:
   clientApp:
-    name: 'budgetApplicationApp'
+    name: "budgetApplicationApp"
   # By default CORS is disabled. Uncomment to enable.
   # cors:
   #   allowed-origins: "http://localhost:8100,http://localhost:9000"

@@ -1,5 +1,5 @@
-import dayjs from 'dayjs/esm';
-import { IEngagement } from 'app/entities/engagement/engagement.model';
+import dayjs from "dayjs/esm";
+import { IEngagement } from "app/entities/engagement/engagement.model";
 
 export interface IMandate {
   id: number;
@@ -11,4 +11,4 @@ export interface IMandate {
   engagement?: IEngagement | null;
 }
 
-export type NewMandate = Omit<IMandate, 'id'> & { id: null };
+export type NewMandate = Omit<IMandate, "id"> & { id: null };

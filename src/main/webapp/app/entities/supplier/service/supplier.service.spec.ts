@@ -1,17 +1,25 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideHttpClient } from '@angular/common/http';
+import { TestBed } from "@angular/core/testing";
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from "@angular/common/http/testing";
+import { provideHttpClient } from "@angular/common/http";
 
-import { ISupplier } from '../supplier.model';
-import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../supplier.test-samples';
+import { ISupplier } from "../supplier.model";
+import {
+  sampleWithFullData,
+  sampleWithNewData,
+  sampleWithPartialData,
+  sampleWithRequiredData,
+} from "../supplier.test-samples";
 
-import { SupplierService } from './supplier.service';
+import { SupplierService } from "./supplier.service";
 
 const requireRestSample: ISupplier = {
   ...sampleWithRequiredData,
 };
 
-describe('Supplier Service', () => {
+describe("Supplier Service", () => {
   let service: SupplierService;
   let httpMock: HttpTestingController;
   let expectedResult: ISupplier | ISupplier[] | boolean | null;
@@ -25,86 +33,92 @@ describe('Supplier Service', () => {
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  describe('Service methods', () => {
-    it('should find an element', () => {
+  describe("Service methods", () => {
+    it("should find an element", () => {
       const returnedFromService = { ...requireRestSample };
       const expected = { ...sampleWithRequiredData };
 
-      service.find(123).subscribe(resp => (expectedResult = resp.body));
+      service.find(123).subscribe((resp) => (expectedResult = resp.body));
 
-      const req = httpMock.expectOne({ method: 'GET' });
+      const req = httpMock.expectOne({ method: "GET" });
       req.flush(returnedFromService);
       expect(expectedResult).toMatchObject(expected);
     });
 
-    it('should create a Supplier', () => {
+    it("should create a Supplier", () => {
       const supplier = { ...sampleWithNewData };
       const returnedFromService = { ...requireRestSample };
       const expected = { ...sampleWithRequiredData };
 
-      service.create(supplier).subscribe(resp => (expectedResult = resp.body));
+      service
+        .create(supplier)
+        .subscribe((resp) => (expectedResult = resp.body));
 
-      const req = httpMock.expectOne({ method: 'POST' });
+      const req = httpMock.expectOne({ method: "POST" });
       req.flush(returnedFromService);
       expect(expectedResult).toMatchObject(expected);
     });
 
-    it('should update a Supplier', () => {
+    it("should update a Supplier", () => {
       const supplier = { ...sampleWithRequiredData };
       const returnedFromService = { ...requireRestSample };
       const expected = { ...sampleWithRequiredData };
 
-      service.update(supplier).subscribe(resp => (expectedResult = resp.body));
+      service
+        .update(supplier)
+        .subscribe((resp) => (expectedResult = resp.body));
 
-      const req = httpMock.expectOne({ method: 'PUT' });
+      const req = httpMock.expectOne({ method: "PUT" });
       req.flush(returnedFromService);
       expect(expectedResult).toMatchObject(expected);
     });
 
-    it('should partial update a Supplier', () => {
+    it("should partial update a Supplier", () => {
       const patchObject = { ...sampleWithPartialData };
       const returnedFromService = { ...requireRestSample };
       const expected = { ...sampleWithRequiredData };
 
-      service.partialUpdate(patchObject).subscribe(resp => (expectedResult = resp.body));
+      service
+        .partialUpdate(patchObject)
+        .subscribe((resp) => (expectedResult = resp.body));
 
-      const req = httpMock.expectOne({ method: 'PATCH' });
+      const req = httpMock.expectOne({ method: "PATCH" });
       req.flush(returnedFromService);
       expect(expectedResult).toMatchObject(expected);
     });
 
-    it('should return a list of Supplier', () => {
+    it("should return a list of Supplier", () => {
       const returnedFromService = { ...requireRestSample };
 
       const expected = { ...sampleWithRequiredData };
 
-      service.query().subscribe(resp => (expectedResult = resp.body));
+      service.query().subscribe((resp) => (expectedResult = resp.body));
 
-      const req = httpMock.expectOne({ method: 'GET' });
+      const req = httpMock.expectOne({ method: "GET" });
       req.flush([returnedFromService]);
       httpMock.verify();
       expect(expectedResult).toMatchObject([expected]);
     });
 
-    it('should delete a Supplier', () => {
+    it("should delete a Supplier", () => {
       const expected = true;
 
-      service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+      service.delete(123).subscribe((resp) => (expectedResult = resp.ok));
 
-      const req = httpMock.expectOne({ method: 'DELETE' });
+      const req = httpMock.expectOne({ method: "DELETE" });
       req.flush({ status: 200 });
       expect(expectedResult).toBe(expected);
     });
 
-    describe('addSupplierToCollectionIfMissing', () => {
-      it('should add a Supplier to an empty array', () => {
+    describe("addSupplierToCollectionIfMissing", () => {
+      it("should add a Supplier to an empty array", () => {
         const supplier: ISupplier = sampleWithRequiredData;
         expectedResult = service.addSupplierToCollectionIfMissing([], supplier);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(supplier);
       });
 
-      it('should not add a Supplier to an array that contains it', () => {
+      it("should not add a Supplier to an array that contains it", () => {
         const supplier: ISupplier = sampleWithRequiredData;
         const supplierCollection: ISupplier[] = [
           {
@@ -112,50 +126,76 @@ describe('Supplier Service', () => {
           },
           sampleWithPartialData,
         ];
-        expectedResult = service.addSupplierToCollectionIfMissing(supplierCollection, supplier);
+        expectedResult = service.addSupplierToCollectionIfMissing(
+          supplierCollection,
+          supplier,
+        );
         expect(expectedResult).toHaveLength(2);
       });
 
       it("should add a Supplier to an array that doesn't contain it", () => {
         const supplier: ISupplier = sampleWithRequiredData;
         const supplierCollection: ISupplier[] = [sampleWithPartialData];
-        expectedResult = service.addSupplierToCollectionIfMissing(supplierCollection, supplier);
+        expectedResult = service.addSupplierToCollectionIfMissing(
+          supplierCollection,
+          supplier,
+        );
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(supplier);
       });
 
-      it('should add only unique Supplier to an array', () => {
-        const supplierArray: ISupplier[] = [sampleWithRequiredData, sampleWithPartialData, sampleWithFullData];
+      it("should add only unique Supplier to an array", () => {
+        const supplierArray: ISupplier[] = [
+          sampleWithRequiredData,
+          sampleWithPartialData,
+          sampleWithFullData,
+        ];
         const supplierCollection: ISupplier[] = [sampleWithRequiredData];
-        expectedResult = service.addSupplierToCollectionIfMissing(supplierCollection, ...supplierArray);
+        expectedResult = service.addSupplierToCollectionIfMissing(
+          supplierCollection,
+          ...supplierArray,
+        );
         expect(expectedResult).toHaveLength(3);
       });
 
-      it('should accept varargs', () => {
+      it("should accept varargs", () => {
         const supplier: ISupplier = sampleWithRequiredData;
         const supplier2: ISupplier = sampleWithPartialData;
-        expectedResult = service.addSupplierToCollectionIfMissing([], supplier, supplier2);
+        expectedResult = service.addSupplierToCollectionIfMissing(
+          [],
+          supplier,
+          supplier2,
+        );
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(supplier);
         expect(expectedResult).toContain(supplier2);
       });
 
-      it('should accept null and undefined values', () => {
+      it("should accept null and undefined values", () => {
         const supplier: ISupplier = sampleWithRequiredData;
-        expectedResult = service.addSupplierToCollectionIfMissing([], null, supplier, undefined);
+        expectedResult = service.addSupplierToCollectionIfMissing(
+          [],
+          null,
+          supplier,
+          undefined,
+        );
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(supplier);
       });
 
-      it('should return initial array if no Supplier is added', () => {
+      it("should return initial array if no Supplier is added", () => {
         const supplierCollection: ISupplier[] = [sampleWithRequiredData];
-        expectedResult = service.addSupplierToCollectionIfMissing(supplierCollection, undefined, null);
+        expectedResult = service.addSupplierToCollectionIfMissing(
+          supplierCollection,
+          undefined,
+          null,
+        );
         expect(expectedResult).toEqual(supplierCollection);
       });
     });
 
-    describe('compareSupplier', () => {
-      it('should return true if both entities are null', () => {
+    describe("compareSupplier", () => {
+      it("should return true if both entities are null", () => {
         const entity1 = null;
         const entity2 = null;
 
@@ -164,7 +204,7 @@ describe('Supplier Service', () => {
         expect(compareResult).toEqual(true);
       });
 
-      it('should return false if one entity is null', () => {
+      it("should return false if one entity is null", () => {
         const entity1 = { id: 28889 };
         const entity2 = null;
 
@@ -175,7 +215,7 @@ describe('Supplier Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('should return false if primaryKey differs', () => {
+      it("should return false if primaryKey differs", () => {
         const entity1 = { id: 28889 };
         const entity2 = { id: 5063 };
 
@@ -186,7 +226,7 @@ describe('Supplier Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('should return false if primaryKey matches', () => {
+      it("should return false if primaryKey matches", () => {
         const entity1 = { id: 28889 };
         const entity2 = { id: 28889 };
 

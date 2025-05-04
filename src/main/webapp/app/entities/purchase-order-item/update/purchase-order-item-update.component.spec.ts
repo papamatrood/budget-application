@@ -1,18 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, from, of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Subject, from, of } from "rxjs";
 
-import { IPurchaseOrder } from 'app/entities/purchase-order/purchase-order.model';
-import { PurchaseOrderService } from 'app/entities/purchase-order/service/purchase-order.service';
-import { PurchaseOrderItemService } from '../service/purchase-order-item.service';
-import { IPurchaseOrderItem } from '../purchase-order-item.model';
-import { PurchaseOrderItemFormService } from './purchase-order-item-form.service';
+import { IPurchaseOrder } from "app/entities/purchase-order/purchase-order.model";
+import { PurchaseOrderService } from "app/entities/purchase-order/service/purchase-order.service";
+import { PurchaseOrderItemService } from "../service/purchase-order-item.service";
+import { IPurchaseOrderItem } from "../purchase-order-item.model";
+import { PurchaseOrderItemFormService } from "./purchase-order-item-form.service";
 
-import { PurchaseOrderItemUpdateComponent } from './purchase-order-item-update.component';
+import { PurchaseOrderItemUpdateComponent } from "./purchase-order-item-update.component";
 
-describe('PurchaseOrderItem Management Update Component', () => {
+describe("PurchaseOrderItem Management Update Component", () => {
   let comp: PurchaseOrderItemUpdateComponent;
   let fixture: ComponentFixture<PurchaseOrderItemUpdateComponent>;
   let activatedRoute: ActivatedRoute;
@@ -34,7 +34,7 @@ describe('PurchaseOrderItem Management Update Component', () => {
         },
       ],
     })
-      .overrideTemplate(PurchaseOrderItemUpdateComponent, '')
+      .overrideTemplate(PurchaseOrderItemUpdateComponent, "")
       .compileComponents();
 
     fixture = TestBed.createComponent(PurchaseOrderItemUpdateComponent);
@@ -46,30 +46,41 @@ describe('PurchaseOrderItem Management Update Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('ngOnInit', () => {
-    it('should call PurchaseOrder query and add missing value', () => {
+  describe("ngOnInit", () => {
+    it("should call PurchaseOrder query and add missing value", () => {
       const purchaseOrderItem: IPurchaseOrderItem = { id: 27171 };
       const purchaseOrder: IPurchaseOrder = { id: 29828 };
       purchaseOrderItem.purchaseOrder = purchaseOrder;
 
       const purchaseOrderCollection: IPurchaseOrder[] = [{ id: 29828 }];
-      jest.spyOn(purchaseOrderService, 'query').mockReturnValue(of(new HttpResponse({ body: purchaseOrderCollection })));
+      jest
+        .spyOn(purchaseOrderService, "query")
+        .mockReturnValue(
+          of(new HttpResponse({ body: purchaseOrderCollection })),
+        );
       const additionalPurchaseOrders = [purchaseOrder];
-      const expectedCollection: IPurchaseOrder[] = [...additionalPurchaseOrders, ...purchaseOrderCollection];
-      jest.spyOn(purchaseOrderService, 'addPurchaseOrderToCollectionIfMissing').mockReturnValue(expectedCollection);
+      const expectedCollection: IPurchaseOrder[] = [
+        ...additionalPurchaseOrders,
+        ...purchaseOrderCollection,
+      ];
+      jest
+        .spyOn(purchaseOrderService, "addPurchaseOrderToCollectionIfMissing")
+        .mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ purchaseOrderItem });
       comp.ngOnInit();
 
       expect(purchaseOrderService.query).toHaveBeenCalled();
-      expect(purchaseOrderService.addPurchaseOrderToCollectionIfMissing).toHaveBeenCalledWith(
+      expect(
+        purchaseOrderService.addPurchaseOrderToCollectionIfMissing,
+      ).toHaveBeenCalledWith(
         purchaseOrderCollection,
         ...additionalPurchaseOrders.map(expect.objectContaining),
       );
       expect(comp.purchaseOrdersSharedCollection).toEqual(expectedCollection);
     });
 
-    it('should update editForm', () => {
+    it("should update editForm", () => {
       const purchaseOrderItem: IPurchaseOrderItem = { id: 27171 };
       const purchaseOrder: IPurchaseOrder = { id: 29828 };
       purchaseOrderItem.purchaseOrder = purchaseOrder;
@@ -82,14 +93,18 @@ describe('PurchaseOrderItem Management Update Component', () => {
     });
   });
 
-  describe('save', () => {
-    it('should call update service on save for existing entity', () => {
+  describe("save", () => {
+    it("should call update service on save for existing entity", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IPurchaseOrderItem>>();
       const purchaseOrderItem = { id: 13347 };
-      jest.spyOn(purchaseOrderItemFormService, 'getPurchaseOrderItem').mockReturnValue(purchaseOrderItem);
-      jest.spyOn(purchaseOrderItemService, 'update').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest
+        .spyOn(purchaseOrderItemFormService, "getPurchaseOrderItem")
+        .mockReturnValue(purchaseOrderItem);
+      jest
+        .spyOn(purchaseOrderItemService, "update")
+        .mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ purchaseOrderItem });
       comp.ngOnInit();
 
@@ -100,19 +115,27 @@ describe('PurchaseOrderItem Management Update Component', () => {
       saveSubject.complete();
 
       // THEN
-      expect(purchaseOrderItemFormService.getPurchaseOrderItem).toHaveBeenCalled();
+      expect(
+        purchaseOrderItemFormService.getPurchaseOrderItem,
+      ).toHaveBeenCalled();
       expect(comp.previousState).toHaveBeenCalled();
-      expect(purchaseOrderItemService.update).toHaveBeenCalledWith(expect.objectContaining(purchaseOrderItem));
+      expect(purchaseOrderItemService.update).toHaveBeenCalledWith(
+        expect.objectContaining(purchaseOrderItem),
+      );
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('should call create service on save for new entity', () => {
+    it("should call create service on save for new entity", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IPurchaseOrderItem>>();
       const purchaseOrderItem = { id: 13347 };
-      jest.spyOn(purchaseOrderItemFormService, 'getPurchaseOrderItem').mockReturnValue({ id: null });
-      jest.spyOn(purchaseOrderItemService, 'create').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest
+        .spyOn(purchaseOrderItemFormService, "getPurchaseOrderItem")
+        .mockReturnValue({ id: null });
+      jest
+        .spyOn(purchaseOrderItemService, "create")
+        .mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ purchaseOrderItem: null });
       comp.ngOnInit();
 
@@ -123,25 +146,29 @@ describe('PurchaseOrderItem Management Update Component', () => {
       saveSubject.complete();
 
       // THEN
-      expect(purchaseOrderItemFormService.getPurchaseOrderItem).toHaveBeenCalled();
+      expect(
+        purchaseOrderItemFormService.getPurchaseOrderItem,
+      ).toHaveBeenCalled();
       expect(purchaseOrderItemService.create).toHaveBeenCalled();
       expect(comp.isSaving).toEqual(false);
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('should set isSaving to false on error', () => {
+    it("should set isSaving to false on error", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IPurchaseOrderItem>>();
       const purchaseOrderItem = { id: 13347 };
-      jest.spyOn(purchaseOrderItemService, 'update').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      jest
+        .spyOn(purchaseOrderItemService, "update")
+        .mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ purchaseOrderItem });
       comp.ngOnInit();
 
       // WHEN
       comp.save();
       expect(comp.isSaving).toEqual(true);
-      saveSubject.error('This is an error!');
+      saveSubject.error("This is an error!");
 
       // THEN
       expect(purchaseOrderItemService.update).toHaveBeenCalled();
@@ -150,14 +177,17 @@ describe('PurchaseOrderItem Management Update Component', () => {
     });
   });
 
-  describe('Compare relationships', () => {
-    describe('comparePurchaseOrder', () => {
-      it('should forward to purchaseOrderService', () => {
+  describe("Compare relationships", () => {
+    describe("comparePurchaseOrder", () => {
+      it("should forward to purchaseOrderService", () => {
         const entity = { id: 29828 };
         const entity2 = { id: 21921 };
-        jest.spyOn(purchaseOrderService, 'comparePurchaseOrder');
+        jest.spyOn(purchaseOrderService, "comparePurchaseOrder");
         comp.comparePurchaseOrder(entity, entity2);
-        expect(purchaseOrderService.comparePurchaseOrder).toHaveBeenCalledWith(entity, entity2);
+        expect(purchaseOrderService.comparePurchaseOrder).toHaveBeenCalledWith(
+          entity,
+          entity2,
+        );
       });
     });
   });

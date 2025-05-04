@@ -1,13 +1,15 @@
-import { inject } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { inject } from "@angular/core";
+import { HttpResponse } from "@angular/common/http";
+import { ActivatedRouteSnapshot, Router } from "@angular/router";
+import { EMPTY, Observable, of } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 
-import { IAppUser } from '../app-user.model';
-import { AppUserService } from '../service/app-user.service';
+import { IAppUser } from "../app-user.model";
+import { AppUserService } from "../service/app-user.service";
 
-const appUserResolve = (route: ActivatedRouteSnapshot): Observable<null | IAppUser> => {
+const appUserResolve = (
+  route: ActivatedRouteSnapshot,
+): Observable<null | IAppUser> => {
   const id = route.params.id;
   if (id) {
     return inject(AppUserService)
@@ -17,7 +19,7 @@ const appUserResolve = (route: ActivatedRouteSnapshot): Observable<null | IAppUs
           if (appUser.body) {
             return of(appUser.body);
           }
-          inject(Router).navigate(['404']);
+          inject(Router).navigate(["404"]);
           return EMPTY;
         }),
       );

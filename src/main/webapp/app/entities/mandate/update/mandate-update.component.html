@@ -1,7 +1,11 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-mandate-heading" data-cy="MandateCreateUpdateHeading" jhiTranslate="budgetApplicationApp.mandate.home.createOrEditLabel">
+      <h2
+        id="jhi-mandate-heading"
+        data-cy="MandateCreateUpdateHeading"
+        jhiTranslate="budgetApplicationApp.mandate.home.createOrEditLabel"
+      >
         Créer ou éditer un Mandate
       </h2>
 
@@ -10,14 +14,30 @@
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="budgetApplicationApp.mandate.id">ID</label>
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.mandate.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
           </div>
         }
 
-        @let mandateNumberRef = editForm.get('mandateNumber')!;
+        @let mandateNumberRef = editForm.get("mandateNumber")!;
         <div class="mb-3">
-          <label class="form-label" for="field_mandateNumber" jhiTranslate="budgetApplicationApp.mandate.mandateNumber"
+          <label
+            class="form-label"
+            for="field_mandateNumber"
+            jhiTranslate="budgetApplicationApp.mandate.mandateNumber"
             >Mandate Number</label
           >
           <input
@@ -28,18 +48,30 @@
             data-cy="mandateNumber"
             formControlName="mandateNumber"
           />
-          @if (mandateNumberRef.invalid && (mandateNumberRef.dirty || mandateNumberRef.touched)) {
+          @if (
+            mandateNumberRef.invalid &&
+            (mandateNumberRef.dirty || mandateNumberRef.touched)
+          ) {
             <div>
-              @if (editForm.get('mandateNumber')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("mandateNumber")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
             </div>
           }
         </div>
 
-        @let mandateDateRef = editForm.get('mandateDate')!;
+        @let mandateDateRef = editForm.get("mandateDate")!;
         <div class="mb-3">
-          <label class="form-label" for="field_mandateDate" jhiTranslate="budgetApplicationApp.mandate.mandateDate">Mandate Date</label>
+          <label
+            class="form-label"
+            for="field_mandateDate"
+            jhiTranslate="budgetApplicationApp.mandate.mandateDate"
+            >Mandate Date</label
+          >
           <div class="d-flex">
             <input
               id="field_mandateDate"
@@ -51,10 +83,17 @@
               placeholder="YYYY-MM-DD HH:mm"
             />
           </div>
-          @if (mandateDateRef.invalid && (mandateDateRef.dirty || mandateDateRef.touched)) {
+          @if (
+            mandateDateRef.invalid &&
+            (mandateDateRef.dirty || mandateDateRef.touched)
+          ) {
             <div>
-              @if (editForm.get('mandateDate')?.errors?.required) {
-                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              @if (editForm.get("mandateDate")?.errors?.required) {
+                <small
+                  class="form-text text-danger"
+                  jhiTranslate="entity.validation.required"
+                  >Ce champ est obligatoire.</small
+                >
               }
               <small
                 class="form-text text-danger"
@@ -67,7 +106,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_issueSlipNumber" jhiTranslate="budgetApplicationApp.mandate.issueSlipNumber"
+          <label
+            class="form-label"
+            for="field_issueSlipNumber"
+            jhiTranslate="budgetApplicationApp.mandate.issueSlipNumber"
             >Issue Slip Number</label
           >
           <input
@@ -81,7 +123,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_monthAndYearOfIssue" jhiTranslate="budgetApplicationApp.mandate.monthAndYearOfIssue"
+          <label
+            class="form-label"
+            for="field_monthAndYearOfIssue"
+            jhiTranslate="budgetApplicationApp.mandate.monthAndYearOfIssue"
             >Month And Year Of Issue</label
           >
           <input
@@ -95,7 +140,10 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_supportingDocuments" jhiTranslate="budgetApplicationApp.mandate.supportingDocuments"
+          <label
+            class="form-label"
+            for="field_supportingDocuments"
+            jhiTranslate="budgetApplicationApp.mandate.supportingDocuments"
             >Supporting Documents</label
           >
           <input
@@ -109,7 +157,12 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_engagement" jhiTranslate="budgetApplicationApp.mandate.engagement">Engagement</label>
+          <label
+            class="form-label"
+            for="field_engagement"
+            jhiTranslate="budgetApplicationApp.mandate.engagement"
+            >Engagement</label
+          >
           <select
             class="form-control"
             id="field_engagement"
@@ -120,15 +173,26 @@
           >
             <option [ngValue]="null"></option>
             @for (engagementOption of engagementsCollection; track $index) {
-              <option [ngValue]="engagementOption">{{ engagementOption.id }}</option>
+              <option [ngValue]="engagementOption">
+                {{ engagementOption.id }}
+              </option>
             }
           </select>
         </div>
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
         </button>
 
         <button
@@ -138,7 +202,10 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
         </button>
       </div>
     </form>

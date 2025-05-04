@@ -1,11 +1,14 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideHttpClient } from '@angular/common/http';
+import { TestBed } from "@angular/core/testing";
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from "@angular/common/http/testing";
+import { provideHttpClient } from "@angular/common/http";
 
-import { ApplicationConfigService } from 'app/core/config/application-config.service';
-import { PasswordResetInitService } from './password-reset-init.service';
+import { ApplicationConfigService } from "app/core/config/application-config.service";
+import { PasswordResetInitService } from "./password-reset-init.service";
 
-describe('PasswordResetInit Service', () => {
+describe("PasswordResetInit Service", () => {
   let service: PasswordResetInitService;
   let httpMock: HttpTestingController;
   let applicationConfigService: ApplicationConfigService;
@@ -24,17 +27,19 @@ describe('PasswordResetInit Service', () => {
     httpMock.verify();
   });
 
-  describe('Service methods', () => {
-    it('should call reset-password/init endpoint with correct values', () => {
+  describe("Service methods", () => {
+    it("should call reset-password/init endpoint with correct values", () => {
       // GIVEN
-      const mail = 'test@test.com';
+      const mail = "test@test.com";
 
       // WHEN
       service.save(mail).subscribe();
 
       const testRequest = httpMock.expectOne({
-        method: 'POST',
-        url: applicationConfigService.getEndpointFor('api/account/reset-password/init'),
+        method: "POST",
+        url: applicationConfigService.getEndpointFor(
+          "api/account/reset-password/init",
+        ),
       });
 
       // THEN

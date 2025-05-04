@@ -1,31 +1,37 @@
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-import { IFinancialYear, NewFinancialYear } from '../financial-year.model';
+import { IFinancialYear, NewFinancialYear } from "../financial-year.model";
 
 /**
  * A partial Type with required key is used as form input.
  */
-type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
+type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<
+  Omit<T, "id">
+> & { id: T["id"] };
 
 /**
  * Type for createFormGroup and resetForm argument.
  * It accepts IFinancialYear for edit and NewFinancialYearFormGroupInput for create.
  */
-type FinancialYearFormGroupInput = IFinancialYear | PartialWithRequiredKeyOf<NewFinancialYear>;
+type FinancialYearFormGroupInput =
+  | IFinancialYear
+  | PartialWithRequiredKeyOf<NewFinancialYear>;
 
-type FinancialYearFormDefaults = Pick<NewFinancialYear, 'id'>;
+type FinancialYearFormDefaults = Pick<NewFinancialYear, "id">;
 
 type FinancialYearFormGroupContent = {
-  id: FormControl<IFinancialYear['id'] | NewFinancialYear['id']>;
-  theYear: FormControl<IFinancialYear['theYear']>;
+  id: FormControl<IFinancialYear["id"] | NewFinancialYear["id"]>;
+  theYear: FormControl<IFinancialYear["theYear"]>;
 };
 
 export type FinancialYearFormGroup = FormGroup<FinancialYearFormGroupContent>;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class FinancialYearFormService {
-  createFinancialYearFormGroup(financialYear: FinancialYearFormGroupInput = { id: null }): FinancialYearFormGroup {
+  createFinancialYearFormGroup(
+    financialYear: FinancialYearFormGroupInput = { id: null },
+  ): FinancialYearFormGroup {
     const financialYearRawValue = {
       ...this.getFormDefaults(),
       ...financialYear,
@@ -44,12 +50,20 @@ export class FinancialYearFormService {
     });
   }
 
-  getFinancialYear(form: FinancialYearFormGroup): IFinancialYear | NewFinancialYear {
+  getFinancialYear(
+    form: FinancialYearFormGroup,
+  ): IFinancialYear | NewFinancialYear {
     return form.getRawValue() as IFinancialYear | NewFinancialYear;
   }
 
-  resetForm(form: FinancialYearFormGroup, financialYear: FinancialYearFormGroupInput): void {
-    const financialYearRawValue = { ...this.getFormDefaults(), ...financialYear };
+  resetForm(
+    form: FinancialYearFormGroup,
+    financialYear: FinancialYearFormGroupInput,
+  ): void {
+    const financialYearRawValue = {
+      ...this.getFormDefaults(),
+      ...financialYear,
+    };
     form.reset(
       {
         ...financialYearRawValue,

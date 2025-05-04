@@ -1,15 +1,21 @@
-jest.mock('@ng-bootstrap/ng-bootstrap');
+jest.mock("@ng-bootstrap/ng-bootstrap");
 
-import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  inject,
+  tick,
+} from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import { of } from "rxjs";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
-import { FinancialYearService } from '../service/financial-year.service';
+import { FinancialYearService } from "../service/financial-year.service";
 
-import { FinancialYearDeleteDialogComponent } from './financial-year-delete-dialog.component';
+import { FinancialYearDeleteDialogComponent } from "./financial-year-delete-dialog.component";
 
-describe('FinancialYear Management Delete Component', () => {
+describe("FinancialYear Management Delete Component", () => {
   let comp: FinancialYearDeleteDialogComponent;
   let fixture: ComponentFixture<FinancialYearDeleteDialogComponent>;
   let service: FinancialYearService;
@@ -20,7 +26,7 @@ describe('FinancialYear Management Delete Component', () => {
       imports: [FinancialYearDeleteDialogComponent],
       providers: [provideHttpClient(), NgbActiveModal],
     })
-      .overrideTemplate(FinancialYearDeleteDialogComponent, '')
+      .overrideTemplate(FinancialYearDeleteDialogComponent, "")
       .compileComponents();
     fixture = TestBed.createComponent(FinancialYearDeleteDialogComponent);
     comp = fixture.componentInstance;
@@ -28,12 +34,14 @@ describe('FinancialYear Management Delete Component', () => {
     mockActiveModal = TestBed.inject(NgbActiveModal);
   });
 
-  describe('confirmDelete', () => {
-    it('should call delete service on confirmDelete', inject(
+  describe("confirmDelete", () => {
+    it("should call delete service on confirmDelete", inject(
       [],
       fakeAsync(() => {
         // GIVEN
-        jest.spyOn(service, 'delete').mockReturnValue(of(new HttpResponse({ body: {} })));
+        jest
+          .spyOn(service, "delete")
+          .mockReturnValue(of(new HttpResponse({ body: {} })));
 
         // WHEN
         comp.confirmDelete(123);
@@ -41,13 +49,13 @@ describe('FinancialYear Management Delete Component', () => {
 
         // THEN
         expect(service.delete).toHaveBeenCalledWith(123);
-        expect(mockActiveModal.close).toHaveBeenCalledWith('deleted');
+        expect(mockActiveModal.close).toHaveBeenCalledWith("deleted");
       }),
     ));
 
-    it('should not call delete service on clear', () => {
+    it("should not call delete service on clear", () => {
       // GIVEN
-      jest.spyOn(service, 'delete');
+      jest.spyOn(service, "delete");
 
       // WHEN
       comp.cancel();

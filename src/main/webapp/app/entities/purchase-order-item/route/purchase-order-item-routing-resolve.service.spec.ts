@@ -1,14 +1,19 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
-import { of } from 'rxjs';
+import { TestBed } from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Router,
+  convertToParamMap,
+} from "@angular/router";
+import { of } from "rxjs";
 
-import { IPurchaseOrderItem } from '../purchase-order-item.model';
-import { PurchaseOrderItemService } from '../service/purchase-order-item.service';
+import { IPurchaseOrderItem } from "../purchase-order-item.model";
+import { PurchaseOrderItemService } from "../service/purchase-order-item.service";
 
-import purchaseOrderItemResolve from './purchase-order-item-routing-resolve.service';
+import purchaseOrderItemResolve from "./purchase-order-item-routing-resolve.service";
 
-describe('PurchaseOrderItem routing resolve service', () => {
+describe("PurchaseOrderItem routing resolve service", () => {
   let mockRouter: Router;
   let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
   let service: PurchaseOrderItemService;
@@ -29,16 +34,18 @@ describe('PurchaseOrderItem routing resolve service', () => {
       ],
     });
     mockRouter = TestBed.inject(Router);
-    jest.spyOn(mockRouter, 'navigate').mockImplementation(() => Promise.resolve(true));
+    jest
+      .spyOn(mockRouter, "navigate")
+      .mockImplementation(() => Promise.resolve(true));
     mockActivatedRouteSnapshot = TestBed.inject(ActivatedRoute).snapshot;
     service = TestBed.inject(PurchaseOrderItemService);
     resultPurchaseOrderItem = undefined;
   });
 
-  describe('resolve', () => {
-    it('should return IPurchaseOrderItem returned by find', () => {
+  describe("resolve", () => {
+    it("should return IPurchaseOrderItem returned by find", () => {
       // GIVEN
-      service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
+      service.find = jest.fn((id) => of(new HttpResponse({ body: { id } })));
       mockActivatedRouteSnapshot.params = { id: 123 };
 
       // WHEN
@@ -55,7 +62,7 @@ describe('PurchaseOrderItem routing resolve service', () => {
       expect(resultPurchaseOrderItem).toEqual({ id: 123 });
     });
 
-    it('should return null if id is not provided', () => {
+    it("should return null if id is not provided", () => {
       // GIVEN
       service.find = jest.fn();
       mockActivatedRouteSnapshot.params = {};
@@ -74,9 +81,13 @@ describe('PurchaseOrderItem routing resolve service', () => {
       expect(resultPurchaseOrderItem).toEqual(null);
     });
 
-    it('should route to 404 page if data not found in server', () => {
+    it("should route to 404 page if data not found in server", () => {
       // GIVEN
-      jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse<IPurchaseOrderItem>({ body: null })));
+      jest
+        .spyOn(service, "find")
+        .mockReturnValue(
+          of(new HttpResponse<IPurchaseOrderItem>({ body: null })),
+        );
       mockActivatedRouteSnapshot.params = { id: 123 };
 
       // WHEN
@@ -91,7 +102,7 @@ describe('PurchaseOrderItem routing resolve service', () => {
       // THEN
       expect(service.find).toHaveBeenCalledWith(123);
       expect(resultPurchaseOrderItem).toEqual(undefined);
-      expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(["404"]);
     });
   });
 });

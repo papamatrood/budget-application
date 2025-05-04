@@ -1,15 +1,21 @@
-jest.mock('@ng-bootstrap/ng-bootstrap');
+jest.mock("@ng-bootstrap/ng-bootstrap");
 
-import { ComponentFixture, TestBed, fakeAsync, inject, tick } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  inject,
+  tick,
+} from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import { of } from "rxjs";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
-import { RecipeService } from '../service/recipe.service';
+import { RecipeService } from "../service/recipe.service";
 
-import { RecipeDeleteDialogComponent } from './recipe-delete-dialog.component';
+import { RecipeDeleteDialogComponent } from "./recipe-delete-dialog.component";
 
-describe('Recipe Management Delete Component', () => {
+describe("Recipe Management Delete Component", () => {
   let comp: RecipeDeleteDialogComponent;
   let fixture: ComponentFixture<RecipeDeleteDialogComponent>;
   let service: RecipeService;
@@ -20,7 +26,7 @@ describe('Recipe Management Delete Component', () => {
       imports: [RecipeDeleteDialogComponent],
       providers: [provideHttpClient(), NgbActiveModal],
     })
-      .overrideTemplate(RecipeDeleteDialogComponent, '')
+      .overrideTemplate(RecipeDeleteDialogComponent, "")
       .compileComponents();
     fixture = TestBed.createComponent(RecipeDeleteDialogComponent);
     comp = fixture.componentInstance;
@@ -28,12 +34,14 @@ describe('Recipe Management Delete Component', () => {
     mockActiveModal = TestBed.inject(NgbActiveModal);
   });
 
-  describe('confirmDelete', () => {
-    it('should call delete service on confirmDelete', inject(
+  describe("confirmDelete", () => {
+    it("should call delete service on confirmDelete", inject(
       [],
       fakeAsync(() => {
         // GIVEN
-        jest.spyOn(service, 'delete').mockReturnValue(of(new HttpResponse({ body: {} })));
+        jest
+          .spyOn(service, "delete")
+          .mockReturnValue(of(new HttpResponse({ body: {} })));
 
         // WHEN
         comp.confirmDelete(123);
@@ -41,13 +49,13 @@ describe('Recipe Management Delete Component', () => {
 
         // THEN
         expect(service.delete).toHaveBeenCalledWith(123);
-        expect(mockActiveModal.close).toHaveBeenCalledWith('deleted');
+        expect(mockActiveModal.close).toHaveBeenCalledWith("deleted");
       }),
     ));
 
-    it('should not call delete service on clear', () => {
+    it("should not call delete service on clear", () => {
       // GIVEN
-      jest.spyOn(service, 'delete');
+      jest.spyOn(service, "delete");
 
       // WHEN
       comp.cancel();

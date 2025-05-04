@@ -1,4 +1,4 @@
-import { IDecision } from 'app/entities/decision/decision.model';
+import { IDecision } from "app/entities/decision/decision.model";
 
 export interface IDecisionItem {
   id: number;
@@ -8,4 +8,4 @@ export interface IDecisionItem {
   decision?: IDecision | null;
 }
 
-export type NewDecisionItem = Omit<IDecisionItem, 'id'> & { id: null };
+export type NewDecisionItem = Omit<IDecisionItem, "id"> & { id: null };

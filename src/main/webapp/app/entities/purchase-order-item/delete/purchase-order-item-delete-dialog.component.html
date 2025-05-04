@@ -1,7 +1,11 @@
 @if (purchaseOrderItem) {
   <form name="deleteForm" (ngSubmit)="confirmDelete(purchaseOrderItem.id!)">
     <div class="modal-header">
-      <h4 class="modal-title" data-cy="purchaseOrderItemDeleteDialogHeading" jhiTranslate="entity.delete.title">
+      <h4
+        class="modal-title"
+        data-cy="purchaseOrderItemDeleteDialogHeading"
+        jhiTranslate="entity.delete.title"
+      >
         Confirmation de suppression
       </h4>
     </div>
@@ -13,17 +17,34 @@
         jhiTranslate="budgetApplicationApp.purchaseOrderItem.delete.question"
         [translateValues]="{ id: purchaseOrderItem.id }"
       >
-        Êtes-vous certain de vouloir supprimer le Purchase Order Item {{ purchaseOrderItem.id }} ?
+        Êtes-vous certain de vouloir supprimer le Purchase Order Item
+        {{ purchaseOrderItem.id }} ?
       </p>
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
-        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-dismiss="modal"
+        (click)="cancel()"
+      >
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span
+          jhiTranslate="entity.action.cancel"
+          >Annuler</span
+        >
       </button>
 
-      <button id="jhi-confirm-delete-purchaseOrderItem" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
-        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Supprimer</span>
+      <button
+        id="jhi-confirm-delete-purchaseOrderItem"
+        data-cy="entityConfirmDeleteButton"
+        type="submit"
+        class="btn btn-danger"
+      >
+        <fa-icon icon="times"></fa-icon>&nbsp;<span
+          jhiTranslate="entity.action.delete"
+          >Supprimer</span
+        >
       </button>
     </div>
   </form>

@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, from, of } from 'rxjs';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpResponse, provideHttpClient } from "@angular/common/http";
+import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Subject, from, of } from "rxjs";
 
-import { AuthorityService } from '../service/authority.service';
-import { IAuthority } from '../authority.model';
-import { AuthorityFormService } from './authority-form.service';
+import { AuthorityService } from "../service/authority.service";
+import { IAuthority } from "../authority.model";
+import { AuthorityFormService } from "./authority-form.service";
 
-import { AuthorityUpdateComponent } from './authority-update.component';
+import { AuthorityUpdateComponent } from "./authority-update.component";
 
-describe('Authority Management Update Component', () => {
+describe("Authority Management Update Component", () => {
   let comp: AuthorityUpdateComponent;
   let fixture: ComponentFixture<AuthorityUpdateComponent>;
   let activatedRoute: ActivatedRoute;
@@ -31,7 +31,7 @@ describe('Authority Management Update Component', () => {
         },
       ],
     })
-      .overrideTemplate(AuthorityUpdateComponent, '')
+      .overrideTemplate(AuthorityUpdateComponent, "")
       .compileComponents();
 
     fixture = TestBed.createComponent(AuthorityUpdateComponent);
@@ -42,9 +42,11 @@ describe('Authority Management Update Component', () => {
     comp = fixture.componentInstance;
   });
 
-  describe('ngOnInit', () => {
-    it('should update editForm', () => {
-      const authority: IAuthority = { name: 'c56c1cf7-aca8-48fe-ad81-eeebbf872cb1' };
+  describe("ngOnInit", () => {
+    it("should update editForm", () => {
+      const authority: IAuthority = {
+        name: "c56c1cf7-aca8-48fe-ad81-eeebbf872cb1",
+      };
 
       activatedRoute.data = of({ authority });
       comp.ngOnInit();
@@ -53,14 +55,16 @@ describe('Authority Management Update Component', () => {
     });
   });
 
-  describe('save', () => {
-    it('should call create service on save for new entity', () => {
+  describe("save", () => {
+    it("should call create service on save for new entity", () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IAuthority>>();
-      const authority = { name: '572a7ecc-bf76-43f4-8026-46b42fba586d' };
-      jest.spyOn(authorityFormService, 'getAuthority').mockReturnValue({ name: null });
-      jest.spyOn(authorityService, 'create').mockReturnValue(saveSubject);
-      jest.spyOn(comp, 'previousState');
+      const authority = { name: "572a7ecc-bf76-43f4-8026-46b42fba586d" };
+      jest
+        .spyOn(authorityFormService, "getAuthority")
+        .mockReturnValue({ name: null });
+      jest.spyOn(authorityService, "create").mockReturnValue(saveSubject);
+      jest.spyOn(comp, "previousState");
       activatedRoute.data = of({ authority: null });
       comp.ngOnInit();
 
