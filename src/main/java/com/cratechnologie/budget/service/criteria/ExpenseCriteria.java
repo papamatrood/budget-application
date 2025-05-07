@@ -48,9 +48,9 @@ public class ExpenseCriteria implements Serializable, Criteria {
 
     private FinancialCategoryEnumFilter category;
 
-    private LongFilter financialYearId;
-
     private LongFilter annexDecisionId;
+
+    private LongFilter financialYearId;
 
     private LongFilter articleId;
 
@@ -63,8 +63,8 @@ public class ExpenseCriteria implements Serializable, Criteria {
         this.achievementsInThePastYear = other.optionalAchievementsInThePastYear().map(IntegerFilter::copy).orElse(null);
         this.newYearForecast = other.optionalNewYearForecast().map(IntegerFilter::copy).orElse(null);
         this.category = other.optionalCategory().map(FinancialCategoryEnumFilter::copy).orElse(null);
-        this.financialYearId = other.optionalFinancialYearId().map(LongFilter::copy).orElse(null);
         this.annexDecisionId = other.optionalAnnexDecisionId().map(LongFilter::copy).orElse(null);
+        this.financialYearId = other.optionalFinancialYearId().map(LongFilter::copy).orElse(null);
         this.articleId = other.optionalArticleId().map(LongFilter::copy).orElse(null);
         this.distinct = other.distinct;
     }
@@ -150,25 +150,6 @@ public class ExpenseCriteria implements Serializable, Criteria {
         this.category = category;
     }
 
-    public LongFilter getFinancialYearId() {
-        return financialYearId;
-    }
-
-    public Optional<LongFilter> optionalFinancialYearId() {
-        return Optional.ofNullable(financialYearId);
-    }
-
-    public LongFilter financialYearId() {
-        if (financialYearId == null) {
-            setFinancialYearId(new LongFilter());
-        }
-        return financialYearId;
-    }
-
-    public void setFinancialYearId(LongFilter financialYearId) {
-        this.financialYearId = financialYearId;
-    }
-
     public LongFilter getAnnexDecisionId() {
         return annexDecisionId;
     }
@@ -186,6 +167,25 @@ public class ExpenseCriteria implements Serializable, Criteria {
 
     public void setAnnexDecisionId(LongFilter annexDecisionId) {
         this.annexDecisionId = annexDecisionId;
+    }
+
+    public LongFilter getFinancialYearId() {
+        return financialYearId;
+    }
+
+    public Optional<LongFilter> optionalFinancialYearId() {
+        return Optional.ofNullable(financialYearId);
+    }
+
+    public LongFilter financialYearId() {
+        if (financialYearId == null) {
+            setFinancialYearId(new LongFilter());
+        }
+        return financialYearId;
+    }
+
+    public void setFinancialYearId(LongFilter financialYearId) {
+        this.financialYearId = financialYearId;
     }
 
     public LongFilter getArticleId() {
@@ -240,8 +240,8 @@ public class ExpenseCriteria implements Serializable, Criteria {
             Objects.equals(achievementsInThePastYear, that.achievementsInThePastYear) &&
             Objects.equals(newYearForecast, that.newYearForecast) &&
             Objects.equals(category, that.category) &&
-            Objects.equals(financialYearId, that.financialYearId) &&
             Objects.equals(annexDecisionId, that.annexDecisionId) &&
+            Objects.equals(financialYearId, that.financialYearId) &&
             Objects.equals(articleId, that.articleId) &&
             Objects.equals(distinct, that.distinct)
         );
@@ -254,8 +254,8 @@ public class ExpenseCriteria implements Serializable, Criteria {
             achievementsInThePastYear,
             newYearForecast,
             category,
-            financialYearId,
             annexDecisionId,
+            financialYearId,
             articleId,
             distinct
         );
@@ -269,8 +269,8 @@ public class ExpenseCriteria implements Serializable, Criteria {
             optionalAchievementsInThePastYear().map(f -> "achievementsInThePastYear=" + f + ", ").orElse("") +
             optionalNewYearForecast().map(f -> "newYearForecast=" + f + ", ").orElse("") +
             optionalCategory().map(f -> "category=" + f + ", ").orElse("") +
-            optionalFinancialYearId().map(f -> "financialYearId=" + f + ", ").orElse("") +
             optionalAnnexDecisionId().map(f -> "annexDecisionId=" + f + ", ").orElse("") +
+            optionalFinancialYearId().map(f -> "financialYearId=" + f + ", ").orElse("") +
             optionalArticleId().map(f -> "articleId=" + f + ", ").orElse("") +
             optionalDistinct().map(f -> "distinct=" + f + ", ").orElse("") +
         "}";

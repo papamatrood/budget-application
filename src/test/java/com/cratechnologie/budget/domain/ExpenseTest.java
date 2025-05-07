@@ -28,18 +28,6 @@ class ExpenseTest {
     }
 
     @Test
-    void financialYearTest() {
-        Expense expense = getExpenseRandomSampleGenerator();
-        FinancialYear financialYearBack = getFinancialYearRandomSampleGenerator();
-
-        expense.setFinancialYear(financialYearBack);
-        assertThat(expense.getFinancialYear()).isEqualTo(financialYearBack);
-
-        expense.financialYear(null);
-        assertThat(expense.getFinancialYear()).isNull();
-    }
-
-    @Test
     void annexDecisionTest() {
         Expense expense = getExpenseRandomSampleGenerator();
         AnnexDecision annexDecisionBack = getAnnexDecisionRandomSampleGenerator();
@@ -49,6 +37,18 @@ class ExpenseTest {
 
         expense.annexDecision(null);
         assertThat(expense.getAnnexDecision()).isNull();
+    }
+
+    @Test
+    void financialYearTest() {
+        Expense expense = getExpenseRandomSampleGenerator();
+        FinancialYear financialYearBack = getFinancialYearRandomSampleGenerator();
+
+        expense.setFinancialYear(financialYearBack);
+        assertThat(expense.getFinancialYear()).isEqualTo(financialYearBack);
+
+        expense.financialYear(null);
+        assertThat(expense.getFinancialYear()).isNull();
     }
 
     @Test

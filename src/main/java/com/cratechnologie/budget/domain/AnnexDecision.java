@@ -37,12 +37,12 @@ public class AnnexDecision implements Serializable {
     @Column(name = "credits_open")
     private String creditsOpen;
 
-    @JsonIgnoreProperties(value = { "recipe", "expense", "annexDecision" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "annexDecision", "recipes", "expenses" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private FinancialYear financialYear;
 
-    @JsonIgnoreProperties(value = { "financialYear", "annexDecision", "articles" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "annexDecision", "financialYear", "articles" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "annexDecision")
     private Expense expense;
 

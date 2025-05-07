@@ -69,7 +69,7 @@ public class Article implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "expense_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "financialYear", "annexDecision", "articles" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "annexDecision", "financialYear", "articles" }, allowSetters = true)
     private Set<Expense> expenses = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

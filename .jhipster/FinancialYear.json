@@ -15,25 +15,25 @@
   "pagination": "pagination",
   "relationships": [
     {
+      "otherEntityName": "annexDecision",
+      "otherEntityRelationshipName": "financialYear",
+      "relationshipName": "annexDecision",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
       "otherEntityName": "recipe",
       "otherEntityRelationshipName": "financialYear",
       "relationshipName": "recipe",
       "relationshipSide": "right",
-      "relationshipType": "one-to-one"
+      "relationshipType": "one-to-many"
     },
     {
       "otherEntityName": "expense",
       "otherEntityRelationshipName": "financialYear",
       "relationshipName": "expense",
       "relationshipSide": "right",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "annexDecision",
-      "otherEntityRelationshipName": "financialYear",
-      "relationshipName": "annexDecision",
-      "relationshipSide": "right",
-      "relationshipType": "one-to-one"
+      "relationshipType": "one-to-many"
     }
   ],
   "searchEngine": "no",

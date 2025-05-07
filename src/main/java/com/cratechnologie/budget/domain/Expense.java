@@ -36,15 +36,14 @@ public class Expense implements Serializable {
     @Column(name = "category")
     private FinancialCategoryEnum category;
 
-    @JsonIgnoreProperties(value = { "recipe", "expense", "annexDecision" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private FinancialYear financialYear;
-
     @JsonIgnoreProperties(value = { "financialYear", "expense", "purchaseOrders", "decisions" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private AnnexDecision annexDecision;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "annexDecision", "recipes", "expenses" }, allowSetters = true)
+    private FinancialYear financialYear;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "expenses")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -105,19 +104,6 @@ public class Expense implements Serializable {
         this.category = category;
     }
 
-    public FinancialYear getFinancialYear() {
-        return this.financialYear;
-    }
-
-    public void setFinancialYear(FinancialYear financialYear) {
-        this.financialYear = financialYear;
-    }
-
-    public Expense financialYear(FinancialYear financialYear) {
-        this.setFinancialYear(financialYear);
-        return this;
-    }
-
     public AnnexDecision getAnnexDecision() {
         return this.annexDecision;
     }
@@ -128,6 +114,19 @@ public class Expense implements Serializable {
 
     public Expense annexDecision(AnnexDecision annexDecision) {
         this.setAnnexDecision(annexDecision);
+        return this;
+    }
+
+    public FinancialYear getFinancialYear() {
+        return this.financialYear;
+    }
+
+    public void setFinancialYear(FinancialYear financialYear) {
+        this.financialYear = financialYear;
+    }
+
+    public Expense financialYear(FinancialYear financialYear) {
+        this.setFinancialYear(financialYear);
         return this;
     }
 

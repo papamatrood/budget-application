@@ -7,10 +7,10 @@ import { finalize, map } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IFinancialYear } from 'app/entities/financial-year/financial-year.model';
-import { FinancialYearService } from 'app/entities/financial-year/service/financial-year.service';
 import { IAnnexDecision } from 'app/entities/annex-decision/annex-decision.model';
 import { AnnexDecisionService } from 'app/entities/annex-decision/service/annex-decision.service';
+import { IFinancialYear } from 'app/entities/financial-year/financial-year.model';
+import { FinancialYearService } from 'app/entities/financial-year/service/financial-year.service';
 import { IArticle } from 'app/entities/article/article.model';
 import { ArticleService } from 'app/entities/article/service/article.service';
 import { FinancialCategoryEnum } from 'app/entities/enumerations/financial-category-enum.model';
@@ -28,25 +28,25 @@ export class ExpenseUpdateComponent implements OnInit {
   expense: IExpense | null = null;
   financialCategoryEnumValues = Object.keys(FinancialCategoryEnum);
 
-  financialYearsCollection: IFinancialYear[] = [];
   annexDecisionsCollection: IAnnexDecision[] = [];
+  financialYearsSharedCollection: IFinancialYear[] = [];
   articlesSharedCollection: IArticle[] = [];
 
   protected expenseService = inject(ExpenseService);
   protected expenseFormService = inject(ExpenseFormService);
-  protected financialYearService = inject(FinancialYearService);
   protected annexDecisionService = inject(AnnexDecisionService);
+  protected financialYearService = inject(FinancialYearService);
   protected articleService = inject(ArticleService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: ExpenseFormGroup = this.expenseFormService.createExpenseFormGroup();
 
-  compareFinancialYear = (o1: IFinancialYear | null, o2: IFinancialYear | null): boolean =>
-    this.financialYearService.compareFinancialYear(o1, o2);
-
   compareAnnexDecision = (o1: IAnnexDecision | null, o2: IAnnexDecision | null): boolean =>
     this.annexDecisionService.compareAnnexDecision(o1, o2);
+
+  compareFinancialYear = (o1: IFinancialYear | null, o2: IFinancialYear | null): boolean =>
+    this.financialYearService.compareFinancialYear(o1, o2);
 
   compareArticle = (o1: IArticle | null, o2: IArticle | null): boolean => this.articleService.compareArticle(o1, o2);
 
@@ -98,13 +98,13 @@ export class ExpenseUpdateComponent implements OnInit {
     this.expense = expense;
     this.expenseFormService.resetForm(this.editForm, expense);
 
-    this.financialYearsCollection = this.financialYearService.addFinancialYearToCollectionIfMissing<IFinancialYear>(
-      this.financialYearsCollection,
-      expense.financialYear,
-    );
     this.annexDecisionsCollection = this.annexDecisionService.addAnnexDecisionToCollectionIfMissing<IAnnexDecision>(
       this.annexDecisionsCollection,
       expense.annexDecision,
+    );
+    this.financialYearsSharedCollection = this.financialYearService.addFinancialYearToCollectionIfMissing<IFinancialYear>(
+      this.financialYearsSharedCollection,
+      expense.financialYear,
     );
     this.articlesSharedCollection = this.articleService.addArticleToCollectionIfMissing<IArticle>(
       this.articlesSharedCollection,
@@ -113,16 +113,6 @@ export class ExpenseUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
-    this.financialYearService
-      .query({ 'expenseId.specified': 'false' })
-      .pipe(map((res: HttpResponse<IFinancialYear[]>) => res.body ?? []))
-      .pipe(
-        map((financialYears: IFinancialYear[]) =>
-          this.financialYearService.addFinancialYearToCollectionIfMissing<IFinancialYear>(financialYears, this.expense?.financialYear),
-        ),
-      )
-      .subscribe((financialYears: IFinancialYear[]) => (this.financialYearsCollection = financialYears));
-
     this.annexDecisionService
       .query({ 'expenseId.specified': 'false' })
       .pipe(map((res: HttpResponse<IAnnexDecision[]>) => res.body ?? []))
@@ -132,6 +122,16 @@ export class ExpenseUpdateComponent implements OnInit {
         ),
       )
       .subscribe((annexDecisions: IAnnexDecision[]) => (this.annexDecisionsCollection = annexDecisions));
+
+    this.financialYearService
+      .query()
+      .pipe(map((res: HttpResponse<IFinancialYear[]>) => res.body ?? []))
+      .pipe(
+        map((financialYears: IFinancialYear[]) =>
+          this.financialYearService.addFinancialYearToCollectionIfMissing<IFinancialYear>(financialYears, this.expense?.financialYear),
+        ),
+      )
+      .subscribe((financialYears: IFinancialYear[]) => (this.financialYearsSharedCollection = financialYears));
 
     this.articleService
       .query()

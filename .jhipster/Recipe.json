@@ -27,7 +27,7 @@
       "otherEntityRelationshipName": "recipe",
       "relationshipName": "financialYear",
       "relationshipSide": "left",
-      "relationshipType": "one-to-one"
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "article",

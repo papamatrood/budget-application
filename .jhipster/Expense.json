@@ -23,18 +23,18 @@
   "pagination": "pagination",
   "relationships": [
     {
-      "otherEntityName": "financialYear",
-      "otherEntityRelationshipName": "expense",
-      "relationshipName": "financialYear",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
       "otherEntityName": "annexDecision",
       "otherEntityRelationshipName": "expense",
       "relationshipName": "annexDecision",
       "relationshipSide": "left",
       "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "financialYear",
+      "otherEntityRelationshipName": "expense",
+      "relationshipName": "financialYear",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "article",

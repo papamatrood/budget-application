@@ -33,18 +33,6 @@ public interface FinancialYearService {
     Optional<FinancialYear> partialUpdate(FinancialYear financialYear);
 
     /**
-     * Get all the FinancialYear where Recipe is {@code null}.
-     *
-     * @return the {@link List} of entities.
-     */
-    List<FinancialYear> findAllWhereRecipeIsNull();
-    /**
-     * Get all the FinancialYear where Expense is {@code null}.
-     *
-     * @return the {@link List} of entities.
-     */
-    List<FinancialYear> findAllWhereExpenseIsNull();
-    /**
      * Get all the FinancialYear where AnnexDecision is {@code null}.
      *
      * @return the {@link List} of entities.

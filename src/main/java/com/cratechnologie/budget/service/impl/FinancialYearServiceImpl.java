@@ -55,30 +55,6 @@ public class FinancialYearServiceImpl implements FinancialYearService {
     }
 
     /**
-     *  Get all the financialYears where Recipe is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true)
-    public List<FinancialYear> findAllWhereRecipeIsNull() {
-        LOG.debug("Request to get all financialYears where Recipe is null");
-        return StreamSupport.stream(financialYearRepository.findAll().spliterator(), false)
-            .filter(financialYear -> financialYear.getRecipe() == null)
-            .toList();
-    }
-
-    /**
-     *  Get all the financialYears where Expense is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true)
-    public List<FinancialYear> findAllWhereExpenseIsNull() {
-        LOG.debug("Request to get all financialYears where Expense is null");
-        return StreamSupport.stream(financialYearRepository.findAll().spliterator(), false)
-            .filter(financialYear -> financialYear.getExpense() == null)
-            .toList();
-    }
-
-    /**
      *  Get all the financialYears where AnnexDecision is {@code null}.
      *  @return the list of entities.
      */

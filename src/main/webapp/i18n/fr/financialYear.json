@@ -19,9 +19,9 @@
       },
       "id": "ID",
       "theYear": "The Year",
+      "annexDecision": "Annex Decision",
       "recipe": "Recipe",
-      "expense": "Expense",
-      "annexDecision": "Annex Decision"
+      "expense": "Expense"
     }
   }
 }

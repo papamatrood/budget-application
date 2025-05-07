@@ -36,9 +36,8 @@ public class Recipe implements Serializable {
     @Column(name = "category")
     private FinancialCategoryEnum category;
 
-    @JsonIgnoreProperties(value = { "recipe", "expense", "annexDecision" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "annexDecision", "recipes", "expenses" }, allowSetters = true)
     private FinancialYear financialYear;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "recipes")

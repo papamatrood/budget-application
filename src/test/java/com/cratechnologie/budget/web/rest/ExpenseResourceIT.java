@@ -404,28 +404,6 @@ class ExpenseResourceIT {
 
     @Test
     @Transactional
-    void getAllExpensesByFinancialYearIsEqualToSomething() throws Exception {
-        FinancialYear financialYear;
-        if (TestUtil.findAll(em, FinancialYear.class).isEmpty()) {
-            expenseRepository.saveAndFlush(expense);
-            financialYear = FinancialYearResourceIT.createEntity();
-        } else {
-            financialYear = TestUtil.findAll(em, FinancialYear.class).get(0);
-        }
-        em.persist(financialYear);
-        em.flush();
-        expense.setFinancialYear(financialYear);
-        expenseRepository.saveAndFlush(expense);
-        Long financialYearId = financialYear.getId();
-        // Get all the expenseList where financialYear equals to financialYearId
-        defaultExpenseShouldBeFound("financialYearId.equals=" + financialYearId);
-
-        // Get all the expenseList where financialYear equals to (financialYearId + 1)
-        defaultExpenseShouldNotBeFound("financialYearId.equals=" + (financialYearId + 1));
-    }
-
-    @Test
-    @Transactional
     void getAllExpensesByAnnexDecisionIsEqualToSomething() throws Exception {
         AnnexDecision annexDecision;
         if (TestUtil.findAll(em, AnnexDecision.class).isEmpty()) {
@@ -444,6 +422,28 @@ class ExpenseResourceIT {
 
         // Get all the expenseList where annexDecision equals to (annexDecisionId + 1)
         defaultExpenseShouldNotBeFound("annexDecisionId.equals=" + (annexDecisionId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllExpensesByFinancialYearIsEqualToSomething() throws Exception {
+        FinancialYear financialYear;
+        if (TestUtil.findAll(em, FinancialYear.class).isEmpty()) {
+            expenseRepository.saveAndFlush(expense);
+            financialYear = FinancialYearResourceIT.createEntity();
+        } else {
+            financialYear = TestUtil.findAll(em, FinancialYear.class).get(0);
+        }
+        em.persist(financialYear);
+        em.flush();
+        expense.setFinancialYear(financialYear);
+        expenseRepository.saveAndFlush(expense);
+        Long financialYearId = financialYear.getId();
+        // Get all the expenseList where financialYear equals to financialYearId
+        defaultExpenseShouldBeFound("financialYearId.equals=" + financialYearId);
+
+        // Get all the expenseList where financialYear equals to (financialYearId + 1)
+        defaultExpenseShouldNotBeFound("financialYearId.equals=" + (financialYearId + 1));
     }
 
     @Test

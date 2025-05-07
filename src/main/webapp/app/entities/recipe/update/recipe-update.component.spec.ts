@@ -51,22 +51,26 @@ describe('Recipe Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('should call financialYear query and add missing value', () => {
+    it('should call FinancialYear query and add missing value', () => {
       const recipe: IRecipe = { id: 32502 };
       const financialYear: IFinancialYear = { id: 14021 };
       recipe.financialYear = financialYear;
 
       const financialYearCollection: IFinancialYear[] = [{ id: 14021 }];
       jest.spyOn(financialYearService, 'query').mockReturnValue(of(new HttpResponse({ body: financialYearCollection })));
-      const expectedCollection: IFinancialYear[] = [financialYear, ...financialYearCollection];
+      const additionalFinancialYears = [financialYear];
+      const expectedCollection: IFinancialYear[] = [...additionalFinancialYears, ...financialYearCollection];
       jest.spyOn(financialYearService, 'addFinancialYearToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ recipe });
       comp.ngOnInit();
 
       expect(financialYearService.query).toHaveBeenCalled();
-      expect(financialYearService.addFinancialYearToCollectionIfMissing).toHaveBeenCalledWith(financialYearCollection, financialYear);
-      expect(comp.financialYearsCollection).toEqual(expectedCollection);
+      expect(financialYearService.addFinancialYearToCollectionIfMissing).toHaveBeenCalledWith(
+        financialYearCollection,
+        ...additionalFinancialYears.map(expect.objectContaining),
+      );
+      expect(comp.financialYearsSharedCollection).toEqual(expectedCollection);
     });
 
     it('should call Article query and add missing value', () => {
@@ -101,7 +105,7 @@ describe('Recipe Management Update Component', () => {
       activatedRoute.data = of({ recipe });
       comp.ngOnInit();
 
-      expect(comp.financialYearsCollection).toContainEqual(financialYear);
+      expect(comp.financialYearsSharedCollection).toContainEqual(financialYear);
       expect(comp.articlesSharedCollection).toContainEqual(article);
       expect(comp.recipe).toEqual(recipe);
     });
