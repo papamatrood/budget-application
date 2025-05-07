@@ -79,8 +79,8 @@ class ExpenseCriteriaTest {
         expenseCriteria.achievementsInThePastYear();
         expenseCriteria.newYearForecast();
         expenseCriteria.category();
-        expenseCriteria.financialYearId();
         expenseCriteria.annexDecisionId();
+        expenseCriteria.financialYearId();
         expenseCriteria.articleId();
         expenseCriteria.distinct();
     }
@@ -92,8 +92,8 @@ class ExpenseCriteriaTest {
                 condition.apply(criteria.getAchievementsInThePastYear()) &&
                 condition.apply(criteria.getNewYearForecast()) &&
                 condition.apply(criteria.getCategory()) &&
-                condition.apply(criteria.getFinancialYearId()) &&
                 condition.apply(criteria.getAnnexDecisionId()) &&
+                condition.apply(criteria.getFinancialYearId()) &&
                 condition.apply(criteria.getArticleId()) &&
                 condition.apply(criteria.getDistinct()),
             "every filter matches"
@@ -107,8 +107,8 @@ class ExpenseCriteriaTest {
                 condition.apply(criteria.getAchievementsInThePastYear(), copy.getAchievementsInThePastYear()) &&
                 condition.apply(criteria.getNewYearForecast(), copy.getNewYearForecast()) &&
                 condition.apply(criteria.getCategory(), copy.getCategory()) &&
-                condition.apply(criteria.getFinancialYearId(), copy.getFinancialYearId()) &&
                 condition.apply(criteria.getAnnexDecisionId(), copy.getAnnexDecisionId()) &&
+                condition.apply(criteria.getFinancialYearId(), copy.getFinancialYearId()) &&
                 condition.apply(criteria.getArticleId(), copy.getArticleId()) &&
                 condition.apply(criteria.getDistinct(), copy.getDistinct()),
             "every filter matches"

@@ -21,8 +21,8 @@ type ExpenseFormGroupContent = {
   achievementsInThePastYear: FormControl<IExpense['achievementsInThePastYear']>;
   newYearForecast: FormControl<IExpense['newYearForecast']>;
   category: FormControl<IExpense['category']>;
-  financialYear: FormControl<IExpense['financialYear']>;
   annexDecision: FormControl<IExpense['annexDecision']>;
+  financialYear: FormControl<IExpense['financialYear']>;
   articles: FormControl<IExpense['articles']>;
 };
 
@@ -46,8 +46,8 @@ export class ExpenseFormService {
       achievementsInThePastYear: new FormControl(expenseRawValue.achievementsInThePastYear),
       newYearForecast: new FormControl(expenseRawValue.newYearForecast),
       category: new FormControl(expenseRawValue.category),
-      financialYear: new FormControl(expenseRawValue.financialYear),
       annexDecision: new FormControl(expenseRawValue.annexDecision),
+      financialYear: new FormControl(expenseRawValue.financialYear),
       articles: new FormControl(expenseRawValue.articles ?? []),
     });
   }

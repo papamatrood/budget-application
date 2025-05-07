@@ -10,18 +10,18 @@
     -->
     <changeSet id="20250504145632-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="financial_year_id"
-                                 baseTableName="expense"
-                                 constraintName="fk_expense__financial_year_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="financial_year"
-                                 />
-
         <addForeignKeyConstraint baseColumnNames="annex_decision_id"
                                  baseTableName="expense"
                                  constraintName="fk_expense__annex_decision_id"
                                  referencedColumnNames="id"
                                  referencedTableName="annex_decision"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="financial_year_id"
+                                 baseTableName="expense"
+                                 constraintName="fk_expense__financial_year_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="financial_year"
                                  />
     </changeSet>
 </databaseChangeLog>

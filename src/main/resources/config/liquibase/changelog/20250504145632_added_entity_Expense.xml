@@ -23,11 +23,11 @@
             <column name="category" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="financial_year_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_expense__financial_year_id" />
-            </column>
             <column name="annex_decision_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_expense__annex_decision_id" />
+            </column>
+            <column name="financial_year_id" type="bigint">
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>

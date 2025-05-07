@@ -61,6 +61,36 @@
               <td>{{ financialYear.theYear }}</td>
               <td class="text-end">
                 <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/recipe']"
+                    [queryParams]="{ 'filter[financialYearId.in]': financialYear.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('budgetApplicationApp.financialYear.recipe' | translate) }"
+                      >Show Recipe</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/expense']"
+                    [queryParams]="{ 'filter[financialYearId.in]': financialYear.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('budgetApplicationApp.financialYear.expense' | translate) }"
+                      >Show Expense</span
+                    >
+                  </button>
                   <a [routerLink]="['/financial-year', financialYear.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                     <fa-icon icon="eye"></fa-icon>
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
@@ -86,7 +116,7 @@
   @if (financialYears().length > 0) {
     <div>
       <div class="d-flex justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
       </div>
 
       <div class="d-flex justify-content-center">

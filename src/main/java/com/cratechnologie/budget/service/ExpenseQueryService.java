@@ -72,11 +72,11 @@ public class ExpenseQueryService extends QueryService<Expense> {
                 buildRangeSpecification(criteria.getAchievementsInThePastYear(), Expense_.achievementsInThePastYear),
                 buildRangeSpecification(criteria.getNewYearForecast(), Expense_.newYearForecast),
                 buildSpecification(criteria.getCategory(), Expense_.category),
-                buildSpecification(criteria.getFinancialYearId(), root ->
-                    root.join(Expense_.financialYear, JoinType.LEFT).get(FinancialYear_.id)
-                ),
                 buildSpecification(criteria.getAnnexDecisionId(), root ->
                     root.join(Expense_.annexDecision, JoinType.LEFT).get(AnnexDecision_.id)
+                ),
+                buildSpecification(criteria.getFinancialYearId(), root ->
+                    root.join(Expense_.financialYear, JoinType.LEFT).get(FinancialYear_.id)
                 ),
                 buildSpecification(criteria.getArticleId(), root -> root.join(Expense_.articles, JoinType.LEFT).get(Article_.id))
             );

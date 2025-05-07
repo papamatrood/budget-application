@@ -77,9 +77,9 @@ class FinancialYearCriteriaTest {
     private static void setAllFilters(FinancialYearCriteria financialYearCriteria) {
         financialYearCriteria.id();
         financialYearCriteria.theYear();
+        financialYearCriteria.annexDecisionId();
         financialYearCriteria.recipeId();
         financialYearCriteria.expenseId();
-        financialYearCriteria.annexDecisionId();
         financialYearCriteria.distinct();
     }
 
@@ -88,9 +88,9 @@ class FinancialYearCriteriaTest {
             criteria ->
                 condition.apply(criteria.getId()) &&
                 condition.apply(criteria.getTheYear()) &&
+                condition.apply(criteria.getAnnexDecisionId()) &&
                 condition.apply(criteria.getRecipeId()) &&
                 condition.apply(criteria.getExpenseId()) &&
-                condition.apply(criteria.getAnnexDecisionId()) &&
                 condition.apply(criteria.getDistinct()),
             "every filter matches"
         );
@@ -104,9 +104,9 @@ class FinancialYearCriteriaTest {
             criteria ->
                 condition.apply(criteria.getId(), copy.getId()) &&
                 condition.apply(criteria.getTheYear(), copy.getTheYear()) &&
+                condition.apply(criteria.getAnnexDecisionId(), copy.getAnnexDecisionId()) &&
                 condition.apply(criteria.getRecipeId(), copy.getRecipeId()) &&
                 condition.apply(criteria.getExpenseId(), copy.getExpenseId()) &&
-                condition.apply(criteria.getAnnexDecisionId(), copy.getAnnexDecisionId()) &&
                 condition.apply(criteria.getDistinct(), copy.getDistinct()),
             "every filter matches"
         );

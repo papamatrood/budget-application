@@ -65,8 +65,8 @@ public class ExpenseAsserts {
     public static void assertExpenseUpdatableRelationshipsEquals(Expense expected, Expense actual) {
         assertThat(actual)
             .as("Verify Expense relationships")
-            .satisfies(a -> assertThat(a.getFinancialYear()).as("check financialYear").isEqualTo(expected.getFinancialYear()))
             .satisfies(a -> assertThat(a.getAnnexDecision()).as("check annexDecision").isEqualTo(expected.getAnnexDecision()))
+            .satisfies(a -> assertThat(a.getFinancialYear()).as("check financialYear").isEqualTo(expected.getFinancialYear()))
             .satisfies(a -> assertThat(a.getArticles()).as("check articles").isEqualTo(expected.getArticles()));
     }
 }

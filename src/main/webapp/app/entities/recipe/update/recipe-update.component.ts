@@ -26,7 +26,7 @@ export class RecipeUpdateComponent implements OnInit {
   recipe: IRecipe | null = null;
   financialCategoryEnumValues = Object.keys(FinancialCategoryEnum);
 
-  financialYearsCollection: IFinancialYear[] = [];
+  financialYearsSharedCollection: IFinancialYear[] = [];
   articlesSharedCollection: IArticle[] = [];
 
   protected recipeService = inject(RecipeService);
@@ -91,8 +91,8 @@ export class RecipeUpdateComponent implements OnInit {
     this.recipe = recipe;
     this.recipeFormService.resetForm(this.editForm, recipe);
 
-    this.financialYearsCollection = this.financialYearService.addFinancialYearToCollectionIfMissing<IFinancialYear>(
-      this.financialYearsCollection,
+    this.financialYearsSharedCollection = this.financialYearService.addFinancialYearToCollectionIfMissing<IFinancialYear>(
+      this.financialYearsSharedCollection,
       recipe.financialYear,
     );
     this.articlesSharedCollection = this.articleService.addArticleToCollectionIfMissing<IArticle>(
@@ -103,14 +103,14 @@ export class RecipeUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.financialYearService
-      .query({ 'recipeId.specified': 'false' })
+      .query()
       .pipe(map((res: HttpResponse<IFinancialYear[]>) => res.body ?? []))
       .pipe(
         map((financialYears: IFinancialYear[]) =>
           this.financialYearService.addFinancialYearToCollectionIfMissing<IFinancialYear>(financialYears, this.recipe?.financialYear),
         ),
       )
-      .subscribe((financialYears: IFinancialYear[]) => (this.financialYearsCollection = financialYears));
+      .subscribe((financialYears: IFinancialYear[]) => (this.financialYearsSharedCollection = financialYears));
 
     this.articleService
       .query()

@@ -35,19 +35,19 @@
               }[expenseRef.category ?? 'null']
             }}</span>
           </dd>
-          <dt><span jhiTranslate="budgetApplicationApp.expense.financialYear">Financial Year</span></dt>
-          <dd>
-            @if (expense()!.financialYear) {
-              <div>
-                <a [routerLink]="['/financial-year', expense()!.financialYear?.id, 'view']">{{ expenseRef.financialYear?.id }}</a>
-              </div>
-            }
-          </dd>
           <dt><span jhiTranslate="budgetApplicationApp.expense.annexDecision">Annex Decision</span></dt>
           <dd>
             @if (expense()!.annexDecision) {
               <div>
                 <a [routerLink]="['/annex-decision', expense()!.annexDecision?.id, 'view']">{{ expenseRef.annexDecision?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="budgetApplicationApp.expense.financialYear">Financial Year</span></dt>
+          <dd>
+            @if (expense()!.financialYear) {
+              <div>
+                <a [routerLink]="['/financial-year', expense()!.financialYear?.id, 'view']">{{ expenseRef.financialYear?.id }}</a>
               </div>
             }
           </dd>

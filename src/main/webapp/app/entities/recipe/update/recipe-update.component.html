@@ -71,7 +71,7 @@
             [compareWith]="compareFinancialYear"
           >
             <option [ngValue]="null"></option>
-            @for (financialYearOption of financialYearsCollection; track $index) {
+            @for (financialYearOption of financialYearsSharedCollection; track $index) {
               <option [ngValue]="financialYearOption">{{ financialYearOption.id }}</option>
             }
           </select>

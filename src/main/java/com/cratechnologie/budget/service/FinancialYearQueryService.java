@@ -70,11 +70,11 @@ public class FinancialYearQueryService extends QueryService<FinancialYear> {
                 Boolean.TRUE.equals(criteria.getDistinct()) ? distinct(criteria.getDistinct()) : null,
                 buildRangeSpecification(criteria.getId(), FinancialYear_.id),
                 buildRangeSpecification(criteria.getTheYear(), FinancialYear_.theYear),
-                buildSpecification(criteria.getRecipeId(), root -> root.join(FinancialYear_.recipe, JoinType.LEFT).get(Recipe_.id)),
-                buildSpecification(criteria.getExpenseId(), root -> root.join(FinancialYear_.expense, JoinType.LEFT).get(Expense_.id)),
                 buildSpecification(criteria.getAnnexDecisionId(), root ->
                     root.join(FinancialYear_.annexDecision, JoinType.LEFT).get(AnnexDecision_.id)
-                )
+                ),
+                buildSpecification(criteria.getRecipeId(), root -> root.join(FinancialYear_.recipes, JoinType.LEFT).get(Recipe_.id)),
+                buildSpecification(criteria.getExpenseId(), root -> root.join(FinancialYear_.expenses, JoinType.LEFT).get(Expense_.id))
             );
         }
         return specification;

@@ -59,25 +59,6 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_financialYear" jhiTranslate="budgetApplicationApp.expense.financialYear"
-            >Financial Year</label
-          >
-          <select
-            class="form-control"
-            id="field_financialYear"
-            data-cy="financialYear"
-            name="financialYear"
-            formControlName="financialYear"
-            [compareWith]="compareFinancialYear"
-          >
-            <option [ngValue]="null"></option>
-            @for (financialYearOption of financialYearsCollection; track $index) {
-              <option [ngValue]="financialYearOption">{{ financialYearOption.id }}</option>
-            }
-          </select>
-        </div>
-
-        <div class="mb-3">
           <label class="form-label" for="field_annexDecision" jhiTranslate="budgetApplicationApp.expense.annexDecision"
             >Annex Decision</label
           >
@@ -92,6 +73,25 @@
             <option [ngValue]="null"></option>
             @for (annexDecisionOption of annexDecisionsCollection; track $index) {
               <option [ngValue]="annexDecisionOption">{{ annexDecisionOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_financialYear" jhiTranslate="budgetApplicationApp.expense.financialYear"
+            >Financial Year</label
+          >
+          <select
+            class="form-control"
+            id="field_financialYear"
+            data-cy="financialYear"
+            name="financialYear"
+            formControlName="financialYear"
+            [compareWith]="compareFinancialYear"
+          >
+            <option [ngValue]="null"></option>
+            @for (financialYearOption of financialYearsSharedCollection; track $index) {
+              <option [ngValue]="financialYearOption">{{ financialYearOption.id }}</option>
             }
           </select>
         </div>

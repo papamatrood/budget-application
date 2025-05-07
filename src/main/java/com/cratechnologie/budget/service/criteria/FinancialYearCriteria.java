@@ -26,11 +26,11 @@ public class FinancialYearCriteria implements Serializable, Criteria {
 
     private IntegerFilter theYear;
 
+    private LongFilter annexDecisionId;
+
     private LongFilter recipeId;
 
     private LongFilter expenseId;
-
-    private LongFilter annexDecisionId;
 
     private Boolean distinct;
 
@@ -39,9 +39,9 @@ public class FinancialYearCriteria implements Serializable, Criteria {
     public FinancialYearCriteria(FinancialYearCriteria other) {
         this.id = other.optionalId().map(LongFilter::copy).orElse(null);
         this.theYear = other.optionalTheYear().map(IntegerFilter::copy).orElse(null);
+        this.annexDecisionId = other.optionalAnnexDecisionId().map(LongFilter::copy).orElse(null);
         this.recipeId = other.optionalRecipeId().map(LongFilter::copy).orElse(null);
         this.expenseId = other.optionalExpenseId().map(LongFilter::copy).orElse(null);
-        this.annexDecisionId = other.optionalAnnexDecisionId().map(LongFilter::copy).orElse(null);
         this.distinct = other.distinct;
     }
 
@@ -88,6 +88,25 @@ public class FinancialYearCriteria implements Serializable, Criteria {
         this.theYear = theYear;
     }
 
+    public LongFilter getAnnexDecisionId() {
+        return annexDecisionId;
+    }
+
+    public Optional<LongFilter> optionalAnnexDecisionId() {
+        return Optional.ofNullable(annexDecisionId);
+    }
+
+    public LongFilter annexDecisionId() {
+        if (annexDecisionId == null) {
+            setAnnexDecisionId(new LongFilter());
+        }
+        return annexDecisionId;
+    }
+
+    public void setAnnexDecisionId(LongFilter annexDecisionId) {
+        this.annexDecisionId = annexDecisionId;
+    }
+
     public LongFilter getRecipeId() {
         return recipeId;
     }
@@ -126,25 +145,6 @@ public class FinancialYearCriteria implements Serializable, Criteria {
         this.expenseId = expenseId;
     }
 
-    public LongFilter getAnnexDecisionId() {
-        return annexDecisionId;
-    }
-
-    public Optional<LongFilter> optionalAnnexDecisionId() {
-        return Optional.ofNullable(annexDecisionId);
-    }
-
-    public LongFilter annexDecisionId() {
-        if (annexDecisionId == null) {
-            setAnnexDecisionId(new LongFilter());
-        }
-        return annexDecisionId;
-    }
-
-    public void setAnnexDecisionId(LongFilter annexDecisionId) {
-        this.annexDecisionId = annexDecisionId;
-    }
-
     public Boolean getDistinct() {
         return distinct;
     }
@@ -176,16 +176,16 @@ public class FinancialYearCriteria implements Serializable, Criteria {
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(theYear, that.theYear) &&
+            Objects.equals(annexDecisionId, that.annexDecisionId) &&
             Objects.equals(recipeId, that.recipeId) &&
             Objects.equals(expenseId, that.expenseId) &&
-            Objects.equals(annexDecisionId, that.annexDecisionId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, theYear, recipeId, expenseId, annexDecisionId, distinct);
+        return Objects.hash(id, theYear, annexDecisionId, recipeId, expenseId, distinct);
     }
 
     // prettier-ignore
@@ -194,9 +194,9 @@ public class FinancialYearCriteria implements Serializable, Criteria {
         return "FinancialYearCriteria{" +
             optionalId().map(f -> "id=" + f + ", ").orElse("") +
             optionalTheYear().map(f -> "theYear=" + f + ", ").orElse("") +
+            optionalAnnexDecisionId().map(f -> "annexDecisionId=" + f + ", ").orElse("") +
             optionalRecipeId().map(f -> "recipeId=" + f + ", ").orElse("") +
             optionalExpenseId().map(f -> "expenseId=" + f + ", ").orElse("") +
-            optionalAnnexDecisionId().map(f -> "annexDecisionId=" + f + ", ").orElse("") +
             optionalDistinct().map(f -> "distinct=" + f + ", ").orElse("") +
         "}";
     }

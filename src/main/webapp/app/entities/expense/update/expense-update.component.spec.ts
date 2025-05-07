@@ -4,10 +4,10 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, from, of } from 'rxjs';
 
-import { IFinancialYear } from 'app/entities/financial-year/financial-year.model';
-import { FinancialYearService } from 'app/entities/financial-year/service/financial-year.service';
 import { IAnnexDecision } from 'app/entities/annex-decision/annex-decision.model';
 import { AnnexDecisionService } from 'app/entities/annex-decision/service/annex-decision.service';
+import { IFinancialYear } from 'app/entities/financial-year/financial-year.model';
+import { FinancialYearService } from 'app/entities/financial-year/service/financial-year.service';
 import { IArticle } from 'app/entities/article/article.model';
 import { ArticleService } from 'app/entities/article/service/article.service';
 import { IExpense } from '../expense.model';
@@ -22,8 +22,8 @@ describe('Expense Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let expenseFormService: ExpenseFormService;
   let expenseService: ExpenseService;
-  let financialYearService: FinancialYearService;
   let annexDecisionService: AnnexDecisionService;
+  let financialYearService: FinancialYearService;
   let articleService: ArticleService;
 
   beforeEach(() => {
@@ -47,32 +47,14 @@ describe('Expense Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     expenseFormService = TestBed.inject(ExpenseFormService);
     expenseService = TestBed.inject(ExpenseService);
-    financialYearService = TestBed.inject(FinancialYearService);
     annexDecisionService = TestBed.inject(AnnexDecisionService);
+    financialYearService = TestBed.inject(FinancialYearService);
     articleService = TestBed.inject(ArticleService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('should call financialYear query and add missing value', () => {
-      const expense: IExpense = { id: 9220 };
-      const financialYear: IFinancialYear = { id: 14021 };
-      expense.financialYear = financialYear;
-
-      const financialYearCollection: IFinancialYear[] = [{ id: 14021 }];
-      jest.spyOn(financialYearService, 'query').mockReturnValue(of(new HttpResponse({ body: financialYearCollection })));
-      const expectedCollection: IFinancialYear[] = [financialYear, ...financialYearCollection];
-      jest.spyOn(financialYearService, 'addFinancialYearToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-      activatedRoute.data = of({ expense });
-      comp.ngOnInit();
-
-      expect(financialYearService.query).toHaveBeenCalled();
-      expect(financialYearService.addFinancialYearToCollectionIfMissing).toHaveBeenCalledWith(financialYearCollection, financialYear);
-      expect(comp.financialYearsCollection).toEqual(expectedCollection);
-    });
-
     it('should call annexDecision query and add missing value', () => {
       const expense: IExpense = { id: 9220 };
       const annexDecision: IAnnexDecision = { id: 18859 };
@@ -89,6 +71,28 @@ describe('Expense Management Update Component', () => {
       expect(annexDecisionService.query).toHaveBeenCalled();
       expect(annexDecisionService.addAnnexDecisionToCollectionIfMissing).toHaveBeenCalledWith(annexDecisionCollection, annexDecision);
       expect(comp.annexDecisionsCollection).toEqual(expectedCollection);
+    });
+
+    it('should call FinancialYear query and add missing value', () => {
+      const expense: IExpense = { id: 9220 };
+      const financialYear: IFinancialYear = { id: 14021 };
+      expense.financialYear = financialYear;
+
+      const financialYearCollection: IFinancialYear[] = [{ id: 14021 }];
+      jest.spyOn(financialYearService, 'query').mockReturnValue(of(new HttpResponse({ body: financialYearCollection })));
+      const additionalFinancialYears = [financialYear];
+      const expectedCollection: IFinancialYear[] = [...additionalFinancialYears, ...financialYearCollection];
+      jest.spyOn(financialYearService, 'addFinancialYearToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ expense });
+      comp.ngOnInit();
+
+      expect(financialYearService.query).toHaveBeenCalled();
+      expect(financialYearService.addFinancialYearToCollectionIfMissing).toHaveBeenCalledWith(
+        financialYearCollection,
+        ...additionalFinancialYears.map(expect.objectContaining),
+      );
+      expect(comp.financialYearsSharedCollection).toEqual(expectedCollection);
     });
 
     it('should call Article query and add missing value', () => {
@@ -115,18 +119,18 @@ describe('Expense Management Update Component', () => {
 
     it('should update editForm', () => {
       const expense: IExpense = { id: 9220 };
-      const financialYear: IFinancialYear = { id: 14021 };
-      expense.financialYear = financialYear;
       const annexDecision: IAnnexDecision = { id: 18859 };
       expense.annexDecision = annexDecision;
+      const financialYear: IFinancialYear = { id: 14021 };
+      expense.financialYear = financialYear;
       const article: IArticle = { id: 24128 };
       expense.articles = [article];
 
       activatedRoute.data = of({ expense });
       comp.ngOnInit();
 
-      expect(comp.financialYearsCollection).toContainEqual(financialYear);
       expect(comp.annexDecisionsCollection).toContainEqual(annexDecision);
+      expect(comp.financialYearsSharedCollection).toContainEqual(financialYear);
       expect(comp.articlesSharedCollection).toContainEqual(article);
       expect(comp.expense).toEqual(expense);
     });
@@ -201,16 +205,6 @@ describe('Expense Management Update Component', () => {
   });
 
   describe('Compare relationships', () => {
-    describe('compareFinancialYear', () => {
-      it('should forward to financialYearService', () => {
-        const entity = { id: 14021 };
-        const entity2 = { id: 23644 };
-        jest.spyOn(financialYearService, 'compareFinancialYear');
-        comp.compareFinancialYear(entity, entity2);
-        expect(financialYearService.compareFinancialYear).toHaveBeenCalledWith(entity, entity2);
-      });
-    });
-
     describe('compareAnnexDecision', () => {
       it('should forward to annexDecisionService', () => {
         const entity = { id: 18859 };
@@ -218,6 +212,16 @@ describe('Expense Management Update Component', () => {
         jest.spyOn(annexDecisionService, 'compareAnnexDecision');
         comp.compareAnnexDecision(entity, entity2);
         expect(annexDecisionService.compareAnnexDecision).toHaveBeenCalledWith(entity, entity2);
+      });
+    });
+
+    describe('compareFinancialYear', () => {
+      it('should forward to financialYearService', () => {
+        const entity = { id: 14021 };
+        const entity2 = { id: 23644 };
+        jest.spyOn(financialYearService, 'compareFinancialYear');
+        comp.compareFinancialYear(entity, entity2);
+        expect(financialYearService.compareFinancialYear).toHaveBeenCalledWith(entity, entity2);
       });
     });
 

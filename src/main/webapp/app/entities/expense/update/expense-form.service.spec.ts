@@ -23,8 +23,8 @@ describe('Expense Form Service', () => {
             achievementsInThePastYear: expect.any(Object),
             newYearForecast: expect.any(Object),
             category: expect.any(Object),
-            financialYear: expect.any(Object),
             annexDecision: expect.any(Object),
+            financialYear: expect.any(Object),
             articles: expect.any(Object),
           }),
         );
@@ -39,8 +39,8 @@ describe('Expense Form Service', () => {
             achievementsInThePastYear: expect.any(Object),
             newYearForecast: expect.any(Object),
             category: expect.any(Object),
-            financialYear: expect.any(Object),
             annexDecision: expect.any(Object),
+            financialYear: expect.any(Object),
             articles: expect.any(Object),
           }),
         );

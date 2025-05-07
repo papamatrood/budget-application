@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -28,17 +30,19 @@ public class FinancialYear implements Serializable {
     @Column(name = "the_year", nullable = false)
     private Integer theYear;
 
-    @JsonIgnoreProperties(value = { "financialYear", "articles" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "financialYear")
-    private Recipe recipe;
-
-    @JsonIgnoreProperties(value = { "financialYear", "annexDecision", "articles" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "financialYear")
-    private Expense expense;
-
     @JsonIgnoreProperties(value = { "financialYear", "expense", "purchaseOrders", "decisions" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "financialYear")
     private AnnexDecision annexDecision;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "financialYear")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "financialYear", "articles" }, allowSetters = true)
+    private Set<Recipe> recipes = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "financialYear")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "annexDecision", "financialYear", "articles" }, allowSetters = true)
+    private Set<Expense> expenses = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -68,44 +72,6 @@ public class FinancialYear implements Serializable {
         this.theYear = theYear;
     }
 
-    public Recipe getRecipe() {
-        return this.recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        if (this.recipe != null) {
-            this.recipe.setFinancialYear(null);
-        }
-        if (recipe != null) {
-            recipe.setFinancialYear(this);
-        }
-        this.recipe = recipe;
-    }
-
-    public FinancialYear recipe(Recipe recipe) {
-        this.setRecipe(recipe);
-        return this;
-    }
-
-    public Expense getExpense() {
-        return this.expense;
-    }
-
-    public void setExpense(Expense expense) {
-        if (this.expense != null) {
-            this.expense.setFinancialYear(null);
-        }
-        if (expense != null) {
-            expense.setFinancialYear(this);
-        }
-        this.expense = expense;
-    }
-
-    public FinancialYear expense(Expense expense) {
-        this.setExpense(expense);
-        return this;
-    }
-
     public AnnexDecision getAnnexDecision() {
         return this.annexDecision;
     }
@@ -122,6 +88,68 @@ public class FinancialYear implements Serializable {
 
     public FinancialYear annexDecision(AnnexDecision annexDecision) {
         this.setAnnexDecision(annexDecision);
+        return this;
+    }
+
+    public Set<Recipe> getRecipes() {
+        return this.recipes;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        if (this.recipes != null) {
+            this.recipes.forEach(i -> i.setFinancialYear(null));
+        }
+        if (recipes != null) {
+            recipes.forEach(i -> i.setFinancialYear(this));
+        }
+        this.recipes = recipes;
+    }
+
+    public FinancialYear recipes(Set<Recipe> recipes) {
+        this.setRecipes(recipes);
+        return this;
+    }
+
+    public FinancialYear addRecipe(Recipe recipe) {
+        this.recipes.add(recipe);
+        recipe.setFinancialYear(this);
+        return this;
+    }
+
+    public FinancialYear removeRecipe(Recipe recipe) {
+        this.recipes.remove(recipe);
+        recipe.setFinancialYear(null);
+        return this;
+    }
+
+    public Set<Expense> getExpenses() {
+        return this.expenses;
+    }
+
+    public void setExpenses(Set<Expense> expenses) {
+        if (this.expenses != null) {
+            this.expenses.forEach(i -> i.setFinancialYear(null));
+        }
+        if (expenses != null) {
+            expenses.forEach(i -> i.setFinancialYear(this));
+        }
+        this.expenses = expenses;
+    }
+
+    public FinancialYear expenses(Set<Expense> expenses) {
+        this.setExpenses(expenses);
+        return this;
+    }
+
+    public FinancialYear addExpense(Expense expense) {
+        this.expenses.add(expense);
+        expense.setFinancialYear(this);
+        return this;
+    }
+
+    public FinancialYear removeExpense(Expense expense) {
+        this.expenses.remove(expense);
+        expense.setFinancialYear(null);
         return this;
     }
 

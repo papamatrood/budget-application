@@ -77,6 +77,8 @@ public class CacheConfiguration {
             createCache(cm, com.cratechnologie.budget.domain.Engagement.class.getName());
             createCache(cm, com.cratechnologie.budget.domain.Engagement.class.getName() + ".purchaseOrders");
             createCache(cm, com.cratechnologie.budget.domain.Mandate.class.getName());
+            createCache(cm, com.cratechnologie.budget.domain.FinancialYear.class.getName() + ".recipes");
+            createCache(cm, com.cratechnologie.budget.domain.FinancialYear.class.getName() + ".expenses");
             // jhipster-needle-ehcache-add-entry
         };
     }
