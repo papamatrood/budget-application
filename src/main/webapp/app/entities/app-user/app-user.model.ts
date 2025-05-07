@@ -18,7 +18,19 @@ export interface IAppUser {
   familySituation?: keyof typeof FamilySituationEnum | null;
   position?: string | null;
   address?: string | null;
-  user?: Pick<IUser, "id" | "email" | "login" | "langKey" | "activated" | "authorities" | "createdBy" | "createdDate" | "lastModifiedBy" | "lastModifiedDate"> | null;
+  user?: Pick<
+    IUser,
+    | "id"
+    | "email"
+    | "login"
+    | "langKey"
+    | "activated"
+    | "authorities"
+    | "createdBy"
+    | "createdDate"
+    | "lastModifiedBy"
+    | "lastModifiedDate"
+  > | null;
 }
 
 export type NewAppUser = Omit<IAppUser, "id"> & { id: null };

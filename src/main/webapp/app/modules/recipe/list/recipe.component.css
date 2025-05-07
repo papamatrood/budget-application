@@ -1,0 +1,8 @@
+tfoot tr td {
+  text-align: start;
+}
+
+.active {
+  /* Add your styles here */
+  background-color: #fbcc00;
+}

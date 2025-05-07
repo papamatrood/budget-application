@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Component, NgZone, OnInit, inject, signal } from "@angular/core";
 import { HttpHeaders } from "@angular/common/http";
 import {
@@ -28,9 +27,7 @@ import {
 } from "app/config/pagination.constants";
 import {
   DEFAULT_SORT_DATA,
-  ITEM_CREATED_EVENT,
   ITEM_DELETED_EVENT,
-  ITEM_UPDATED_EVENT,
   SORT,
 } from "app/config/navigation.constants";
 import {
@@ -39,19 +36,17 @@ import {
   IFilterOption,
   IFilterOptions,
 } from "app/shared/filter";
+import { IRecipe } from "../recipe.model";
 
-import { AppUserDeleteDialogComponent } from "../delete/app-user-delete-dialog.component";
-import { AppUserUpdateComponent } from "../update/app-user-update.component";
-import { IAppUser } from "app/entities/app-user/app-user.model";
 import {
-  AppUserService,
   EntityArrayResponseType,
-} from "app/entities/app-user/service/app-user.service";
-import { IUserAppUserDTO } from "app/shared/dto/user-appuser-dto.model";
+  RecipeService,
+} from "../service/recipe.service";
+import { RecipeDeleteDialogComponent } from "../delete/recipe-delete-dialog.component";
 
 @Component({
-  selector: "jhi-app-user",
-  templateUrl: "./app-user.component.html",
+  selector: "jhi-recipe",
+  templateUrl: "./recipe.component.html",
   imports: [
     RouterModule,
     FormsModule,
@@ -62,10 +57,13 @@ import { IUserAppUserDTO } from "app/shared/dto/user-appuser-dto.model";
     ItemCountComponent,
   ],
 })
-export class AppUserComponent implements OnInit {
+export class RecipeComponent implements OnInit {
   subscription: Subscription | null = null;
-  appUsers = signal<IAppUser[]>([]);
+  recipes = signal<IRecipe[]>([]);
   isLoading = false;
+
+  category = "OPERATIONINCOME";
+  activeTab = "RECETTES DE FONCTIONNEMENT"; // Valeur par défaut
 
   sortState = sortStateSignal({});
   filters: IFilterOptions = new FilterOptions();
@@ -75,14 +73,14 @@ export class AppUserComponent implements OnInit {
   page = 1;
 
   public readonly router = inject(Router);
-  protected readonly appUserService = inject(AppUserService);
+  protected readonly recipeService = inject(RecipeService);
   protected readonly activatedRoute = inject(ActivatedRoute);
   protected readonly sortService = inject(SortService);
   protected modalService = inject(NgbModal);
   protected ngZone = inject(NgZone);
 
-  trackId = (item: IAppUser): number =>
-    this.appUserService.getAppUserIdentifier(item);
+  trackId = (item: IRecipe): number =>
+    this.recipeService.getRecipeIdentifier(item);
 
   ngOnInit(): void {
     this.subscription = combineLatest([
@@ -102,61 +100,23 @@ export class AppUserComponent implements OnInit {
     );
   }
 
-  openCreateModal(): void {
-    const modalRef = this.modalService.open(AppUserUpdateComponent, {
-      size: "lg",
-      backdrop: "static",
-    });
-    modalRef.componentInstance.appUser = undefined; // Pour la création
-    modalRef.closed
-      .pipe(
-        filter((reason) => reason === ITEM_CREATED_EVENT),
-        tap(() => this.load()),
-      )
-      .subscribe();
+  onTabChange(event: any = "OPERATIONINCOME"): void {
+    const selectedValue = event.target.value;
+    if (selectedValue === "OPERATIONINCOME") {
+      this.category = "OPERATIONINCOME";
+      this.activeTab = "RECETTES DE FONCTIONNEMENT";
+    } else {
+      this.category = "INVESTMENTINCOME";
+      this.activeTab = "RECETTES D'INVESTISSEMENT";
+    }
   }
 
-  openEditModal(appUser: IAppUser): void {
-    const modalRef = this.modalService.open(AppUserUpdateComponent, {
+  delete(recipe: IRecipe): void {
+    const modalRef = this.modalService.open(RecipeDeleteDialogComponent, {
       size: "lg",
       backdrop: "static",
     });
-    modalRef.componentInstance.appUser = appUser; // Envoie l'objet complet au modal
-    modalRef.closed
-      .pipe(
-        filter((reason) => reason === ITEM_UPDATED_EVENT),
-        tap(() => this.load()),
-      )
-      .subscribe();
-  }
-
-  // delete(appUser: IAppUser): void {
-  //   const userAppUserDTO = this.returnUserAppUserDTO(appUser);
-
-  //   const modalRef = this.modalService.open(AppUserDeleteDialogComponent, {
-  //     size: "lg",
-  //     backdrop: "static",
-  //   });
-  //   // modalRef.componentInstance.appUser = appUser;
-  //   modalRef.componentInstance.userAppUserDTO = userAppUserDTO;
-  //   // unsubscribe not needed because closed completes on modal close
-  //   modalRef.closed
-  //     .pipe(
-  //       filter((reason) => reason === ITEM_DELETED_EVENT),
-  //       tap(() => this.load()),
-  //     )
-  //     .subscribe();
-  // }
-
-  delete(appUser: IAppUser): void {
-    const userAppUserDTO = this.returnUserAppUserDTO(appUser);
-
-    const modalRef = this.modalService.open(AppUserDeleteDialogComponent, {
-      size: "lg",
-      backdrop: "static",
-    });
-    modalRef.componentInstance.appUser = appUser;
-    modalRef.componentInstance.userAppUserDTO = userAppUserDTO;
+    modalRef.componentInstance.recipe = recipe;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed
       .pipe(
@@ -182,30 +142,6 @@ export class AppUserComponent implements OnInit {
     this.handleNavigation(page, this.sortState(), this.filters.filterOptions);
   }
 
-  protected returnUserAppUserDTO(appUser: IAppUser): IUserAppUserDTO {
-    const userTemplate: IUserAppUserDTO = {
-      id: appUser.id,
-      firstName: appUser.firstname,
-      lastName: appUser.lastname,
-      activated: appUser.user?.activated ?? false,
-      langKey: appUser.user?.langKey ?? "fr",
-      accountStatus: appUser.accountStatus,
-      address: appUser.address,
-      gender: appUser.gender,
-      familySituation: appUser.familySituation,
-      birthDate: appUser.birthDate,
-      birthPlace: appUser.birthPlace,
-      phoneNumber: appUser.phoneNumber,
-      position: appUser.position,
-      jhipsterUserId: appUser.user?.id ?? null,
-      email: appUser.user?.email ?? "",
-      login: appUser.user?.login ?? "",
-      authorities: appUser.user?.authorities ?? [],
-    };
-
-    return userTemplate;
-  }
-
   protected fillComponentAttributeFromRoute(
     params: ParamMap,
     data: Data,
@@ -225,12 +161,12 @@ export class AppUserComponent implements OnInit {
     const dataFromBody = this.fillComponentAttributesFromResponseBody(
       response.body,
     );
-    this.appUsers.set(dataFromBody);
+    this.recipes.set(dataFromBody);
   }
 
   protected fillComponentAttributesFromResponseBody(
-    data: IAppUser[] | null,
-  ): IAppUser[] {
+    data: IRecipe[] | null,
+  ): IRecipe[] {
     return data ?? [];
   }
 
@@ -253,7 +189,7 @@ export class AppUserComponent implements OnInit {
     filters.filterOptions.forEach((filterOption) => {
       queryObject[filterOption.name] = filterOption.values;
     });
-    return this.appUserService
+    return this.recipeService
       .query(queryObject)
       .pipe(tap(() => (this.isLoading = false)));
   }

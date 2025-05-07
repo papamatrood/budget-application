@@ -1,0 +1,471 @@
+<div class="text-center">
+  <h2 class="fw-bold">RECETTES DE FONCTIONNEMENT</h2>
+</div>
+<hr style="height: 5px; opacity: 100%" class="c-yellow" />
+<div class="d-flex justify-content-between align-items-end mb-3">
+  <div>
+    <label
+      class="form-label"
+      jhiTranslate="budgetApplicationApp.recipe.home.title"
+      >Exercice budgétaire de l'année</label
+    >
+    <select class="form-select">
+      <option value="">2023</option>
+      <option value="">2024</option>
+      <option value="">2025</option>
+      <option value="">2025</option>
+    </select>
+  </div>
+  <div>
+    <label class="form-label">Type de recette</label>
+    <select class="form-select" (change)="onTabChange($event)">
+      <option value="OPERATIONINCOME">Recette de fonctionnement</option>
+      <option value="INVESTMENTINCOME">Recette d'investissement</option>
+    </select>
+  </div>
+
+  <div>
+    <button
+      id="jh-create-entity"
+      data-cy="entityCreateButton"
+      class="btn btn-success jh-create-entity create-recipe"
+      [routerLink]="['/recipe/new']"
+      data-bs-toggle="modal"
+      data-bs-target="#amountModal"
+    >
+      <span jhiTranslate="budgetApplicationApp.recipe.home.createLabel"
+        >Créer un nouveau Recipe</span
+      >
+    </button>
+  </div>
+  <div><button class="btn btn-warning">Modifier</button></div>
+  <div>
+    <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+      <fa-icon
+        icon="sync"
+        [animation]="isLoading ? 'spin' : undefined"
+      ></fa-icon>
+      <span jhiTranslate="budgetApplicationApp.recipe.home.refreshListLabel"
+        >Actualiser la liste</span
+      >
+    </button>
+  </div>
+
+  <div class="text-end">
+    <button class="btn btn-primary">
+      Exporter <i class="bi bi-file-earmark-excel-fill"></i>
+    </button>
+  </div>
+  <!-- <div class="text-end">
+      <button class="btn btn-primary" (click)="generatePDF()">Télécharger en PDF</button>
+  </div> -->
+</div>
+
+<jhi-alert-error />
+
+<jhi-alert />
+
+<jhi-filter [filters]="filters" />
+
+@if (recipes().length === 0) {
+  <div class="alert alert-warning" id="no-result">
+    <span jhiTranslate="budgetApplicationApp.recipe.home.notFound"
+      >Aucun Recipe trouvé</span
+    >
+  </div>
+} @else {
+  <div class="container-fluid">
+    <div class="table-responsive table-entities" id="entities">
+      <table class="w-100" aria-describedby="page-heading">
+        <thead>
+          <tr
+            jhiSort
+            [(sortState)]="sortState"
+            (sortChange)="navigateToWithComponentValues($event)"
+          >
+            <th>Sous Titre</th>
+            <th>Chapitre</th>
+            <th>Article</th>
+            <th>C. Div</th>
+            <th>C. Fin</th>
+            <th>Para</th>
+            <th>NATURE RESSOURCES</th>
+            <th>Prévision 2025</th>
+            <th>Réalisation 2025</th>
+            <th>Prévision 2026</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Parcours des Sous-Titres -->
+          @for (recipe of recipes(); track trackId(recipe)) {
+            <tr class="subTitle" data-cy="entityTable">
+              <td>{{ recipe.id }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{ recipe.id }}</td>
+              <td class="text-end">
+                {{ recipe.achievementsInThePastYear }}
+              </td>
+              <td class="text-end">
+                {{ recipe.achievementsInThePastYear }}
+              </td>
+              <td class="text-end">
+                {{ recipe.newYearForecast }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/recipe', recipe.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.edit"
+                      >Editer</span
+                    >
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(recipe)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.delete"
+                      >Supprimer</span
+                    >
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Parcours des Chapitres -->
+            <!-- <ng-container *ngFor="let chapitre of item.sousTitre[0]?.chapitre">
+              <tr class="chapter">
+                <td></td>
+                <td>{{ chapitre.code }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ chapitre.designation }}</td>
+                <td class="text-end">
+                  {{ chapterSum(chapitre, "previsions") | formatMontant }}
+                </td>
+                <td class="text-end">
+                  {{ chapterSum(chapitre, "realisations") | formatMontant }}
+                </td>
+                <td class="text-end">
+                  {{ chapterSum(chapitre, "prevision") | formatMontant }}
+                </td>
+              </tr> -->
+
+            <!-- Parcours des Articles -->
+            <!-- <ng-container *ngFor="let article of chapitre.article">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>{{ article.code }}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>{{ article.designation }}</td>
+                  <td class="text-end">
+                    {{ article.previsions | formatMontant }}
+                  </td>
+                  <td class="text-end">
+                    {{ article.realisations | formatMontant }}
+                  </td>
+                  <td class="text-end">
+                    {{ article.prevision | formatMontant }}
+                  </td>
+                </tr>
+              </ng-container> -->
+            <!-- </ng-container> -->
+          }
+        </tbody>
+        <tfoot>
+          <tr class="fw-bold bg-gray">
+            <td colspan="7">TOTAUX DES {{ this.activeTab }}</td>
+            <td class="text-end fw-bold">{{ 300000 }}</td>
+            <td class="text-end fw-bold">{{ 300000 }}</td>
+            <td class="text-end fw-bold">{{ 300000 }}</td>
+          </tr>
+          <!-- @if (activeTab == 'RECETTES DE FONCTIONNEMENT') { -->
+          <tr class="fw-bold">
+            <td colspan="9" class="">Recettes de fonctionnement</td>
+            <td class="fw-bold text-end">{{ 5040000 }}</td>
+          </tr>
+          <tr class="fw-bold">
+            <td colspan="9">Recettes d'investissement</td>
+            <td class="fw-bold text-end">{{ 7000000 }}</td>
+          </tr>
+          <tr class="fw-bold bg-gray">
+            <td colspan="9">TOTAUX DES RECETTES</td>
+            <td class="fw-bold text-end">{{ 600000 }}</td>
+          </tr>
+          <tr class="fw-bold">
+            <td colspan="9">Depenses de fontionnement</td>
+            <td class="fw-bold text-end">{{ 12000900 }}</td>
+          </tr>
+          <tr class="fw-bold">
+            <td colspan="9">Depenses d'investissement</td>
+            <td class="fw-bold text-end">{{ 453000 }}</td>
+          </tr>
+          <tr class="fw-bold bg-gray">
+            <td colspan="9">TOTAUX DES DEPENSES</td>
+            <td class="fw-bold text-end">{{ 2000000 }}</td>
+          </tr>
+          <!-- } -->
+        </tfoot>
+      </table>
+    </div>
+  </div>
+}
+@if (recipes().length > 0) {
+  <div>
+    <div class="d-flex justify-content-center">
+      <jhi-item-count
+        [params]="{
+          page: page,
+          totalItems: totalItems,
+          itemsPerPage: itemsPerPage,
+        }"
+      />
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+}
+
+<!-- 
+<div>
+  <h2 id="page-heading" data-cy="RecipeHeading">
+    <span jhiTranslate="budgetApplicationApp.recipe.home.title">Recipes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon
+          icon="sync"
+          [animation]="isLoading ? 'spin' : undefined"
+        ></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.recipe.home.refreshListLabel"
+          >Actualiser la liste</span
+        >
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-recipe"
+        [routerLink]="['/recipe/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="budgetApplicationApp.recipe.home.createLabel"
+          >Créer un nouveau Recipe</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (recipes().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="budgetApplicationApp.recipe.home.notFound"
+        >Aucun Recipe trouvé</span
+      >
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr
+            jhiSort
+            [(sortState)]="sortState"
+            (sortChange)="navigateToWithComponentValues($event)"
+          >
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="achievementsInThePastYear">
+              <div class="d-flex">
+                <span
+                  jhiTranslate="budgetApplicationApp.recipe.achievementsInThePastYear"
+                  >Achievements In The Past Year</span
+                >
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="newYearForecast">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.recipe.newYearForecast"
+                  >New Year Forecast</span
+                >
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="category">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.recipe.category"
+                  >Category</span
+                >
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="financialYear.id">
+              <div class="d-flex">
+                <span jhiTranslate="budgetApplicationApp.recipe.financialYear"
+                  >Financial Year</span
+                >
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (recipe of recipes(); track trackId(recipe)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/recipe', recipe.id, 'view']">{{
+                  recipe.id
+                }}</a>
+              </td>
+              <td>{{ recipe.achievementsInThePastYear }}</td>
+              <td>{{ recipe.newYearForecast }}</td>
+              <td
+                [jhiTranslate]="
+                  'budgetApplicationApp.FinancialCategoryEnum.' +
+                  (recipe.category ?? 'null')
+                "
+              >
+                {{
+                  {
+                    null: "",
+                    OPERATING_RECIPE: "OPERATING_RECIPE",
+                    INVESTMENT_RECIPE: "INVESTMENT_RECIPE",
+                    OPERATING_EXPENSE: "OPERATING_EXPENSE",
+                    INVESTMENT_EXPENSE: "INVESTMENT_EXPENSE",
+                  }[recipe.category ?? "null"]
+                }}
+              </td>
+              <td>
+                @if (recipe.financialYear) {
+                  <div>
+                    <a
+                      [routerLink]="[
+                        '/financial-year',
+                        recipe.financialYear.id,
+                        'view',
+                      ]"
+                      >{{ recipe.financialYear.id }}</a
+                    >
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/recipe', recipe.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.view"
+                      >Voir</span
+                    >
+                  </a>
+
+                  <a
+                    [routerLink]="['/recipe', recipe.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.edit"
+                      >Editer</span
+                    >
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(recipe)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.delete"
+                      >Supprimer</span
+                    >
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (recipes().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count
+          [params]="{
+            page: page,
+            totalItems: totalItems,
+            itemsPerPage: itemsPerPage,
+          }"
+        />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div> -->

@@ -1,110 +1,183 @@
 <div class="container-fluid">
   <div class="list-group my-3 border-bottom-yellow">
-    <p class="list-group-item list-group-item-action fw-bold mb-0"
-      [ngClass]="{ selected: selectedTab === 'Tableau de bord' }" (click)="selectTab('Tableau de bord', '')"
-      routerLink="/">
+    <p
+      class="list-group-item list-group-item-action fw-bold mb-0"
+      [ngClass]="{ selected: selectedTab === 'Tableau de bord' }"
+      (click)="selectTab('Tableau de bord', '')"
+      routerLink="/"
+    >
       <i class="bi bi-graph-up fs-5 me-2"></i>
       Tableau de board
     </p>
   </div>
   <div class="list-group my-3 border-bottom-yellow">
-    <p class="list-group-item list-group-item-action fw-bold mb-0" aria-current="true" data-bs-toggle="collapse"
-      data-bs-target="#collapse-1" [ngClass]="{ selected: selectedTab === 'Budget' }"
-      (click)="selectTab('Budget', 'collapse-1')" routerLink="/budget-global">
+    <p
+      class="list-group-item list-group-item-action fw-bold mb-0"
+      aria-current="true"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapse-1"
+      [ngClass]="{ selected: selectedTab === 'Budget' }"
+      (click)="selectTab('Budget', 'collapse-1')"
+    >
       <i class="bi bi-file-earmark-bar-graph fs-5 me-2"></i>
       Budget
     </p>
     <div class="collapse" id="collapse-1">
-      <button class="list-group-item list-group-item-action" routerLink="/budget-global">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/budget-global"
+      >
         <i class="bi bi-speedometer2 me-2"></i>
         Budget global
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/recettes">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/recipe"
+      >
         <i class="bi bi-file-earmark-bar-graph-fill me-2"></i>
         Recettes
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/recapilatif-recettes">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/recapilatif-recettes"
+      >
         <i class="bi bi-arrow-clockwise me-2"></i>
         Recapilatifs des recettes
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/depenses">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/depenses"
+      >
         <i class="bi bi-cash-coin me-2"></i>
         Dépenses
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/recapilatif-depenses">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/recapilatif-depenses"
+      >
         <i class="bi bi-arrow-clockwise me-2"></i>
         Recapilatifs des dépenses
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/budget">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/budget"
+      >
         <i class="bi bi-cash-stack me-2"></i>
         Budget
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/plan-de-tresororie">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/plan-de-tresororie"
+      >
         <i class="bi bi-wallet me-2"></i>
         Plan de trésorerie
       </button>
     </div>
   </div>
   <div class="list-group my-3 border-bottom-yellow">
-    <p class="list-group-item list-group-item-action fw-bold mb-0" aria-current="true" data-bs-toggle="collapse"
-      data-bs-target="#collapse-2" [ngClass]="{ selected: selectedTab === 'Engagement' }"
-      (click)="selectTab('Engagement', 'collapse-2')" routerLink="/controle-des-engagements-des-depenses">
+    <p
+      class="list-group-item list-group-item-action fw-bold mb-0"
+      aria-current="true"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapse-2"
+      [ngClass]="{ selected: selectedTab === 'Engagement' }"
+      (click)="selectTab('Engagement', 'collapse-2')"
+      routerLink="/controle-des-engagements-des-depenses"
+    >
       <i class="bi bi-layers fs-5 me-2"></i>
       Engagement
     </p>
     <div class="collapse" id="collapse-2">
-      <button class="list-group-item list-group-item-action" routerLink="/controle-des-engagements-des-depenses">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/controle-des-engagements-des-depenses"
+      >
         <i class="bi bi-menu-button-fill me-2"></i>
         Contrôle des engagements des depenses
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/bon-achat">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/bon-achat"
+      >
         <i class="bi bi-card-list me-2"></i>
         Bon d’achat
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/detail-engagement">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/detail-engagement"
+      >
         <i class="bi bi-file-earmark-text me-2"></i>
         Détail de l’engagement
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/releves">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/releves"
+      >
         <i class="bi bi-files me-2"></i>
         Relevés
       </button>
     </div>
   </div>
   <div class="list-group my-3 border-bottom-yellow">
-    <p class="list-group-item list-group-item-action fw-bold mb-0" aria-current="true" data-bs-toggle="collapse"
-      data-bs-target="#collapse-3" [ngClass]="{ selected: selectedTab === 'Mandatement' }"
-      (click)="selectTab('Mandatement', 'collapse-3')" routerLink="/mandat-de-paiement">
+    <p
+      class="list-group-item list-group-item-action fw-bold mb-0"
+      aria-current="true"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapse-3"
+      [ngClass]="{ selected: selectedTab === 'Mandatement' }"
+      (click)="selectTab('Mandatement', 'collapse-3')"
+      routerLink="/mandat-de-paiement"
+    >
       <i class="bi bi-file-earmark-check fs-5 me-2"></i>
       Mandatement
     </p>
     <div class="collapse" id="collapse-3">
-      <button class="list-group-item list-group-item-action" routerLink="/mandat-de-paiement">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/mandat-de-paiement"
+      >
         <i class="bi bi-cash-coin me-2"></i>
         Mandat de paiement
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/avis-de-credit">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/avis-de-credit"
+      >
         <i class="bi bi-credit-card me-2"></i>
         Avis de crédit
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/etat-des-retenues">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/etat-des-retenues"
+      >
         <i class="bi bi-journal-minus me-2"></i>
         Etat des retenues de 40%
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/bordereau-emission">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/bordereau-emission"
+      >
         <i class="bi bi-file-earmark-text me-2"></i>
         Bordereau d'emission
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/fiche-de-liquidation">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/fiche-de-liquidation"
+      >
         <i class="bi bi-file-check me-2"></i>
         Fiche de liquidation
       </button>
     </div>
   </div>
   <div class="list-group my-3 border-bottom-yellow">
-    <p class="list-group-item list-group-item-action fw-bold mb-0" aria-current="true" data-bs-toggle="collapse"
-      data-bs-target="#collapse-4" [ngClass]="{ selected: selectedTab === 'Exécution du budget' }"
-      (click)="selectTab('Exécution du budget', 'collapse-4')">
+    <p
+      class="list-group-item list-group-item-action fw-bold mb-0"
+      aria-current="true"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapse-4"
+      [ngClass]="{ selected: selectedTab === 'Exécution du budget' }"
+      (click)="selectTab('Exécution du budget', 'collapse-4')"
+    >
       <i class="bi bi-database-check fs-5 me-2"></i>
       Exécution du budget
     </p>
@@ -120,49 +193,82 @@
     </div>
   </div>
   <div class="list-group my-3 border-bottom-yellow">
-    <p class="list-group-item list-group-item-action fw-bold mb-0" aria-current="true" data-bs-toggle="collapse"
-      data-bs-target="#collapse-5" [ngClass]="{ selected: selectedTab === 'Compte admistratif' }"
-      (click)="selectTab('Compte admistratif', 'collapse-5')" routerLink="/fond-propre">
+    <p
+      class="list-group-item list-group-item-action fw-bold mb-0"
+      aria-current="true"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapse-5"
+      [ngClass]="{ selected: selectedTab === 'Compte admistratif' }"
+      (click)="selectTab('Compte admistratif', 'collapse-5')"
+      routerLink="/fond-propre"
+    >
       <i class="bi bi-person-vcard fs-5 me-2"></i>
       Compte admistratif
     </p>
     <div class="collapse" id="collapse-5">
-      <button class="list-group-item list-group-item-action" routerLink="/fond-propre">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/fond-propre"
+      >
         <i class="bi bi-wallet2 me-2"></i>
         Fond Propre
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/tresor">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/tresor"
+      >
         <i class="bi bi-wallet me-2"></i>
         Trésor
       </button>
     </div>
   </div>
   <div class="list-group my-3 border-bottom-yellow">
-    <p class="list-group-item list-group-item-action fw-bold mb-0" aria-current="true" data-bs-toggle="collapse"
-      data-bs-target="#collapse-6" [ngClass]="{ selected: selectedTab === 'Rapports' }"
-      (click)="selectTab('Rapports', 'collapse-6')" routerLink="/rapports-projet-de-budget">
+    <p
+      class="list-group-item list-group-item-action fw-bold mb-0"
+      aria-current="true"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapse-6"
+      [ngClass]="{ selected: selectedTab === 'Rapports' }"
+      (click)="selectTab('Rapports', 'collapse-6')"
+      routerLink="/rapports-projet-de-budget"
+    >
       <i class="bi bi-file-earmark-text fs-5 me-2"></i>
       Rapports
     </p>
     <div class="collapse" id="collapse-6">
-      <button class="list-group-item list-group-item-action" routerLink="/rapports-projet-de-budget">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/rapports-projet-de-budget"
+      >
         <i class="bi bi-file-earmark-text me-2"></i>
         Rapports projet de budget
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/rapport-presention-du-projet-de-Budget">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/rapport-presention-du-projet-de-Budget"
+      >
         <i class="bi bi-file-earmark-text me-2"></i>
         Rapport présention du projet de Budget
       </button>
-      <button class="list-group-item list-group-item-action" routerLink="/rapport-execution">
+      <button
+        class="list-group-item list-group-item-action"
+        routerLink="/rapport-execution"
+      >
         <i class="bi bi-file-earmark-text me-2"></i>
         Rapport d’execution
       </button>
     </div>
   </div>
   <div class="list-group my-3 border-bottom-yellow">
-    <p class="list-group-item list-group-item-action fw-bold mb-0" aria-current="true" data-bs-toggle="collapse"
-      data-bs-target="#collapse-7" [ngClass]="{ selected: selectedTab === 'Dashboard' }"
-      (click)="selectTab('Dashboard', 'collapse-7')" routerLink="/user">
+    <p
+      class="list-group-item list-group-item-action fw-bold mb-0"
+      aria-current="true"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapse-7"
+      [ngClass]="{ selected: selectedTab === 'Dashboard' }"
+      (click)="selectTab('Dashboard', 'collapse-7')"
+      routerLink="/user"
+    >
       <i class="bi bi-bag-dash fs-5 me-2"></i>
       Administration
     </p>
@@ -175,9 +281,15 @@
       </div> -->
   </div>
   <div class="list-group my-3 border-bottom-yellow">
-    <p class="list-group-item list-group-item-action fw-bold mb-0" aria-current="true" data-bs-toggle="collapse"
-      data-bs-target="#collapse-7" [ngClass]="{ selected: selectedTab === 'Paramètres' }"
-      (click)="selectTab('Paramètres', 'collapse-7')" routerLink="parametres">
+    <p
+      class="list-group-item list-group-item-action fw-bold mb-0"
+      aria-current="true"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapse-7"
+      [ngClass]="{ selected: selectedTab === 'Paramètres' }"
+      (click)="selectTab('Paramètres', 'collapse-7')"
+      routerLink="parametres"
+    >
       <i class="bi bi-gear fs-5 me-2"></i>
       Paramètres
     </p>

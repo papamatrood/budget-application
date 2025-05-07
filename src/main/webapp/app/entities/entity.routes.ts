@@ -31,11 +31,11 @@ const routes: Routes = [
   //   data: { pageTitle: "budgetApplicationApp.article.home.title" },
   //   loadChildren: () => import("./article/article.routes"),
   // },
-  {
-    path: "recipe",
-    data: { pageTitle: "budgetApplicationApp.recipe.home.title" },
-    loadChildren: () => import("./recipe/recipe.routes"),
-  },
+  // {
+  //   path: "recipe",
+  //   data: { pageTitle: "budgetApplicationApp.recipe.home.title" },
+  //   loadChildren: () => import("./recipe/recipe.routes"),
+  // },
   {
     path: "expense",
     data: { pageTitle: "budgetApplicationApp.expense.home.title" },

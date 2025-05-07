@@ -6,7 +6,14 @@ import { Observable } from "rxjs";
 import { finalize, map } from "rxjs/operators";
 
 import SharedModule from "app/shared/shared.module";
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
 
 import { IUser } from "app/entities/user/user.model";
 import { UserService } from "app/entities/user/service/user.service";
@@ -14,13 +21,20 @@ import { GenderEnum } from "app/entities/enumerations/gender-enum.model";
 import { FamilySituationEnum } from "app/entities/enumerations/family-situation-enum.model";
 import { IAppUser } from "app/entities/app-user/app-user.model";
 import { AppUserService } from "app/entities/app-user/service/app-user.service";
-import { AppUserFormGroup, AppUserFormService } from "app/entities/app-user/update/app-user-form.service";
-import { ITEM_CREATED_EVENT, ITEM_UPDATED_EVENT } from "app/config/navigation.constants";
+import {
+  AppUserFormGroup,
+  AppUserFormService,
+} from "app/entities/app-user/update/app-user-form.service";
+import {
+  ITEM_CREATED_EVENT,
+  ITEM_UPDATED_EVENT,
+} from "app/config/navigation.constants";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { IUserAppUserDTO, NewUserAppUserDTO } from "app/shared/dto/user-appuser-dto.model";
+import {
+  IUserAppUserDTO,
+  NewUserAppUserDTO,
+} from "app/shared/dto/user-appuser-dto.model";
 import { LANGUAGES } from "app/config/language.constants";
-
-
 
 const userTemplate = {} as IUserAppUserDTO;
 
@@ -28,8 +42,6 @@ const newUser: IUserAppUserDTO = {
   langKey: "fr",
   activated: true,
 } as IUserAppUserDTO;
-
-
 
 @Component({
   selector: "jhi-app-user-update",
@@ -70,7 +82,7 @@ export class AppUserUpdateComponent implements OnInit {
         Validators.minLength(1),
         Validators.maxLength(50),
         Validators.pattern(
-          "^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$"
+          "^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$",
         ),
       ],
     }),
@@ -92,7 +104,7 @@ export class AppUserUpdateComponent implements OnInit {
     activated: new FormControl(userTemplate.activated ?? true, {
       nonNullable: true,
     }),
-    langKey: new FormControl(userTemplate.langKey ?? 'fr', {
+    langKey: new FormControl(userTemplate.langKey ?? "fr", {
       nonNullable: true,
     }),
     authorities: new FormControl(userTemplate.authorities, {
@@ -172,10 +184,12 @@ export class AppUserUpdateComponent implements OnInit {
         error: () => this.onSaveError(),
       });
     } else {
-      this.appUserService.createUserAppUser(user as NewUserAppUserDTO).subscribe({
-        next: () => this.onSaveSuccess(),
-        error: () => this.onSaveError(),
-      });
+      this.appUserService
+        .createUserAppUser(user as NewUserAppUserDTO)
+        .subscribe({
+          next: () => this.onSaveSuccess(),
+          error: () => this.onSaveError(),
+        });
     }
   }
 
@@ -196,7 +210,7 @@ export class AppUserUpdateComponent implements OnInit {
 
   protected reloadCurrentRoute(): void {
     const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl]);
     });
   }

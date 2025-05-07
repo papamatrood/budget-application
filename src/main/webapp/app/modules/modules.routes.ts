@@ -38,6 +38,11 @@ const routes: Routes = [
     data: { pageTitle: "jhipsterFinancialManagementApp.article.home.title" },
     loadChildren: () => import("./article/article.routes"),
   },
+  {
+    path: "recipe",
+    data: { pageTitle: "budgetApplicationApp.recipe.home.title" },
+    loadChildren: () => import("./recipe/recipe.routes"),
+  },
   // {
   //   path: 'chapter',
   //   data: { pageTitle: 'jhipsterFinancialManagementApp.chapter.home.title' },

@@ -10,7 +10,10 @@ import { isPresent } from "app/core/util/operators";
 import { ApplicationConfigService } from "app/core/config/application-config.service";
 import { createRequestOption } from "app/core/request/request-util";
 import { IAppUser, NewAppUser } from "../app-user.model";
-import { IUserAppUserDTO, NewUserAppUserDTO } from "app/shared/dto/user-appuser-dto.model";
+import {
+  IUserAppUserDTO,
+  NewUserAppUserDTO,
+} from "app/shared/dto/user-appuser-dto.model";
 
 export type PartialUpdateAppUser = Partial<IAppUser> & Pick<IAppUser, "id">;
 
@@ -45,15 +48,21 @@ export class AppUserService {
   protected UserAppUserDTOresourceUrl =
     this.applicationConfigService.getEndpointFor("api/user-app-user");
 
-  createUserAppUser(userAppUserDTO: NewUserAppUserDTO): Observable<EntityResponseType> {
+  createUserAppUser(
+    userAppUserDTO: NewUserAppUserDTO,
+  ): Observable<EntityResponseType> {
     const copy = this.myConvertDateFromClient(userAppUserDTO);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.http
-      .post<IUserAppUserDTO>(this.UserAppUserDTOresourceUrl, copy, { observe: 'response' })
+      .post<IUserAppUserDTO>(this.UserAppUserDTOresourceUrl, copy, {
+        observe: "response",
+      })
       .pipe(map((res) => this.myConvertResponseFromServer(res)));
   }
 
-  updateUserAppUser(userAppUserDTO: IUserAppUserDTO): Observable<EntityResponseType> {
+  updateUserAppUser(
+    userAppUserDTO: IUserAppUserDTO,
+  ): Observable<EntityResponseType> {
     const copy = this.myConvertDateFromClient(userAppUserDTO);
     return this.http
       .put<IUserAppUserDTO>(
@@ -64,11 +73,16 @@ export class AppUserService {
       .pipe(map((res) => this.myConvertResponseFromServer(res)));
   }
 
-  deleteUserAppUser(userAppUserDTO: IUserAppUserDTO): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.UserAppUserDTOresourceUrl}/${userAppUserDTO.id}`, {
-      body: userAppUserDTO,
-      observe: "response",
-    });
+  deleteUserAppUser(
+    userAppUserDTO: IUserAppUserDTO,
+  ): Observable<HttpResponse<{}>> {
+    return this.http.delete(
+      `${this.UserAppUserDTOresourceUrl}/${userAppUserDTO.id}`,
+      {
+        body: userAppUserDTO,
+        observe: "response",
+      },
+    );
   }
 
   create(appUser: NewAppUser): Observable<EntityResponseType> {
@@ -125,7 +139,9 @@ export class AppUserService {
     return appUser.id;
   }
 
-  getUserAppUserDTOIdentifier(userAppUserDTO: Pick<IUserAppUserDTO, "id">): number {
+  getUserAppUserDTOIdentifier(
+    userAppUserDTO: Pick<IUserAppUserDTO, "id">,
+  ): number {
     return userAppUserDTO.id;
   }
 
@@ -212,13 +228,10 @@ export class AppUserService {
     });
   }
 
-
-
-
   // Mes codes
-  protected myConvertDateFromClient<T extends IUserAppUserDTO | NewUserAppUserDTO>(
-    userAppUserDTO: T,
-  ): RestOf<T> {
+  protected myConvertDateFromClient<
+    T extends IUserAppUserDTO | NewUserAppUserDTO,
+  >(userAppUserDTO: T): RestOf<T> {
     return {
       ...userAppUserDTO,
       birthDate: dayjs.isDayjs(userAppUserDTO.birthDate)
@@ -227,7 +240,9 @@ export class AppUserService {
     };
   }
 
-  protected myConvertResponseFromServer(res: HttpResponse<any>): HttpResponse<any> {
+  protected myConvertResponseFromServer(
+    res: HttpResponse<any>,
+  ): HttpResponse<any> {
     return res;
   }
 }

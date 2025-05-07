@@ -1,9 +1,9 @@
-@if (userAppUserDTO) {
-  <form name="deleteForm" (ngSubmit)="confirmDelete(userAppUserDTO)">
+@if (recipe) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(recipe.id!)">
     <div class="modal-header">
       <h4
         class="modal-title"
-        data-cy="appUserDeleteDialogHeading"
+        data-cy="recipeDeleteDialogHeading"
         jhiTranslate="entity.delete.title"
       >
         Confirmation de suppression
@@ -13,18 +13,11 @@
     <div class="modal-body">
       <jhi-alert-error />
       <p
-        id="jhi-delete-appUser-heading"
-        jhiTranslate="budgetApplicationApp.appUser.delete.question"
-        [translateValues]="{
-          firstName: userAppUserDTO.firstName,
-          lastName: userAppUserDTO.lastName,
-        }"
+        id="jhi-delete-recipe-heading"
+        jhiTranslate="budgetApplicationApp.recipe.delete.question"
+        [translateValues]="{ id: recipe.id }"
       >
-        Êtes-vous certain de vouloir supprimer l'utilisateur
-        <span class="bold-text"
-          >{{ userAppUserDTO.firstName }} {{ userAppUserDTO.lastName }}</span
-        >
-        ?
+        Êtes-vous certain de vouloir supprimer le Recipe {{ recipe.id }} ?
       </p>
     </div>
 
@@ -42,7 +35,7 @@
       </button>
 
       <button
-        id="jhi-confirm-delete-appUser"
+        id="jhi-confirm-delete-recipe"
         data-cy="entityConfirmDeleteButton"
         type="submit"
         class="btn btn-danger"
