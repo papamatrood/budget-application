@@ -147,8 +147,6 @@ enum FinancialCategoryEnum {
 relationship OneToOne {
     AppUser {user} to User with builtInEntity
     Decision to Engagement
-    Recipe to FinancialYear
-    Expense to FinancialYear
     AnnexDecision to FinancialYear
     Expense to AnnexDecision
     Mandate to Engagement
@@ -163,6 +161,8 @@ relationship ManyToOne {
     PurchaseOrder to Engagement
     DecisionItem to Decision
     Decision to AnnexDecision
+    Recipe to FinancialYear
+    Expense to FinancialYear
 }
 
 relationship ManyToMany {
