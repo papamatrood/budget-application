@@ -1,10 +1,10 @@
 package com.cratechnologie.budget.web.rest;
 
-import com.cratechnologie.budget.domain.SubTitle;
-import com.cratechnologie.budget.repository.SubTitleRepository;
 import com.cratechnologie.budget.service.SubTitleQueryService;
 import com.cratechnologie.budget.service.SubTitleService;
 import com.cratechnologie.budget.service.criteria.SubTitleCriteria;
+import com.cratechnologie.budget.domain.SubTitle;
+import com.cratechnologie.budget.repository.SubTitleRepository;
 import com.cratechnologie.budget.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -2,35 +2,35 @@
   "budgetApplicationApp": {
     "appUser": {
       "home": {
-        "title": "AppUsers",
+        "title": "Utilisateurs",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau App User",
-        "createOrEditLabel": "Créer ou éditer un App User",
-        "notFound": "Aucun App User trouvé"
+        "createLabel": "Créer un nouveau utilisateur",
+        "createOrEditLabel": "Créer ou éditer un utilisateur",
+        "notFound": "Aucun utilisateur trouvé"
       },
-      "created": "Un nouveau App User a été créé avec l'identifiant {{ param }}",
-      "updated": "Le App User avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le App User avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau utilisateur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le utilisateur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le utilisateur avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le App User {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer l'utilisateur {{ firstName }} {{ lastName }} ?"
       },
       "detail": {
-        "title": "App User"
+        "title": "utilisateur"
       },
       "id": "ID",
-      "accountStatus": "Account Status",
-      "lastDateUpdate": "Last Date Update",
-      "dateCreated": "Date Created",
-      "firstname": "Firstname",
-      "lastname": "Lastname",
-      "phoneNumber": "Phone Number",
-      "birthDate": "Birth Date",
-      "birthPlace": "Birth Place",
-      "gender": "Gender",
-      "familySituation": "Family Situation",
-      "position": "Position",
-      "address": "Address",
-      "user": "User"
+      "accountStatus": "Statut du compte",
+      "lastDateUpdate": "Dernière mise à jour",
+      "dateCreated": "Date de création",
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "phoneNumber": "Téléphone",
+      "birthDate": "Date de naissance",
+      "birthPlace": "Lieu de naissance",
+      "gender": "Genre",
+      "familySituation": "Situation familiale",
+      "position": "Poste",
+      "address": "Adresse",
+      "user": "Utilisateur"
     }
   }
 }

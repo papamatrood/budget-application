@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import dayjs from "dayjs/esm";
 import { IUser } from "app/entities/user/user.model";
 import { GenderEnum } from "app/entities/enumerations/gender-enum.model";
@@ -17,7 +18,7 @@ export interface IAppUser {
   familySituation?: keyof typeof FamilySituationEnum | null;
   position?: string | null;
   address?: string | null;
-  user?: Pick<IUser, "id"> | null;
+  user?: Pick<IUser, "id" | "email" | "login" | "langKey" | "activated" | "authorities" | "createdBy" | "createdDate" | "lastModifiedBy" | "lastModifiedDate"> | null;
 }
 
 export type NewAppUser = Omit<IAppUser, "id"> & { id: null };

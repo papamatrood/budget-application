@@ -63,7 +63,7 @@ public class AppUser implements Serializable {
     @Column(name = "address")
     private String address;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(unique = true)
     private User user;
 

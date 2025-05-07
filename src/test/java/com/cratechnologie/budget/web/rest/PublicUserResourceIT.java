@@ -5,10 +5,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.cratechnologie.budget.IntegrationTest;
+import com.cratechnologie.budget.service.UserService;
 import com.cratechnologie.budget.domain.User;
 import com.cratechnologie.budget.repository.UserRepository;
 import com.cratechnologie.budget.security.AuthoritiesConstants;
-import com.cratechnologie.budget.service.UserService;
+
 import java.util.Objects;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;

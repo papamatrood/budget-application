@@ -9,13 +9,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.cratechnologie.budget.IntegrationTest;
+import com.cratechnologie.budget.service.ArticleService;
 import com.cratechnologie.budget.domain.Article;
 import com.cratechnologie.budget.domain.Chapter;
 import com.cratechnologie.budget.domain.Expense;
 import com.cratechnologie.budget.domain.Recipe;
 import com.cratechnologie.budget.domain.enumeration.FinancialCategoryEnum;
 import com.cratechnologie.budget.repository.ArticleRepository;
-import com.cratechnologie.budget.service.ArticleService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.ArrayList;

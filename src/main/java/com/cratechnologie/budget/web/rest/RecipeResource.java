@@ -1,10 +1,10 @@
 package com.cratechnologie.budget.web.rest;
 
-import com.cratechnologie.budget.domain.Recipe;
-import com.cratechnologie.budget.repository.RecipeRepository;
 import com.cratechnologie.budget.service.RecipeQueryService;
 import com.cratechnologie.budget.service.RecipeService;
 import com.cratechnologie.budget.service.criteria.RecipeCriteria;
+import com.cratechnologie.budget.domain.Recipe;
+import com.cratechnologie.budget.repository.RecipeRepository;
 import com.cratechnologie.budget.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;

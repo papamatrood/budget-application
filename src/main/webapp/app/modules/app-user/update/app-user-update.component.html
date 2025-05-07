@@ -1,0 +1,324 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-app-user-heading"
+        data-cy="AppUserCreateUpdateHeading"
+        jhiTranslate="budgetApplicationApp.appUser.home.createOrEditLabel"
+      >
+        Créer ou éditer un App User
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label
+              class="form-label"
+              for="field_id"
+              jhiTranslate="budgetApplicationApp.appUser.id"
+              >ID</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="id"
+              id="field_id"
+              data-cy="id"
+              formControlName="id"
+              [readonly]="true"
+            />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_accountStatus"
+            jhiTranslate="budgetApplicationApp.appUser.accountStatus"
+            >Account Status</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="accountStatus"
+            id="field_accountStatus"
+            data-cy="accountStatus"
+            formControlName="accountStatus"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_lastDateUpdate"
+            jhiTranslate="budgetApplicationApp.appUser.lastDateUpdate"
+            >Last Date Update</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastDateUpdate"
+              data-cy="lastDateUpdate"
+              type="datetime-local"
+              class="form-control"
+              name="lastDateUpdate"
+              formControlName="lastDateUpdate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_dateCreated"
+            jhiTranslate="budgetApplicationApp.appUser.dateCreated"
+            >Date Created</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateCreated"
+              data-cy="dateCreated"
+              type="datetime-local"
+              class="form-control"
+              name="dateCreated"
+              formControlName="dateCreated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_firstname"
+            jhiTranslate="budgetApplicationApp.appUser.firstname"
+            >Firstname</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="firstname"
+            id="field_firstname"
+            data-cy="firstname"
+            formControlName="firstname"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_lastname"
+            jhiTranslate="budgetApplicationApp.appUser.lastname"
+            >Lastname</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastname"
+            id="field_lastname"
+            data-cy="lastname"
+            formControlName="lastname"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_phoneNumber"
+            jhiTranslate="budgetApplicationApp.appUser.phoneNumber"
+            >Phone Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_birthDate"
+            jhiTranslate="budgetApplicationApp.appUser.birthDate"
+            >Birth Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_birthDate"
+              data-cy="birthDate"
+              type="datetime-local"
+              class="form-control"
+              name="birthDate"
+              formControlName="birthDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_birthPlace"
+            jhiTranslate="budgetApplicationApp.appUser.birthPlace"
+            >Birth Place</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="birthPlace"
+            id="field_birthPlace"
+            data-cy="birthPlace"
+            formControlName="birthPlace"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_gender"
+            jhiTranslate="budgetApplicationApp.appUser.gender"
+            >Gender</label
+          >
+          <select
+            class="form-control"
+            name="gender"
+            formControlName="gender"
+            id="field_gender"
+            data-cy="gender"
+          >
+            <option [ngValue]="null">
+              {{ "budgetApplicationApp.GenderEnum.null" | translate }}
+            </option>
+            @for (genderEnum of genderEnumValues; track $index) {
+              <option [value]="genderEnum">
+                {{
+                  "budgetApplicationApp.GenderEnum." + genderEnum | translate
+                }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_familySituation"
+            jhiTranslate="budgetApplicationApp.appUser.familySituation"
+            >Family Situation</label
+          >
+          <select
+            class="form-control"
+            name="familySituation"
+            formControlName="familySituation"
+            id="field_familySituation"
+            data-cy="familySituation"
+          >
+            <option [ngValue]="null">
+              {{ "budgetApplicationApp.FamilySituationEnum.null" | translate }}
+            </option>
+            @for (
+              familySituationEnum of familySituationEnumValues;
+              track $index
+            ) {
+              <option [value]="familySituationEnum">
+                {{
+                  "budgetApplicationApp.FamilySituationEnum." +
+                    familySituationEnum | translate
+                }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_position"
+            jhiTranslate="budgetApplicationApp.appUser.position"
+            >Position</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="position"
+            id="field_position"
+            data-cy="position"
+            formControlName="position"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_address"
+            jhiTranslate="budgetApplicationApp.appUser.address"
+            >Address</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="address"
+            id="field_address"
+            data-cy="address"
+            formControlName="address"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_user"
+            jhiTranslate="budgetApplicationApp.appUser.user"
+            >User</label
+          >
+          <select
+            class="form-control"
+            id="field_user"
+            data-cy="user"
+            name="user"
+            formControlName="user"
+            [compareWith]="compareUser"
+          >
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.cancel"
+            >Annuler</span
+          >
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span
+            jhiTranslate="entity.action.save"
+            >Sauvegarder</span
+          >
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

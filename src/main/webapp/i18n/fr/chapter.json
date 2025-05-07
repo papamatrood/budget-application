@@ -4,23 +4,23 @@
       "home": {
         "title": "Chapters",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Chapter",
-        "createOrEditLabel": "Créer ou éditer un Chapter",
-        "notFound": "Aucun Chapter trouvé"
+        "createLabel": "Créer un nouveau chapitre",
+        "createOrEditLabel": "Créer ou éditer un chapitre",
+        "notFound": "Aucun chapitre trouvé"
       },
-      "created": "Un nouveau Chapter a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Chapter avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Chapter avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau chapitre a été créé avec l'identifiant {{ param }}",
+      "updated": "Le chapitre avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le chapitre avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Chapter {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le chapitre {{ id }} ?"
       },
       "detail": {
-        "title": "Chapter"
+        "title": "Chapitre"
       },
       "id": "ID",
       "code": "Code",
-      "designation": "Designation",
-      "subTitle": "Sub Title",
+      "designation": "Désignation",
+      "subTitle": "Sous-titre",
       "article": "Article"
     }
   }

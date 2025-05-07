@@ -1,7 +1,5 @@
 package com.cratechnologie.budget.web.rest;
 
-import com.cratechnologie.budget.service.UserService;
-import com.cratechnologie.budget.service.dto.UserDTO;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.cratechnologie.budget.service.UserService;
+import com.cratechnologie.budget.service.dto.UserDTO;
+
 import tech.jhipster.web.util.PaginationUtil;
 
 @RestController

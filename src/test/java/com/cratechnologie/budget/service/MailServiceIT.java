@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import com.cratechnologie.budget.IntegrationTest;
+import com.cratechnologie.budget.service.MailService;
 import com.cratechnologie.budget.config.Constants;
 import com.cratechnologie.budget.domain.User;
 import jakarta.mail.Multipart;

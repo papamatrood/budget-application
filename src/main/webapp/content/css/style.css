@@ -1,3 +1,7 @@
+* {
+  text-align: inherit;
+}
+
 .c-red {
   color: #eb1d22;
 }
@@ -51,7 +55,6 @@ td {
 }
 
 td {
-  text-align: end;
   white-space: nowrap;
 }
 

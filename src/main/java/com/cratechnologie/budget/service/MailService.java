@@ -1,5 +1,6 @@
 package com.cratechnologie.budget.service;
 
+import com.cratechnologie.budget.domain.AppUser;
 import com.cratechnologie.budget.domain.User;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -107,9 +108,9 @@ public class MailService {
     }
 
     @Async
-    public void sendCreationEmail(User user) {
-        LOG.debug("Sending creation email to '{}'", user.getEmail());
-        sendEmailFromTemplateSync(user, "mail/creationEmail", "email.activation.title");
+    public void sendCreationEmail(User newUser) {
+        LOG.debug("Sending creation email to '{}'", newUser.getEmail());
+        sendEmailFromTemplateSync(newUser, "mail/creationEmail", "email.activation.title");
     }
 
     @Async

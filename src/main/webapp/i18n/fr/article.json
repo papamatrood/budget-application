@@ -18,15 +18,15 @@
         "title": "Article"
       },
       "id": "ID",
-      "category": "Category",
+      "category": "Catégorie",
       "code": "Code",
-      "designation": "Designation",
-      "accountDiv": "Account Div",
-      "codeEnd": "Code End",
-      "paragraph": "Paragraph",
-      "chapter": "Chapter",
-      "recipe": "Recipe",
-      "expense": "Expense"
+      "designation": "Désignation",
+      "accountDiv": "CompteDiv",
+      "codeEnd": "Code FamilySituationEnum",
+      "paragraph": "Paragraphe",
+      "chapter": "Chapitre",
+      "recipe": "Recette",
+      "expense": "Dépense"
     }
   }
 }

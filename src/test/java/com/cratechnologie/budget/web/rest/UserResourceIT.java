@@ -6,12 +6,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.cratechnologie.budget.IntegrationTest;
-import com.cratechnologie.budget.domain.User;
-import com.cratechnologie.budget.repository.UserRepository;
-import com.cratechnologie.budget.security.AuthoritiesConstants;
 import com.cratechnologie.budget.service.UserService;
 import com.cratechnologie.budget.service.dto.AdminUserDTO;
 import com.cratechnologie.budget.service.mapper.UserMapper;
+import com.cratechnologie.budget.domain.User;
+import com.cratechnologie.budget.repository.UserRepository;
+import com.cratechnologie.budget.security.AuthoritiesConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.util.*;

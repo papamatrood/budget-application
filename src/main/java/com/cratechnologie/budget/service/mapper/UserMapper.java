@@ -1,9 +1,11 @@
 package com.cratechnologie.budget.service.mapper;
 
-import com.cratechnologie.budget.domain.Authority;
-import com.cratechnologie.budget.domain.User;
+
 import com.cratechnologie.budget.service.dto.AdminUserDTO;
 import com.cratechnologie.budget.service.dto.UserDTO;
+import com.cratechnologie.budget.domain.Authority;
+import com.cratechnologie.budget.domain.User;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import org.mapstruct.BeanMapping;

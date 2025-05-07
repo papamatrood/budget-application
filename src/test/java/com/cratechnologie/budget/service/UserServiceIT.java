@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import com.cratechnologie.budget.IntegrationTest;
+import com.cratechnologie.budget.service.UserService;
 import com.cratechnologie.budget.domain.User;
 import com.cratechnologie.budget.repository.UserRepository;
 import java.time.Instant;

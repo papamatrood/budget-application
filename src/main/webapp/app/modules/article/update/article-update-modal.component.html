@@ -2,12 +2,7 @@
   <h4 class="modal-title" id="modal-title">
     {{ article?.id ? "Modifier Article" : "Créer Article" }}
   </h4>
-  <button
-    type="button"
-    class="btn-close"
-    aria-label="Close"
-    (click)="previousState()"
-  ></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="previousState()"></button>
 </div>
 
 <div class="modal-body">
@@ -18,90 +13,66 @@
       <div class="row">
         <!-- Première ligne avec Chapter et Category -->
         <div class="col-md-6 mb-3">
-          <label
-            class="form-label"
-            for="field_chapter"
-            jhiTranslate="budgetApplicationApp.article.chapter"
-            >Chapitre</label
-          >
-          <select
-            class="form-select"
-            id="field_chapter"
-            data-cy="chapter"
-            name="chapter"
-            formControlName="chapter"
-            [compareWith]="compareChapter"
-          >
+          <label class="form-label" for="field_chapter"
+            jhiTranslate="budgetApplicationApp.article.chapter">Chapitre</label>
+          <select class="form-select" id="field_chapter" data-cy="chapter" name="chapter" formControlName="chapter"
+            [compareWith]="compareChapter">
             <option [ngValue]="null"></option>
             @for (chapterOption of chaptersSharedCollection; track $index) {
-              <option [ngValue]="chapterOption">
-                {{ chapterOption.code }} - {{ chapterOption.designation }}
-              </option>
+            <option [ngValue]="chapterOption">
+              {{ chapterOption.code }} - {{ chapterOption.designation }}
+            </option>
             }
           </select>
         </div>
 
         <div class="col-md-6 mb-3">
-          <label
-            class="form-label"
-            for="field_category"
-            jhiTranslate="budgetApplicationApp.article.category"
-            >Categorie</label
-          >
-          <select
-            class="form-select"
-            name="category"
-            formControlName="category"
-            id="field_category"
-            data-cy="category"
-          >
+          <label class="form-label" for="field_category"
+            jhiTranslate="budgetApplicationApp.article.category">Categorie</label>
+          <select class="form-select" name="category" formControlName="category" id="field_category" data-cy="category">
             <option [ngValue]="null">
               {{
-                "budgetApplicationApp.FinancialCategoryEnum.null" | translate
+              "budgetApplicationApp.FinancialCategoryEnum.null" | translate
               }}
             </option>
 
             <!-- Groupe pour les RECETTES -->
-            <optgroup
-              label="{{
+            <optgroup label="{{
                 'budgetApplicationApp.FinancialCategoryEnum.group.RECIPES'
                   | translate
-              }}"
-            >
+              }}">
               @for (
-                financialCategoryEnum of financialCategoryEnumValues;
-                track $index
+              financialCategoryEnum of financialCategoryEnumValues;
+              track $index
               ) {
-                @if (financialCategoryEnum.includes("RECIPE")) {
-                  <option [value]="financialCategoryEnum">
-                    {{
-                      "budgetApplicationApp.FinancialCategoryEnum." +
-                        financialCategoryEnum | translate
-                    }}
-                  </option>
-                }
+              @if (financialCategoryEnum.includes("RECIPE")) {
+              <option [value]="financialCategoryEnum">
+                {{
+                "budgetApplicationApp.FinancialCategoryEnum." +
+                financialCategoryEnum | translate
+                }}
+              </option>
+              }
               }
             </optgroup>
 
             <!-- Groupe pour les DÉPENSES -->
-            <optgroup
-              label="{{
+            <optgroup label="{{
                 'budgetApplicationApp.FinancialCategoryEnum.group.EXPENSES'
                   | translate
-              }}"
-            >
+              }}">
               @for (
-                financialCategoryEnum of financialCategoryEnumValues;
-                track $index
+              financialCategoryEnum of financialCategoryEnumValues;
+              track $index
               ) {
-                @if (financialCategoryEnum.includes("EXPENSE")) {
-                  <option [value]="financialCategoryEnum">
-                    {{
-                      "budgetApplicationApp.FinancialCategoryEnum." +
-                        financialCategoryEnum | translate
-                    }}
-                  </option>
-                }
+              @if (financialCategoryEnum.includes("EXPENSE")) {
+              <option [value]="financialCategoryEnum">
+                {{
+                "budgetApplicationApp.FinancialCategoryEnum." +
+                financialCategoryEnum | translate
+                }}
+              </option>
+              }
               }
             </optgroup>
           </select>
@@ -112,146 +83,72 @@
       <div class="row">
         @let codeRef = editForm.get("code")!;
         <div class="col-md-6 mb-3">
-          <label
-            class="form-label"
-            for="field_code"
-            jhiTranslate="budgetApplicationApp.article.code"
-            >Code</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="code"
-            id="field_code"
-            data-cy="code"
-            formControlName="code"
-          />
+          <label class="form-label" for="field_code" jhiTranslate="budgetApplicationApp.article.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
           @if (codeRef.invalid && (codeRef.dirty || codeRef.touched)) {
-            <div>
-              @if (editForm.get("code")?.errors?.required) {
-                <small
-                  class="form-text text-danger"
-                  jhiTranslate="entity.validation.required"
-                  >Ce champ est obligatoire.</small
-                >
-              }
-            </div>
+          <div>
+            @if (editForm.get("code")?.errors?.required) {
+            <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est
+              obligatoire.</small>
+            }
+          </div>
           }
         </div>
 
         @let designationRef = editForm.get("designation")!;
         <div class="col-md-6 mb-3">
-          <label
-            class="form-label"
-            for="field_designation"
-            jhiTranslate="budgetApplicationApp.article.designation"
-            >Designation</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="designation"
-            id="field_designation"
-            data-cy="designation"
-            formControlName="designation"
-          />
+          <label class="form-label" for="field_designation"
+            jhiTranslate="budgetApplicationApp.article.designation">Designation</label>
+          <input type="text" class="form-control" name="designation" id="field_designation" data-cy="designation"
+            formControlName="designation" />
           @if (
-            designationRef.invalid &&
-            (designationRef.dirty || designationRef.touched)
+          designationRef.invalid &&
+          (designationRef.dirty || designationRef.touched)
           ) {
-            <div>
-              @if (editForm.get("designation")?.errors?.required) {
-                <small
-                  class="form-text text-danger"
-                  jhiTranslate="entity.validation.required"
-                  >Ce champ est obligatoire.</small
-                >
-              }
-            </div>
+          <div>
+            @if (editForm.get("designation")?.errors?.required) {
+            <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est
+              obligatoire.</small>
+            }
+          </div>
           }
         </div>
       </div>
 
       <!-- Paragraph seul -->
       <div class="mb-3">
-        <label
-          class="form-label"
-          for="field_paragraph"
-          jhiTranslate="budgetApplicationApp.article.paragraph"
-          >Paragraph</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          name="paragraph"
-          id="field_paragraph"
-          data-cy="paragraph"
-          formControlName="paragraph"
-        />
+        <label class="form-label" for="field_paragraph"
+          jhiTranslate="budgetApplicationApp.article.paragraph">Paragraph</label>
+        <input type="text" class="form-control" name="paragraph" id="field_paragraph" data-cy="paragraph"
+          formControlName="paragraph" />
       </div>
 
       <!-- AccountDiv seul -->
       <div class="mb-3">
-        <label
-          class="form-label"
-          for="field_accountDiv"
-          jhiTranslate="budgetApplicationApp.article.accountDiv"
-          >Account Div</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          name="accountDiv"
-          id="field_accountDiv"
-          data-cy="accountDiv"
-          formControlName="accountDiv"
-        />
+        <label class="form-label" for="field_accountDiv" jhiTranslate="budgetApplicationApp.article.accountDiv">Account
+          Div</label>
+        <input type="text" class="form-control" name="accountDiv" id="field_accountDiv" data-cy="accountDiv"
+          formControlName="accountDiv" />
       </div>
 
       <!-- CodeEnd seul -->
       <div class="mb-3">
-        <label
-          class="form-label"
-          for="field_codeEnd"
-          jhiTranslate="budgetApplicationApp.article.codeEnd"
-          >Code End</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          name="codeEnd"
-          id="field_codeEnd"
-          data-cy="codeEnd"
-          formControlName="codeEnd"
-        />
+        <label class="form-label" for="field_codeEnd" jhiTranslate="budgetApplicationApp.article.codeEnd">Code
+          End</label>
+        <input type="text" class="form-control" name="codeEnd" id="field_codeEnd" data-cy="codeEnd"
+          formControlName="codeEnd" />
       </div>
     </div>
 
     <div>
-      <button
-        type="button"
-        id="cancel-save"
-        data-cy="entityCreateCancelButton"
-        class="btn btn-danger"
-        (click)="previousState()"
-      >
-        <fa-icon icon="ban"></fa-icon>&nbsp;<span
-          jhiTranslate="entity.action.cancel"
-          >Annuler</span
-        >
+      <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-danger"
+        (click)="previousState()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
       </button>
 
-      <button
-        type="submit"
-        id="save-entity"
-        data-cy="entityCreateSaveButton"
-        [disabled]="editForm.invalid || isSaving"
-        class="btn btn-primary"
-      >
-        <fa-icon icon="save"></fa-icon>&nbsp;<span
-          jhiTranslate="entity.action.save"
-          >Sauvegarder</span
-        >
+      <button type="submit" id="save-entity" data-cy="entityCreateSaveButton" [disabled]="editForm.invalid || isSaving"
+        class="btn btn-primary">
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
       </button>
     </div>
   </form>

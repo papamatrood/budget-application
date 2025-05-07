@@ -1,12 +1,12 @@
 package com.cratechnologie.budget.web.rest;
 
+import com.cratechnologie.budget.service.MailService;
+import com.cratechnologie.budget.service.UserService;
+import com.cratechnologie.budget.service.dto.AdminUserDTO;
 import com.cratechnologie.budget.config.Constants;
 import com.cratechnologie.budget.domain.User;
 import com.cratechnologie.budget.repository.UserRepository;
 import com.cratechnologie.budget.security.AuthoritiesConstants;
-import com.cratechnologie.budget.service.MailService;
-import com.cratechnologie.budget.service.UserService;
-import com.cratechnologie.budget.service.dto.AdminUserDTO;
 import com.cratechnologie.budget.web.rest.errors.BadRequestAlertException;
 import com.cratechnologie.budget.web.rest.errors.EmailAlreadyUsedException;
 import com.cratechnologie.budget.web.rest.errors.LoginAlreadyUsedException;

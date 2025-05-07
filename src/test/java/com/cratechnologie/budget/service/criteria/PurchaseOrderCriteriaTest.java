@@ -8,6 +8,8 @@ import java.util.function.Function;
 import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
+import com.cratechnologie.budget.service.criteria.PurchaseOrderCriteria;
+
 class PurchaseOrderCriteriaTest {
 
     @Test

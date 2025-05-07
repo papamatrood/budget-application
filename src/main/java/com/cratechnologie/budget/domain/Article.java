@@ -48,7 +48,7 @@ public class Article implements Serializable {
     @Column(name = "paragraph")
     private String paragraph;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "subTitle", "articles" }, allowSetters = true)
     private Chapter chapter;
 

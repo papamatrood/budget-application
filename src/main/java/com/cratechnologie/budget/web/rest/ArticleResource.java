@@ -1,10 +1,10 @@
 package com.cratechnologie.budget.web.rest;
 
-import com.cratechnologie.budget.domain.Article;
-import com.cratechnologie.budget.repository.ArticleRepository;
 import com.cratechnologie.budget.service.ArticleQueryService;
 import com.cratechnologie.budget.service.ArticleService;
 import com.cratechnologie.budget.service.criteria.ArticleCriteria;
+import com.cratechnologie.budget.domain.Article;
+import com.cratechnologie.budget.repository.ArticleRepository;
 import com.cratechnologie.budget.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

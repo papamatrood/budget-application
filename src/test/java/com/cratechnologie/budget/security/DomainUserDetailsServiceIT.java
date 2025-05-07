@@ -4,9 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.cratechnologie.budget.IntegrationTest;
+import com.cratechnologie.budget.service.UserService;
 import com.cratechnologie.budget.domain.User;
 import com.cratechnologie.budget.repository.UserRepository;
-import com.cratechnologie.budget.service.UserService;
+
 import java.util.Locale;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.AfterEach;

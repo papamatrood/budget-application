@@ -34,7 +34,7 @@ public class Chapter implements Serializable {
     @Column(name = "designation", nullable = false)
     private String designation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "chapters" }, allowSetters = true)
     private SubTitle subTitle;
 

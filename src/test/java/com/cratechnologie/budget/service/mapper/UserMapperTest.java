@@ -2,11 +2,13 @@ package com.cratechnologie.budget.service.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.cratechnologie.budget.service.dto.AdminUserDTO;
+import com.cratechnologie.budget.service.dto.UserDTO;
+import com.cratechnologie.budget.service.mapper.UserMapper;
 import com.cratechnologie.budget.domain.Authority;
 import com.cratechnologie.budget.domain.User;
 import com.cratechnologie.budget.security.AuthoritiesConstants;
-import com.cratechnologie.budget.service.dto.AdminUserDTO;
-import com.cratechnologie.budget.service.dto.UserDTO;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;

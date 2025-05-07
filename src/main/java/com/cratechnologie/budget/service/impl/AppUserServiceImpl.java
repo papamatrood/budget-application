@@ -1,8 +1,9 @@
 package com.cratechnologie.budget.service.impl;
 
+import com.cratechnologie.budget.service.AppUserService;
 import com.cratechnologie.budget.domain.AppUser;
 import com.cratechnologie.budget.repository.AppUserRepository;
-import com.cratechnologie.budget.service.AppUserService;
+
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

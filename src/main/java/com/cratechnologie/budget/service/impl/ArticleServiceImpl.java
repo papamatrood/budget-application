@@ -1,8 +1,9 @@
 package com.cratechnologie.budget.service.impl;
 
+import com.cratechnologie.budget.service.ArticleService;
 import com.cratechnologie.budget.domain.Article;
 import com.cratechnologie.budget.repository.ArticleRepository;
-import com.cratechnologie.budget.service.ArticleService;
+
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

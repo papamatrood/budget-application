@@ -1,6 +1,7 @@
 package com.cratechnologie.budget.web.rest.vm;
 
 import com.cratechnologie.budget.service.dto.AdminUserDTO;
+
 import jakarta.validation.constraints.Size;
 
 /**

@@ -1,10 +1,10 @@
 package com.cratechnologie.budget.web.rest;
 
-import com.cratechnologie.budget.domain.Mandate;
-import com.cratechnologie.budget.repository.MandateRepository;
 import com.cratechnologie.budget.service.MandateQueryService;
 import com.cratechnologie.budget.service.MandateService;
 import com.cratechnologie.budget.service.criteria.MandateCriteria;
+import com.cratechnologie.budget.domain.Mandate;
+import com.cratechnologie.budget.repository.MandateRepository;
 import com.cratechnologie.budget.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -1,8 +1,9 @@
 package com.cratechnologie.budget.service.impl;
 
+import com.cratechnologie.budget.service.RecipeService;
 import com.cratechnologie.budget.domain.Recipe;
 import com.cratechnologie.budget.repository.RecipeRepository;
-import com.cratechnologie.budget.service.RecipeService;
+
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

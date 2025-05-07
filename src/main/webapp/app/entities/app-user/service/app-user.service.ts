@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable prettier/prettier */
 import { Injectable, inject } from "@angular/core";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable, map } from "rxjs";
@@ -8,6 +10,7 @@ import { isPresent } from "app/core/util/operators";
 import { ApplicationConfigService } from "app/core/config/application-config.service";
 import { createRequestOption } from "app/core/request/request-util";
 import { IAppUser, NewAppUser } from "../app-user.model";
+import { IUserAppUserDTO, NewUserAppUserDTO } from "app/shared/dto/user-appuser-dto.model";
 
 export type PartialUpdateAppUser = Partial<IAppUser> & Pick<IAppUser, "id">;
 
@@ -38,6 +41,35 @@ export class AppUserService {
 
   protected resourceUrl =
     this.applicationConfigService.getEndpointFor("api/app-users");
+
+  protected UserAppUserDTOresourceUrl =
+    this.applicationConfigService.getEndpointFor("api/user-app-user");
+
+  createUserAppUser(userAppUserDTO: NewUserAppUserDTO): Observable<EntityResponseType> {
+    const copy = this.myConvertDateFromClient(userAppUserDTO);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return this.http
+      .post<IUserAppUserDTO>(this.UserAppUserDTOresourceUrl, copy, { observe: 'response' })
+      .pipe(map((res) => this.myConvertResponseFromServer(res)));
+  }
+
+  updateUserAppUser(userAppUserDTO: IUserAppUserDTO): Observable<EntityResponseType> {
+    const copy = this.myConvertDateFromClient(userAppUserDTO);
+    return this.http
+      .put<IUserAppUserDTO>(
+        `${this.UserAppUserDTOresourceUrl}/${this.getUserAppUserDTOIdentifier(userAppUserDTO)}`,
+        copy,
+        { observe: "response" },
+      )
+      .pipe(map((res) => this.myConvertResponseFromServer(res)));
+  }
+
+  deleteUserAppUser(userAppUserDTO: IUserAppUserDTO): Observable<HttpResponse<{}>> {
+    return this.http.delete(`${this.UserAppUserDTOresourceUrl}/${userAppUserDTO.id}`, {
+      body: userAppUserDTO,
+      observe: "response",
+    });
+  }
 
   create(appUser: NewAppUser): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(appUser);
@@ -93,6 +125,10 @@ export class AppUserService {
     return appUser.id;
   }
 
+  getUserAppUserDTOIdentifier(userAppUserDTO: Pick<IUserAppUserDTO, "id">): number {
+    return userAppUserDTO.id;
+  }
+
   compareAppUser(
     o1: Pick<IAppUser, "id"> | null,
     o2: Pick<IAppUser, "id"> | null,
@@ -122,6 +158,14 @@ export class AppUserService {
       return [...appUsersToAdd, ...appUserCollection];
     }
     return appUserCollection;
+  }
+
+  authorities(): Observable<string[]> {
+    return this.http
+      .get<
+        { name: string }[]
+      >(this.applicationConfigService.getEndpointFor("api/authorities"))
+      .pipe(map((authorities) => authorities.map((a) => a.name)));
   }
 
   protected convertDateFromClient<
@@ -166,5 +210,24 @@ export class AppUserService {
         ? res.body.map((item) => this.convertDateFromServer(item))
         : null,
     });
+  }
+
+
+
+
+  // Mes codes
+  protected myConvertDateFromClient<T extends IUserAppUserDTO | NewUserAppUserDTO>(
+    userAppUserDTO: T,
+  ): RestOf<T> {
+    return {
+      ...userAppUserDTO,
+      birthDate: dayjs.isDayjs(userAppUserDTO.birthDate)
+        ? userAppUserDTO.birthDate.toJSON()
+        : null,
+    };
+  }
+
+  protected myConvertResponseFromServer(res: HttpResponse<any>): HttpResponse<any> {
+    return res;
   }
 }

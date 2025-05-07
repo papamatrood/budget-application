@@ -1,8 +1,9 @@
 package com.cratechnologie.budget.service.impl;
 
+import com.cratechnologie.budget.service.MandateService;
 import com.cratechnologie.budget.domain.Mandate;
 import com.cratechnologie.budget.repository.MandateRepository;
-import com.cratechnologie.budget.service.MandateService;
+
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

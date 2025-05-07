@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: "user",
     data: { pageTitle: "jhipsterFinancialManagementApp.appUser.home.title" },
-    loadChildren: () => import("./../entities/app-user/app-user.routes"),
+    loadChildren: () => import("./app-user/app-user.routes"),
   },
   {
     path: "parametres",

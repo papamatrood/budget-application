@@ -1,10 +1,10 @@
 package com.cratechnologie.budget.web.rest;
 
-import com.cratechnologie.budget.domain.AppUser;
-import com.cratechnologie.budget.repository.AppUserRepository;
 import com.cratechnologie.budget.service.AppUserQueryService;
 import com.cratechnologie.budget.service.AppUserService;
 import com.cratechnologie.budget.service.criteria.AppUserCriteria;
+import com.cratechnologie.budget.domain.AppUser;
+import com.cratechnologie.budget.repository.AppUserRepository;
 import com.cratechnologie.budget.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;

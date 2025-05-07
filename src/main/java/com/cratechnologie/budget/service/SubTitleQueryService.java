@@ -1,9 +1,10 @@
 package com.cratechnologie.budget.service;
 
+import com.cratechnologie.budget.service.criteria.SubTitleCriteria;
 import com.cratechnologie.budget.domain.*; // for static metamodels
 import com.cratechnologie.budget.domain.SubTitle;
 import com.cratechnologie.budget.repository.SubTitleRepository;
-import com.cratechnologie.budget.service.criteria.SubTitleCriteria;
+
 import jakarta.persistence.criteria.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

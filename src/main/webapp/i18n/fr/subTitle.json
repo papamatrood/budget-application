@@ -4,23 +4,23 @@
       "home": {
         "title": "SubTitles",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Sub Title",
-        "createOrEditLabel": "Créer ou éditer un Sub Title",
-        "notFound": "Aucun Sub Title trouvé"
+        "createLabel": "Créer un nouveau sous-titre",
+        "createOrEditLabel": "Créer ou éditer un sous-titre",
+        "notFound": "Aucun sous-titre trouvé"
       },
-      "created": "Un nouveau Sub Title a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Sub Title avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Sub Title avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau sous-titre a été créé avec l'identifiant {{ param }}",
+      "updated": "Le sous-titre avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le sous-titre avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Sub Title {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le sous-titre {{ id }} ?"
       },
       "detail": {
-        "title": "Sub Title"
+        "title": "Sous-titre"
       },
       "id": "ID",
       "code": "Code",
-      "designation": "Designation",
-      "chapter": "Chapter"
+      "designation": "Désignation",
+      "chapter": "Chapitre"
     }
   }
 }

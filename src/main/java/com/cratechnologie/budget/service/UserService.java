@@ -1,5 +1,7 @@
 package com.cratechnologie.budget.service;
 
+import com.cratechnologie.budget.service.dto.AdminUserDTO;
+import com.cratechnologie.budget.service.dto.UserDTO;
 import com.cratechnologie.budget.config.Constants;
 import com.cratechnologie.budget.domain.Authority;
 import com.cratechnologie.budget.domain.User;
@@ -7,8 +9,7 @@ import com.cratechnologie.budget.repository.AuthorityRepository;
 import com.cratechnologie.budget.repository.UserRepository;
 import com.cratechnologie.budget.security.AuthoritiesConstants;
 import com.cratechnologie.budget.security.SecurityUtils;
-import com.cratechnologie.budget.service.dto.AdminUserDTO;
-import com.cratechnologie.budget.service.dto.UserDTO;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
